@@ -264,6 +264,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3746186248982303575, guid: 856890d952066c04193ddb349544db5c, type: 3}
+      propertyPath: poolsize
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7629108816560492869, guid: 856890d952066c04193ddb349544db5c, type: 3}
       propertyPath: m_Name
       value: visitorSpawner
