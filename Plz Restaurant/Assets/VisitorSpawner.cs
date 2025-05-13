@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class VisitorSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public VisitorPool pool;
+    private WaitForSeconds delay = new WaitForSeconds(1f);
+
     void Start()
     {
-        
+        StartCoroutine(SpawnVisitor());
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private IEnumerator SpawnVisitor()
     {
-        
+        while (true)
+        {
+            yield return delay;
+            var visitor = pool.GetObj(); // get visitor from pool
+            visitor.Init(pool);
+        }
     }
 }
