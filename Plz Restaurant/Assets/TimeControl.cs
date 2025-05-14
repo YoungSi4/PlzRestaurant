@@ -9,10 +9,11 @@ public class TimeControl : MonoBehaviour
     public TextMeshProUGUI[] TimeText;
     public GameObject TimeOutImage;
 
-    private float time = 0f;
     private int StartTime = 480;
     public float LimitTime = 600; // sec
-    private bool isTimeOver = false;
+    private float time = 0f;
+
+    private bool isRunning = false;
     
     void Start()
     {
@@ -21,6 +22,10 @@ public class TimeControl : MonoBehaviour
 
     void Update()
     {
+
+        if (!isRunning) return;
+
+
         if(time < LimitTime)
         {
             time += Time.deltaTime;
@@ -35,23 +40,17 @@ public class TimeControl : MonoBehaviour
         }
         else
         {
-            isTimeOver = true;
-            Handle_Timeover();
+            TimeOutImage.SetActive(true);
+            isRunning = false;
         }
 
     }
-    
-    void Handle_Timeover()
-    {
-        TimeOutImage.SetActive(true);
-        Invoke("Restart_Timer", 2f);
-    }
 
-    void Restart_Timer()
+    public void Start_Timer()
     {
-        TimeOutImage.SetActive(false);
-        isTimeOver = false;
+        isRunning = true;
         time = 0f;
+        TimeOutImage.SetActive(false);
         TimeText[0].text = (StartTime / 60).ToString("D2");
         TimeText[1].text = (StartTime % 60).ToString("D2");
     }
