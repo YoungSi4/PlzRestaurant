@@ -46,6 +46,7 @@ public class VisitorPool : MonoBehaviour
     public void SetObj(Visitor visitor)
     {
         visitor.gameObject.SetActive(false);
+        visitor.transform.position = Vector3.zero;
         visitorStack.Push(visitor);
     }
 }
