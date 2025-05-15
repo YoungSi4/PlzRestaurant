@@ -22,7 +22,8 @@ public class Visitor : MonoBehaviour
 
     private void OnEnable()
     {
-        var targetPos = new Vector3(Random.Range(-25f, 25f), -5f, Random.Range(-25f, 25f));
+        var targetPos = new Vector3(Random.Range(-23f, 23f), 0f, Random.Range(-23f, 23f));
+        Debug.Log("Target Postion: " + targetPos);
         agent.SetDestination(targetPos);
     }
 
