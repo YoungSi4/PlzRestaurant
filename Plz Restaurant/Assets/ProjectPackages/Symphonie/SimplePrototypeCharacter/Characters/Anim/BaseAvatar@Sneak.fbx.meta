@@ -1,0 +1,253 @@
+fileFormatVersion: 2
+guid: 72435baff82af574fb9a3c96892384aa
+timeCreated: 1436647255
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Bip001
+    100004: Bip001 Eyes
+    100006: Bip001 Head
+    100008: Bip001 L Calf
+    100010: Bip001 L Clavicle
+    100012: Bip001 L Foot
+    100014: Bip001 L Forearm
+    100016: Bip001 L Hand
+    100018: Bip001 L Thigh
+    100020: Bip001 L Toe0
+    100022: Bip001 L UpperArm
+    100024: Bip001 Neck
+    100026: Bip001 Pelvis
+    100028: Bip001 R Calf
+    100030: Bip001 R Clavicle
+    100032: Bip001 R Foot
+    100034: Bip001 R Forearm
+    100036: Bip001 R Hand
+    100038: Bip001 R Thigh
+    100040: Bip001 R Toe0
+    100042: Bip001 R UpperArm
+    100044: Bip001 Spine
+    100046: Bip001 Spine1
+    100048: Bone002
+    100050: Bone002(mirrored)
+    100052: Bone004
+    100054: Bone004(mirrored)
+    100056: ForeArmBend0_Left
+    100058: ForeArmBend0_Right
+    100060: Trajectory
+    100062: UpperArmBend0_Left
+    100064: UpperArmBend0_Right
+    100066: UpperArmBend1_Left
+    100068: UpperArmBend1_Right
+    100070: UpperArmBend2_Left
+    100072: UpperArmBend2_Right
+    400000: //RootNode
+    400002: Bip001
+    400004: Bip001 Eyes
+    400006: Bip001 Head
+    400008: Bip001 L Calf
+    400010: Bip001 L Clavicle
+    400012: Bip001 L Foot
+    400014: Bip001 L Forearm
+    400016: Bip001 L Hand
+    400018: Bip001 L Thigh
+    400020: Bip001 L Toe0
+    400022: Bip001 L UpperArm
+    400024: Bip001 Neck
+    400026: Bip001 Pelvis
+    400028: Bip001 R Calf
+    400030: Bip001 R Clavicle
+    400032: Bip001 R Foot
+    400034: Bip001 R Forearm
+    400036: Bip001 R Hand
+    400038: Bip001 R Thigh
+    400040: Bip001 R Toe0
+    400042: Bip001 R UpperArm
+    400044: Bip001 Spine
+    400046: Bip001 Spine1
+    400048: Bone002
+    400050: Bone002(mirrored)
+    400052: Bone004
+    400054: Bone004(mirrored)
+    400056: ForeArmBend0_Left
+    400058: ForeArmBend0_Right
+    400060: Trajectory
+    400062: UpperArmBend0_Left
+    400064: UpperArmBend0_Right
+    400066: UpperArmBend1_Left
+    400068: UpperArmBend1_Right
+    400070: UpperArmBend2_Left
+    400072: UpperArmBend2_Right
+    7400000: Sneak
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: Trajectory
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Sneak
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 240
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bip001
+        weight: 1
+      - path: Bip001/Bip001 Pelvis
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 L Thigh
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 L Thigh/Bip001 L Calf
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 L Thigh/Bip001 L Calf/Bip001 L Foot
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 L Thigh/Bip001 L Calf/Bip001 L Foot/Bip001
+          L Toe0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 R Thigh
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 R Thigh/Bip001 R Calf
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 R Thigh/Bip001 R Calf/Bip001 R Foot
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 R Thigh/Bip001 R Calf/Bip001 R Foot/Bip001
+          R Toe0
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle/Bip001
+          L UpperArm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle/Bip001
+          L UpperArm/Bip001 L Forearm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle/Bip001
+          L UpperArm/Bip001 L Forearm/Bip001 L Hand
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle/Bip001
+          L UpperArm/ForeArmBend0_Left
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle/UpperArmBend0_Left
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle/UpperArmBend1_Left
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle/UpperArmBend1_Left/Bone002(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle/UpperArmBend2_Left
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 L Clavicle/UpperArmBend2_Left/Bone004(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Neck
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Neck/Bip001 Head
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Neck/Bip001 Head/Bip001
+          Eyes
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+          R UpperArm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+          R UpperArm/Bip001 R Forearm
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+          R UpperArm/Bip001 R Forearm/Bip001 R Hand
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+          R UpperArm/ForeArmBend0_Right
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/UpperArmBend0_Right
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/UpperArmBend1_Right
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/UpperArmBend1_Right/Bone002
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/UpperArmBend2_Right
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/UpperArmBend2_Right/Bone004
+        weight: 1
+      - path: Trajectory
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: Bip001
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: a15db774e3c752145b501d72ef69f6b9,
+    type: 3}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
