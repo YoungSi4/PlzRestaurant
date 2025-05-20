@@ -1,1 +1,4 @@
 /Packages/packages-lock.json merge=union
+
+# Force this one Meta file to LF
+Assets/ProjectPackages/TextMesh\ Pro.meta eol=lf
