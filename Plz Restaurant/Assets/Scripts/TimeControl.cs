@@ -4,10 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimeControl : MonoBehaviour
+public class TimeControl : Singleton<TimeControl>
 {
     public TextMeshProUGUI[] TimeText;
     public GameObject TimeOutImage;
+    public Button StartButton;
 
     private int StartTime = 480;
     public float LimitTime = 600; // sec
@@ -18,6 +19,16 @@ public class TimeControl : MonoBehaviour
     void Start()
     {
         
+    }
+    public override void Awake()
+    {
+        base.Awake();
+
+        if (StartButton != null)
+        {
+            StartButton.onClick.AddListener(Start_Timer);
+        }
+        else Debug.Log("StartButton is not assigned in the Inspector.");
     }
 
     void Update()
