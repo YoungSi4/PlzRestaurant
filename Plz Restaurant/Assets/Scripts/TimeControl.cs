@@ -15,20 +15,10 @@ public class TimeControl : Singleton<TimeControl>
     private float time = 0f;
 
     private bool isRunning = false;
-    
-    void Start()
-    {
-        
-    }
+
     public override void Awake()
     {
         base.Awake();
-
-        if (StartButton != null)
-        {
-            StartButton.onClick.AddListener(Start_Timer);
-        }
-        else Debug.Log("StartButton is not assigned in the Inspector.");
     }
 
     void Update()

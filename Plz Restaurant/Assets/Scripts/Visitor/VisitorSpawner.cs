@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisitorSpawner : MonoBehaviour
+public class VisitorSpawner : Singleton<VisitorSpawner>
 {
     public VisitorPool pool;
     private WaitForSeconds delay = new WaitForSeconds(1f);
 
-    void Start()
+    public override void Awake()
+    {
+        base.Awake();
+    }
+
+    public void Start_Spawning()
     {
         StartCoroutine(SpawnVisitor());
     }
