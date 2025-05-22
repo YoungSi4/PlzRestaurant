@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Spaghetti
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodName: 
-  foodDescription: 
-  foodType: 0
+  foodName: Spaghetti
+  foodDescription: Do not Break Pasta in half.
+  foodType: 3
