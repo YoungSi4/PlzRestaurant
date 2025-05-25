@@ -24,11 +24,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         {
             yield return delay;
             var visitor = pool.GetObj(); // get visitor from pool
-<<<<<<< HEAD
             visitor.transform.position = transform.position;
-=======
-            visitor.transform.position = transform.position; //Ãß°¡ÇÔ
->>>>>>> origin/SJ
             visitor.Init(pool);
         }
     }
