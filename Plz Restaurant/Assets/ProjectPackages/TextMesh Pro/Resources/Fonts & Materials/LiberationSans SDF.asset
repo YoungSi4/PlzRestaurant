@@ -8,11 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LiberationSans SDF Material
-<<<<<<< HEAD
   m_Shader: {fileID: 4800000, guid: 76533336fb2deb14799d988fad9ac7f7, type: 3}
-=======
-  m_Shader: {fileID: 10101, guid: 0000000000000000e000000000000000, type: 0}
->>>>>>> origin/JS
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -43,13 +39,10 @@ Material:
         m_Texture: {fileID: 28684132378477856}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-<<<<<<< HEAD
     - _OutlineTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-=======
->>>>>>> origin/JS
     m_Ints: []
     m_Floats:
     - _Ambient: 0.5
@@ -105,11 +98,7 @@ Material:
     - _WeightNormal: 0
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-<<<<<<< HEAD
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
-=======
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
->>>>>>> origin/JS
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}

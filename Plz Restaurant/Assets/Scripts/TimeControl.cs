@@ -4,21 +4,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimeControl : Singleton<TimeControl>
+public class TimeControl : MonoBehaviour
 {
     public TextMeshProUGUI[] TimeText;
     public GameObject TimeOutImage;
-    public Button StartButton;
 
     private int StartTime = 480;
     public float LimitTime = 600; // sec
     private float time = 0f;
 
     private bool isRunning = false;
-
-    public override void Awake()
+    
+    void Start()
     {
-        base.Awake();
+        
     }
 
     void Update()
