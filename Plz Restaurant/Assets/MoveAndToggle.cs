@@ -1,7 +1,9 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MoveAndToggle : MonoBehaviour
 {
@@ -11,29 +13,36 @@ public class MoveAndToggle : MonoBehaviour
     public float moveSpeed = 2f;  
     private Rigidbody rb;
 
+    public Vector3 direction { get; private set; }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 moveDir = (transform.right*x + transform.forward*z).normalized;
-        rb.velocity = moveDir * moveSpeed; //AddForce´Â ÈûÀÌ ´©ÀûµÊ
-
         if (Input.GetKeyDown(KeyCode.T))
         {
             SwitchToView();
         }
+        
+        Move();
     }
     void SwitchToView()
     {
         isFirstPerson = !isFirstPerson;
         firstPersonCam.Priority = isFirstPerson ? 1 : 0;
         topDownCam.Priority = isFirstPerson ? 0 : 1;
+    }
+    public void OnMoveInput(InputAction.CallbackContext context)
+    {
+        Vector2 input = context.ReadValue<Vector2>();
+        direction = new Vector3(input.x, 0f, input.y);
+    }
+
+    public void Move()
+    {
+        rb.velocity = direction * moveSpeed + Vector3.up * rb.velocity.y; 
     }
 }
