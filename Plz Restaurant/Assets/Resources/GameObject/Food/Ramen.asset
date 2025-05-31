@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
-  m_Name: Spaghetti
+  m_Name: Ramen
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodName: Spaghetti
-  foodDescription: Do not Break Pasta in half.
-  foodType: 3
-  foodPrefab: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}
+  foodName: Ramen
+  foodDescription: 
+  foodType: 1
+  foodPrefab: {fileID: 7822243917324814751, guid: e0027058173b5a84a98fab4dd0ce5872, type: 3}

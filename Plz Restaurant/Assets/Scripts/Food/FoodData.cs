@@ -16,4 +16,6 @@ public class FoodData : ScriptableObject // 스크립터블 오브젝트 상속
     [TextArea]
     public string foodDescription;
     public FoodType foodType;
+    // 음식 모델
+    public GameObject foodPrefab;
 }
