@@ -10,6 +10,7 @@ public class FoodManager : Singleton<FoodManager>
         base.Awake();
     }
 
+    // 큐에 음식 넣기
     public void AddCompletedFood(FoodData food)
     {
         completedFood.Enqueue(food);

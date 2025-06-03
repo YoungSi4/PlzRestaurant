@@ -8,13 +8,8 @@ public class TrayControl : MonoBehaviour
     public Transform foodPos1;
     public Transform foodPos2;
     // 현재 트레이에 올라가있는 음식 오브젝트 저장
-    private GameObject foodObj1;
-    private GameObject foodObj2;
-
-    private void Start()
-    {
-        StartCoroutine(DeleteFood());
-    }
+    public GameObject foodObj1;
+    public GameObject foodObj2;
 
     void Update()
     {
@@ -41,7 +36,7 @@ public class TrayControl : MonoBehaviour
             else Debug.Log("Null오류");
 
         }
-
+        // 큐에 음식이 있으면서 트레이에 빈자리가 있으면 트레이에 음식을 채우기 위해 계속 확인
         TryUpdateTray();
     }
     void TryUpdateTray()
@@ -70,26 +65,27 @@ public class TrayControl : MonoBehaviour
         GameObject instantFood = Instantiate(food.foodPrefab, foodPos.position, foodPos.rotation);
         return instantFood;
     }
-
-    // 테스트용 음식제거 코루틴
-    IEnumerator DeleteFood()
+    
+    // 트레이에서 음식 삭제
+    // NPC.cs 에서 호출
+    public void ClearFood(int foodIndex)
     {
-        while (true)
+        if(foodIndex == 1)
         {
-            yield return new WaitForSeconds(3f);
             if (foodObj1 != null)
             {
                 Destroy(foodObj1);
                 foodObj1 = null;
-                Debug.Log("1번 음식 제거됨");
             }
-            yield return new WaitForSeconds(3f);
+        }
+        else if(foodIndex == 2)
+        {
             if (foodObj2 != null)
             {
                 Destroy(foodObj2);
                 foodObj2 = null;
-                Debug.Log("2번 음식 제거됨");
             }
         }
+
     }
 }
