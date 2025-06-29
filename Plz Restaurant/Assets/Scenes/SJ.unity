@@ -1926,7 +1926,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269947687}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.58599997, z: 0.316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3168,6 +3168,11 @@ MonoBehaviour:
   firstPersonCam: {fileID: 269947688}
   topDownCam: {fileID: 1853857937}
   moveSpeed: 2
+  playerBody: {fileID: 485621479}
+  cameraHolder: {fileID: 269947689}
+  xRotation: 0
+  mouseY: 0
+  cameraTransform: {fileID: 269947689}
 --- !u!54 &485621481
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3236,6 +3241,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7d2c81a2-c0a1-47af-bf55-1c98647554e2
     m_ActionName: FirstPerspective/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 485621480}
+        m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
+        m_MethodName: OnMouseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f25b1964-f36f-4466-a3ff-dd43cc996396
+    m_ActionName: FirstPerspective/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a413c1d9-1218-4007-8aac-672087a09a61
+    m_ActionName: ThreePerspective/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPerspective
