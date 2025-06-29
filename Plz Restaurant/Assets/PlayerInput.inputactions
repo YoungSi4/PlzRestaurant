@@ -6,7 +6,7 @@
             "id": "026462ff-62c3-4ed2-b285-c1cd11614f25",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "Move(WASD)",
                     "type": "Value",
                     "id": "7d2c81a2-c0a1-47af-bf55-1c98647554e2",
                     "expectedControlType": "Vector2",
@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Toggle",
+                    "type": "Button",
+                    "id": "aa26b80c-4b3d-4b8f-a55f-8d6f8ac61a5a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -32,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Move(WASD)",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -43,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Move(WASD)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -54,7 +63,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Move(WASD)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -65,7 +74,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Move(WASD)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -76,7 +85,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Move(WASD)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -90,6 +99,17 @@
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7cc948c5-b036-4a04-8790-8d6232ffdd4e",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -98,24 +118,33 @@
             "id": "218d9c20-b6cf-432c-b8c0-df95ba7175d9",
             "actions": [
                 {
-                    "name": "WASD",
+                    "name": "Move(WASD)",
                     "type": "Value",
                     "id": "a413c1d9-1218-4007-8aac-672087a09a61",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Toggle",
+                    "type": "Button",
+                    "id": "12bd7c5d-fc8b-4e5b-a790-de7a7e0b95e2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "WASD",
                     "id": "d473a09f-4540-4c5c-9fcf-b1e8318cd0bc",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "Move(WASD)",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -126,7 +155,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "Move(WASD)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -137,7 +166,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "Move(WASD)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -148,7 +177,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "Move(WASD)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -159,9 +188,20 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "Move(WASD)",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9bc437d8-6b0a-48d9-ae20-47ccb9e27c20",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
