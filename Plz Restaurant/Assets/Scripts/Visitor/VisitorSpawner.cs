@@ -10,6 +10,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
     public override void Awake()
     {
         base.Awake();
+        Start_Spawning();
     }
 
     public void Start_Spawning()
