@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class OrderMemo : MonoBehaviour
 {
-    public GameObject OrderMemoBlock;
+    // 숫자가 낮을수록 아래
+    public GameObject OrderMemoBlock1;
+    public GameObject OrderMemoBlock2;
+    public GameObject OrderMemoBlock3;
+    public GameObject OrderMemoBlock4;
     private TextMeshPro TMP;
 
     private int tableNum;
@@ -14,20 +18,33 @@ public class OrderMemo : MonoBehaviour
     private int foodPrice;
 
     // FoodInfo
-    private int foodNumber;
+    private VisitorOrder order;
+    private FoodData foodData;
 
     void Start()
     {
-        TMP = OrderMemoBlock.GetComponent<TextMeshPro>();
+        TMP = OrderMemoBlock1.GetComponent<TextMeshPro>();
     }
 
-    public void GetFoodInfoFromOrder(int foodNum)
+    // FoodDB 객체에서 이 함수를 실행...?
+    // Food Manager 같은 중간 매개체로 전달하는 게 안전해보인다.
+    
+    // 테이블 번호는 어디서 받아서 넘기지? -> visitor order 객체
+    public void GetFoodInfo(ref FoodData foodData, int tableNum)
     {
-        foodNumber = foodNum;
+        this.foodData = foodData;
+        this.tableNum = tableNum;
+        
     }
 
-    public void SetText(string text)
+    private void SetData()
     {
-        TMP.text = text;
+        foodName = foodData.foodName;
+        foodPrice = foodData.foodPrice; 
+    }
+
+    private void SetText()
+    {
+        
     }
 }

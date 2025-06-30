@@ -8,7 +8,7 @@ public class FoodDB : MonoBehaviour
     // 유니티 상에서 Scriptable Object로 하나하나 넣어주면 됨
     public FoodData[] foodDatas;
 
-    // 위 데이터를 딕셔너리 형태로 저장
+    // 위 데이터를 컨테이너에 저장
     private Dictionary<int, FoodData> foodDB;
 
     void Awake()
@@ -23,7 +23,8 @@ public class FoodDB : MonoBehaviour
     public FoodData GetFoodData(int foodNum)
     {
         FoodData targetFood = foodDB[foodNum];
-        return targetFood;
+        return new FoodData { foodNum = targetFood.foodNum, foodName = targetFood.foodName,
+                                                foodPrice = targetFood.foodPrice };
     }
 
 }
