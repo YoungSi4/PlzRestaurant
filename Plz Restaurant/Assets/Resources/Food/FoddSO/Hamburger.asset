@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
+  m_Name: Hamburger
+  m_EditorClassIdentifier: 
+  foodImage: {fileID: 0}
+  foodNum: 1
+  foodName: hamburer
+  foodPrice: 12000
+  foodDescription: "\uC0AC\uC2E4  \uD328\uD2F0 \uC774\uB984\uC774 \uD584\uBC84\uAC70\uC785\uB2C8\uB2E4\n\uD568\uBD80\uB974\uD06C"
+  foodPrefab: {fileID: 0}

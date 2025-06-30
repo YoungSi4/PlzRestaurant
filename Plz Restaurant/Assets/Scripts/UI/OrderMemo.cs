@@ -7,7 +7,11 @@ public class OrderMemo : MonoBehaviour
 {
     public GameObject OrderMemoBlock;
     private TextMeshPro TMP;
-    private string order;
+
+    private int tableNum;
+    private string foodName;
+    // food image?
+    private int foodPrice;
 
     // FoodInfo
     private int foodNumber;
