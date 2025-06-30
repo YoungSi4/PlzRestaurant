@@ -12,6 +12,11 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         base.Awake();
     }
 
+    public void Start()
+    {
+        Start_Spawning();
+    }
+
     public void Start_Spawning()
     {
         StartCoroutine(SpawnVisitor());

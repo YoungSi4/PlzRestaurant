@@ -3173,6 +3173,7 @@ MonoBehaviour:
   xRotation: 0
   mouseY: 0
   cameraTransform: {fileID: 269947689}
+  playerInput: {fileID: 0}
 --- !u!54 &485621481
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3258,9 +3259,53 @@ MonoBehaviour:
     m_ActionId: f25b1964-f36f-4466-a3ff-dd43cc996396
     m_ActionName: FirstPerspective/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 485621480}
+        m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
+        m_MethodName: OnMoveInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a413c1d9-1218-4007-8aac-672087a09a61
     m_ActionName: ThreePerspective/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 485621480}
+        m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
+        m_MethodName: OnToggleView
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: aa26b80c-4b3d-4b8f-a55f-8d6f8ac61a5a
+    m_ActionName: FirstPerspective/Toggle[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 485621480}
+        m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
+        m_MethodName: OnToggleView
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 12bd7c5d-fc8b-4e5b-a790-de7a7e0b95e2
+    m_ActionName: ThreePerspective/Toggle[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPerspective
