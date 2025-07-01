@@ -11,7 +11,7 @@ public class MoveAndToggle : MonoBehaviour
     public CinemachineVirtualCamera topDownCam; // 3인칭 시점일 때 카메라
 
 
-    private bool isFirstPerson = true; //현재 시점이 1인칭인지 아닌지 
+    public bool isFirstPerson = true; //현재 시점이 1인칭인지 아닌지 
     public float moveSpeed = 2f;  //플레이어 이동속도. 아마 나중에 플레이어 스크립트에 넣어야할듯
     
     Rigidbody rb; //리지드바디

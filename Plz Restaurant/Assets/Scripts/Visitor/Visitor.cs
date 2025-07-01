@@ -26,8 +26,7 @@ public class Visitor : MonoBehaviour
 
     private void OnEnable()
     {
-        var targetPos = new Vector3(Random.Range(-5f, 8f), 0f, Random.Range(-5f, 14f));
-        Debug.Log("Target Postion: " + targetPos);
+        var targetPos = new Vector3(Random.Range(-5f, 9f), 0f, Random.Range(-5f, 14f));
         agent.SetDestination(targetPos);
     }
 
@@ -38,14 +37,7 @@ public class Visitor : MonoBehaviour
             //혹은 코루틴 함수로 만들어서 할 수 있음
             StartCoroutine(Mark(true,1));
         }
-        // transform.Translate(0f, 0f, 5f * Time.deltaTime);
-        // transform.Rotate(new Vector3(1f, 0f, 0f), 50f  * Time.deltaTime);
-        // 
     }
-    //private void MarkOn()
-    //{
-    //    mark.SetActive(true);
-    //}
 
     IEnumerator Mark(bool what,float t=0)
     {
