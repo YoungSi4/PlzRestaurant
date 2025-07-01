@@ -23,8 +23,7 @@ public class FoodDB : MonoBehaviour
     public FoodData GetFoodData(int foodNum)
     {
         FoodData targetFood = foodDB[foodNum];
-        return new FoodData { foodNum = targetFood.foodNum, foodName = targetFood.foodName,
-                                                foodPrice = targetFood.foodPrice };
+        return targetFood;
     }
 
 }

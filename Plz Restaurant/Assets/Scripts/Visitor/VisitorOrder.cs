@@ -23,11 +23,13 @@ public class VisitorOrder : MonoBehaviour
 
     // setter, getter
     // 음식 정보 구성을 시작하는 함수 - 플레이어의 상호작용 E에서 출발
-    // SetFoodNum -> GetFoodInfo -> SendFoodInfo
     public void SetFoodNumFromVisitor(int foodNum, int tableNum)
     {
         this.foodNum = foodNum;
         this.tableNum = tableNum;
+
+        GetFoodInfoFromDB(foodNum);
+        SendFoodInfo(foodData, foodNum);
     }
 
     // 데이터 전달 흐름
@@ -37,9 +39,9 @@ public class VisitorOrder : MonoBehaviour
         foodData = foodDB.GetFoodData(foodNum);
     }
 
-    public void SendFoodInfo(ref FoodData foodData, int tableNum)
+    public void SendFoodInfo(FoodData foodData, int tableNum)
     {
         // OrderMemo 상에서 표시될 정보를 이 함수에서 초기화
-        orderMemo.GetFoodInfo(ref foodData, tableNum);
+        orderMemo.GetFoodInfo(foodData, tableNum);
     }
 }
