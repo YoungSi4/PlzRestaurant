@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 사용 관련
+ * Empty Object 로 생성하여 스크립트만 넣어줌
+ *  GameManager나 OrderManager 아무튼 무언가 아래에 둘 예정
+ */
+
 public class VisitorOrder : MonoBehaviour
 {
     // Vars related to FoodDB
@@ -19,6 +24,7 @@ public class VisitorOrder : MonoBehaviour
     {
         // initialize
         orderMemo = GameObject.FindObjectOfType<OrderMemo>();
+        foodDB = GameObject.FindObjectOfType<FoodDB>();
     }
 
     // setter, getter
