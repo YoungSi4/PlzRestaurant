@@ -13,6 +13,11 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         // Start_Spawning();
     }
 
+    public void Start()
+    {
+        Start_Spawning();
+    }
+
     public void Start_Spawning()
     {
         StartCoroutine(SpawnVisitor());
