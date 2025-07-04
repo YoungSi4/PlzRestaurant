@@ -8979,7 +8979,6 @@ MonoBehaviour:
   startButton: {fileID: 207640642225170676}
   moneyButton: {fileID: 83588870}
   pool: {fileID: 0}
-  R_dailyIncome_Tmp: {fileID: 0}
   R_targetIncome_Tmp: {fileID: 0}
 --- !u!4 &1380657896
 Transform:
@@ -10311,6 +10310,7 @@ GameObject:
   - component: {fileID: 1566415977}
   - component: {fileID: 1566415976}
   - component: {fileID: 1566415975}
+  - component: {fileID: 1566415978}
   m_Layer: 0
   m_Name: Section1
   m_TagString: Untagged
@@ -10405,6 +10405,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566415973}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1566415978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566415973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 106df084329d83f489375fbc99e3ece7, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &1583057456
 GameObject:
   m_ObjectHideFlags: 0
