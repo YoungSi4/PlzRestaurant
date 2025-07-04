@@ -14601,6 +14601,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3673149658127017769, guid: 712243f72fdbdee468d9e1e079f6f93b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4886112622829414987, guid: 712243f72fdbdee468d9e1e079f6f93b, type: 3}
       propertyPath: m_Name
       value: targetIncome
@@ -14608,6 +14612,10 @@ PrefabInstance:
     - target: {fileID: 7668103541231779252, guid: 712243f72fdbdee468d9e1e079f6f93b, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7668103541231779252, guid: 712243f72fdbdee468d9e1e079f6f93b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14698,6 +14706,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoodDB
       objectReference: {fileID: 0}
+    - target: {fileID: 2628866163921608886, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: foodDatas.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2628866163921608886, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: foodDatas.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8eabbd029bd2f5e4c835a8157824beac, type: 2}
+    - target: {fileID: 2628866163921608886, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: foodDatas.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 86d1615701875b447b2f0cfae0e2b1f5, type: 2}
     - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100
