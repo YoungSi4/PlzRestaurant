@@ -30,6 +30,7 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField]
     private TextMeshProUGUI R_targetIncome_Tmp;
+    [SerializeField]
     private TextMeshProUGUI R_dailyIncome_Tmp;
 
     public override void Awake()
@@ -56,6 +57,16 @@ public class GameManager : Singleton<GameManager>
     private void ShowMeTheMoney()
     {
         R_dailyIncome += 1000;
+        string tempIncome = R_dailyIncome.ToString();
+        R_dailyIncome_Tmp.SetText(tempIncome);
+    }
+
+    // 수익을 반영시키는 함수
+    public void AddDailyIncome(int income)
+    {
+        R_dailyIncome += income;
+        string tempIncome = R_dailyIncome.ToString();
+        R_dailyIncome_Tmp.SetText(tempIncome);
     }
 
     // 함수 실행 조건 : 시간 // 일일 수익 넘어서도 계속 영업하는 게 좋을 듯?
@@ -96,6 +107,8 @@ public class GameManager : Singleton<GameManager>
     {
         R_day++;
         R_targetIncome += R_targetIncomeIncrease;
+        var tempTarget = R_targetIncome.ToString();
+        R_targetIncome_Tmp.SetText(tempTarget);
     }
 
     private void R_repeatDay()
