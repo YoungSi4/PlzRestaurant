@@ -6,12 +6,16 @@ using UnityEngine.UI;
 
 public class TimeControl : Singleton<TimeControl>
 {
+    // 임시로 GameManager 받아서 사용
+    [SerializeField]
+    private GameManager gameManager;
+
     public TextMeshProUGUI[] TimeText;
     public GameObject TimeOutImage;
     public Button StartButton;
 
     private int StartTime = 480;
-    public float LimitTime = 600; // sec
+    public float LimitTime = 600; // default: 600 [sec]
     private float time = 0f;
 
     private bool isRunning = false;
@@ -43,6 +47,7 @@ public class TimeControl : Singleton<TimeControl>
         {
             TimeOutImage.SetActive(true);
             isRunning = false;
+            gameManager.R_close();
         }
 
     }

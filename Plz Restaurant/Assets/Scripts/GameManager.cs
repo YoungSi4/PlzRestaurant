@@ -10,8 +10,10 @@ public class GameManager : Singleton<GameManager>
     public VisitorSpawner visitorSpawner;
 
     public Button startButton;
+    public Button endButton;
 
     public Button moneyButton; // 테스트 용도;
+    public Button moneyLoseButton;
 
     public VisitorPool pool; // ?
 
@@ -37,15 +39,23 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
+        // UI 좌측상단 수익 관련 텍스트 초기화
+        R_targetIncome_Tmp.SetText(R_targetIncome.ToString());
+        R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
+
+
+        // UI 테스트용 버튼 연결
         if (startButton != null)
         {
             startButton.onClick.AddListener(StartGame);
         }
         else Debug.Log("StartButton is not assigned in the Inspector.");
 
+        endButton.onClick.AddListener(R_close);
         moneyButton.onClick.AddListener(ShowMeTheMoney);
+        moneyLoseButton.onClick.AddListener(EraseMoney);
     }
-    public void StartGame()
+    public void StartGame() // 나중에 R_Open로 바꿀 것
     {
         // 순서 변경 시 pool == null 인 상태가 발생하여 Spawn동작 X
         visitorSpawner.Start_Spawning();
@@ -54,6 +64,23 @@ public class GameManager : Singleton<GameManager>
         R_isOpen = true;
     }
 
+    /* time control을 game manager가 관찰하다가 (옵저버 디자인 패턴?)
+    *   시간이 지나면 해당 함수 실행?
+    *   OR 애초에 time control에서 game manager의 함수를 실행?
+    */
+    public void R_close()
+    {
+        // 아직 둘 다 함수가 없음
+        // visitorSpawner.stop
+        // timeControl.stop
+
+        R_isOpen = false;
+        R_checkSuccess();
+        R_resetVars();
+    }
+
+
+    // 버튼에 연결한 돈 증가, 감소 시키는 함수 - 테스트 용도
     private void ShowMeTheMoney()
     {
         R_dailyIncome += 1000;
@@ -61,18 +88,17 @@ public class GameManager : Singleton<GameManager>
         R_dailyIncome_Tmp.SetText(tempIncome);
     }
 
-    // 수익을 반영시키는 함수
+    private void EraseMoney()
+    {
+        R_dailyIncome -= 1000;
+        R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
+    }
+
+    // 수익을 반영시키는 함수 (매개변수는 음수 양수 상관없음)
     public void AddDailyIncome(int income)
     {
         R_dailyIncome += income;
-        string tempIncome = R_dailyIncome.ToString();
-        R_dailyIncome_Tmp.SetText(tempIncome);
-    }
-
-    // 함수 실행 조건 : 시간 // 일일 수익 넘어서도 계속 영업하는 게 좋을 듯?
-    public void R_close()
-    {
-
+        R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
     }
 
     public void R_checkSuccess()
@@ -83,19 +109,23 @@ public class GameManager : Singleton<GameManager>
         {
             // 돈 늘어나는 건 애니메이션을 넣어도 좋을 듯?
             R_totalIncome += R_dailyIncome;
+            Debug.Log("total money : " + R_totalIncome);
+            Debug.Log("next day");
             // nextDay()
         }
         else
         {
             R_totalIncome += R_dailyIncome / 3;
+
+            Debug.Log("total money : " + R_totalIncome);
+            Debug.Log("target fail");
+
             // repeatDay()
         }
-
-        R_reset();
     }
 
     // 필요한 변수를 모두 초기화 해주는 함수
-    private void R_reset()
+    private void R_resetVars()
     {
         R_dailyIncome = 0;
         R_isOpen = false;
