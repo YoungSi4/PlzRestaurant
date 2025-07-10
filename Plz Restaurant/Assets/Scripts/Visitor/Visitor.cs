@@ -9,12 +9,30 @@ public class Visitor : MonoBehaviour
     private VisitorSpawner spawner;
     private WaitForSeconds wait = new WaitForSeconds(10f);
     private NavMeshAgent agent;
+    private VisitorOrder order;
 
-    public GameObject mark;
+    public GameObject readyToOrderMark;
+
+    private int C_ID;
+    private float C_seatNumber;// 랜덤생성 소수점 1자리
+    private bool hasOrdered = false;
+    private int C_orderID;
+    private bool isEating = false;
+    private bool hasEaten = false;
+    private int C_payment = 0;
+    private int C_foodNumber; // 손님이 주문한 음식 번호
 
     public void Init(VisitorPool pool)
     {
         this.pool = pool;
+
+        /* 랜덤변수로 초기화 할 변수
+        C_ID;
+        C_seatNumber;
+        C_orderID;
+        C_foodNumber;
+
+        */
         StartCoroutine(DisableObj());
     }
 
@@ -22,6 +40,7 @@ public class Visitor : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         spawner = GameObject.Find("visitorSpawner").GetComponent<VisitorSpawner>();
+        order = GameObject.Find("VisitorOrder").GetComponent<VisitorOrder>();
     }
 
     private void OnEnable()
@@ -35,23 +54,45 @@ public class Visitor : MonoBehaviour
         if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance - agent.stoppingDistance < 0.5f)
         {
             //혹은 코루틴 함수로 만들어서 할 수 있음
-            StartCoroutine(Mark(true,1));
+            StartCoroutine(Mark(true, 1));
         }
     }
 
-    IEnumerator Mark(bool what,float t=0)
+    IEnumerator Mark(bool what, float t=0)
     {
         yield return new WaitForSeconds(t);
-        mark.SetActive(what);
+        readyToOrderMark.SetActive(what);
     }
 
     private IEnumerator DisableObj()
     {
         yield return wait;
-        mark.SetActive(false);
+        readyToOrderMark.SetActive(false);
+        ResetVars();
+        
         pool.SetObj(this);
     }
-    // ai navigation
+    
+    // 손님을 Disable 할 때 
+    private void ResetVars()
+    {
+        C_ID = 0;
+        C_seatNumber = 0f;// 랜덤생성 소수점 1자리
+        hasOrdered = false;
+        C_orderID = 0;
+        isEating = false;
+        hasEaten = false;
+        C_payment = 0;
+        C_foodNumber = 0; // 손님이 주문한 음식 번호
+    }
 
+    // player가 상호작용 할 때 이 함수를 실행시키기
+    // VisitorOrder 객체를 통해서 데이터가 플레이어의 UI로 전달
+    public void SendOrderInfo()
+    {
+        // C_foodNumber : FoodDB 상의 음식 번호
+        // 테이블 번호 : C_seatNumber을 명시적 형변환하여 사용
+        order.SetFoodNumFromVisitor(C_foodNumber, (int)C_seatNumber);
+    }
 }
 

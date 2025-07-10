@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4730c9e81762df4d9589b69a3b5d917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mark: {fileID: 4262764899718205527}
+  readyToOrderMark: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}
 --- !u!195 &3591895740982544131
 NavMeshAgent:
   m_ObjectHideFlags: 0
