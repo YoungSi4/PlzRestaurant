@@ -5,22 +5,28 @@ using UnityEngine;
 public class VisitorSpawner : Singleton<VisitorSpawner>
 {
     public VisitorPool pool;
-    private WaitForSeconds delay = new WaitForSeconds(3f); //이거 바꿈
+
+    [SerializeField]
+    private float spawnDelay = 3f;
+    private WaitForSeconds delay;
 
     public override void Awake()
     {
         base.Awake();
-        // Start_Spawning();
+        delay = new WaitForSeconds(spawnDelay);
+
+        // Start_Spawning(); // start 버튼 누르면 실행됨
     }
 
-    public void Start()
-    {
-        Start_Spawning();
-    }
-
+    // UI 상의 start 버튼을 누르면 실행된다
     public void Start_Spawning()
     {
         StartCoroutine(SpawnVisitor());
+    }
+
+    public void StopSpawning()
+    {
+        StopCoroutine(SpawnVisitor());
     }
 
 

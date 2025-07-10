@@ -34,6 +34,8 @@ public class GameManager : Singleton<GameManager>
     private TextMeshProUGUI R_targetIncome_Tmp;
     [SerializeField]
     private TextMeshProUGUI R_dailyIncome_Tmp;
+    [SerializeField]
+    private TextMeshProUGUI R_day_Tmp;
 
     public override void Awake()
     {
@@ -42,7 +44,7 @@ public class GameManager : Singleton<GameManager>
         // UI 좌측상단 수익 관련 텍스트 초기화
         R_targetIncome_Tmp.SetText(R_targetIncome.ToString());
         R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
-
+        R_day_Tmp.SetText(R_day.ToString());
 
         // UI 테스트용 버튼 연결
         if (startButton != null)
@@ -73,6 +75,7 @@ public class GameManager : Singleton<GameManager>
         // 아직 둘 다 함수가 없음
         // visitorSpawner.stop
         // timeControl.stop
+        visitorSpawner.StopSpawning();
 
         R_isOpen = false;
         R_checkSuccess();
@@ -107,11 +110,17 @@ public class GameManager : Singleton<GameManager>
         // 플레이어는 동일한 확인 버튼을 누르지만 함수는 다르게 동작
         if (R_dailyIncome >= R_targetIncome)
         {
+            // 아래 수익 처리하는 건 따로 함수로 빼고
+            // 결과창 표시는 성공 실패 2개로 만들어서 처리해야 할 듯
+
             // 돈 늘어나는 건 애니메이션을 넣어도 좋을 듯?
+            // 화면에 표시할 값을 담은 변수
             R_totalIncome += R_dailyIncome;
+            // 표시할 값 변수 -> R_totalIncome까지 숫자 기분좋게 올라가는 애니메이션 실행
+
             Debug.Log("total money : " + R_totalIncome);
             Debug.Log("next day");
-            // nextDay()
+            R_nextDay();
         }
         else
         {
@@ -120,7 +129,7 @@ public class GameManager : Singleton<GameManager>
             Debug.Log("total money : " + R_totalIncome);
             Debug.Log("target fail");
 
-            // repeatDay()
+            R_repeatDay();
         }
     }
 
@@ -128,6 +137,8 @@ public class GameManager : Singleton<GameManager>
     private void R_resetVars()
     {
         R_dailyIncome = 0;
+        R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
+
         R_isOpen = false;
         // 타이머 초기화
         // VisitorSpawner 초기화
@@ -136,6 +147,7 @@ public class GameManager : Singleton<GameManager>
     private void R_nextDay()
     {
         R_day++;
+        R_day_Tmp.SetText(R_day.ToString());
         R_targetIncome += R_targetIncomeIncrease;
         var tempTarget = R_targetIncome.ToString();
         R_targetIncome_Tmp.SetText(tempTarget);
@@ -144,5 +156,6 @@ public class GameManager : Singleton<GameManager>
     private void R_repeatDay()
     {
         // blank
+        
     }
 }

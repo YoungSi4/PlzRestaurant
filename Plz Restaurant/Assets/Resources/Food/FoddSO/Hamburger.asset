@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
   foodNum: 1
-  foodName: hamburer
+  foodName: hamburger
   foodPrice: 12000
   foodDescription: "\uC0AC\uC2E4  \uD328\uD2F0 \uC774\uB984\uC774 \uD584\uBC84\uAC70\uC785\uB2C8\uB2E4\n\uD568\uBD80\uB974\uD06C"
   foodPrefab: {fileID: 0}
