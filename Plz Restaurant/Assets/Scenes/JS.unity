@@ -1216,6 +1216,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 7668103541231779252, guid: 712243f72fdbdee468d9e1e079f6f93b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6176,6 +6180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e21254917a37d64196159ac946912e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodNum: 1
 --- !u!4 &793848464
 Transform:
   m_ObjectHideFlags: 0
@@ -13073,6 +13078,75 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: a295bac19c187874ab062b0bf9accf16, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1001 &1782527037
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2363749034558011857, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_Name
+      value: FoodDB
+      objectReference: {fileID: 0}
+    - target: {fileID: 2628866163921608886, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: foodDatas.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2628866163921608886, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: foodDatas.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8eabbd029bd2f5e4c835a8157824beac, type: 2}
+    - target: {fileID: 2628866163921608886, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: foodDatas.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 86d1615701875b447b2f0cfae0e2b1f5, type: 2}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028970155497681831, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 882f3c039443cb6438ecc2194b23ec1d, type: 3}
 --- !u!1 &1805368916
 GameObject:
   m_ObjectHideFlags: 0
@@ -15603,3 +15677,4 @@ SceneRoots:
   - {fileID: 1754373255}
   - {fileID: 169292494}
   - {fileID: 421718930}
+  - {fileID: 1782527037}
