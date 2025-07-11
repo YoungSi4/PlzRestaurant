@@ -28,11 +28,16 @@ public class Visitor : MonoBehaviour
 
         /* 랜덤변수로 초기화 할 변수
         C_ID;
-        C_seatNumber;
         C_orderID;
-        C_foodNumber;
-
         */
+
+        C_seatNumber = Random.Range(1.1f, 4.4f);
+        Debug.Log("seatNumber : " +  C_seatNumber);
+        C_foodNumber = Random.Range(1, 2);
+        Debug.Log("foodNumber : " + C_foodNumber);
+
+
+
         StartCoroutine(DisableObj());
     }
 
