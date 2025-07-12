@@ -1,67 +1,117 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class TrayControl : MonoBehaviour
 {
+    // 현재 트레이에 올라가있는 음식 오브젝트 저장
+    private GameObject foodObj1;
+    private GameObject foodObj2;
     // 트레이에 음식을 올릴 위치 저장
     public Transform foodPos1;
     public Transform foodPos2;
-    // 현재 트레이에 올라가있는 음식 오브젝트 저장
-    public GameObject foodObj1;
-    public GameObject foodObj2;
-    void Update()
-    {
-        // 큐에 음식이 있으면서 트레이에 빈자리가 있으면 트레이에 음식을 채우기 위해 계속 확인
-        TryUpdateTray();
-    }
-    void TryUpdateTray()
-    {
-        // 1번 위치에 올라간 음식이 없고 큐에 완성된 음식이 남아있을 때
-        if (foodObj1 == null && FoodManager.Instance.HasFood())
-        {
-            // 큐에서 음식을 꺼냄
-            FoodData food1 = FoodManager.Instance.GetNextFood();
-            // 음식을 트레이의 지정 위치에 올림
-            foodObj1 = SpawnFoodOnTray(food1, foodPos1);
-        }
-        // 2번 위치에 올라간 음식이 없고 큐에 완성된 음식이 남아있을 때
-        if (foodObj2 == null && FoodManager.Instance.HasFood())
-        {
-            // 큐에서 음식을 꺼냄
-            FoodData food2 = FoodManager.Instance.GetNextFood();
-            // 음식을 트레이의 지정 위치에 올림
-            foodObj2 = SpawnFoodOnTray(food2, foodPos2);
-        }
-    }
 
-    GameObject SpawnFoodOnTray(FoodData food,  Transform foodPos)
+    // 트레이에 음식 올리기
+    // HeadChef.cs 에서 호출
+    public void SpawnFoodOnTray(FoodData food, int posNum)
     {
         // foodPos의 위치에 food의 3D오브젝트 생성
-        GameObject instantFood = Instantiate(food.foodPrefab, foodPos.position, foodPos.rotation);
-        return instantFood;
+        switch (posNum)
+        {
+            // 1번 위치
+            case 1:
+                foodObj1 = Instantiate(food.foodPrefab, foodPos1.position, foodPos1.rotation);
+                break;
+            // 2번 위치
+            case 2:
+                foodObj2 = Instantiate(food.foodPrefab, foodPos2.position, foodPos2.rotation);
+                break;
+        }
     }
-    
+
+    // 트레이에 음식을 올릴 위치 결정
+    // HeadChef.cs에서 호출
+    public int selectTrayPosition()
+    {
+        // 1번 위치가 비었으면 우선적으로 1번 위치에 올림
+        if (foodObj1 == null) return 1;
+        // 1번위치가 비어있지 않아 첫 번째 조건문을 통과했는데 2번 위치가 비었으면 2번 위치에 올림
+        if (foodObj2 == null) return 2;
+
+        // 빈 트레이 위치가 없다면 0을 반환
+        return 0;
+    }
+
+    // 트레이에서 사장님 손에 올리기위해 음식 정보 전달
+    // NPC.cs 에서 호출
+    public GameObject TakeFoodFromTray(int TrayIndex, Transform handPos)
+    {
+        GameObject copiedFood = null;
+
+        switch (TrayIndex)
+        {
+            case 1:
+                if (foodObj1 != null)
+                {
+                    copiedFood = Instantiate(foodObj1, handPos.position, handPos.rotation);
+                }
+                break;
+            case 2:
+                if (foodObj2 != null)
+                {
+                    copiedFood = Instantiate(foodObj2, handPos.position, handPos.rotation);
+                }
+                break;
+        }
+        return copiedFood;
+    }
     // 트레이에서 음식 삭제
     // NPC.cs 에서 호출
-    public void ClearFood(int foodIndex)
+    public void ClearFood(int TrayIndex)
     {
-        if(foodIndex == 1)
+        switch (TrayIndex)
         {
-            if (foodObj1 != null)
-            {
-                Destroy(foodObj1);
-                foodObj1 = null;
-            }
+            case 1:
+                if (foodObj1 != null)
+                {
+                    Destroy(foodObj1);
+                    foodObj1 = null;
+                }
+                break;
+            case 2:
+                if (foodObj2 != null)
+                {
+                    Destroy(foodObj2);
+                    foodObj2 = null;
+                }
+                break;
         }
-        else if(foodIndex == 2)
-        {
-            if (foodObj2 != null)
-            {
-                Destroy(foodObj2);
-                foodObj2 = null;
-            }
-        }
+    }
+    // 트레이에 빈 자리가 있는지 검사
+    // HeadChef.cs에서 호출
+    public bool isTrayAvailable()
+    {
+        return foodObj1 == null || foodObj2 == null;
+    }
 
+    // 트레이에 올라온 음식이 있는지 검사
+    // NPC.cs에서 호출
+    public bool isFoodOnTray()
+    {
+        return foodObj1 != null || foodObj2 != null;
+    }
+
+    // 트레이 1번 위치가 비어있는지 검사
+    // NPC.cs에서 호출
+    public bool isTrayFirstSlotEmpty()
+    {
+        return foodObj1 == null;
+    }
+    // 트레이 2번 위치가 비어있는지 검사
+    // NPC.cs에서 호출
+    public bool isTraySecondSlotEmpty()
+    {
+        return foodObj2 == null;
     }
 }
