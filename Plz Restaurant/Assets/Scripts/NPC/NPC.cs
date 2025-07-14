@@ -15,7 +15,7 @@ public class NPC : MonoBehaviour
     private Quaternion B_startRot; // 사장님의 기본위치 방향 저장
     private float B_speed = 5; // 사장님의 이동 속도 (조정 가능)
     private int B_abillity = 2; // 한 번에 들 수 있는 음식 수 (최대4개 예정)
-    private Queue<GameObject> foodCopies = new Queue<GameObject>(); // 사장님 손에 들고 있는 음식 리스트
+    private List<GameObject> B_handFoods = new List<GameObject>(); // 사장님 손에 들고 있는 음식의 리스트
 
     private bool isBusy = false; // 현재 음식을 서빙하는 코루틴이 실행중인지 검사
 
@@ -60,7 +60,7 @@ public class NPC : MonoBehaviour
             yield return StartCoroutine(MoveToPos(trayControl.foodPos1.transform.position + new Vector3(0, 0, 1f)));
 
             // 들 수 있는 만큼 들 때 까지 음식 들기 반복
-            while (foodCopies.Count < B_abillity)
+            while (B_handFoods.Count < B_abillity)
             {
                 // 트레이에 음식이 없다면 음식을 드는 동작을 멈추고 서빙으로 넘어가기 위한 예외처리
                 if (!trayControl.isFoodOnTray())
@@ -104,7 +104,7 @@ public class NPC : MonoBehaviour
                 }
             }
             // 서빙할 테이블로 이동 후 음식을 두는 동작. 들고 있는 음식을 모두 내릴 때 까지 반복
-            while (foodCopies.Count > 0)
+            while (B_handFoods.Count > 0)
             {
                 // 서빙할 테이블 위치를 얻는 로직이 필요
 
@@ -130,7 +130,7 @@ public class NPC : MonoBehaviour
     // case 늘리기로 확장 가능
     Transform selectHandPos()
     {
-        switch (foodCopies.Count)
+        switch (B_handFoods.Count)
         {
             case 0:
                 return bossHandPos1;
@@ -146,7 +146,7 @@ public class NPC : MonoBehaviour
     void PickFood(int trayIndex)
     {
         // 오류방지 들 수 있는 음식 수 만큼 들고 있으면 
-        if (foodCopies.Count >= B_abillity) return;
+        if (B_handFoods.Count >= B_abillity) return;
         // 어느 위치에 들지 선택
         Transform handPos = selectHandPos();
         // 트레이에서 들 음식 정보 불러 오기 및 트레이에서 삭제
@@ -157,7 +157,7 @@ public class NPC : MonoBehaviour
             // foodCopy에 저장한 오브젝트 손 위치에 생성
             foodCopy.transform.SetParent(handPos);
             // 들고있는 음식 큐에 넣기
-            foodCopies.Enqueue(foodCopy);
+            B_handFoods.Add(foodCopy);
         }
 
     }
@@ -166,9 +166,10 @@ public class NPC : MonoBehaviour
     // 들고 있는 음식 리스트를 순회하며 도착한 테이블에 서빙할 음식이 더 있는지 확인 후 있으면 추가로 내려놓기(로직추가필요)
     void ServeFood()
     {
-        while (foodCopies.Count > 0) // 사장님이 들고있는 음식이 있는 경우(foodCopies가 empty가 아닌 경우)
+        while (B_handFoods.Count > 0) // 사장님이 들고있는 음식이 있는 경우(B_handFoods가 empty가 아닌 경우)
         {
-            GameObject foodCopy = foodCopies.Dequeue();
+            GameObject foodCopy = B_handFoods[0];
+            B_handFoods.RemoveAt(0);
             // 테이블에 음식 생성
             GameObject tableFood = Instantiate(foodCopy, tablePos.position, tablePos.rotation);
             // 테이블에 올릴 음식은 부모 해제 후 독립 개체로
