@@ -4,23 +4,37 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class MainScene1 : MonoBehaviour
 {
     //public Button dropDownMenu;
-    public GameObject menu;
+    public GameObject dropDownMenu;
     public GameObject storeMenu;
     public GameObject ExitMenu;
-    public TextMeshProUGUI asset;
+    public TextMeshProUGUI assetMenuText;
+    public GameObject StartMenu;
     public int a = 10000000;
+
+    public GameObject uiLeft;
+    public GameObject uiRight;
+
+    Animator uiLeftGo;
+    Animator uiRightGo;
+
+    private void Start()
+    {
+        uiLeftGo = uiLeft.GetComponent<Animator>();
+        uiRightGo = uiRight.GetComponent<Animator>();
+    }
 
     public void DropDownMenu()
     {
-        if (menu.activeSelf)
+        if (dropDownMenu.activeSelf)
         {
-            menu.SetActive(false);
+            dropDownMenu.SetActive(false);
         }
-        else menu.SetActive(true);
+        else dropDownMenu.SetActive(true);
     }
 
     private void Update()
@@ -31,7 +45,7 @@ public class MainScene1 : MonoBehaviour
     /// //////////////////////////////////////////////////
     public void Asset()
     {
-        asset.text = "asset" + "FormatNumber(a)";
+        assetMenuText.text = "asset" + FormatNumber(a);
     }
     string FormatNumber(int num)
     {
@@ -62,6 +76,9 @@ public class MainScene1 : MonoBehaviour
     }
     public void GameStart()
     {
+        StartMenu.SetActive(false);
+        uiRightGo.SetBool("Go", true);
+        uiLeftGo.SetBool("Go", true);
         Debug.Log("Ω√¿€");
     }
 }
