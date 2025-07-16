@@ -45,32 +45,32 @@ public class TrayControl : MonoBehaviour
 
     // 트레이에서 사장님 손에 올리기위해 음식 정보 전달
     // NPC.cs 에서 호출
-    public GameObject TakeFoodFromTray(int TrayIndex, Transform handPos)
+    public GameObject TakeFoodFromTray(int trayIndex, Transform handPos)
     {
-        GameObject copiedFood = null;
+        GameObject B_handFood = null;
 
-        switch (TrayIndex)
+        switch (trayIndex)
         {
             case 1:
                 if (foodObj1 != null)
                 {
-                    copiedFood = Instantiate(foodObj1, handPos.position, handPos.rotation);
+                    B_handFood = Instantiate(foodObj1, handPos.position, handPos.rotation);
                 }
                 break;
             case 2:
                 if (foodObj2 != null)
                 {
-                    copiedFood = Instantiate(foodObj2, handPos.position, handPos.rotation);
+                    B_handFood = Instantiate(foodObj2, handPos.position, handPos.rotation);
                 }
                 break;
         }
-        return copiedFood;
+        return B_handFood;
     }
     // 트레이에서 음식 삭제
     // NPC.cs 에서 호출
-    public void ClearFood(int TrayIndex)
+    public void ClearFood(int trayIndex)
     {
-        switch (TrayIndex)
+        switch (trayIndex)
         {
             case 1:
                 if (foodObj1 != null)
