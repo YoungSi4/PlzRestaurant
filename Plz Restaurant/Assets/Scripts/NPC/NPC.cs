@@ -150,14 +150,14 @@ public class NPC : MonoBehaviour
         // 어느 위치에 들지 선택
         Transform handPos = selectHandPos();
         // 트레이에서 들 음식 정보 불러 오기 및 트레이에서 삭제
-        GameObject foodCopy = trayControl.TakeFoodFromTray(trayIndex, handPos);
+        GameObject B_handFood = trayControl.TakeFoodFromTray(trayIndex, handPos);
 
-        if (foodCopy != null)
+        if (B_handFood != null)
         {
-            // foodCopy에 저장한 오브젝트 손 위치에 생성
-            foodCopy.transform.SetParent(handPos);
+            // B_handFood의 부모를 사장님의 손 위치로 설정
+            B_handFood.transform.SetParent(handPos);
             // 들고있는 음식 큐에 넣기
-            B_handFoods.Add(foodCopy);
+            B_handFoods.Add(B_handFood);
         }
 
     }
@@ -168,15 +168,15 @@ public class NPC : MonoBehaviour
     {
         while (B_handFoods.Count > 0) // 사장님이 들고있는 음식이 있는 경우(B_handFoods가 empty가 아닌 경우)
         {
-            GameObject foodCopy = B_handFoods[0];
+            GameObject B_handFood = B_handFoods[0];
             B_handFoods.RemoveAt(0);
             // 테이블에 음식 생성
-            GameObject tableFood = Instantiate(foodCopy, tablePos.position, tablePos.rotation);
+            GameObject tableFood = Instantiate(B_handFood, tablePos.position, tablePos.rotation);
             // 테이블에 올릴 음식은 부모 해제 후 독립 개체로
             tableFood.transform.SetParent(null);
 
             // 손에서 오브젝트 삭제
-            Destroy(foodCopy);
+            Destroy(B_handFood);
         }
     }
     // 목적 위치로 이동
