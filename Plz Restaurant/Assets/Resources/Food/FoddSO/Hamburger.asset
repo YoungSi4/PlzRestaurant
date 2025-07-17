@@ -17,4 +17,4 @@ MonoBehaviour:
   foodName: hamburger
   foodPrice: 12000
   foodDescription: "\uC0AC\uC2E4  \uD328\uD2F0 \uC774\uB984\uC774 \uD584\uBC84\uAC70\uC785\uB2C8\uB2E4\n\uD568\uBD80\uB974\uD06C"
-  foodPrefab: {fileID: 0}
+  foodPrefab: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}
