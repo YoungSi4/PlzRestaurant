@@ -9,12 +9,6 @@ public class GameManager : Singleton<GameManager>
     public TimeControl timeControl;
     public VisitorSpawner visitorSpawner;
 
-    public Button startButton;
-    public Button endButton;
-
-    public Button moneyButton; // 테스트 용도;
-    public Button moneyLoseButton;
-
     public VisitorPool pool; // ?
 
     // 진행상황 관련 변수
@@ -29,6 +23,12 @@ public class GameManager : Singleton<GameManager>
 
     // VisitorSpawner에 정지시키는 플래그 필요
     // public 함수 하나 만들어서 GameManager에서 제어
+
+    public Button startButton;
+    public Button endButton;
+
+    public Button moneyButton; // 테스트 용도;
+    public Button moneyLoseButton;
 
     [SerializeField]
     private TextMeshProUGUI R_targetIncome_Tmp;
