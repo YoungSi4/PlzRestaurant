@@ -9,8 +9,6 @@ public class GameManager : Singleton<GameManager>
     public TimeControl timeControl;
     public VisitorSpawner visitorSpawner;
 
-    public VisitorPool pool; // ?
-
     // 진행상황 관련 변수
     private int R_day = 1;
     private int R_targetIncome = 5000;
@@ -59,7 +57,6 @@ public class GameManager : Singleton<GameManager>
     }
     public void StartGame() // 나중에 R_Open로 바꿀 것
     {
-        // 순서 변경 시 pool == null 인 상태가 발생하여 Spawn동작 X
         visitorSpawner.Start_Spawning();
         timeControl.Start_Timer();
 
