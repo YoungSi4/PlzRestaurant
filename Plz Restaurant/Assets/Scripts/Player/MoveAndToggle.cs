@@ -84,6 +84,8 @@ public class MoveAndToggle : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E)) //이건 인풋시스템으로 고쳐야하는데 1인칭일 때 3인칭일 때 아직 어케 할지 몰라서 쉽게 만들어 놓기만함
                     {
                         Debug.Log("visitor상호작용");
+                        var visitor = hit.collider.gameObject.GetComponent<Visitor>();
+                        visitor.SendOrderInfo();
                     }
                 }
             }
