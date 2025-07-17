@@ -5,13 +5,13 @@ using UnityEngine;
 public class HeadChef1 : MonoBehaviour
 {
     //public List<int> H_cookingList = new List<int>(); //현재 조리중인 주문서 목록
-    public Queue<int> H_cookingList = new Queue<int>(); // 다 큐로 했길래 일단 리스트에서 큐로 바꿈
-                                                        // 외부에서 H_cookingList.Enqueu로 넣어줄듯?
+    public Queue<int> H_cookingList = new Queue<int>(); // 거의 큐나 스택으로 진행하여서 일단 리스트에서 큐로 바꿈
+                                                        //주문서를 넘기면(외부스크립트에서 뭐 enque로 넣어주는식)
                                                         // or addCooking함수를 외부에서 써서 넣어줌 
     public FoodDB foodDB;
     public FoodData food;
     bool isCooking = false; //지금 조리중인지 체크
-    int nextFood = 0;
+    int nextFood = 0; //인덱스를 위해
     private void Update()
     {
         H_startCooking();
