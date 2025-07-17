@@ -32,9 +32,9 @@ public class Visitor : MonoBehaviour
         */
 
         C_seatNumber = Random.Range(1.1f, 4.4f);
-        Debug.Log("seatNumber : " +  C_seatNumber);
         C_foodNumber = Random.Range(1, 2);
-        Debug.Log("foodNumber : " + C_foodNumber);
+        //Debug.Log("seatNumber : " +  C_seatNumber);
+        //Debug.Log("foodNumber : " + C_foodNumber);
 
 
 

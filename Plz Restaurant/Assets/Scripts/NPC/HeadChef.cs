@@ -22,17 +22,21 @@ public class HeadChef : MonoBehaviour
 
     private void Update()
     {
-        if(!isCooking && H_hasFood() && trayControl.isTrayAvailable())
+        H_startCooking();
+        GetFood();
+    }
+
+    private void H_startCooking()
+    {
+        if (!isCooking && H_hasFood() && trayControl.isTrayAvailable())
         {
             // 큐 내부에서 맨 앞에 있는 값 반환
             FoodData foodData = H_cookingList.Peek();
             StartCoroutine(cookingRoutine(foodData));
         }
-
-        GetFood();
     }
 
-    IEnumerator cookingRoutine(FoodData foodData)
+    private IEnumerator cookingRoutine(FoodData foodData)
     {
         isCooking = true; 
 
@@ -53,7 +57,7 @@ public class HeadChef : MonoBehaviour
     }
 
     // 음식 조리하기
-    void H_startCooking(FoodData foodData)
+    private void H_startCooking(FoodData foodData)
     {
         // 오류검사
         if (foodData == null)
@@ -66,7 +70,7 @@ public class HeadChef : MonoBehaviour
     }
 
     // 트레이에 음식 올리기
-    void H_placeFoodOnTray(FoodData foodData)
+    private void H_placeFoodOnTray(FoodData foodData)
     {
         // 올릴 트레이 위치 정하기
         int posNum = trayControl.selectTrayPosition();
@@ -90,10 +94,10 @@ public class HeadChef : MonoBehaviour
     }
 
     // 큐에 음식이 있는지 확인
-    public bool H_hasFood() => H_cookingList.Count > 0;
+    private bool H_hasFood() => H_cookingList.Count > 0;
 
     // 임시 음식 추가용 함수
-    void GetFood()
+    private void GetFood()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
