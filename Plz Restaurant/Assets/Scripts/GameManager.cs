@@ -10,12 +10,12 @@ public class GameManager : Singleton<GameManager>
     public VisitorSpawner visitorSpawner;
 
     // 진행상황 관련 변수
-    private int R_day = 1;
+    public int R_day = 1;                                                             //@@@@@@@@@ UI에서 나타내기위해 private->public 변경
     private int R_targetIncome = 5000;
     private int R_targetIncomeIncrease = 5000;
     private int R_season = 0; // spring 0, summer 1, autumn 2, winter 3
     private int R_chapter = 1;
-    private int R_totalIncome = 0; // 플레이어의 재화량
+    public int R_totalIncome = 0; // 플레이어의 재화량                                //@@@@@@@@@ UI에서 나타내기위해 private->public 변경
     private int R_dailyIncome = 0;
     private bool R_isOpen = false;
 
@@ -28,21 +28,21 @@ public class GameManager : Singleton<GameManager>
     public Button moneyButton; // 테스트 용도;
     public Button moneyLoseButton;
 
-    [SerializeField]
-    private TextMeshProUGUI R_targetIncome_Tmp;
-    [SerializeField]
-    private TextMeshProUGUI R_dailyIncome_Tmp;
-    [SerializeField]
-    private TextMeshProUGUI R_day_Tmp;
+    //[SerializeField]
+    //private TextMeshProUGUI R_targetIncome_Tmp;
+    //[SerializeField]
+    //private TextMeshProUGUI R_dailyIncome_Tmp;
+    //[SerializeField]
+    //private TextMeshProUGUI R_day_Tmp;
 
     public override void Awake()
     {
         base.Awake();
 
         // UI 좌측상단 수익 관련 텍스트 초기화
-        R_targetIncome_Tmp.SetText(R_targetIncome.ToString());
-        R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
-        R_day_Tmp.SetText(R_day.ToString());
+        //R_targetIncome_Tmp.SetText(R_targetIncome.ToString());
+        //R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
+        //R_day_Tmp.SetText(R_day.ToString());
 
         // UI 테스트용 버튼 연결
         if (startButton != null)
@@ -85,20 +85,20 @@ public class GameManager : Singleton<GameManager>
     {
         R_dailyIncome += 1000;
         string tempIncome = R_dailyIncome.ToString();
-        R_dailyIncome_Tmp.SetText(tempIncome);
+        //R_dailyIncome_Tmp.SetText(tempIncome);
     }
 
     private void EraseMoney()
     {
         R_dailyIncome -= 1000;
-        R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
+        //R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
     }
 
     // 수익을 반영시키는 함수 (매개변수는 음수 양수 상관없음)
     public void AddDailyIncome(int income)
     {
         R_dailyIncome += income;
-        R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
+        //R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
     }
 
     public void R_checkSuccess()
@@ -134,7 +134,7 @@ public class GameManager : Singleton<GameManager>
     private void R_resetVars()
     {
         R_dailyIncome = 0;
-        R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
+        //R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
 
         R_isOpen = false;
         // 타이머 초기화
@@ -144,10 +144,10 @@ public class GameManager : Singleton<GameManager>
     private void R_nextDay()
     {
         R_day++;
-        R_day_Tmp.SetText(R_day.ToString());
+        //R_day_Tmp.SetText(R_day.ToString());
         R_targetIncome += R_targetIncomeIncrease;
         var tempTarget = R_targetIncome.ToString();
-        R_targetIncome_Tmp.SetText(tempTarget);
+        //R_targetIncome_Tmp.SetText(tempTarget);
     }
 
     private void R_repeatDay()

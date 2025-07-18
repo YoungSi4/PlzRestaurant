@@ -8,17 +8,19 @@ using UnityEngine.UIElements;
 
 public class MainScene1 : MonoBehaviour
 {
-    //public Button dropDownMenu;
+    [Header("On/Off UI")]
     public GameObject dropDownMenu;
     public GameObject storeMenu;
-    public GameObject ExitMenu;
-    public TextMeshProUGUI assetMenuText;
-    public GameObject StartMenu;
-    public int a = 10000000;
+    public GameObject exitMenu;
+    public GameObject startMenu;
 
+    [Header("Update Text")]
+    [SerializeField] TextMeshProUGUI currentAsset;
+    [SerializeField] TextMeshProUGUI currentDate;
+
+    [Header("Start Animation")]
     public GameObject uiLeft;
     public GameObject uiRight;
-
     Animator uiLeftGo;
     Animator uiRightGo;
 
@@ -26,6 +28,7 @@ public class MainScene1 : MonoBehaviour
     {
         uiLeftGo = uiLeft.GetComponent<Animator>();
         uiRightGo = uiRight.GetComponent<Animator>();
+        TodayInit();//@@@@@@@@@@ 씬이 시작하면 현재 플레이어의 자산과 현재 영업일을 업데이트해줌
     }
 
     public void DropDownMenu()
@@ -42,10 +45,16 @@ public class MainScene1 : MonoBehaviour
         
     }
 
+    private void TodayInit()
+    {
+        Asset();
+        currentDate.text = GameManager.Instance.R_day.ToString(); //@@@@@@@@@ 게임매니저에서 가져옴
+    }
+
     /// //////////////////////////////////////////////////
     public void Asset()
     {
-        assetMenuText.text = "asset" + FormatNumber(a);
+        currentAsset.text = "asset" + FormatNumber(GameManager.Instance.R_totalIncome); //@@@@@@@  게임매니저에서 가져옴
     }
     string FormatNumber(int num)
     {
@@ -68,17 +77,22 @@ public class MainScene1 : MonoBehaviour
 
     public void OnExitMenu()
     {
-        if (ExitMenu.activeSelf)
+        if (exitMenu.activeSelf)
         {
-            ExitMenu.SetActive(false);
+            exitMenu.SetActive(false);
         }
-        else ExitMenu.SetActive(true);
+        else exitMenu.SetActive(true);
     }
     public void GameStart()
     {
-        StartMenu.SetActive(false);
+        startMenu.SetActive(false);
         uiRightGo.SetBool("Go", true);
         uiLeftGo.SetBool("Go", true);
         Debug.Log("시작");
+    }
+    public void OnOff_UI(GameObject uiObject)
+    {
+        if (uiObject == null) return;
+        uiObject.SetActive(!uiObject.activeSelf);
     }
 }
