@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
-  m_Name: Hamburger
+  m_Name: Pancake
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
   foodNum: 1
-  foodName: "\uD584\uBC84\uAC70"
-  foodPrice: 12000
-  foodDescription: "\uC218\uC81C \uD328\uD2F0\uB85C \uB9CC\uB4E0 \uD584\uBC84\uAC70"
+  foodName: "\uD32C\uCF00\uC775"
+  foodPrice: 9500
+  foodDescription: "\uAC08\uC0C9\uC73C\uB85C \uAD6C\uC6CC\uC9C4 \uD32C\uCF00\uC775,
+    \uBA54\uC774\uD50C \uC2DC\uB7FD, \uBC84\uD130, \uCEE4\uD53C \uD55C \uC794\uC73C\uB85C
+    \uB274\uC695\uC758 \uBE0C\uB7F0\uCE58\uB97C \uC644\uC131\uD574\uBCF4\uC138\uC694"
   foodPrefab: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}

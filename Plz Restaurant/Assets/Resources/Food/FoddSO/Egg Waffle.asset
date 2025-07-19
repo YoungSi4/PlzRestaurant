@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
-  m_Name: Bourbon
+  m_Name: Egg Waffle
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 2
-  foodName: bourbon
+  foodNum: 1
+  foodName: "\uACC4\uB780 \uC640\uD50C"
   foodPrice: 9000
-  foodDescription: "\uD568\uBD80\uB974\uD06C\uAC00 \uC788\uB294\uB370 \uBD80\uB974\uBD09\uC774
-    \uBE60\uC9C8 \uC21C \uC5C6\uC9C0\n\uBC84\uBC88"
-  foodPrefab: {fileID: 7822243917324814751, guid: e0027058173b5a84a98fab4dd0ce5872, type: 3}
+  foodDescription: "\uC9C4\uC2EC\uC73C\uB85C \uBB34\uC2A8 \uB9DB\uC77C\uC9C0 \uAD81\uAE08\uD558\uB2E4
+    \uBC14\uC0AD\uD55C \uACC4\uB780\uBE75\uC77C\uAE4C"
+  foodPrefab: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}

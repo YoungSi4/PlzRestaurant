@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
-  m_Name: Hamburger
+  m_Name: Kimchi Freid Rice
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
   foodNum: 1
-  foodName: "\uD584\uBC84\uAC70"
-  foodPrice: 12000
-  foodDescription: "\uC218\uC81C \uD328\uD2F0\uB85C \uB9CC\uB4E0 \uD584\uBC84\uAC70"
+  foodName: "\uAE40\uCE58\uBCF6\uC74C\uBC25"
+  foodPrice: 9000
+  foodDescription: "\uACC4\uB780\uD6C4\uB77C\uC774\uB294 \uB2F9\uC5F0\uD558\uC8E0
+    \uC544\uB294 \uB9DB\uC774 \uBB34\uC11C\uC6B4 \uAE40\uCE58\uBCF6\uC74C\uBC25"
   foodPrefab: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}

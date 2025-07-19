@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
-  m_Name: Hamburger
+  m_Name: Galbi Tang
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
   foodNum: 1
-  foodName: "\uD584\uBC84\uAC70"
-  foodPrice: 12000
-  foodDescription: "\uC218\uC81C \uD328\uD2F0\uB85C \uB9CC\uB4E0 \uD584\uBC84\uAC70"
+  foodName: "\uAC08\uBE44\uD0D5"
+  foodPrice: 15000
+  foodDescription: "\uC0B4\uCF54\uAE30\uAC00 \uBD80\uB4DC\uB7FD\uAC8C \uC798 \uB72F\uC5B4\uC9C0\uB294
+    \uAC08\uBE44\uD0D5"
   foodPrefab: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}
