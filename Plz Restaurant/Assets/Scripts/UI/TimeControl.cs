@@ -45,7 +45,7 @@ public class TimeControl : Singleton<TimeControl>
         }
         else
         {
-            TimeOutImage.SetActive(true);
+            //TimeOutImage.SetActive(true);
             isRunning = false;
             gameManager.R_close();
         }
@@ -56,7 +56,7 @@ public class TimeControl : Singleton<TimeControl>
     {
         isRunning = true;
         time = 0f;
-        TimeOutImage.SetActive(false);
+        //TimeOutImage.SetActive(false);
         TimeText[0].text = (StartTime / 60).ToString("D2");
         TimeText[1].text = (StartTime % 60).ToString("D2");
     }

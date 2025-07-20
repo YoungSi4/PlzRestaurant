@@ -31,14 +31,14 @@ public class MainScene1 : MonoBehaviour
         TodayInit();//@@@@@@@@@@ 씬이 시작하면 현재 플레이어의 자산과 현재 영업일을 업데이트해줌
     }
 
-    public void DropDownMenu()
-    {
-        if (dropDownMenu.activeSelf)
-        {
-            dropDownMenu.SetActive(false);
-        }
-        else dropDownMenu.SetActive(true);
-    }
+    //public void DropDownMenu()
+    //{
+    //    if (dropDownMenu.activeSelf)
+    //    {
+    //        dropDownMenu.SetActive(false);
+    //    }
+    //    else dropDownMenu.SetActive(true);
+    //}
 
     private void Update()
     {
@@ -48,7 +48,7 @@ public class MainScene1 : MonoBehaviour
     private void TodayInit()
     {
         Asset();
-        currentDate.text = GameManager.Instance.R_day.ToString(); //@@@@@@@@@ 게임매니저에서 가져옴
+        currentDate.text = "Day" + GameManager.Instance.R_day.ToString(); //@@@@@@@@@ 게임매니저에서 가져옴
     }
 
     /// //////////////////////////////////////////////////
@@ -66,23 +66,24 @@ public class MainScene1 : MonoBehaviour
     }
     //////////////////////////////////////////////////////
     
-    public void OnStore()
-    {
-        if (storeMenu.activeSelf)
-        {
-            storeMenu.SetActive(false);
-        }
-        else storeMenu.SetActive(true);
-    }
+    //public void OnStore()
+    //{
+    //    if (storeMenu.activeSelf)
+    //    {
+    //        storeMenu.SetActive(false);
+    //    }
+    //    else storeMenu.SetActive(true);
+    //}
 
-    public void OnExitMenu()
-    {
-        if (exitMenu.activeSelf)
-        {
-            exitMenu.SetActive(false);
-        }
-        else exitMenu.SetActive(true);
-    }
+    //public void OnExitMenu()
+    //{
+    //    if (exitMenu.activeSelf)
+    //    {
+    //        exitMenu.SetActive(false);
+    //    }
+    //    else exitMenu.SetActive(true);
+    //}
+
     public void GameStart()
     {
         startMenu.SetActive(false);

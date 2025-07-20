@@ -11,8 +11,8 @@ public class GameManager : Singleton<GameManager>
 
     // 진행상황 관련 변수
     public int R_day = 1;                                                             //@@@@@@@@@ UI에서 나타내기위해 private->public 변경
-    private int R_targetIncome = 5000;
-    private int R_targetIncomeIncrease = 5000;
+    public int R_targetIncome = 5000; // @@@@@@@@@@@@
+    private int R_targetIncomeIncrease = 5000; 
     private int R_season = 0; // spring 0, summer 1, autumn 2, winter 3
     private int R_chapter = 1;
     public int R_totalIncome = 0; // 플레이어의 재화량                                //@@@@@@@@@ UI에서 나타내기위해 private->public 변경
