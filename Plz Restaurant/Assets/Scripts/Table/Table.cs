@@ -14,29 +14,57 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    private int tableNum { get; set;  }
-    private bool isTableOccupied {  get; set; } 
-    private int chairNum { get; set; }
-    private int[] chairs; // 각 의자에 앉은 손님의 아이디를 저장
-    
-    //
+    [SerializeField]
+    public int tableNum { get; private set;  }
+    [SerializeField]
+    public int chairNum { get; private set; }
+    public bool isTableOccupied { get; private set; }
+    public int[] visitorIDOnChair { get; private set; } // 각 의자에 앉은 손님의 아이디를 저장
+    [SerializeField]
+    public Transform[] chairPos { get; private set; } // 각 의자의 위치
 
-    // constructor
-    public Table()
+    // 음식 둘 위치는 구현 방식을 못 정했음
+    private Transform[] foodPos;
+
+    // 테이블에 놓인 음식 정보도 저장해야하나?
+
+    //// constructor
+    //public Table()
+    //{
+    //    this.tableNum = -1;
+    //    this.isTableOccupied = false;
+    //    this.chairNum = -1;
+    //    this.visitorIDOnChair = new int[chairNum];
+    //}
+
+    //public Table(int tableNum, bool isTableOccupied, int chairNum)
+    //{
+    //    this.tableNum = tableNum;
+    //    this.isTableOccupied = isTableOccupied;
+    //    this.chairNum = chairNum;
+    //    this.visitorIDOnChair = new int[chairNum];
+    //}
+
+
+    // 손님을 그룹 단위로 묶어서 관리하는 스크립트 쪽에서 (아마도 Vsitor spawner 혹은 pool)
+    // 손님 ID를 보내줘야 함 -> 손님 id가 primary key이므로 생성 규칙에 대해서도 생각해봐야 함
+    void VisitorSitOnChair(params int[] vistorIDs)
     {
-        this.tableNum = -1;
-        this.isTableOccupied = false;
-        this.chairNum = -1;
-        this.chairs = new int[chairNum];
+        int randPos = Random.Range(1, chairNum); // 아무 위치를 하나만 지정
+        
+        // 이후 인원 수에 따라 앉는 자리를 배치
+        // 2인 : 맞은 편에
+        // 3인 : 남는 자리 아무대나
+        // 4인 : 마지막 자리
     }
 
-    public Table(int tableNum, bool isTableOccupied, int chairNum)
+    void VisitorStandUpChair()
     {
-        this.tableNum = tableNum;
-        this.isTableOccupied = isTableOccupied;
-        this.chairNum = chairNum;
-        this.chairs = new int[chairNum];
+        isTableOccupied = false;
+        for(int i = 0;  visitorIDOnChair.Length > 0; i++)
+        {
+            visitorIDOnChair[i] = -1;
+        }
     }
-
 
 }
