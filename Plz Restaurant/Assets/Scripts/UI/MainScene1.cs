@@ -12,33 +12,20 @@ public class MainScene1 : MonoBehaviour
     public GameObject dropDownMenu;
     public GameObject storeMenu;
     public GameObject exitMenu;
-    public GameObject startMenu;
+    //public GameObject startMenu;
 
     [Header("Update Text")]
     [SerializeField] TextMeshProUGUI currentAsset;
     [SerializeField] TextMeshProUGUI currentDate;
 
     [Header("Start Animation")]
-    public GameObject uiLeft;
-    public GameObject uiRight;
-    Animator uiLeftGo;
-    Animator uiRightGo;
-
+    public Animator uiLeft;
+    public Animator uiRight;
+    public Animator uiDown;
     private void Start()
     {
-        uiLeftGo = uiLeft.GetComponent<Animator>();
-        uiRightGo = uiRight.GetComponent<Animator>();
         TodayInit();//@@@@@@@@@@ 씬이 시작하면 현재 플레이어의 자산과 현재 영업일을 업데이트해줌
     }
-
-    //public void DropDownMenu()
-    //{
-    //    if (dropDownMenu.activeSelf)
-    //    {
-    //        dropDownMenu.SetActive(false);
-    //    }
-    //    else dropDownMenu.SetActive(true);
-    //}
 
     private void Update()
     {
@@ -64,31 +51,14 @@ public class MainScene1 : MonoBehaviour
         }
         else return num.ToString();
     }
-    //////////////////////////////////////////////////////
-    
-    //public void OnStore()
-    //{
-    //    if (storeMenu.activeSelf)
-    //    {
-    //        storeMenu.SetActive(false);
-    //    }
-    //    else storeMenu.SetActive(true);
-    //}
-
-    //public void OnExitMenu()
-    //{
-    //    if (exitMenu.activeSelf)
-    //    {
-    //        exitMenu.SetActive(false);
-    //    }
-    //    else exitMenu.SetActive(true);
-    //}
 
     public void GameStart()
     {
-        startMenu.SetActive(false);
-        uiRightGo.SetBool("Go", true);
-        uiLeftGo.SetBool("Go", true);
+        //startMenu.SetActive(false);
+        uiRight.SetBool("Out", true);
+        uiLeft.SetBool("Out", true);
+        uiDown.SetBool("Out", true);
+        GameManager.Instance.StartGame();
         Debug.Log("시작");
     }
     public void OnOff_UI(GameObject uiObject)

@@ -6,13 +6,8 @@ using UnityEngine;
 public class MainScene2 : MonoBehaviour
 {
     public GameObject stopPopup;
-
-
-    public TextMeshProUGUI[] TimeText; //시간 : 분을 나타낼 텍스트
-    private int StartTime = 480;
-    public float LimitTime = 600; // default: 600 [sec]
-    private float time = 0f;
-    private bool isRunning = false;
+    public TextMeshProUGUI targetIncomeText;
+    public TextMeshProUGUI todayIncomeText;
 
     public void On_UI(GameObject uiObect)
     {
@@ -29,5 +24,20 @@ public class MainScene2 : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)) {
             Off_UI(stopPopup);
              }
+    }
+
+    public void ShowMeTheMoney()
+    {
+        GameManager.Instance.ShowMeTheMoney();
+    }
+
+    public void EraseMoney()
+    {
+        GameManager.Instance.EraseMoney();
+    }
+
+    public void EndGame()
+    {
+
     }
 }

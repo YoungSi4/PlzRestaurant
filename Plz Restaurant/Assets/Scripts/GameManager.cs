@@ -22,11 +22,11 @@ public class GameManager : Singleton<GameManager>
     // VisitorSpawner에 정지시키는 플래그 필요
     // public 함수 하나 만들어서 GameManager에서 제어
 
-    public Button startButton;
-    public Button endButton;
+    //public Button startButton; @@@@@@@@@@ 이거필요 없는게 mainscene1에서 start누르면 바로 시작이라
+    //public Button endButton;
 
-    public Button moneyButton; // 테스트 용도;
-    public Button moneyLoseButton;
+    //public Button moneyButton; // 테스트 용도;
+    //public Button moneyLoseButton;
 
     //[SerializeField]
     //private TextMeshProUGUI R_targetIncome_Tmp;
@@ -44,22 +44,21 @@ public class GameManager : Singleton<GameManager>
         //R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
         //R_day_Tmp.SetText(R_day.ToString());
 
-        // UI 테스트용 버튼 연결
-        if (startButton != null)
-        {
-            startButton.onClick.AddListener(StartGame);
-        }
-        else Debug.Log("StartButton is not assigned in the Inspector.");
+        //// UI 테스트용 버튼 연결 
+        //if (startButton != null)
+        //{
+        //    startButton.onClick.AddListener(StartGame);
+        //}
+        //else Debug.Log("StartButton is not assigned in the Inspector.");
 
-        endButton.onClick.AddListener(R_close);
-        moneyButton.onClick.AddListener(ShowMeTheMoney);
-        moneyLoseButton.onClick.AddListener(EraseMoney);
+        //endButton.onClick.AddListener(R_close);      @@@@@@@@@@
+        //moneyButton.onClick.AddListener(ShowMeTheMoney);@@@@@@@@@@
+        //moneyLoseButton.onClick.AddListener(EraseMoney);@@@@@@@@@@@@
     }
     public void StartGame() // 나중에 R_Open로 바꿀 것
     {
         visitorSpawner.Start_Spawning();
         timeControl.Start_Timer();
-
         R_isOpen = true;
     }
 
@@ -81,14 +80,14 @@ public class GameManager : Singleton<GameManager>
 
 
     // 버튼에 연결한 돈 증가, 감소 시키는 함수 - 테스트 용도
-    private void ShowMeTheMoney()
+    public void ShowMeTheMoney() //@@@@@@@@@ public으로 바꿈
     {
         R_dailyIncome += 1000;
         string tempIncome = R_dailyIncome.ToString();
         //R_dailyIncome_Tmp.SetText(tempIncome);
     }
 
-    private void EraseMoney()
+    public void EraseMoney() //@@@@@@@@@@@@@@@@@@ public으로 바꿈
     {
         R_dailyIncome -= 1000;
         //R_dailyIncome_Tmp.SetText(R_dailyIncome.ToString());
