@@ -57,7 +57,8 @@ public class NPC : MonoBehaviour
         {
             // 트레이 앞으로 이동 (위치 조정필요)
             // 도착할 때 까지 다른 동작 하지 않게 하기 위해 yield return
-            yield return StartCoroutine(MoveToPos(trayControl.foodPos1.transform.position + new Vector3(0, 0, 1f)));
+            // foodPos1 -> foodPositions[0] 교체 테스트중
+            yield return StartCoroutine(MoveToPos(trayControl.foodPositions[0].transform.position + new Vector3(0, 0, 1f)));
 
             // 들 수 있는 만큼 들 때 까지 음식 들기 반복
             while (B_handFoods.Count < B_abillity)
