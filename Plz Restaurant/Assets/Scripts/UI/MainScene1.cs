@@ -22,6 +22,11 @@ public class MainScene1 : MonoBehaviour
     public Animator uiLeft;
     public Animator uiRight;
     public Animator uiDown;
+
+
+    public MainScene2 mainScene2;
+    public GameObject mainScene_2;
+
     private void Start()
     {
         TodayInit();//@@@@@@@@@@ 씬이 시작하면 현재 플레이어의 자산과 현재 영업일을 업데이트해줌
@@ -58,12 +63,20 @@ public class MainScene1 : MonoBehaviour
         uiRight.SetBool("Out", true);
         uiLeft.SetBool("Out", true);
         uiDown.SetBool("Out", true);
-        GameManager.Instance.StartGame();
-        Debug.Log("시작");
+        StartCoroutine(IGameStart());
     }
+
+    IEnumerator IGameStart()
+    {
+        yield return new WaitForSeconds(1);
+        mainScene_2.SetActive(true);
+        StartCoroutine(mainScene2.MainScene2Start());
+    }
+
     public void OnOff_UI(GameObject uiObject)
     {
         if (uiObject == null) return;
         uiObject.SetActive(!uiObject.activeSelf);
     }
+    
 }

@@ -9,6 +9,10 @@ public class MainScene2 : MonoBehaviour
     public TextMeshProUGUI targetIncomeText;
     public TextMeshProUGUI todayIncomeText;
 
+    public Animator left;
+    public Animator right;
+    public Animator up;
+
     public void On_UI(GameObject uiObect)
     {
         if (uiObect == null) return;
@@ -24,6 +28,8 @@ public class MainScene2 : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)) {
             Off_UI(stopPopup);
              }
+        todayIncomeText.text = GameManager.Instance.R_dailyIncome.ToString();
+        targetIncomeText.text = GameManager.Instance.R_targetIncome.ToString();
     }
 
     public void ShowMeTheMoney()
@@ -40,4 +46,16 @@ public class MainScene2 : MonoBehaviour
     {
 
     }
+
+    public IEnumerator MainScene2Start()
+    {
+        left.SetBool("In",true);
+        right.SetBool("In",true);
+        up.SetBool("In",true);
+        yield return new WaitForSeconds(1);
+        GameManager.Instance.StartGame();
+        Debug.Log("Ω√¿€");
+    }
+
+
 }
