@@ -28,8 +28,8 @@ public class MainScene2 : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)) {
             Off_UI(stopPopup);
              }
-        todayIncomeText.text = GameManager.Instance.R_dailyIncome.ToString();
-        targetIncomeText.text = GameManager.Instance.R_targetIncome.ToString();
+        todayIncomeText.SetText(GameManager.Instance.R_dailyIncome.ToString());
+        targetIncomeText.SetText(GameManager.Instance.R_targetIncome.ToString());
     }
 
     public void ShowMeTheMoney()
