@@ -5,10 +5,17 @@ using UnityEngine;
 public class VisitorSpawner : Singleton<VisitorSpawner>
 {
     public VisitorPool pool;
+    [SerializeField]
+    private TableManager tableManager;
 
     [SerializeField]
     private float spawnDelay = 3f;
     private WaitForSeconds delay;
+    int groupVisitorNum;
+    int groupTableNum; // 그룹 손님이 앉을 테이블
+
+    [SerializeField]
+    int tableCount; // 맵 상의 테이블 수
 
     public override void Awake()
     {
@@ -32,12 +39,27 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
 
     private IEnumerator SpawnVisitor()
     {
+        
+
         while (true)
         {
             yield return delay;
-            var visitor = pool.GetObj(); // get visitor from pool
-            visitor.transform.position = transform.position;
-            visitor.Init(pool);
+            groupVisitorNum = Random.Range(1, 5); // 1에서 4까지 균등확률. 해당 손님 그룹의 인원
+            
+            
+            for (int i = 0;  i < groupVisitorNum; i++)
+            {
+                var visitor = pool.GetObj(); // get visitor from pool
+                visitor.transform.position = transform.position;
+                visitor.Init(pool);
+            }
+
         }
+    }
+
+    private void ChooseTable()
+    {
+        groupTableNum = Random.Range(1, tableCount+1); // 일단 1 ~ 4로 범위 정해둠.
+
     }
 }
