@@ -10805,6 +10805,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3601989579858859004, guid: fd33b7f857b624b4fb5dcbedb72055ca, type: 3}
+      propertyPath: tablePos
+      value: 
+      objectReference: {fileID: 169292494}
     - target: {fileID: 4384860695052205134, guid: fd33b7f857b624b4fb5dcbedb72055ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.7200003
@@ -10861,9 +10865,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4384860695052623982, guid: fd33b7f857b624b4fb5dcbedb72055ca, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1474265440}
-    - targetCorrespondingSourceObject: {fileID: 4384860695052623982, guid: fd33b7f857b624b4fb5dcbedb72055ca, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1474265442}
   m_SourcePrefab: {fileID: 100100000, guid: fd33b7f857b624b4fb5dcbedb72055ca, type: 3}
 --- !u!1 &1474265437 stripped
@@ -10876,21 +10877,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4384860695052205158, guid: fd33b7f857b624b4fb5dcbedb72055ca, type: 3}
   m_PrefabInstance: {fileID: 1474265436}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1474265440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1474265437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be4e836044b25204fbb68f4d56baffdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tablePos: {fileID: 968302268}
-  bossHandPos1: {fileID: 2143858285}
-  bossHandPos2: {fileID: 1812766058}
 --- !u!195 &1474265442
 NavMeshAgent:
   m_ObjectHideFlags: 0
