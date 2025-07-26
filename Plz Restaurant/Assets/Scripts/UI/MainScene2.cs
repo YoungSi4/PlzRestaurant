@@ -13,6 +13,8 @@ public class MainScene2 : MonoBehaviour
     public Animator right;
     public Animator up;
 
+    public GameObject timeOver;
+
     public void On_UI(GameObject uiObect)
     {
         if (uiObect == null) return;
@@ -44,7 +46,8 @@ public class MainScene2 : MonoBehaviour
 
     public void EndGame()
     {
-
+        timeOver.SetActive(true);
+        GameManager.Instance.R_close();
     }
 
     public IEnumerator MainScene2Start()

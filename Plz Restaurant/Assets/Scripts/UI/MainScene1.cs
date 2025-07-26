@@ -81,15 +81,6 @@ public class MainScene1 : MonoBehaviour
     {
         if (uiObject == null) return;
         uiObject.SetActive(true);
-        Debug.Log(uiObject.transform.root.name);
-        Debug.Log(uiObject.transform.parent.name);
-        Debug.Log(uiObject.transform.name);
-
-        uiObject.transform.root.SetAsLastSibling();
-        //Transform parent = uiObject.transform.parent;
-        //parent.SetAsLastSibling();        // 부모 그룹이 위로
-        //uiObject.transform.SetAsLastSibling(); // 해당 오브젝트가 그 그룹 내 가장 위
-
     }
     public void Off_UI(GameObject uiObject)
     {
