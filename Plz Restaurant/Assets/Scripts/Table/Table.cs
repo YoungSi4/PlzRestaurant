@@ -15,16 +15,16 @@ using UnityEngine;
 public class Table : MonoBehaviour
 {
     [SerializeField]
-    public int tableNum { get; private set;  }
+    public int tableNum;
     [SerializeField]
-    public int chairNum { get; private set; }
+    public int chairNum { get; private set; } // 굳이 필요할까? chairPos의 길이로 접근해도 되잖아.
     public bool isTableOccupied { get; private set; }
     public int[] visitorIDOnChair { get; private set; } // 각 의자에 앉은 손님의 아이디를 저장
     [SerializeField]
-    public Transform[] chairPos { get; private set; } // 각 의자의 위치
+    public Transform[] chairPos; // 각 의자의 위치
 
     // 음식 둘 위치는 구현 방식을 못 정했음
-    private Transform[] foodPos;
+    private Transform[] foodPos { get; set; }
 
     // 테이블에 놓인 음식 정보도 저장해야하나?
 
