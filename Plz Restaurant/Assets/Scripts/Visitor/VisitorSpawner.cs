@@ -40,11 +40,14 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
     private IEnumerator SpawnVisitor()
     {
         
-
+        // 손님 생성 규칙을 정하려면 웨이팅 여부도 정해야 함.
+        /* 1. 남은테이블에 맞게 손님을 스폰한다 (개발 및 플레이어 편의성)
+         * 2. 손님 생성은 랜덤으로 두고 꽉 차면 웨이팅 시킨다 (현실성)
+         */
         while (true)
         {
             yield return delay;
-            groupVisitorNum = Random.Range(1, 5); // 1에서 4까지 균등확률. 해당 손님 그룹의 인원
+            groupVisitorNum = Random.Range(1, 3); // 1에서 2까지 균등확률. 해당 손님 그룹의 인원
             
             
             for (int i = 0;  i < groupVisitorNum; i++)
