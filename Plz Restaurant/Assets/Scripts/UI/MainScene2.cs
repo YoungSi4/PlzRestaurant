@@ -60,5 +60,13 @@ public class MainScene2 : MonoBehaviour
         Debug.Log("Ω√¿€");
     }
 
+    public void StopGame()
+    {
+        GameManager.Instance.StopGame();
+    }
+    public void ReStartGame()
+    {
+        GameManager.Instance.ReStartGame();
+    }
 
 }

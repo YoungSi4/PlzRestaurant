@@ -155,4 +155,13 @@ public class GameManager : Singleton<GameManager>
         // blank
         
     }
+
+    public void StopGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void ReStartGame()
+    {
+        Time.timeScale = 1;
+    }
 }
