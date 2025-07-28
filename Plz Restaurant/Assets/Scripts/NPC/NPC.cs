@@ -72,10 +72,9 @@ public class NPC : MonoBehaviour
                     case 2:
                         if (!trayControl.isTrayFirstSlotEmpty())
                         {
+                            yield return new WaitForSeconds(0.5f);
                             // 음식 들기
                             PickFood(1);
-                            yield return new WaitForSeconds(0.5f);
-                            trayControl.ClearFood(1);
                             // 최근 트레이에서 음식을 챙긴 위치 저장
                             lastPickedTrayIndex = 1;
 
@@ -84,19 +83,17 @@ public class NPC : MonoBehaviour
                     case 1:
                         if (!trayControl.isTraySecondSlotEmpty())
                         {
+                            yield return new WaitForSeconds(0.5f);
                             // 음식 들기
                             PickFood(2);
-                            yield return new WaitForSeconds(0.5f);
-                            trayControl.ClearFood(2);
                             // 최근 트레이에서 음식을 챙긴 위치 저장
                             lastPickedTrayIndex = 2;
                         }
                         else if (trayControl.isTraySecondSlotEmpty() && !trayControl.isTrayFirstSlotEmpty())
                         {
+                            yield return new WaitForSeconds(0.5f);
                             // 음식 들기
                             PickFood(1);
-                            yield return new WaitForSeconds(0.5f);
-                            trayControl.ClearFood(1);
                             // 최근 트레이에서 음식을 챙긴 위치 저장
                             lastPickedTrayIndex = 1;
                         }
@@ -158,6 +155,7 @@ public class NPC : MonoBehaviour
             B_handFood.transform.SetParent(handPos);
             // 들고있는 음식 큐에 넣기
             B_handFoods.Add(B_handFood);
+            trayControl.ClearFood(trayIndex); // 트레이에서 음식 삭제
         }
 
     }

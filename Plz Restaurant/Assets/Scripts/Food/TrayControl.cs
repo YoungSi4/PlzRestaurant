@@ -6,6 +6,7 @@ using UnityEngine;
 public class TrayControl : MonoBehaviour
 {
     // 현재 트레이에 올라가있는 음식 오브젝트 저장
+    // .Add(null)로 크기 늘리기
     private List<GameObject> foodObjs = new List<GameObject>() { null, null };
     // 트레이에 음식을 올릴 위치 저장
     public Transform[] foodPositions = new Transform[2];
