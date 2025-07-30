@@ -51,7 +51,7 @@ public class Table : MonoBehaviour
     
     // 수정 - 손님 묶는 쪽에서 앉을 의자 번호를 알아서 지정하고 위치를 반환 받아야 할 듯?
     // visitorIDsToSitChair : 의자 번호 인덱스에 맞게 전달된 매개변수여야 한다.
-    void VisitorSitOnChair(params int[] vistorIDsToSitChair)
+    public void VisitorSitOnChair(params int[] vistorIDsToSitChair)
     {
         isTableOccupied = true;
 

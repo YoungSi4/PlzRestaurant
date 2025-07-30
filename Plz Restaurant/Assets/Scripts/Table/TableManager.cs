@@ -8,6 +8,8 @@ public class TableManager : MonoBehaviour
     // ** 중요 ** 테이블 번호 순서에 맞게 넣어야 함
     [SerializeField]
     private Table[] tables = null;
+    public IEnumerable<Table> Tables => tables; // 외부에서 순회를 위해 접근
+
     public int tableNum { get { return tables.Length; } private set {;} }
 
 

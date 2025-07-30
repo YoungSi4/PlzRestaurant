@@ -22,15 +22,15 @@ public class Visitor : MonoBehaviour
     private int C_payment = 0;
     private int C_foodNumber; // 손님이 주문한 음식 번호
 
-    public void Init(VisitorPool pool)
+    public void Init(VisitorPool pool, int visitorID)
     {
         this.pool = pool;
 
         /* 랜덤변수로 초기화 할 변수
-        C_ID;
         C_orderID;
         */
 
+        C_ID = visitorID;
         C_seatNumber = Random.Range(1.1f, 4.4f);
         C_foodNumber = Random.Range(1, 2);
         //Debug.Log("seatNumber : " +  C_seatNumber);
@@ -99,5 +99,11 @@ public class Visitor : MonoBehaviour
         // 테이블 번호 : C_seatNumber을 명시적 형변환하여 사용
         order.SetFoodNumFromVisitor(C_foodNumber, (int)C_seatNumber);
     }
+
+    // 5초동안 식사
+    
+    // 자리에서 일어나기 -> 테이블 매니저, 스포너 등에서 리스트 관리
+
+    // 자리에 돈 지불
 }
 
