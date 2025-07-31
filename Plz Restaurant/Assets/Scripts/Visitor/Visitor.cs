@@ -13,8 +13,9 @@ public class Visitor : MonoBehaviour
 
     public GameObject readyToOrderMark;
 
-    private int C_ID;
-    private float C_seatNumber;// 랜덤생성 소수점 1자리
+    private int C_ID; // 손님 고유 id : visitor spawner에서 부여
+    private int C_seatTableNumber; // 앉을 테이블 번호, 의자 번호
+    private int C_seatChairNumber;
     private bool hasOrdered = false;
     private int C_orderID;
     private bool isEating = false;
@@ -31,7 +32,7 @@ public class Visitor : MonoBehaviour
         */
 
         C_ID = visitorID;
-        C_seatNumber = Random.Range(1.1f, 4.4f);
+        // C_seatNumber = Random.Range(1.1f, 4.4f);
         C_foodNumber = Random.Range(1, 2);
         //Debug.Log("seatNumber : " +  C_seatNumber);
         //Debug.Log("foodNumber : " + C_foodNumber);
@@ -82,7 +83,8 @@ public class Visitor : MonoBehaviour
     private void ResetVars()
     {
         C_ID = 0;
-        C_seatNumber = 0f;// 랜덤생성 소수점 1자리
+        C_seatTableNumber = 0;
+        C_seatChairNumber = 0;
         hasOrdered = false;
         C_orderID = 0;
         isEating = false;
@@ -97,7 +99,7 @@ public class Visitor : MonoBehaviour
     {
         // C_foodNumber : FoodDB 상의 음식 번호
         // 테이블 번호 : C_seatNumber을 명시적 형변환하여 사용
-        order.SetFoodNumFromVisitor(C_foodNumber, (int)C_seatNumber);
+        order.SetFoodNumFromVisitor(C_foodNumber, C_seatTableNumber);
     }
 
     // 5초동안 식사

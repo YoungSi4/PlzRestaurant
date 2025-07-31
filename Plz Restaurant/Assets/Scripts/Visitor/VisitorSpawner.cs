@@ -55,7 +55,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
             yield return delay;
 
             // 테이블 꽉 찼는지 체크하고 생성 중지
-
+            // blank
 
             // 테이블 최대 인원 수를 보고 생성할 손님 수를 조정
             int currentMaxChair = CurrentMaxChair();
