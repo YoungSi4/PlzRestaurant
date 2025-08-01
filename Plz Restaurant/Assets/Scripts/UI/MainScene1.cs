@@ -12,6 +12,7 @@ public class MainScene1 : MonoBehaviour
     public GameObject dropDownMenu;
     public GameObject storeMenu;
     public GameObject exitMenu;
+    public GameObject fadeOutPanel;
     //public GameObject startMenu;
 
     [Header("Update Text")]
@@ -34,13 +35,13 @@ public class MainScene1 : MonoBehaviour
     private void TodayInit()
     {
         Asset();
-        currentDate.SetText("Day" + GameManager.Instance.R_day.ToString()); //@@@@@@@@@ 게임매니저에서 가져옴
+        currentDate.SetText("Day " + GameManager.Instance.R_day.ToString()); //@@@@@@@@@ 게임매니저에서 가져옴
     }
 
     /// //////////////////////////////////////////////////
     public void Asset()
     {
-        currentAsset.SetText("asset" + FormatNumber(GameManager.Instance.R_totalIncome)); //@@@@@@@  게임매니저에서 가져옴
+        currentAsset.SetText("asset " + FormatNumber(GameManager.Instance.R_totalIncome)); //@@@@@@@  게임매니저에서 가져옴
     }
     string FormatNumber(int num)
     {
@@ -81,10 +82,12 @@ public class MainScene1 : MonoBehaviour
     {
         if (uiObject == null) return;
         uiObject.SetActive(true);
+        fadeOutPanel.SetActive(true);
     }
     public void Off_UI(GameObject uiObject)
     {
         if (uiObject == null) return;
         uiObject.SetActive(false);
+        fadeOutPanel.SetActive(false);
     }
 }

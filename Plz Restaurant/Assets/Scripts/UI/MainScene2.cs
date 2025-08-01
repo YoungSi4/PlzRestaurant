@@ -6,8 +6,12 @@ using UnityEngine;
 public class MainScene2 : MonoBehaviour
 {
     public GameObject stopPopup;
+    public GameObject fadeOutPanel;
+
     public TextMeshProUGUI targetIncomeText;
     public TextMeshProUGUI todayIncomeText;
+    public TextMeshProUGUI giveUpTodayText;
+
 
     public Animator left;
     public Animator right;
@@ -19,11 +23,14 @@ public class MainScene2 : MonoBehaviour
     {
         if (uiObect == null) return;
         uiObect.SetActive(true);
+        fadeOutPanel.SetActive(true);
+        
     }
     public void Off_UI(GameObject uiObect)
     {
         if (uiObect == null) return;
         uiObect.SetActive(false);
+        fadeOutPanel.SetActive(false);
     }
     private void Update()
     {
@@ -32,6 +39,7 @@ public class MainScene2 : MonoBehaviour
              }
         todayIncomeText.SetText(GameManager.Instance.R_dailyIncome.ToString());
         targetIncomeText.SetText(GameManager.Instance.R_targetIncome.ToString());
+        giveUpTodayText.SetText("Day "+GameManager.Instance.R_day.ToString());
     }
 
     public void ShowMeTheMoney()
@@ -68,5 +76,7 @@ public class MainScene2 : MonoBehaviour
     {
         GameManager.Instance.ReStartGame();
     }
-
+    public void Stop(){
+        //영업 중단..
+    }
 }
