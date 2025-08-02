@@ -12,7 +12,7 @@ public class TimeControl : Singleton<TimeControl>
 
     public TextMeshProUGUI[] TimeText;
     public GameObject TimeOutImage;
-    public Button StartButton;
+    //public Button StartButton; @@@@@@@ start버튼은 없앰 mainscene1에서 영업시작을 하기 때문에
 
     private int StartTime = 480;
     public float LimitTime = 600; // default: 600 [sec]
@@ -45,7 +45,7 @@ public class TimeControl : Singleton<TimeControl>
         }
         else
         {
-            TimeOutImage.SetActive(true);
+            //TimeOutImage.SetActive(true);
             isRunning = false;
             gameManager.R_close();
         }
@@ -56,7 +56,7 @@ public class TimeControl : Singleton<TimeControl>
     {
         isRunning = true;
         time = 0f;
-        TimeOutImage.SetActive(false);
+        //TimeOutImage.SetActive(false);
         TimeText[0].text = (StartTime / 60).ToString("D2");
         TimeText[1].text = (StartTime % 60).ToString("D2");
     }
