@@ -19,7 +19,7 @@ public class Table : MonoBehaviour
     [SerializeField]
     public int chairNum { get; private set; } // 굳이 필요할까? chairPos의 길이로 접근해도 되잖아.
     public bool isTableOccupied { get; private set; }
-    public int[] visitorIDOnChair { get; private set; } // 각 의자에 앉은 손님의 아이디를 저장
+    public int[] visitorIDOnChair { get;  private set; } // 각 의자에 앉은 손님의 아이디를 저장
     [SerializeField]
     public Transform[] chairPos; // 각 의자의 위치
 
@@ -49,21 +49,10 @@ public class Table : MonoBehaviour
     // 손님을 그룹 단위로 묶어서 관리하는 스크립트 쪽에서 (아마도 Vsitor spawner 혹은 pool)
     // 손님 ID를 보내줘야 함 -> 손님 id가 primary key이므로 생성 규칙에 대해서도 생각해봐야 함
     
-    // 수정 - 손님 묶는 쪽에서 앉을 의자 번호를 알아서 지정하고 위치를 반환 받아야 할 듯?
-    // visitorIDsToSitChair : 의자 번호 인덱스에 맞게 전달된 매개변수여야 한다.
-    public void VisitorSitOnChair(params int[] vistorIDsToSitChair)
+    public void VisitorSitOnChair(int index, int visitorID)
     {
         isTableOccupied = true;
-
-        // 아래의 로직을 손님 그룹 단위 묶는 쪽에서 해야함
-        // int randPos = Random.Range(1, chairNum); // 아무 위치를 하나만 지정
-        
-        // 이후 인원 수에 따라 앉는 자리를 배치
-        // 2인 : 맞은 편에
-        // 3인 : 남는 자리 아무대나
-        // 4인 : 마지막 자리
-
-        // 이후 손님 그룹 쪽에서 알아서 chairPos 이용해서 가져와서 자리 세팅하면 됨
+        visitorIDOnChair[index] = visitorID;
     }
 
     void VisitorStandUpChair()

@@ -10,7 +10,10 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
 
     [SerializeField]
     private float spawnDelay = 3f;
+    private float tablecCheckDelay = 5f;
     private WaitForSeconds delay;
+    private WaitForSeconds emptyTableCheckDelay;
+
     int groupVisitorNum;
     int groupTableNum; // 그룹 손님이 앉을 테이블
     List<Visitor>[] groupVisitorsList;
@@ -24,6 +27,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
     {
         base.Awake();
         delay = new WaitForSeconds(spawnDelay);
+        emptyTableCheckDelay = new WaitForSeconds(tablecCheckDelay);
 
         // Start_Spawning(); // start 버튼 누르면 실행됨
     }
@@ -54,11 +58,16 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
             // 손님 생성 딜레이
             yield return delay;
 
-            // 테이블 꽉 찼는지 체크하고 생성 중지
-            // blank
-
             // 테이블 최대 인원 수를 보고 생성할 손님 수를 조정
             int currentMaxChair = CurrentMaxChair();
+
+            // 테이블이 꽉 찬 상태
+            while (currentMaxChair <= 0)
+            {
+                // 재검사 대기
+                yield return emptyTableCheckDelay;
+                currentMaxChair = CurrentMaxChair();
+            }
 
             // 한 번에 생성할 손님 수 (한 그룹에 몇 명인지)
             groupVisitorNum = Random.Range(1, currentMaxChair+1); // 최소 1명, 최대 현재 테이블의 최대 의자 수
@@ -74,17 +83,26 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
                 visitorID++;
                 visitors.Add(visitor);
             }
-            // 그룹을 담아둘 연결 리스트
-            // 테이블 번호에 맞게 배열에 넣음
 
-            // 테이블 번호 정하는 함수
-            ChooseTable();
+            var tempTable = ChooseTable(visitors);
+            ChooseChair(visitors, tempTable);
+
+
+            // 그룹을 담을 배열
+            // 테이블 번호에 맞는 인덱스에 넣음
 
             groupVisitorsList[groupTableNum] = visitors;
         }
     }
 
-    // 현재 빈 테이블 중 최대 의자 수를 검사하는 함수
+
+    /// <summary>
+    /// 현재 빈 테이블 중 최대 의자 수를 검사하는 함수
+    /// </summary>
+    /// <returns>
+    /// int : 0 2 4
+    /// 0은 빈 테이블이 없는 경우 반환됨
+    /// </returns>
     private int CurrentMaxChair()
     {
         int currentMaxChair = 0;
@@ -98,17 +116,23 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         return currentMaxChair;
     }
 
-    private void ChooseTable(params int[] visitors)
+    /// <summary>
+    /// 앉을 테이블을 고르는 함수
+    /// </summary>
+    /// <param name="visitors">
+    /// 손님 리스트를 받음
+    /// </param>
+    private Table ChooseTable(List<Visitor> visitors)
     {
-        groupTableNum = Random.Range(1, tableCount+1); // 현재 테이블 갯수에 맞게 랜덤 생성
-        
-        // 테이블 번호 1번이 배열 0번 인덱스에 있으니까
+         // 손님이 앉을 테이블 정하기 : 현재 테이블 갯수에 맞게 랜덤 생성
+        if (visitors.Count == 1) groupTableNum = 1; // 1명인 손님은 2인 테이블 우선 배정
+        else groupTableNum = Random.Range(1, tableCount + 1);
+
+        // 테이블 번호 1번이 배열 0번 인덱스에 있으니까 -1
         var chosenTable = tableManager.GetTable(groupTableNum - 1);
 
         // 선택한 테이블이 이미 사용 중 or 인원 수보다 테이블 자리 수가 적다면
-        // 4인석이 이미 다 찼는데 4명이 들어오면? -> 무한루프
-        // 생성 조건에서 해결해야 할 듯
-        while (chosenTable.isTableOccupied || groupVisitorNum > chosenTable.chairNum )
+        while (chosenTable.isTableOccupied || groupVisitorNum > chosenTable.chairNum)
         {
             // 앉을 테이블 번호 + 1 (선형탐색)
             groupTableNum++;
@@ -117,13 +141,25 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
 
             chosenTable = tableManager.GetTable(groupTableNum - 1);
         }
-
-        chosenTable.VisitorSitOnChair(visitors);
+        
+        return chosenTable;
     }
 
     // 
-    private void ChooseChair()
+    private void ChooseChair(List<Visitor> visitors, Table table)
     {
+        int randomSit = Random.Range(0, table.chairNum);
+        // 2명이 4인 테이블에 지정됐을 때 맞은 편에 앉도록 함
+        if (table.chairNum > 2 && visitors.Count == 2) randomSit++;
 
+        foreach (var v in visitors)
+        {
+            var target = table.chairPos[randomSit].position;
+            v.Move(target);
+            table.VisitorSitOnChair(randomSit, v.C_ID);
+
+            randomSit++;
+            randomSit %= table.chairNum;
+        }
     }
 }

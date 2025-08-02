@@ -13,7 +13,7 @@ public class Visitor : MonoBehaviour
 
     public GameObject readyToOrderMark;
 
-    private int C_ID; // 손님 고유 id : visitor spawner에서 부여
+    public int C_ID { get; private set; } // 손님 고유 id : visitor spawner에서 부여
     private int C_seatTableNumber; // 앉을 테이블 번호, 의자 번호
     private int C_seatChairNumber;
     private bool hasOrdered = false;
@@ -100,6 +100,11 @@ public class Visitor : MonoBehaviour
         // C_foodNumber : FoodDB 상의 음식 번호
         // 테이블 번호 : C_seatNumber을 명시적 형변환하여 사용
         order.SetFoodNumFromVisitor(C_foodNumber, C_seatTableNumber);
+    }
+
+    public void Move(Vector3 pos)
+    {
+        agent.SetDestination(pos);
     }
 
     // 5초동안 식사
