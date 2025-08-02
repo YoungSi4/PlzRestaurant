@@ -8,7 +8,7 @@ public class HeadChef : MonoBehaviour
 {
     // 현재 조리중인 주문서 목록
     private Queue<FoodData> H_cookingList = new Queue<FoodData>();
-    private float cookTime = 1f; // 음식 조리에 걸리는 시간(수치 임시)
+    private float cookTime = 1f; // 음식 조리에 걸리는 시간(5초로 수정 예정)
     private bool isCooking = false;
 
     private FoodDB foodDB;
@@ -22,11 +22,11 @@ public class HeadChef : MonoBehaviour
 
     private void Update()
     {
-        H_startCooking();
+        H_startCookingRoutine();
         GetFood();
     }
 
-    private void H_startCooking()
+    private void H_startCookingRoutine()
     {
         if (!isCooking && H_hasFood() && trayControl.isTrayAvailable())
         {
@@ -57,6 +57,7 @@ public class HeadChef : MonoBehaviour
     }
 
     // 음식 조리하기
+    // 셰프가 주방에 오더하는 소리나는 기능 추가 필요
     private void H_startCooking(FoodData foodData)
     {
         // 오류검사
@@ -75,20 +76,8 @@ public class HeadChef : MonoBehaviour
         // 올릴 트레이 위치 정하기
         int posNum = trayControl.selectTrayPosition();
 
-        switch (posNum)
-        {
-            case 1:
-                // 트레이 위치에 생성
-                trayControl.SpawnFoodOnTray(foodData, 1);
-                break;
-            case 2:
-                // 트레이 위치에 생성
-                trayControl.SpawnFoodOnTray(foodData, 2);
-                break;
-            default:
-                Debug.Log("트레이 번호가 유효하지 않음 : " + posNum);
-                break;
-        }
+        // 트레이 위치에 생성, 주문정보 전달(OrderData 클래스의 변수로 전달 - 현재 구현x)
+        trayControl.SpawnFoodOnTray(foodData, posNum, null);
 
         Debug.Log("조리 완료 " + foodData.foodName);
     }

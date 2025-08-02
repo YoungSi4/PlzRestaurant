@@ -3728,7 +3728,7 @@ GameObject:
   - component: {fileID: 461542455}
   m_Layer: 0
   m_Name: FoodPos1
-  m_TagString: Untagged
+  m_TagString: FoodPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10682,7 +10682,6 @@ GameObject:
   - component: {fileID: 1467905387}
   - component: {fileID: 1467905386}
   - component: {fileID: 1467905385}
-  - component: {fileID: 1467905384}
   m_Layer: 0
   m_Name: FoodTray
   m_TagString: Untagged
@@ -10711,21 +10710,6 @@ Transform:
   - {fileID: 2112200954}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1467905384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1467905382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a0cd3b4a13bbb1408cc516b6a94883c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foodPositions:
-  - {fileID: 461542455}
-  - {fileID: 2138166392}
 --- !u!65 &1467905385
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12517,6 +12501,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634417925}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1653385995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1653385997}
+  - component: {fileID: 1653385996}
+  m_Layer: 0
+  m_Name: TrayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1653385996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653385995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0cd3b4a13bbb1408cc516b6a94883c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trayPrefabs:
+  - {fileID: 1467905382}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  foodPositions: []
+--- !u!4 &1653385997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653385995}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.87199974, y: 0.6919994, z: -5.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1703539786
 GameObject:
   m_ObjectHideFlags: 0
@@ -15540,7 +15574,7 @@ GameObject:
   - component: {fileID: 2138166392}
   m_Layer: 0
   m_Name: FoodPos2
-  m_TagString: Untagged
+  m_TagString: FoodPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15810,6 +15844,7 @@ SceneRoots:
   - {fileID: 1145481409}
   - {fileID: 909052487}
   - {fileID: 1365098364}
+  - {fileID: 1653385997}
   - {fileID: 1782527037}
   - {fileID: 2074661304}
   - {fileID: 49900609}
