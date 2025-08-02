@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.UIElements;
 
 public class MainScene1 : MonoBehaviour
 {
@@ -26,6 +25,9 @@ public class MainScene1 : MonoBehaviour
 
     public MainScene2 mainScene2;
     public GameObject mainScene_2;
+
+    Color activeColor = new Color(0.4f, 0.7f, 1f); //파란색
+    Color inactiveColor = new Color(0.7f, 0.7f, 0.7f); //회색
 
     private void Start()
     {
@@ -89,5 +91,22 @@ public class MainScene1 : MonoBehaviour
         if (uiObject == null) return;
         uiObject.SetActive(false);
         fadeOutPanel.SetActive(false);
+    }
+
+    public void BtnOn(GameObject uiObject)
+    {
+        Image img = uiObject.GetComponent<Image>(); 
+        if(img != null)
+        {
+            img.color = activeColor;
+        }
+    }
+    public void BtnOff(GameObject uiObject)
+    {
+        Image img = uiObject.GetComponent<Image>();
+        if (img != null)
+        {
+            img.color = inactiveColor;
+        }
     }
 }
