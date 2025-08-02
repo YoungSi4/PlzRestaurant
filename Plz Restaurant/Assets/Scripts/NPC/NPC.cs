@@ -57,7 +57,7 @@ public class NPC : MonoBehaviour
         {
             // 트레이 앞으로 이동 (위치 조정필요)
             // 도착할 때 까지 다른 동작 하지 않게 하기 위해 yield return
-            yield return StartCoroutine(MoveToPos(trayControl.foodPos1.transform.position + new Vector3(0, 0, 1f)));
+            yield return StartCoroutine(MoveToPos(trayControl.foodPositions[0].transform.position + new Vector3(0, 0, 1f)));
 
             // 들 수 있는 만큼 들 때 까지 음식 들기 반복
             while (B_handFoods.Count < B_abillity)
@@ -72,10 +72,9 @@ public class NPC : MonoBehaviour
                     case 2:
                         if (!trayControl.isTrayFirstSlotEmpty())
                         {
+                            yield return new WaitForSeconds(0.5f);
                             // 음식 들기
                             PickFood(1);
-                            yield return new WaitForSeconds(0.5f);
-                            trayControl.ClearFood(1);
                             // 최근 트레이에서 음식을 챙긴 위치 저장
                             lastPickedTrayIndex = 1;
 
@@ -84,19 +83,17 @@ public class NPC : MonoBehaviour
                     case 1:
                         if (!trayControl.isTraySecondSlotEmpty())
                         {
+                            yield return new WaitForSeconds(0.5f);
                             // 음식 들기
                             PickFood(2);
-                            yield return new WaitForSeconds(0.5f);
-                            trayControl.ClearFood(2);
                             // 최근 트레이에서 음식을 챙긴 위치 저장
                             lastPickedTrayIndex = 2;
                         }
                         else if (trayControl.isTraySecondSlotEmpty() && !trayControl.isTrayFirstSlotEmpty())
                         {
+                            yield return new WaitForSeconds(0.5f);
                             // 음식 들기
                             PickFood(1);
-                            yield return new WaitForSeconds(0.5f);
-                            trayControl.ClearFood(1);
                             // 최근 트레이에서 음식을 챙긴 위치 저장
                             lastPickedTrayIndex = 1;
                         }
@@ -158,6 +155,7 @@ public class NPC : MonoBehaviour
             B_handFood.transform.SetParent(handPos);
             // 들고있는 음식 큐에 넣기
             B_handFoods.Add(B_handFood);
+            trayControl.ClearFood(trayIndex); // 트레이에서 음식 삭제
         }
 
     }

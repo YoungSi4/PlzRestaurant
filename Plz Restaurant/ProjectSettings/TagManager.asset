@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Visitor
+  - FoodPos
   layers:
   - Default
   - TransparentFX
