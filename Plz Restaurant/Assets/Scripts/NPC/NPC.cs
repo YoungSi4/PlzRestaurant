@@ -59,12 +59,20 @@ public class NPC : MonoBehaviour
             // 도착할 때 까지 다른 동작 하지 않게 하기 위해 yield return
             yield return StartCoroutine(MoveToPos(trayControl.foodPositions[0].transform.position + new Vector3(0, 0, 1f)));
 
+            // 트레이에 도착 후 잠시 대기
+            yield return new WaitForSeconds(0.5f); 
+
             // 들 수 있는 만큼 들 때 까지 음식 들기 반복
             while (B_handFoods.Count < B_abillity)
             {
                 // 트레이에 음식이 없다면 음식을 드는 동작을 멈추고 서빙으로 넘어가기 위한 예외처리
                 if (!trayControl.isFoodOnTray())
                     break;
+
+                // 트레이의 음식을 하나씩 챙긴다면 여기서 WaitForSeconds 해야함
+                // 그 경우 HeadChef의 일괄 조리 로직 수정이 필요해짐
+                // yield return new WaitForSeconds(0.5f); // 음식 들기 전 잠시 대기
+
                 // 순서에 따라 트레이에서 음식 들기
                 switch (lastPickedTrayIndex)
                 {
@@ -72,7 +80,6 @@ public class NPC : MonoBehaviour
                     case 2:
                         if (!trayControl.isTrayFirstSlotEmpty())
                         {
-                            yield return new WaitForSeconds(0.5f);
                             // 음식 들기
                             PickFood(1);
                             // 최근 트레이에서 음식을 챙긴 위치 저장
@@ -83,7 +90,6 @@ public class NPC : MonoBehaviour
                     case 1:
                         if (!trayControl.isTraySecondSlotEmpty())
                         {
-                            yield return new WaitForSeconds(0.5f);
                             // 음식 들기
                             PickFood(2);
                             // 최근 트레이에서 음식을 챙긴 위치 저장
@@ -91,7 +97,6 @@ public class NPC : MonoBehaviour
                         }
                         else if (trayControl.isTraySecondSlotEmpty() && !trayControl.isTrayFirstSlotEmpty())
                         {
-                            yield return new WaitForSeconds(0.5f);
                             // 음식 들기
                             PickFood(1);
                             // 최근 트레이에서 음식을 챙긴 위치 저장

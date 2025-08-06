@@ -143,4 +143,18 @@ public class TrayControl : MonoBehaviour
     // 트레이 2번 위치가 비어있는지 검사
     // NPC.cs에서 호출
     public bool isTraySecondSlotEmpty() => foodObjs[1] == null;
+
+    // 트레이의 빈자리 수 반환
+    // HeadChef.cs에서 호출
+    public int GetTrayEmptyCount()
+    {
+        int count = 0;
+        foreach (var foodObj in foodObjs)
+        {
+            if (foodObj == null)
+                count++;
+        }
+        return count;
+    }
+
 }
