@@ -10,7 +10,6 @@ public class NPC : MonoBehaviour
     public Transform bossHandPos1; // 음식을 들 사장님의 손 위치 저장.
     public Transform bossHandPos2; // 음식을 들 사장님의 손 위치 저장.
 
-    private int lastPickedTrayIndex = 0; // 가장 최근에 챙긴 음식의 트레이 위치 저장
     private Vector3 B_startPos; // 사장님의 기본위치 저장
     private Quaternion B_startRot; // 사장님의 기본위치 방향 저장
     private float B_speed = 5; // 사장님의 이동 속도 (조정 가능)
