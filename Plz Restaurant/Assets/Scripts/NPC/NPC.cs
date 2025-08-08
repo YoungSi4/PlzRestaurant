@@ -74,36 +74,9 @@ public class NPC : MonoBehaviour
                 // yield return new WaitForSeconds(0.5f); // 음식 들기 전 잠시 대기
 
                 // 순서에 따라 트레이에서 음식 들기
-                switch (lastPickedTrayIndex)
-                {
-                    case 0:
-                    case 2:
-                        if (!trayControl.isTrayFirstSlotEmpty())
-                        {
-                            // 음식 들기
-                            PickFood(1);
-                            // 최근 트레이에서 음식을 챙긴 위치 저장
-                            lastPickedTrayIndex = 1;
-
-                        }
-                        break;
-                    case 1:
-                        if (!trayControl.isTraySecondSlotEmpty())
-                        {
-                            // 음식 들기
-                            PickFood(2);
-                            // 최근 트레이에서 음식을 챙긴 위치 저장
-                            lastPickedTrayIndex = 2;
-                        }
-                        else if (trayControl.isTraySecondSlotEmpty() && !trayControl.isTrayFirstSlotEmpty())
-                        {
-                            // 음식 들기
-                            PickFood(1);
-                            // 최근 트레이에서 음식을 챙긴 위치 저장
-                            lastPickedTrayIndex = 1;
-                        }
-                        break;
-                }
+                int pickIndex = trayControl.PeekPickIndex();
+                PickFood(pickIndex);
+                trayControl.ConfirmPickIndex(); // 음식 들기에 성공하면 트레이 인덱스 큐에서 해당 인덱스 제거
             }
             // 서빙할 테이블로 이동 후 음식을 두는 동작. 들고 있는 음식을 모두 내릴 때 까지 반복
             while (B_handFoods.Count > 0)

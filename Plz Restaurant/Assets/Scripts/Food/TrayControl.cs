@@ -25,6 +25,11 @@ public class TrayControl : MonoBehaviour
     // 트레이에 올라간 음식의 주문 정보 저장
     private List<OrderData> trayOrderDatas = new List<OrderData>();
 
+    // 트레이에 음식이 올라간 순서 저장
+    // 서빙할 때 음식을 챙겨야할 순서를 관리하기 위한 큐
+    // 트레이 인덱스를 저장해서 순차적으로 서빙할 수 있도록 함
+    private Queue<int> trayIndexTurns = new Queue<int>();
+
     void Start()
     {
         SetTray(0);
@@ -91,9 +96,11 @@ public class TrayControl : MonoBehaviour
         foodObjs[index] = Instantiate(food.foodPrefab, foodPositions[index].position, foodPositions[index].rotation);
 
         // 트레이에 음식이 올라간 위치에 주문 정보 저장
-        trayOrderDatas[index] = order; 
+        trayOrderDatas[index] = order;
+        // 트레이 인덱스 큐에 추가 (서빙 순서 관리)
+        trayIndexTurns.Enqueue(posNum);
     }
-    
+
     // 트레이에 음식을 올릴 위치 결정 (앞에서부터 빈자리가 있으면 바로바로 채우기)
     // HeadChef.cs에서 호출
     public int selectTrayPosition()
@@ -103,7 +110,7 @@ public class TrayControl : MonoBehaviour
             if (foodObjs[i] == null)
                 return i + 1;
         }
-        return 0; // 꽉 찼으면 0
+        return 0; // 꽉 찼으면 0 반환
     }
 
     // 트레이에서 사장님 손에 올리기위해 음식 정보 전달
@@ -151,10 +158,20 @@ public class TrayControl : MonoBehaviour
         int count = 0;
         foreach (var foodObj in foodObjs)
         {
-            if (foodObj == null)
-                count++;
+            if (foodObj == null) count++;
         }
         return count;
     }
 
+    // 트레이 인덱스 큐에서 서빙할 음식의 트레이 인덱스(위치)를 가져옴
+    // NPC.cs에서 호출
+    public int PeekPickIndex() => trayIndexTurns.Count > 0 ? trayIndexTurns.Peek() : 0;
+
+    // 음식을 Pick하는데 성공하면 트레이 인덱스 큐에서 해당 인덱스를 제거
+    // NPC.cs에서 호출
+    public void ConfirmPickIndex()
+    {
+        if (trayIndexTurns.Count > 0) trayIndexTurns.Dequeue();
+    }
 }
+
