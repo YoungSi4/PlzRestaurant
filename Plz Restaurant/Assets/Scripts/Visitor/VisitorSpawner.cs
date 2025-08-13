@@ -29,7 +29,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         delay = new WaitForSeconds(spawnDelay);
         emptyTableCheckDelay = new WaitForSeconds(tablecCheckDelay);
 
-        // Start_Spawning(); // start 버튼 누르면 실행됨
+        Start_Spawning(); // start 버튼 누르면 실행됨
     }
 
     // UI 상의 start 버튼을 누르면 실행된다
@@ -128,8 +128,8 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         if (visitors.Count == 1) groupTableNum = 1; // 1명인 손님은 2인 테이블 우선 배정
         else groupTableNum = Random.Range(1, tableCount + 1);
 
-        // 테이블 번호 1번이 배열 0번 인덱스에 있으니까 -1
-        var chosenTable = tableManager.GetTable(groupTableNum - 1);
+        // 테이블 번호를 전달 . 인덱스 -1 처리는 해당 함수 안에서 실행
+        var chosenTable = tableManager.GetTable(groupTableNum);
 
         // 선택한 테이블이 이미 사용 중 or 인원 수보다 테이블 자리 수가 적다면
         while (chosenTable.isTableOccupied || groupVisitorNum > chosenTable.chairNum)
@@ -139,7 +139,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
             // 인덱스 넘어서지 않도록 전체 테이블 갯수로 나눠줌
             groupTableNum %= tableCount;
 
-            chosenTable = tableManager.GetTable(groupTableNum - 1);
+            chosenTable = tableManager.GetTable(groupTableNum);
         }
         
         return chosenTable;
@@ -152,11 +152,11 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         // 2명이 4인 테이블에 지정됐을 때 맞은 편에 앉도록 함
         if (table.chairNum > 2 && visitors.Count == 2) randomSit++;
 
-        foreach (var v in visitors)
+        foreach (var visitor in visitors)
         {
             var target = table.chairPos[randomSit].position;
-            v.Move(target);
-            table.VisitorSitOnChair(randomSit, v.C_ID);
+            visitor.Move(target);
+            table.VisitorSitOnChair(randomSit, visitor.C_ID);
 
             randomSit++;
             randomSit %= table.chairNum;

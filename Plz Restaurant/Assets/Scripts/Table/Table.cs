@@ -26,6 +26,12 @@ public class Table : MonoBehaviour
     // 음식 둘 위치는 구현 방식을 못 정했음
     private Transform[] foodPos { get; set; }
 
+    private void Start()
+    {
+        chairNum = chairPos.Length;
+        visitorIDOnChair = new int[chairNum];
+    }
+
     // 테이블에 놓인 음식 정보도 저장해야하나?
 
     //// constructor
@@ -48,7 +54,7 @@ public class Table : MonoBehaviour
 
     // 손님을 그룹 단위로 묶어서 관리하는 스크립트 쪽에서 (아마도 Vsitor spawner 혹은 pool)
     // 손님 ID를 보내줘야 함 -> 손님 id가 primary key이므로 생성 규칙에 대해서도 생각해봐야 함
-    
+
     public void VisitorSitOnChair(int index, int visitorID)
     {
         isTableOccupied = true;
