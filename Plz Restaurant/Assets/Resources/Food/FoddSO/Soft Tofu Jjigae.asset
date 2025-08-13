@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Soft Tofu Jjigae
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 31
   foodName: "\uC21C\uB450\uBD80 \uCC0C\uAC1C"
   foodPrice: 8000
   foodDescription: "\uC5BC\uD070\uD558\uACE0 \uACE0\uC18C\uD558\uACE0 \uBD80\uB4E4\uBD80\uB4E4\uD55C

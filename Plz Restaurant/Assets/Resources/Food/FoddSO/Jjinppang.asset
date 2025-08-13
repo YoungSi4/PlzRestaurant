@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jjinppang
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 0
+  foodNum: 18
   foodName: "\uCC10\uBE75"
   foodPrice: 0
   foodDescription: "\uAE40\uC744 \uD638\uD638 \uBD88\uC5B4 \uBA39\uB294 \uCC10\uBE75"

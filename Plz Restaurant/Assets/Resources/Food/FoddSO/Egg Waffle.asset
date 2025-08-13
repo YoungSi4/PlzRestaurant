@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Egg Waffle
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 10
   foodName: "\uACC4\uB780 \uC640\uD50C"
   foodPrice: 9000
   foodDescription: "\uC9C4\uC2EC\uC73C\uB85C \uBB34\uC2A8 \uB9DB\uC77C\uC9C0 \uAD81\uAE08\uD558\uB2E4

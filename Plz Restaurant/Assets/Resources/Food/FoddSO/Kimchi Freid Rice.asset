@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kimchi Freid Rice
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 19
   foodName: "\uAE40\uCE58\uBCF6\uC74C\uBC25"
   foodPrice: 9000
   foodDescription: "\uACC4\uB780\uD6C4\uB77C\uC774\uB294 \uB2F9\uC5F0\uD558\uC8E0

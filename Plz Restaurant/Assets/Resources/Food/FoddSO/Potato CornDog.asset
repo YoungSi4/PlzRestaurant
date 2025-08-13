@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Potato CornDog
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 24
   foodName: "\uAC10\uC790 \uD56B\uB3C4\uADF8"
   foodPrice: 9000
   foodDescription: "\uBB58 \uC880 \uC544\uC2DC\uB124"

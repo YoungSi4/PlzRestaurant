@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ramen
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 25
   foodName: "\uB77C\uBA58"
   foodPrice: 11000
   foodDescription: "\uADF8\uB798\uC11C \uC774\uAC8C \uBB34\uC2A8 \uB77C\uBA58\uC774\uC5D0\uC694?

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Steamed Egg
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 36
   foodName: "\uB2EC\uAC40\uCC1C"
   foodPrice: 6000
   foodDescription: "\uACE0\uC18C\uD55C \uACC4\uB780\uCC1C"

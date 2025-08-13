@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unagi Don
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 39
   foodName: "\uC7A5\uC5B4\uB36E\uBC25"
   foodPrice: 17000
   foodDescription: "\uC7A5\uC5B4\uB36E\uBC25\uC740 \uD0C0\uB798, \uC640\uC0AC\uBE44\uC640

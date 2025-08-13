@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Doenjang jjigea
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 7
   foodName: "\uB41C\uC7A5\uCC0C\uAC1C"
   foodPrice: 6000
   foodDescription: "\uD55C\uC2DD\uC758 \uAE30\uB465 \uB41C\uC7A5\uCC0C\uAC1C"

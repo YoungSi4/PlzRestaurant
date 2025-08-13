@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Egg Sushi
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 9
   foodName: "\uACC4\uB780\uB9D0\uC774 \uC2A4\uC2DC"
   foodPrice: 5000
   foodDescription: "\uC8FC\uC778\uC7A5\uC758 \uC2E4\uB825\uC744 \uC54C \uC218 \uC788\uB294

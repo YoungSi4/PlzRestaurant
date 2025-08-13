@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Soondae
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 32
   foodName: "\uC21C\uB300"
   foodPrice: 9500
   foodDescription: "\uC9C1\uC811 \uB9CC\uB4E0 \uC21C\uB300 (\uB2F9\uBA74\uC21C\uB300

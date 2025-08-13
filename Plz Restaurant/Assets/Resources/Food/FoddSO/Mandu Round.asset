@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mandu Round
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 21
   foodName: "\uBC18\uB2EC \uBAA8\uC591 \uB9CC\uB450"
   foodPrice: 12000
   foodDescription: "\uBC18\uB2EC \uBAA8\uC591\uC5D0 \uC798 \uC775\uC740 \uB9CC\uB450"

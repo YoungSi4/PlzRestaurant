@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Squid Ink CornDog
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 34
   foodName: "\uBA39\uBB3C \uD56B\uB3C4\uADF8"
   foodPrice: 9000
   foodDescription: "\uD56B\uB3C4\uADF8\uB294 \uBE75\uC5D0 \uB07C\uC6B4 \uAC70\n\uC774\uAC74

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Old Skool Dosiirock
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 22
   foodName: "\uC61B\uB0A0\uB3C4\uC2DC\uB77D"
   foodPrice: 7000
   foodDescription: "\uC61B\uB0A0\uB3C4\uC2DC\uB77D \uD558\uB098. \uC813\uC9C0\uB9D0\uACE0

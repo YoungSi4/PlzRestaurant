@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hamburger
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 13
   foodName: "\uD584\uBC84\uAC70"
   foodPrice: 12000
   foodDescription: "\uC218\uC81C \uD328\uD2F0\uB85C \uB9CC\uB4E0 \uD584\uBC84\uAC70"

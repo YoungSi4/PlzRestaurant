@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ikura Sushi
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 16
   foodName: "\uC5F0\uC5B4\uC54C \uC2A4\uC2DC"
   foodPrice: 7000
   foodDescription: "\uC5F0\uC5B4\uC54C\uC740 \uC77C\uBCF8\uC5B4\uB85C \uC774\uCFE0\uB77C\n\uC774\uAC70

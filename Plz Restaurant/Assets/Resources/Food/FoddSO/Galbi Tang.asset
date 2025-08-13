@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Galbi Tang
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 12
   foodName: "\uAC08\uBE44\uD0D5"
   foodPrice: 15000
   foodDescription: "\uC0B4\uCF54\uAE30\uAC00 \uBD80\uB4DC\uB7FD\uAC8C \uC798 \uB72F\uC5B4\uC9C0\uB294

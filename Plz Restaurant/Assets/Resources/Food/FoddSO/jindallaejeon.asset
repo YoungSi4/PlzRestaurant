@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: jindallaejeon
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 17
   foodName: "\uC9C4\uB2EC\uB798\uC804"
   foodPrice: 9000
   foodDescription: "\uC190\uC218 \uB530\uC11C \uB9D0\uB9B0 \uC9C4\uB2EC\uB798\uAF43\uC73C\uB85C

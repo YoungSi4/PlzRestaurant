@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bibim Bab
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 2
   foodName: "\uBE44\uBE54\uBC25"
   foodPrice: 8500
   foodDescription: "\uC0B0\uCC44\uB098\uBB3C \uBE44\uBE54\uBC25"

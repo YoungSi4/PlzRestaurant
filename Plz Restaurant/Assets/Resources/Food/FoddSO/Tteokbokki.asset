@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tteokbokki
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 38
   foodName: "\uB5A1\uBCF6\uC774"
   foodPrice: 9000
   foodDescription: "\uC544 \uBA39\uACE0 \uC2F6\uB2E4"

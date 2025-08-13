@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hobakjeon
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 14
   foodName: "\uD638\uBC15\uC804"
   foodPrice: 8500
   foodDescription: "\uC81C\uCCA0 \uC560\uD638\uBC15\uC73C\uB85C \uB9CC\uB4E0 \uC740\uC740\uD558\uAC8C

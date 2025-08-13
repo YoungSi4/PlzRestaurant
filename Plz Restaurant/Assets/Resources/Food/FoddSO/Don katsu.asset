@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Don katsu
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 8
   foodName: "\uACBD\uC591\uC2DD \uB3C8\uAE4C\uC2A4"
   foodPrice: 9000
   foodDescription: "\uC0AC\uBB34\uCE58\uAC8C \uADF8\uB9AC\uC6CC\uC9C8 \uB54C\uAC00

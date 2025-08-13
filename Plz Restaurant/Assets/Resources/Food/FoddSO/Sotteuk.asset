@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sotteuk
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 33
   foodName: "\uC18C\uB5A1\uC18C\uB5A1"
   foodPrice: 5000
   foodDescription: "\uC9C4\uC9DC \uC774\uAC8C \uC65C \uB9DB\uC788\uB294\uC9C0 \uBAB0\uB77C\uB3C4

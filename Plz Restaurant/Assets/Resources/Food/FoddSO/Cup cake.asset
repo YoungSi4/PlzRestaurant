@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cup cake
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 6
   foodName: "\uCEF5\uCF00\uC775"
   foodPrice: 8500
   foodDescription: "\uB098\uB294 \uC0AC\uB791\uC2A4\uB7F0 \uCF00\uC775"

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SeaWeed Souip
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 27
   foodName: "\uBBF8\uC5ED\uAD6D"
   foodPrice: 7000
   foodDescription: "\uC1E0\uACE0\uAE30\uAC00 \uC88B\uC73C\uC138\uC694 \uD669\uD0DC\uAC00

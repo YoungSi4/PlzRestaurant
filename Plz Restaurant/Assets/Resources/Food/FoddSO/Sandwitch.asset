@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sandwitch
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 26
   foodName: "\uC0CC\uB4DC\uC704\uCE58"
   foodPrice: 5000
   foodDescription: "\uC2DD\uBE75 \uC704\uC5D0 \uC2AC\uB77C\uC774\uC2A4 \uD584 \uB450

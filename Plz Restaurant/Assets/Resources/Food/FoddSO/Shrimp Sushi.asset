@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shrimp Sushi
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 28
   foodName: "\uC0C8\uC6B0 \uC2A4\uC2DC"
   foodPrice: 6000
   foodDescription: "\uBCF4\uB4E4\uBCF4\uB4E4\uD55C \uC0C8\uC6B0 \uC2A4\uC2DC"

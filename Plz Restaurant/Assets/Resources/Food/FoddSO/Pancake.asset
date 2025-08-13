@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pancake
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 23
   foodName: "\uD32C\uCF00\uC775"
   foodPrice: 9500
   foodDescription: "\uAC08\uC0C9\uC73C\uB85C \uAD6C\uC6CC\uC9C4 \uD32C\uCF00\uC775,

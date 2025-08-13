@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Corn Cheese
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 4
   foodName: "\uCF58\uCE58\uC988"
   foodPrice: 6500
   foodDescription: "\uC5B8\uC81C \uBA39\uC5B4\uB3C4 \uB9DB\uC788\uB294 \uCF58\uCE58\uC988"

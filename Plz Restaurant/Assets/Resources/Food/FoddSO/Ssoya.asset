@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ssoya
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 35
   foodName: "\uC18C\uC138\uC9C0 \uC57C\uCC44 \uBCF6\uC74C"
   foodPrice: 7000
   foodDescription: "\uD3C9\uC0DD \uBA39\uC5B4\uB3C4 \uC9C8\uB9AC\uC9C0 \uC54A\uC744

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Siomay
   m_EditorClassIdentifier: 
   foodImage: {fileID: 0}
-  foodNum: 1
+  foodNum: 29
   foodName: "\uC1FC\uB9C8\uC774"
   foodPrice: 12000
   foodDescription: "\uC911\uAD6D \uAD11\uB465 \uC9C0\uC5ED\uC758 \uB524\uC12C"
