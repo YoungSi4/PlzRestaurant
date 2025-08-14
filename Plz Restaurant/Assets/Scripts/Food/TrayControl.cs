@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-// 수도코드 작성을 위한 임시클래스
-public class OrderData
-{
-    
-}
-
 public class TrayControl : MonoBehaviour
 {
     // 현재 트레이에 올라가있는 음식 오브젝트 저장
@@ -80,9 +74,16 @@ public class TrayControl : MonoBehaviour
         SetTray(trayLevel);
     }
 
-    // 트레이에 음식 올리기
+    // 주문 데이터 가져오기
     // HeadChef.cs 에서 호출
-    public void SpawnFoodOnTray(FoodData food, int posNum, OrderData order)
+    public void GetOrderInfo(OrderData order)
+    {
+        SpawnFoodOnTray(order, selectTrayPosition());
+    }
+
+
+    // 트레이에 음식 올리기
+    private  void SpawnFoodOnTray(OrderData order, int posNum)
     {
         // 0부터 시작하는 인덱스
         int index = posNum - 1;
@@ -93,7 +94,7 @@ public class TrayControl : MonoBehaviour
             return;
         }
         // 트레이에 음식 오브젝트 생성
-        foodObjs[index] = Instantiate(food.foodPrefab, foodPositions[index].position, foodPositions[index].rotation);
+        foodObjs[index] = Instantiate(order.foodData.foodPrefab, foodPositions[index].position, foodPositions[index].rotation);
 
         // 트레이에 음식이 올라간 위치에 주문 정보 저장
         trayOrderDatas[index] = order;

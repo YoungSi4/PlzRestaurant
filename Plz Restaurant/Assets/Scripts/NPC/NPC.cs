@@ -16,6 +16,9 @@ public class NPC : MonoBehaviour
     private int B_abillity = 2; // 한 번에 들 수 있는 음식 수 (최대4개 예정)
     private List<GameObject> B_handFoods = new List<GameObject>(); // 사장님 손에 들고 있는 음식의 리스트
 
+    // 주문 정보 전달 로직 작성중
+    private OrderData orderData; // 주문 정보 저장용
+
     private bool isBusy = false; // 현재 음식을 서빙하는 코루틴이 실행중인지 검사
 
     private NavMeshAgent nav; // 네비게이션
@@ -46,6 +49,16 @@ public class NPC : MonoBehaviour
             StartCoroutine(BossRoutine());
         }
 
+    }
+
+    // 주문 정보 전달 받는 함수
+    // 전달받은 데이터 사용하는 기능 구현 필요
+    // TrayControl.cs에서 호출
+    void GetOrderInfo(OrderData orderData)
+    {
+        // 주문 정보 저장
+        this.orderData = orderData;
+        // 주문 정보에 따라 사장님이 서빙할 테이블 위치를 설정하는 로직 필요
     }
 
     // 사장님의 움직임 총괄
