@@ -16,10 +16,19 @@ public class TableManager : MonoBehaviour
     // 지금 단계에선 더 필요한 게 없어보임.
     // 이후 필요하면 추가할 예정
 
+    /// <summary>
+    /// Tables 배열의 getter
+    /// </summary>
+    /// <param name="tableNum">
+    /// 0 ~ n - 1
+    /// </param>
+    /// <returns>
+    /// Tables 객체
+    /// </returns>
     public Table GetTable(int tableNum)
     {
         if (tables == null || tables.Length <= tableNum) return null;
-        return tables[tableNum - 1]; // 테이블 번호는 1번부터, 인덱스는 0번부터.
+        return tables[tableNum]; // 테이블 번호는 1번부터, 인덱스는 0번부터.
     }
 
     // 테이블 매니저 끄고 키는 함수
