@@ -19,17 +19,26 @@ public class Table : MonoBehaviour
     [SerializeField]
     public int chairNum { get; private set; } // 굳이 필요할까? chairPos의 길이로 접근해도 되잖아.
     public bool isTableOccupied { get; private set; }
-    public int[] visitorIDOnChair { get;  private set; } // 각 의자에 앉은 손님의 아이디를 저장
+    public Visitor[] visitorOnChair { get;  private set; } // 각 의자에 앉은 손님의 아이디를 저장
     [SerializeField]
     public Transform[] chairPos; // 각 의자의 위치
+    public int visitorNum { get;  set; } // 손님의 수
 
-    // 음식 둘 위치는 구현 방식을 못 정했음
+    private BoxCollider boxCollider; // 손님 검사
+    private WaitForSeconds inspectionDelay;
+    private float delay = 5f;
+    public bool IsWaitingForVisitorArrived { get;  set; } // 배정된 손님을 기다리는 중인지
+    private WaitForSeconds orderDelay = new WaitForSeconds(5f);
+
+    // 음식 둘 위치 : 각 테이블마다 지정?
     private Transform[] foodPos { get; set; }
 
     private void Start()
     {
         chairNum = chairPos.Length;
-        visitorIDOnChair = new int[chairNum];
+        visitorIDOnChair = new Visitor[chairNum];
+        inspectionDelay = new(delay);
+        IsWaitingForVisitorArrived = false;
     }
 
     // 테이블에 놓인 음식 정보도 저장해야하나?
@@ -55,19 +64,38 @@ public class Table : MonoBehaviour
     // 손님을 그룹 단위로 묶어서 관리하는 스크립트 쪽에서 (아마도 Vsitor spawner 혹은 pool)
     // 손님 ID를 보내줘야 함 -> 손님 id가 primary key이므로 생성 규칙에 대해서도 생각해봐야 함
 
-    public void VisitorSitOnChair(int index, int visitorID)
+    public void VisitorSitOnChair(int index, Visitor visitor)
     {
         isTableOccupied = true;
-        visitorIDOnChair[index] = visitorID;
+        visitorOnChair[index] = visitor;
+        IsWaitingForVisitorArrived = true; // 배정된 손님이 도착했는지 기다리는 중
+        StartCoroutine(CheckingVisitorHasArrived());
     }
 
-    void VisitorStandUpChair()
+    public void VisitorStandUpChair()
     {
         isTableOccupied = false;
-        for(int i = 0;  visitorIDOnChair.Length > 0; i++)
+        for(int i = 0;  visitorOnChair.Length > 0; i++)
         {
-            visitorIDOnChair[i] = -1;
+            visitorOnChair[i] = null;
         }
+    }
+
+   /// <summary>
+   /// 손님이 테이블에 도착했는지 확인하는 비동기 함수
+   /// </summary>
+   /// <returns></returns>
+    private IEnumerator CheckingVisitorHasArrived()
+    {
+        while (IsWaitingForVisitorArrived)
+        {
+            yield return inspectionDelay;
+
+            
+        }
+        
+        
+
     }
 
 }

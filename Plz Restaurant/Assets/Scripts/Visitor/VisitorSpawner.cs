@@ -86,7 +86,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
 
             var tempTable = ChooseTable(visitors);
             ChooseChair(visitors, tempTable);
-
+            
 
             // 그룹을 담을 배열
             // 테이블 번호에 맞는 인덱스에 넣음
@@ -141,7 +141,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
 
             chosenTable = tableManager.GetTable(groupTableNum);
         }
-        
+
         return chosenTable;
     }
 

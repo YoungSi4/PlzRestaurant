@@ -33,11 +33,9 @@ public class Visitor : MonoBehaviour
 
         C_ID = visitorID;
         // C_seatNumber = Random.Range(1.1f, 4.4f);
-        C_foodNumber = Random.Range(1, 2);
+        C_foodNumber = Random.Range(1, 11);
         //Debug.Log("seatNumber : " +  C_seatNumber);
         //Debug.Log("foodNumber : " + C_foodNumber);
-
-
 
         StartCoroutine(DisableObj());
     }
