@@ -95,6 +95,8 @@ public class Table : MonoBehaviour
         var obj = other.gameObject.GetComponent<Visitor>();
         if (obj == null) return; // 닿은 물체가 손님이 아니라면 return
 
+        Debug.Log(tableNum + "번 테이블 근처의 손님 ID: " + obj.C_ID);
+
         // 테이블 근처의 손님이 이 테이블에 지정된 손님인지
         bool isRightVisitor = false;
 
