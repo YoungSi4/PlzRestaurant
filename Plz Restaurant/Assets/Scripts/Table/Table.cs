@@ -31,6 +31,10 @@ public class Table : MonoBehaviour
     public bool IsWaitingForVisitorArrived { get;  set; } // 배정된 손님을 기다리는 중인지
     private WaitForSeconds orderDelay = new WaitForSeconds(5f);
 
+    [SerializeField]
+    private GameObject readyToOrderIcon;
+
+
     // 음식 둘 위치 : 각 테이블마다 지정?
     private Transform[] foodPos { get; set; }
 
@@ -113,8 +117,23 @@ public class Table : MonoBehaviour
         if (isRightVisitor)
         {
             visitorCheckCollider.enabled = false; // 주문 대기부터는 잠시 collider를 꺼둔다
-            // 5 ~ 10초 대기 후 주문하는 함수
+            StartCoroutine(WaitingForOrder());
         }
     }
+
+    private IEnumerator WaitingForOrder()
+    {
+        int randInt = Random.Range(5, 11); // 5 ~ 10
+        orderDelay = new WaitForSeconds(randInt);
+
+        yield return orderDelay;
+
+        // 손님이 주문할 음식 번호 종합해서 전달하는 함수
+        // 고민 : table이 정보를 종합적으로 가지고 있을 것인가
+        // 혹은 전달만 할 것인가?
+        // 전자 - 음식 놓을 때 활용 가능
+        // 후자 - 캡슐화가 잘 됨
+    }
+
 
 }
