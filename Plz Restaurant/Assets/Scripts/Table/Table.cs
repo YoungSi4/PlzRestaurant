@@ -24,7 +24,8 @@ public class Table : MonoBehaviour
     public Transform[] chairPos; // 각 의자의 위치
     public int visitorNum { get;  set; } // 손님의 수
 
-    private BoxCollider boxCollider; // 손님 검사
+    [SerializeField]
+    private Collider visitorCheckCollider; // 손님 검사
     private WaitForSeconds inspectionDelay;
     private float delay = 5f;
     public bool IsWaitingForVisitorArrived { get;  set; } // 배정된 손님을 기다리는 중인지
@@ -36,7 +37,7 @@ public class Table : MonoBehaviour
     private void Start()
     {
         chairNum = chairPos.Length;
-        visitorIDOnChair = new Visitor[chairNum];
+        visitorOnChair = new Visitor[chairNum];
         inspectionDelay = new(delay);
         IsWaitingForVisitorArrived = false;
     }
@@ -69,7 +70,6 @@ public class Table : MonoBehaviour
         isTableOccupied = true;
         visitorOnChair[index] = visitor;
         IsWaitingForVisitorArrived = true; // 배정된 손님이 도착했는지 기다리는 중
-        StartCoroutine(CheckingVisitorHasArrived());
     }
 
     public void VisitorStandUpChair()
@@ -79,23 +79,40 @@ public class Table : MonoBehaviour
         {
             visitorOnChair[i] = null;
         }
+        visitorNum = 0;
+        visitorCheckCollider.enabled = true; // 다시 손님 받을 준비
     }
 
-   /// <summary>
-   /// 손님이 테이블에 도착했는지 확인하는 비동기 함수
-   /// </summary>
-   /// <returns></returns>
-    private IEnumerator CheckingVisitorHasArrived()
+    /// <summary>
+    /// 손님이 테이블에 도착했는지 확인하는 trigger 함수
+    /// </summary>
+    /// <returns></returns>
+    private void OnTriggerEnter(Collider other)
     {
-        while (IsWaitingForVisitorArrived)
+        // 테이블에 오고 있는 손님이 없다면 return
+        if (!isTableOccupied) return;
+        
+        var obj = other.gameObject.GetComponent<Visitor>();
+        if (obj == null) return; // 닿은 물체가 손님이 아니라면 return
+
+        // 테이블 근처의 손님이 이 테이블에 지정된 손님인지
+        bool isRightVisitor = false;
+
+        // 테이블에 입력된 손님 정보를 순회
+        foreach(var visitor in visitorOnChair)
         {
-            yield return inspectionDelay;
-
-            
+            if (obj == visitor)
+            {
+                isRightVisitor = true;
+                break;
+            }
         }
-        
-        
 
+        if (isRightVisitor)
+        {
+            visitorCheckCollider.enabled = false; // 주문 대기부터는 잠시 collider를 꺼둔다
+            // 5 ~ 10초 대기 후 주문하는 함수
+        }
     }
 
 }

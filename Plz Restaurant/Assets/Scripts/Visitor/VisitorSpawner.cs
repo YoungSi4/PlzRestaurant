@@ -175,7 +175,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         {
             var target = table.chairPos[randomSit].position;
             visitor.Move(target);
-            table.VisitorSitOnChair(randomSit, visitor.C_ID);
+            table.VisitorSitOnChair(randomSit, visitor);
 
             randomSit++;
             randomSit %= table.chairNum;
