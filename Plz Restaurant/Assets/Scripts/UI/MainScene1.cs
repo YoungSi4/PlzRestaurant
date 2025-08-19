@@ -4,9 +4,16 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class MainScene1 : MonoBehaviour
 {
+    [Header("Quest get popup")]
+    public Button[] questGetButtons; // 수령 버튼 
+    public GameObject getPopup; // 수령 버튼에 마우스 올리면 나올 팝업
+    public Transform getButtonTransform; // 수령 버튼 위에 팝업을 띄울거라 위치값을 가져옴
+
+
     [Header("On/Off UI")]
     public GameObject dropDownMenu;
     public GameObject storeMenu;
@@ -28,6 +35,7 @@ public class MainScene1 : MonoBehaviour
 
     Color activeColor = new Color(0.4f, 0.7f, 1f); //파란색
     Color inactiveColor = new Color(0.7f, 0.7f, 0.7f); //회색
+    Color getColor = new Color(1f, 1f, 0.6f); // 연한 노란색
 
     private void Start()
     {
@@ -107,6 +115,24 @@ public class MainScene1 : MonoBehaviour
         if (img != null)
         {
             img.color = inactiveColor;
+        }
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (eventData.pointerEnter.gameObject.CompareTag("GetButton"))
+        {
+            getButtonTransform = eventData.pointerEnter.gameObject.transform;
+            RectTransform buttonRect = getButtonTransform.GetComponent<RectTransform>();
+            RectTransform popupRect = getPopup.GetComponent<RectTransform>();
+
+            getPopup.SetActive(true);
+            popupRect.position = buttonRect.position + new Vector3(0, buttonRect.rect.height, 0);   
+        }
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (eventData.pointerEnter != null && eventData.pointerEnter.CompareTag("GetButton")) {
+            getPopup.SetActive(false);
         }
     }
 }
