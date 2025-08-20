@@ -34,9 +34,9 @@ public class Table : MonoBehaviour
     [SerializeField]
     private GameObject readyToOrderIcon;
 
-
     // 음식 둘 위치 : 각 테이블마다 지정?
-    private Transform[] foodPos { get; set; }
+    [SerializeField]
+    private Transform[] foodPos;
 
     private void Start()
     {
@@ -119,7 +119,7 @@ public class Table : MonoBehaviour
             visitorCheckCollider.enabled = false; // 주문 대기부터는 잠시 collider를 꺼둔다
             StartCoroutine(WaitingForOrder());
         }
-    }
+    } // onTriggerEnter -end-
 
     private IEnumerator WaitingForOrder()
     {
@@ -135,5 +135,9 @@ public class Table : MonoBehaviour
         // 후자 - 캡슐화가 잘 됨
     }
 
+    private void ReadyToOrder()
+    {
+
+    }
 
 }
