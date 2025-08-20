@@ -171,6 +171,8 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
             randomSit++;
             randomSit %= table.chairNum; // 인덱스(randomSit)가 4를 넘으면 안 됨
         }
+
+        // 손님 수만큼 반복
         foreach (var visitor in visitors)
         {
             var target = table.chairPos[randomSit].position;

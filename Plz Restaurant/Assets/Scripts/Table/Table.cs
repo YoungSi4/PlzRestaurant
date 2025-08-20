@@ -19,7 +19,7 @@ public class Table : MonoBehaviour
     [SerializeField]
     public int chairNum { get; private set; } // 굳이 필요할까? chairPos의 길이로 접근해도 되잖아.
     public bool isTableOccupied { get; private set; }
-    public Visitor[] visitorOnChair { get;  private set; } // 각 의자에 앉은 손님의 아이디를 저장
+    public Visitor[] visitorOnChair { get;  private set; } // 각 의자에 앉은 손님 객체를 저장
     [SerializeField]
     public Transform[] chairPos; // 각 의자의 위치
     public int visitorNum { get;  set; } // 손님의 수
@@ -44,6 +44,7 @@ public class Table : MonoBehaviour
         visitorOnChair = new Visitor[chairNum];
         inspectionDelay = new(delay);
         IsWaitingForVisitorArrived = false;
+        visitorNum = 0;
     }
 
     // 테이블에 놓인 음식 정보도 저장해야하나?
@@ -66,14 +67,22 @@ public class Table : MonoBehaviour
     //}
 
 
-    // 손님을 그룹 단위로 묶어서 관리하는 스크립트 쪽에서 (아마도 Vsitor spawner 혹은 pool)
-    // 손님 ID를 보내줘야 함 -> 손님 id가 primary key이므로 생성 규칙에 대해서도 생각해봐야 함
-
+    /// <summary>
+    /// 의자에 손님 정보를 세팅하는 함수
+    /// 손님 수만큼 반복해야 한다
+    /// </summary>
+    /// <param name="index">
+    /// 앉는 의자 번호
+    /// </param>
+    /// <param name="visitor">
+    /// 앉는 손님 객체 정보
+    /// </param>
     public void VisitorSitOnChair(int index, Visitor visitor)
     {
         isTableOccupied = true;
         visitorOnChair[index] = visitor;
         IsWaitingForVisitorArrived = true; // 배정된 손님이 도착했는지 기다리는 중
+        visitorNum++;
     }
 
     public void VisitorStandUpChair()
@@ -135,9 +144,30 @@ public class Table : MonoBehaviour
         // 후자 - 캡슐화가 잘 됨
     }
 
+    // 아이콘 띄우는 함수
     private void ReadyToOrder()
     {
 
     }
 
+    /// <summary>
+    /// 해당 테이블에 앉은 손님이 주문한 음식 ID를 넘기는 함수
+    /// </summary>
+    /// <returns>
+    /// int[] - 의자 번호 순서대로 저장
+    /// </returns>
+    public int[] SendFoodNumToOrderInfo()
+    {
+        // 앉은 손님 수만큼 동적 길이 배열 선언
+        int[] foodNums = new int[visitorNum];
+        int tempIdx = 0;
+
+        foreach(var visitor in visitorOnChair)
+        {
+            foodNums[tempIdx] = visitor.C_foodNumber;
+            tempIdx++;
+        }
+
+        return foodNums;
+    }
 }
