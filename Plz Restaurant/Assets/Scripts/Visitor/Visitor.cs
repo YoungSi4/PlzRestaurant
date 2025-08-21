@@ -17,11 +17,12 @@ public class Visitor : MonoBehaviour
     private int C_seatTableNumber; // 앉을 테이블 번호, 의자 번호
     private int C_seatChairNumber;
     private bool hasOrdered = false;
-    private int C_orderID;
+    private int C_orderID; // 이거 테이블에 있어야 하지 않을까? 혹은 주문 객체가 가지고 있던가
     private bool isEating = false;
     private bool hasEaten = false;
     private int C_payment = 0;
-    public int C_foodNumber { get; private set; } // 손님이 주문한 음식 번호
+    public int[] C_foodNumber { get; private set; } // 손님이 주문한 음식 번호
+    public int numOfOrderFood;
 
     public void Init(VisitorPool pool, int visitorID)
     {
@@ -33,7 +34,13 @@ public class Visitor : MonoBehaviour
 
         C_ID = visitorID;
         // C_seatNumber = Random.Range(1.1f, 4.4f);
-        C_foodNumber = Random.Range(1, 11);
+
+        numOfOrderFood = Random.Range(1, 3); // 1 ~ 2
+        for (int i = 0; i < numOfOrderFood;  i++)
+        {
+            C_foodNumber[i] = Random.Range(0, 11);
+        }
+
         //Debug.Log("seatNumber : " +  C_seatNumber);
         //Debug.Log("foodNumber : " + C_foodNumber);
 
@@ -74,7 +81,7 @@ public class Visitor : MonoBehaviour
     {
         // C_foodNumber : FoodDB 상의 음식 번호
         // 테이블 번호 : C_seatNumber을 명시적 형변환하여 사용
-        order.SetFoodNumFromVisitor(C_foodNumber, C_seatTableNumber);
+        // order.SetFoodNumFromVisitor(C_foodNumber, C_seatTableNumber);
     }
 
     // 외부에서 visitior 이동 위치 지정하는 함수
@@ -111,7 +118,8 @@ public class Visitor : MonoBehaviour
         isEating = false;
         hasEaten = false;
         C_payment = 0;
-        C_foodNumber = 0; // 손님이 주문한 음식 번호
+        C_foodNumber[0] = -1; // 손님이 주문한 음식 번호
+        C_foodNumber[1] = -1;
     }
 }
 

@@ -33,6 +33,7 @@ public class Table : MonoBehaviour
 
     [SerializeField]
     private GameObject readyToOrderIcon;
+    private bool isReadyToOrder;
 
     // 음식 둘 위치 : 각 테이블마다 지정?
     [SerializeField]
@@ -45,6 +46,7 @@ public class Table : MonoBehaviour
         inspectionDelay = new(delay);
         IsWaitingForVisitorArrived = false;
         visitorNum = 0;
+        isReadyToOrder = false;
     }
 
     // 테이블에 놓인 음식 정보도 저장해야하나?
@@ -147,26 +149,33 @@ public class Table : MonoBehaviour
     // 아이콘 띄우는 함수
     private void ReadyToOrder()
     {
+        isReadyToOrder = true;
+        // 아이콘 띄우기
 
     }
 
-    /// <summary>
-    /// 해당 테이블에 앉은 손님이 주문한 음식 ID를 넘기는 함수
-    /// </summary>
-    /// <returns>
-    /// int[] - 의자 번호 순서대로 저장
-    /// </returns>
-    public int[] SendFoodNumToOrderInfo()
+/// <summary>
+/// 해당 테이블에 앉은 손님이 주문한 음식 ID를 넘기는 함수
+/// </summary>
+/// <returns>
+/// int[] - 의자 번호 순서대로 저장
+/// </returns>
+public int[] SendFoodNumToOrderInfo()
     {
         // 앉은 손님 수만큼 동적 길이 배열 선언
         int[] foodNums = new int[visitorNum];
         int tempIdx = 0;
 
+        // 2중 반복이라 좀 거슬리네
         foreach(var visitor in visitorOnChair)
         {
-            foodNums[tempIdx] = visitor.C_foodNumber;
-            tempIdx++;
+            foreach(var foodId in visitor.C_foodNumber)
+            {
+                foodNums[tempIdx++] = foodId;
+            }
         }
+
+        isReadyToOrder = false;
 
         return foodNums;
     }
