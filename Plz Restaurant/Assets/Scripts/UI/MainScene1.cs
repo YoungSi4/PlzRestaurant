@@ -9,9 +9,9 @@ using UnityEngine.EventSystems;
 public class MainScene1 : MonoBehaviour
 {
     [Header("Quest get popup")]
-    public Button[] questGetButtons; // 수령 버튼 
+    //public Button[] questGetButtons; // 수령 버튼 
     public GameObject getPopup; // 수령 버튼에 마우스 올리면 나올 팝업
-    public Transform getButtonTransform; // 수령 버튼 위에 팝업을 띄울거라 위치값을 가져옴
+    //public Transform getButtonTransform; // 수령 버튼 위에 팝업을 띄울거라 위치값을 가져옴
 
 
     [Header("On/Off UI")]
@@ -117,22 +117,37 @@ public class MainScene1 : MonoBehaviour
             img.color = inactiveColor;
         }
     }
-    public void OnPointerEnter(PointerEventData eventData)
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    public void PopupOn()
     {
-        if (eventData.pointerEnter.gameObject.CompareTag("GetButton"))
-        {
-            getButtonTransform = eventData.pointerEnter.gameObject.transform;
-            RectTransform buttonRect = getButtonTransform.GetComponent<RectTransform>();
-            RectTransform popupRect = getPopup.GetComponent<RectTransform>();
+        getPopup.SetActive(true);
+    }
+    public void PopupOff()
+    {
+        getPopup.SetActive(false);
+    }
+    //@@@@@@@@@@@@@@@@@@@@@@@@@
 
-            getPopup.SetActive(true);
-            popupRect.position = buttonRect.position + new Vector3(0, buttonRect.rect.height, 0);   
-        }
-    }
-    public void OnPointerExit(PointerEventData eventData)
+    public Canvas rootCanvas; //최상위 canvas
+    public RectTransform tooltipPanel; // 공용 팝업(비활성 시작)
+    public TMP_Text tooltipLabel; // 팝업 텍스트
+    public Vector2 offset = new Vector2(0, 24f); // 버튼 위로 살짝
+
+    public void ShowOver(Transform target, string text)
     {
-        if (eventData.pointerEnter != null && eventData.pointerEnter.CompareTag("GetButton")) {
-            getPopup.SetActive(false);
-        }
+        if (!tooltipPanel || !rootCanvas) return;
+        if (tooltipLabel) tooltipLabel.text = text ?? "";
+
+        var targetRT = (RectTransform)target; //버튼의 transform을 RectTrasnform으로 캐스팅
+        var canvasRT = (RectTransform)rootCanvas.transform; //최상위 캔버스의 trasnform을 recttrasnform으로 바꿈
+        var cam = rootCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : rootCanvas.worldCamera;
+        //좌표 변환에 사용할 카메라를 선택
+
+        Vector2 screen = RectTransformUtility.WorldToScreenPoint(cam, targetRT.position);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRT, screen, cam, out var local);
+        tooltipPanel.anchoredPosition = local + offset;
+        tooltipPanel.gameObject.SetActive(true);
     }
+    public void Hide() => tooltipPanel?.gameObject.SetActive(false);
+    //tooltipPanel이 null이 아니면 setactive(false)를 실행
 }

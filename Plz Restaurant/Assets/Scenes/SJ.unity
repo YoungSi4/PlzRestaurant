@@ -18036,10 +18036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d906e3b1de2b16648bfb69e59291168e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questGetButtons:
-  - {fileID: 1689994654}
   getPopup: {fileID: 1797306391}
-  getButtonTransform: {fileID: 0}
   dropDownMenu: {fileID: 1878524983}
   storeMenu: {fileID: 2020577682}
   exitMenu: {fileID: 36441086}
@@ -18051,6 +18048,10 @@ MonoBehaviour:
   uiDown: {fileID: 2047695155}
   mainScene2: {fileID: 1590612331}
   mainScene_2: {fileID: 2113788990}
+  rootCanvas: {fileID: 0}
+  tooltipPanel: {fileID: 0}
+  tooltipLabel: {fileID: 0}
+  offset: {x: 0, y: 24}
 --- !u!1 &1283561633
 GameObject:
   m_ObjectHideFlags: 0
@@ -25485,6 +25486,7 @@ GameObject:
   - component: {fileID: 1689994656}
   - component: {fileID: 1689994655}
   - component: {fileID: 1689994654}
+  - component: {fileID: 1689994657}
   m_Layer: 5
   m_Name: Get Button
   m_TagString: GetButton
@@ -25594,6 +25596,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689994652}
   m_CullTransparentMesh: 1
+--- !u!114 &1689994657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689994652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1242487104}
+          m_TargetAssemblyTypeName: MainScene1, Assembly-CSharp
+          m_MethodName: PopupOn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1242487104}
+          m_TargetAssemblyTypeName: MainScene1, Assembly-CSharp
+          m_MethodName: PopupOn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1690189751
 GameObject:
   m_ObjectHideFlags: 0
