@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class OrderData
 {
     public FoodData foodData { get; private set; } // 음식 데이터
-    public int seatNum { get; private set; } // 좌석 번호
+    public float seatNum { get; private set; } // 좌석 번호 (테이블 번호를 포함한 플롯형)
 
-    public OrderData(FoodData foodData, int seatNum)
+    public OrderData(FoodData foodData, float seatNum)
     {
         this.foodData = foodData;
         this.seatNum = seatNum;
@@ -132,20 +132,28 @@ public class HeadChef : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            for(int i=0;i<3;i++)
+/*            for(int i=0;i<3;i++)
             {
                 FoodData food = foodDB.GetFoodData(1);
-                H_cookingOrderList.Enqueue(new OrderData(food, 1));
+                H_cookingOrderList.Enqueue(new OrderData(food, 1.1f));
                 Debug.Log("조리할 음식 추가");
-            }
+            }*/
+            FoodData food = foodDB.GetFoodData(1);
+            H_cookingOrderList.Enqueue(new OrderData(food, 1.1f));
+            Debug.Log("조리할 음식 추가 1");
+
+            food = foodDB.GetFoodData(1);
+            H_cookingOrderList.Enqueue(new OrderData(food, 1.2f));
+            Debug.Log("조리할 음식 추가 2");
         }
     }
 
     // 주문 정보 가져오기
     // 흐름대로 OrderMemo.cs에서 호출해야 한다면 tableNum이 아닌 SeatNum을 여기까지 전달해와야 함
-    public void GetOrderInfo(FoodData foodData, int SeatNum)
+    public void GetOrderInfo(FoodData foodData, float SeatNum)
     {
         OrderData orderData = new OrderData(foodData, SeatNum);
         H_cookingOrderList.Enqueue(orderData);
+        Debug.Log("조리할 음식 추가");
     }
 }

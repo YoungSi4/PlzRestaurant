@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class TrayControl : MonoBehaviour
 {
-    // 현재 트레이에 올라가있는 음식 오브젝트 저장
-    // .Add(null)로 크기 늘리기
-    private List<GameObject> foodObjs = new List<GameObject>() { null, null };
     // 강화될 트레이의 프리팹 저장
     [SerializeField] 
     private GameObject[] trayPrefabs = new GameObject[4];
@@ -15,6 +12,9 @@ public class TrayControl : MonoBehaviour
     private GameObject currentTray;
     // 트레이에 음식을 올릴 위치 저장
     public List<Transform> foodPositions = new List<Transform>();
+    // 현재 트레이에 올라가있는 음식 오브젝트 저장
+    // .Add(null)로 크기 늘리기
+    private List<GameObject> foodObjs = new List<GameObject>() { null, null };
 
     // 트레이에 올라간 음식의 주문 정보 저장
     private List<OrderData> trayOrderDatas = new List<OrderData>();
@@ -24,9 +24,13 @@ public class TrayControl : MonoBehaviour
     // 트레이 인덱스를 저장해서 순차적으로 서빙할 수 있도록 함
     private Queue<int> trayIndexTurns = new Queue<int>();
 
+    private NPC npc;
+
     void Start()
     {
         SetTray(0);
+
+        npc = FindObjectOfType<NPC>();
     }
 
     private void SetTray(int trayLevel)
@@ -93,9 +97,9 @@ public class TrayControl : MonoBehaviour
             Debug.LogError("Invalid tray position index: " + posNum);
             return;
         }
+
         // 트레이에 음식 오브젝트 생성
         foodObjs[index] = Instantiate(order.foodData.foodPrefab, foodPositions[index].position, foodPositions[index].rotation);
-
         // 트레이에 음식이 올라간 위치에 주문 정보 저장
         trayOrderDatas[index] = order;
         // 트레이 인덱스 큐에 추가 (서빙 순서 관리)
@@ -114,7 +118,7 @@ public class TrayControl : MonoBehaviour
         return 0; // 꽉 찼으면 0 반환
     }
 
-    // 트레이에서 사장님 손에 올리기위해 음식 정보 전달
+    // 트레이에서 사장님 손에 올리기위해 음식 오브젝트 정보 전달
     // NPC.cs 에서 호출
     public GameObject TakeFoodFromTray(int trayIndex, Transform handPos)
     {
@@ -125,6 +129,18 @@ public class TrayControl : MonoBehaviour
         }
         return null;
     }
+    // 트레이에서 사장님 손에 올리기위해 주문 정보 전달
+    // NPC.cs 에서 호출
+    public OrderData GetOrderData(int trayIndex)
+    {
+        int index = trayIndex - 1; // 0부터 시작하는 인덱스
+        if (index >= 0 && index < trayOrderDatas.Count)
+        {
+            return trayOrderDatas[index];
+        }
+        return null;
+    }
+
     // 트레이에서 음식 삭제
     // NPC.cs 에서 호출
     public void ClearFood(int trayIndex)
@@ -134,6 +150,7 @@ public class TrayControl : MonoBehaviour
         {
             Destroy(foodObjs[index]);
             foodObjs[index] = null;
+            trayOrderDatas[index] = null; // 주문 정보도 삭제
         }
     }
     // 트레이에 빈 자리가 있는지 검사
