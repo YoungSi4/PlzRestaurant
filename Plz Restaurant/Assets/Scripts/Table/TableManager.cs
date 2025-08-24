@@ -10,7 +10,7 @@ public class TableManager : MonoBehaviour
     private Table[] tables = null;
     public IEnumerable<Table> Tables => tables; // 외부에서 순회를 위해 접근
 
-    public int tableNum { get { return tables.Length; } private set {;} }
+    public int tableNum { get { return tables.Length; } }
 
 
     // 지금 단계에선 더 필요한 게 없어보임.

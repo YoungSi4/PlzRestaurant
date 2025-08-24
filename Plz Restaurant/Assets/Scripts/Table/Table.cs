@@ -32,8 +32,8 @@ public class Table : MonoBehaviour
     private WaitForSeconds orderDelay = new WaitForSeconds(5f);
 
     [SerializeField]
-    private GameObject readyToOrderIcon;
-    private bool isReadyToOrder;
+    private GameObject readyToOrderIconPrefab; // 컴포넌트 상에서 연결한 자식 오브젝트
+    private bool isReadyToOrder; // true 일 때만 상호작용 가능
 
     // 음식 둘 위치 : 각 테이블마다 지정?
     [SerializeField]
@@ -144,39 +144,50 @@ public class Table : MonoBehaviour
         // 혹은 전달만 할 것인가?
         // 전자 - 음식 놓을 때 활용 가능
         // 후자 - 캡슐화가 잘 됨
+
+        ReadyToOrder();
     }
 
     // 아이콘 띄우는 함수
     private void ReadyToOrder()
     {
         isReadyToOrder = true;
-        // 아이콘 띄우기
-
+        readyToOrderIconPrefab.SetActive(true);
     }
 
 /// <summary>
 /// 해당 테이블에 앉은 손님이 주문한 음식 ID를 넘기는 함수
+/// 플레이어의 상호작용 키에 의해 작동된다
 /// </summary>
 /// <returns>
 /// int[] - 의자 번호 순서대로 저장
 /// </returns>
-public int[] SendFoodNumToOrderInfo()
+public List<int> SendFoodNumToOrderInfo()
     {
-        // 앉은 손님 수만큼 동적 길이 배열 선언
-        int[] foodNums = new int[visitorNum];
-        int tempIdx = 0;
+        if (!isReadyToOrder) return null;  // 주문할 준비가 안 됐다면 리턴
+
+        List<int> foodIDs = new List<int>();
 
         // 2중 반복이라 좀 거슬리네
-        foreach(var visitor in visitorOnChair)
+        /*
+         food ID 규칙
+            1. -3 : eof (배열의 끝을 나타내는 sentinel 값)
+            2. -2 : 다음 손님
+            3. -1 : 음식 없음
+            4. 0 ~ n : 음식 id
+         */
+        foreach (var visitor in visitorOnChair)
         {
             foreach(var foodId in visitor.C_foodNumber)
             {
-                foodNums[tempIdx++] = foodId;
+                foodIDs.Add(foodId);
             }
+            foodIDs.Add(-2);
         }
+        foodIDs.Add(-3); // eof 표시
 
         isReadyToOrder = false;
 
-        return foodNums;
+        return foodIDs;
     }
 }
