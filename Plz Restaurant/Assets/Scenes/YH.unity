@@ -1178,6 +1178,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1443456583090253695, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2199619494053850154, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: readyToOrderIconPrefab
       value: 
@@ -1186,6 +1190,10 @@ PrefabInstance:
       propertyPath: readyToOrderIconPrefab
       value: 
       objectReference: {fileID: 708242767}
+    - target: {fileID: 2859931002626471329, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3393331014342284853, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: readyToOrderIconPrefab
       value: 
@@ -1193,6 +1201,10 @@ PrefabInstance:
     - target: {fileID: 3658230861704139120, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: m_Name
       value: AlarmReadyToOrder
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658230861704139120, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4507841406230512186, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: readyToOrderIconPrefab
@@ -1202,6 +1214,14 @@ PrefabInstance:
       propertyPath: readyToOrderIconPrefab
       value: 
       objectReference: {fileID: 708242772}
+    - target: {fileID: 4710456550488605386, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891711574202883500, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6315895573343207278, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: readyToOrderIconPrefab
       value: 
@@ -1214,10 +1234,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AlarmReadyToOrder
       objectReference: {fileID: 0}
+    - target: {fileID: 7369502613417265429, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7741992638818149841, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: readyToOrderIconPrefab
       value: 
       objectReference: {fileID: 708242768}
+    - target: {fileID: 8363076992726213932, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8593912419145205436, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1261,6 +1289,10 @@ PrefabInstance:
     - target: {fileID: 8937505046305152006, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: m_Name
       value: Restaurant
+      objectReference: {fileID: 0}
+    - target: {fileID: 9006512083221508815, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
