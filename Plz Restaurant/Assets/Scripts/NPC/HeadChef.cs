@@ -21,7 +21,7 @@ public class HeadChef : MonoBehaviour
 /*    // 현재 조리중인 주문서 목록
     private Queue<FoodData> H_cookingList = new Queue<FoodData>();*/
     // 현재 조리중인 주문서 목록 (OrderData 버전)
-    private Queue<OrderData> H_cookingOrderList = new Queue<OrderData>();
+    private Queue<OrderData> H_cookingList = new Queue<OrderData>();
 
     private float cookTime = 1f; // 음식 조리에 걸리는 시간(5초로 수정 예정)
     private bool isCooking = false;
@@ -55,9 +55,9 @@ public class HeadChef : MonoBehaviour
 
             for (int i = 0; i < trayEmptyCount; i++)
             {
-                if (H_cookingOrderList.Count > 0)
+                if (H_cookingList.Count > 0)
                 {
-                    orderDatas.Add(H_cookingOrderList.Dequeue());
+                    orderDatas.Add(H_cookingList.Dequeue());
                 }
                 else
                 {
@@ -105,6 +105,8 @@ public class HeadChef : MonoBehaviour
     }
 
     // 트레이에 음식 올리기
+    // 트레이에 주문 정보 전달
+    // ** 함수의 필요성 재고 필요 **
     // FoodData -> OrderData로 변경
     private void H_placeFoodOnTray(List<OrderData> orderDatas)
     {
@@ -113,7 +115,6 @@ public class HeadChef : MonoBehaviour
             /*// 올릴 트레이 위치 정하기
             int posNum = trayControl.selectTrayPosition();
 
-            // 트레이 위치에 생성, 주문정보 전달(OrderData 클래스의 변수로 전달 - 현재 구현x)
             trayControl.SpawnFoodOnTray(orderData, posNum);*/
             // TrayControl로 데이터만 전달하고 TrayControl에서 음식 올리는 동작하도록 수정 (아래)
             trayControl.GetOrderInfo(orderData);
@@ -124,7 +125,7 @@ public class HeadChef : MonoBehaviour
 
     // 큐에 음식이 있는지 확인
     // FoodData -> OrderData로 변경
-    private bool H_hasFood() => H_cookingOrderList.Count > 0;
+    private bool H_hasFood() => H_cookingList.Count > 0;
 
     // 임시 음식 추가용 함수
     // FoodData -> OrderData로 변경
@@ -132,28 +133,28 @@ public class HeadChef : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-/*            for(int i=0;i<3;i++)
-            {
-                FoodData food = foodDB.GetFoodData(1);
-                H_cookingOrderList.Enqueue(new OrderData(food, 1.1f));
-                Debug.Log("조리할 음식 추가");
-            }*/
+            /*            for(int i=0;i<3;i++)
+                        {
+                            FoodData food = foodDB.GetFoodData(1);
+                            H_cookingList.Enqueue(new OrderData(food, 1.1f));
+                            Debug.Log("조리할 음식 추가");
+                        }*/
             FoodData food = foodDB.GetFoodData(1);
-            H_cookingOrderList.Enqueue(new OrderData(food, 1.1f));
+            H_cookingList.Enqueue(new OrderData(food, 1.1f));
             Debug.Log("조리할 음식 추가 1");
 
             food = foodDB.GetFoodData(1);
-            H_cookingOrderList.Enqueue(new OrderData(food, 1.2f));
+            H_cookingList.Enqueue(new OrderData(food, 1.2f));
             Debug.Log("조리할 음식 추가 2");
         }
     }
 
     // 주문 정보 가져오기
     // 흐름대로 OrderMemo.cs에서 호출해야 한다면 tableNum이 아닌 SeatNum을 여기까지 전달해와야 함
-    public void GetOrderInfo(FoodData foodData, float SeatNum)
+    public void H_GetOrderInfo(FoodData foodData, float SeatNum)
     {
         OrderData orderData = new OrderData(foodData, SeatNum);
-        H_cookingOrderList.Enqueue(orderData);
+        H_cookingList.Enqueue(orderData);
         Debug.Log("조리할 음식 추가");
     }
 }

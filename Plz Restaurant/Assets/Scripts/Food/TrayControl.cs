@@ -108,7 +108,7 @@ public class TrayControl : MonoBehaviour
 
     // 트레이에 음식을 올릴 위치 결정 (앞에서부터 빈자리가 있으면 바로바로 채우기)
     // HeadChef.cs에서 호출
-    public int selectTrayPosition()
+    private int selectTrayPosition()
     {
         for (int i = 0; i < foodObjs.Count; i++)
         {

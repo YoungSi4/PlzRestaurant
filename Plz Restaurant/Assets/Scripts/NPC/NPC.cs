@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class NPC : MonoBehaviour
 {
     private Table table; // 서빙할 테이블 정보 저장
-    public Transform tablePos; // 서빙할 테이블 위치 저장
+    private Transform tablePos; // 서빙할 테이블 위치 저장
     public Transform bossHandPos1; // 음식을 들 사장님의 손 위치 저장.
     public Transform bossHandPos2; // 음식을 들 사장님의 손 위치 저장.
 
