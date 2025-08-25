@@ -83,6 +83,7 @@ public class Table : MonoBehaviour
     {
         isTableOccupied = true;
         visitorOnChair[index] = visitor;
+        visitor.SetSeatNum(index);
         IsWaitingForVisitorArrived = true; // 배정된 손님이 도착했는지 기다리는 중
         visitorNum++;
     }
@@ -160,31 +161,30 @@ public class Table : MonoBehaviour
 /// 플레이어의 상호작용 키에 의해 작동된다
 /// </summary>
 /// <returns>
-/// int[] - 의자 번호 순서대로 저장
+/// List<int> - 의자 번호 순서대로 저장
 /// </returns>
-public List<int> SendFoodNumToOrderInfo()
+public List<int>[] SendFoodNumToOrderInfo()
     {
         if (!isReadyToOrder) return null;  // 주문할 준비가 안 됐다면 리턴
 
-        List<int> foodIDs = new List<int>();
+        List<int>[] foodIDs = new List<int>[chairNum];
 
         // 2중 반복이라 좀 거슬리네
         /*
          food ID 규칙
-            1. -3 : eof (배열의 끝을 나타내는 sentinel 값)
-            2. -2 : 다음 손님
-            3. -1 : 음식 없음
-            4. 0 ~ n : 음식 id
+            1) -1 : 음식 없음
+            2) 0 ~ n : 음식 id
          */
+
         foreach (var visitor in visitorOnChair)
         {
+            // 쓰는 인덱스만 초기화
+            foodIDs[visitor.C_seatChairNumber] = new List<int>();
             foreach(var foodId in visitor.C_foodNumber)
             {
-                foodIDs.Add(foodId);
+                foodIDs[visitor.C_seatChairNumber].Add(foodId);
             }
-            foodIDs.Add(-2);
         }
-        foodIDs.Add(-3); // eof 표시
 
         isReadyToOrder = false;
 

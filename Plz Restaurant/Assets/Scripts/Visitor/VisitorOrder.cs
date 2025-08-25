@@ -10,9 +10,16 @@ using UnityEngine;
 public class VisitorOrder : MonoBehaviour
 {
     // Vars related to FoodDB
-    // 음식 번호, 이름, 가격 등등
-    private FoodData foodData;
-    private int foodNum; // FoodDB 상의 음식 index. 손님에게서 랜덤하게 생성됨.
+    
+    /// <summary>
+    /// 음식 정보를 담은 동적배열 + 리스트 2중 구조
+    /// </summary>
+    /// <description>
+    /// 오픈 체인 형식으로 구성하여 음식 개수에 상관 없이 대응 가능
+    /// 인덱스가 앉은 자리와 일치
+    /// </description>
+    private List<FoodData>[] foodDatas;
+    private List<int> foodIDs; // FoodDB 상의 음식 index. 손님에게서 랜덤하게 생성됨.
     private string foodName;
     private int foodPrice;
     private int tableNum;
@@ -29,25 +36,41 @@ public class VisitorOrder : MonoBehaviour
 
     // setter, getter
     // 음식 정보 구성을 시작하는 함수 - 플레이어의 상호작용 E에서 출발
-    public void SetFoodNumFromVisitor(int foodNum, int tableNum)
+    public void SetFoodNumFromPlayer(List<int>[] foodIDs, int tableNum)
     {
-        this.foodNum = foodNum;
-        this.tableNum = tableNum;
-
-        GetFoodInfoFromDB(foodNum);
-        SendFoodInfo(foodData, foodNum);
+        GetFoodInfoFromDB(foodIDs);
+        SendFoodInfo(foodDatas, tableNum);
     }
 
     // 데이터 전달 흐름
     // VistorOrder -> FoodDB -> VisitorOrder
-    private void GetFoodInfoFromDB(int foodNum)
+    private void GetFoodInfoFromDB(List<int>[] foodIDsArray)
     {
-        foodData = foodDB.GetFoodData(foodNum);
+        int tempIdx = 0;
+        foreach (var foodIDs in foodIDsArray)
+        {
+            // 빈 인덱스는 null 값이 들어있다.
+            if (foodIDs == null)
+            {
+                tempIdx++;
+                continue;
+            }
+
+            foreach(var foodID in foodIDs)
+            {
+                // foodDatas 배열에 손님이 앉은 위치와 동일한 인덱스에 음식 정보가 리스트로 들어있음
+                foodDatas[tempIdx].Add(foodDB.GetFoodData(foodID));
+            }
+            tempIdx++;
+        }
     }
 
-    public void SendFoodInfo(FoodData foodData, int tableNum)
+    
+    public void SendFoodInfo(List<FoodData>[] foodData, int tableNum)
     {
         // OrderMemo 상에서 표시될 정보를 이 함수에서 초기화
-        orderMemo.GetFoodInfo(foodData, tableNum);
+        // orderMemo.GetFoodInfo(foodData, tableNum);
     }
+    // OrderMemo에 어떤 식으로 넘기고 관리할지 회의 필요
+
 }

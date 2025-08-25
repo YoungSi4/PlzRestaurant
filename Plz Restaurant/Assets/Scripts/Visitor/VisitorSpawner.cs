@@ -85,6 +85,10 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
             }
 
             var tempTable = ChooseTable(visitors);
+            foreach (var visitor in visitors)
+            {
+                visitor.SetTableNum(tempTable.tableNum);
+            }
             ChooseChair(visitors, tempTable);
             
 
@@ -159,8 +163,8 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         // 3 4
         //
         // 2명이 앉을 때 문제가 되는 케이스 : 대각선으로 앉는 경우
-        // 1. 1, 4
-        // 2. 2, 3
+        // case 1 ) 1, 4
+        // case 2 ) 2, 3
         //
         // randomSit == 1 -> 다음 사람 2번에 앉음 -> OK
         // randomSit == 2 -> 다음 사람 randomSit ==3 -> 문제
@@ -177,7 +181,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         {
             var target = table.chairPos[randomSit].position;
             visitor.Move(target);
-            table.VisitorSitOnChair(randomSit, visitor);
+            table.VisitorSitOnChair(randomSit, visitor); // 테이블에 해당 손님 정보 전달
 
             randomSit++;
             randomSit %= table.chairNum;

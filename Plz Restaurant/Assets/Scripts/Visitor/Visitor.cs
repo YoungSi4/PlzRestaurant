@@ -14,9 +14,9 @@ public class Visitor : MonoBehaviour
     public GameObject readyToOrderMark;
 
     public int C_ID { get; private set; } // 손님 고유 id : visitor spawner에서 부여
-    private int C_seatTableNumber; // 앉을 테이블 번호, 의자 번호
-    private int C_seatChairNumber;
-    private bool hasOrdered = false;
+    public int C_seatTableNumber { get; private set; } // 앉을 테이블 번호, 의자 번호
+    public int C_seatChairNumber { get; private set; }
+    public bool hasOrdered = false;
     private int C_orderID; // 이거 테이블에 있어야 하지 않을까? 혹은 주문 객체가 가지고 있던가
     private bool isEating = false;
     private bool hasEaten = false;
@@ -47,6 +47,15 @@ public class Visitor : MonoBehaviour
         // StartCoroutine(DisableObj());
     }
 
+    public void SetTableNum(int tableNum)
+    {
+        this.C_seatTableNumber = tableNum;
+    }
+    public void SetSeatNum(int seatNum)
+    {
+        this.C_seatChairNumber = seatNum;
+    }
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -60,14 +69,14 @@ public class Visitor : MonoBehaviour
     //    agent.SetDestination(targetPos);
     //}
 
-    private void Update()
-    {   // 1번째 agent의 경로 계산이 완벽히 됬는지 && 2번째 agent의 현재위치에서 목적지까지의 거리 - 자동으로 멈추는 거리 < 
-        //if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance - agent.stoppingDistance < 0.5f)
-        //{
-        //    //혹은 코루틴 함수로 만들어서 할 수 있음
-        //    StartCoroutine(Mark(true, 1));
-        //}
-    }
+    //private void Update()
+    //{   // 1번째 agent의 경로 계산이 완벽히 됬는지 && 2번째 agent의 현재위치에서 목적지까지의 거리 - 자동으로 멈추는 거리 < 
+    //    //if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance - agent.stoppingDistance < 0.5f)
+    //    //{
+    //    //    //혹은 코루틴 함수로 만들어서 할 수 있음
+    //    //    StartCoroutine(Mark(true, 1));
+    //    //}
+    //}
 
     //IEnumerator Mark(bool what, float t=0)
     //{
