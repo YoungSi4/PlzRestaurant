@@ -180,6 +180,7 @@ public List<int>[] SendFoodNumToOrderInfo()
         // 2중 반복이라 좀 거슬리네
         /*
          food ID 규칙
+            0) null : 빈자리 - null 처리 따로 안 해주면 예외터짐
             1) -1 : 음식 없음
             2) 0 ~ n : 음식 id
          */
