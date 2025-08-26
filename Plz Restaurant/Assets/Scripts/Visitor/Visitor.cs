@@ -24,6 +24,9 @@ public class Visitor : MonoBehaviour
     public int[] C_foodNumber { get; private set; } // 손님이 주문한 음식 번호
     public int numOfOrderFood;
 
+    private WaitForSeconds waitToAngry;
+    private int angryTime = 15;
+
     public void Init(VisitorPool pool, int visitorID)
     {
         this.pool = pool;
@@ -86,17 +89,33 @@ public class Visitor : MonoBehaviour
 
     // player가 상호작용 할 때 이 함수를 실행시키기
     // VisitorOrder 객체를 통해서 데이터가 플레이어의 UI로 전달
-    public void SendOrderInfo()
-    {
-        // C_foodNumber : FoodDB 상의 음식 번호
-        // 테이블 번호 : C_seatNumber을 명시적 형변환하여 사용
-        // order.SetFoodNumFromVisitor(C_foodNumber, C_seatTableNumber);
-    }
+    // 필요 없어짐 (사유 : 테이블에 상호작용 하는 걸로 변경)
+    //public void SendOrderInfo()
+    //{
+    //    // C_foodNumber : FoodDB 상의 음식 번호
+    //    // 테이블 번호 : C_seatNumber을 명시적 형변환하여 사용
+    //    // order.SetFoodNumFromVisitor(C_foodNumber, C_seatTableNumber);
+    //}
 
     // 외부에서 visitior 이동 위치 지정하는 함수
     public void Move(Vector3 pos)
     {
         agent.SetDestination(pos);
+    }
+
+    // 도착 후 주문 정보 뜨고 15초 뒤에 화내는 모션
+    public IEnumerator Angry()
+    {
+        waitToAngry = new WaitForSeconds(angryTime);
+        yield return waitToAngry;
+        // 화내는 모션
+    }
+
+    // 화내는 모션 취소 함수 - 외부 실행
+
+    public void CancelAngry()
+    {
+        // 화내는 거 모션 취소, idle 상태로 돌아감
     }
 
     // 5초동안 식사

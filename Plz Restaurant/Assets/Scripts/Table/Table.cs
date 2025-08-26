@@ -23,6 +23,7 @@ public class Table : MonoBehaviour
     [SerializeField]
     public Transform[] chairPos; // 각 의자의 위치
     public int visitorNum { get;  set; } // 손님의 수
+    private List<Coroutine> visitorAngry;
 
     [SerializeField]
     private Collider visitorCheckCollider; // 손님 검사
@@ -38,6 +39,8 @@ public class Table : MonoBehaviour
     // 음식 둘 위치 : 각 테이블마다 지정?
     [SerializeField]
     private Transform[] foodPos;
+
+
 
     private void Start()
     {
@@ -154,6 +157,11 @@ public class Table : MonoBehaviour
     {
         isReadyToOrder = true;
         readyToOrderIconPrefab.SetActive(true);
+
+        foreach(var visitor in visitorOnChair)
+        {
+            visitorAngry.Add(StartCoroutine(visitor.Angry()));
+        }
     }
 
 /// <summary>
@@ -187,6 +195,17 @@ public List<int>[] SendFoodNumToOrderInfo()
         }
 
         isReadyToOrder = false;
+
+        // 화내기 코루틴 종료
+        foreach(var co in visitorAngry)
+        {
+            StopCoroutine(co);
+        }
+        // 애니메이션 정지
+        foreach (var visitor in visitorOnChair)
+        {
+            visitor.CancelAngry();
+        }
 
         return foodIDs;
     }
