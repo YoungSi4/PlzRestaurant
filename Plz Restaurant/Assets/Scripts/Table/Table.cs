@@ -198,11 +198,12 @@ public List<int>[] SendFoodNumToOrderInfo()
         isReadyToOrder = false;
 
         // 화내기 코루틴 종료
+        // 화내기 전에 이 함수가 실행되더라도 코루틴은 여전히 실행 중 -> 따로 종료 시켜줘야함
         foreach(var co in visitorAngry)
         {
             StopCoroutine(co);
         }
-        // 애니메이션 정지
+        // 화내는 애니메이션 정지
         foreach (var visitor in visitorOnChair)
         {
             visitor.CancelAngry();

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Visitor
   - FoodPos
+  - Table
   layers:
   - Default
   - TransparentFX

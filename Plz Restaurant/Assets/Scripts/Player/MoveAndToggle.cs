@@ -50,7 +50,7 @@ public class MoveAndToggle : MonoBehaviour
             SwitchToView();
         }
         Move();
-        RaySystem();
+        // RaySystem();
     }
     public void OnToggleInput(InputAction.CallbackContext ctx)  //On???Input 형태로 항상 작성해야하는듯
     {
@@ -70,27 +70,36 @@ public class MoveAndToggle : MonoBehaviour
             playerInput.SwitchCurrentActionMap("ThreePerspective");
     }
 
-    void RaySystem()
-    {
-        ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        if (isFirstPerson)
-        {
-            if (Physics.Raycast(ray, out RaycastHit hit, distance))
-            {
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
-                if (hit.collider.CompareTag("Visitor"))
-                {
-                    //Debug.Log("Visitor 발견!");
-                    if (Input.GetKeyDown(KeyCode.E)) //이건 인풋시스템으로 고쳐야하는데 1인칭일 때 3인칭일 때 아직 어케 할지 몰라서 쉽게 만들어 놓기만함
-                    {
-                        Debug.Log("visitor상호작용");
-                        var visitor = hit.collider.gameObject.GetComponent<Visitor>();
-                        visitor.SendOrderInfo();
-                    }
-                }
-            }
-        }
-    }
+
+    /*
+     주석처리 한 이유 - 밑의 InterAction에 넣었음 e를 누를 때 한 번 ray를 이용해서 판단하고 작동
+     */
+    //void RaySystem()
+    //{
+    //    ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+    //    if (isFirstPerson)
+    //    {
+    //        if (Physics.Raycast(ray, out RaycastHit hit, distance))
+    //        {
+    //            Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
+    //            if (hit.collider.CompareTag("Visitor"))
+    //            {
+    //                //Debug.Log("Visitor 발견!");
+    //                if (Input.GetKeyDown(KeyCode.E)) //이건 인풋시스템으로 고쳐야하는데 1인칭일 때 3인칭일 때 아직 어케 할지 몰라서 쉽게 만들어 놓기만함
+    //                {
+    //                    Debug.Log("visitor상호작용");
+    //                    var visitor = hit.collider.gameObject.GetComponent<Visitor>();
+    //                    // visitor.SendOrderInfo();
+    //                }
+    //                else if(hit.collider.CompareTag("Table"))
+    //                {
+
+    //                }
+
+    //            }
+    //        }
+    //    }
+    //}
 
     //인풋시스템으로 이동 값 받음.
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -165,4 +174,38 @@ public class MoveAndToggle : MonoBehaviour
     // 이 쿼터니언을 우리가 다룰수 없음(?) 그래서 Euler를 붙여서 우리가 알 수 있게 3차원으로
     // 정의를 할 수 있는거임. ex) Quaternion.Euler(xRotation, 0f, 0f);
     // 그래서 회전값 자체를 정의할 때 빼고는 보통 위처럼 quaternion이 사용됨. 
+
+
+    public void InterAction(InputAction.CallbackContext context)
+    {
+        // 버튼 눌린 게 감지되면
+        // 인풋 시스템의 context phase를 적절히 활용하자
+        if (context.started)
+        {
+            ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+            if (isFirstPerson)
+            {
+                if (Physics.Raycast(ray, out RaycastHit hit, distance))
+                {
+                    Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
+
+                    // 근데 이제 이거 필요 없지 않나?
+                    if (hit.collider.CompareTag("Visitor"))
+                    {
+                        //Debug.Log("Visitor 발견!");
+                        Debug.Log("visitor상호작용");
+                        var visitor = hit.collider.gameObject.GetComponent<Visitor>();
+                        // visitor.SendOrderInfo();
+                    }
+                    else if (hit.collider.CompareTag("Table"))
+                    {
+                        Debug.Log("Table 상호작용");
+                        var table = hit.collider.gameObject.GetComponent<Table>();
+                        var foodIDs = table.SendFoodNumToOrderInfo();
+                    }
+                }
+            }
+        }
+    }
+
 }
