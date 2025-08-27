@@ -132,22 +132,30 @@ public class MainScene1 : MonoBehaviour
     public RectTransform tooltipPanel; // 공용 팝업(비활성 시작)
     public TMP_Text tooltipLabel; // 팝업 텍스트
     public Vector2 offset = new Vector2(0, 24f); // 버튼 위로 살짝
+    [Header("Quest Rewards")]
+    [SerializeField] private string[] questRewards;
+    [Header("buttons")]
+    [SerializeField] private Button[] questGetButtons;
 
-    public void ShowOver(Transform target, string text)
+    public void ShowOver(int questIndex)
     {
         if (!tooltipPanel || !rootCanvas) return;
-        if (tooltipLabel) tooltipLabel.text = text ?? "";
 
-        var targetRT = (RectTransform)target; //버튼의 transform을 RectTrasnform으로 캐스팅
-        var canvasRT = (RectTransform)rootCanvas.transform; //최상위 캔버스의 trasnform을 recttrasnform으로 바꿈
+        // 보상 텍스트 꺼내오기
+        if (tooltipLabel) tooltipLabel.text = questRewards[questIndex];
+
+        // 버튼 위치 가져오기
+        var targetRT = questGetButtons[questIndex].GetComponent<RectTransform>();
+        var canvasRT = (RectTransform)rootCanvas.transform;
         var cam = rootCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : rootCanvas.worldCamera;
-        //좌표 변환에 사용할 카메라를 선택
 
         Vector2 screen = RectTransformUtility.WorldToScreenPoint(cam, targetRT.position);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRT, screen, cam, out var local);
+
         tooltipPanel.anchoredPosition = local + offset;
         tooltipPanel.gameObject.SetActive(true);
     }
+
     public void Hide() => tooltipPanel?.gameObject.SetActive(false);
     //tooltipPanel이 null이 아니면 setactive(false)를 실행
 }
