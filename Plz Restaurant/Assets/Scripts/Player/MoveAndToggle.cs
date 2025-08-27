@@ -35,6 +35,9 @@ public class MoveAndToggle : MonoBehaviour
     Vector3 direction3;
     public PlayerInput playerInput;
 
+    [SerializeField]
+    private VisitorOrder order; // 손님의 주문을 처리하는 객체
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -201,7 +204,10 @@ public class MoveAndToggle : MonoBehaviour
                     {
                         Debug.Log("Table 상호작용");
                         var table = hit.collider.gameObject.GetComponent<Table>();
+                        if (!table.isReadyToOrder) return; // 아직 주문 결정을 못했다면 
+
                         var foodIDs = table.SendFoodNumToOrderInfo();
+                        order.SetFoodNumFromPlayer(foodIDs, table.tableNum);
                     }
                 }
             }

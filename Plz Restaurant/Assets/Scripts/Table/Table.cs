@@ -14,7 +14,6 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    [SerializeField]
     public int tableNum;
     [SerializeField]
     public int chairNum { get; private set; } // 굳이 필요할까? chairPos의 길이로 접근해도 되잖아.
@@ -34,7 +33,7 @@ public class Table : MonoBehaviour
 
     [SerializeField]
     private GameObject readyToOrderIconPrefab; // 컴포넌트 상에서 연결한 자식 오브젝트
-    private bool isReadyToOrder; // true 일 때만 상호작용 가능
+    public bool isReadyToOrder { get; private set; } // true 일 때만 상호작용 가능
 
     // 음식 둘 위치 : 각 테이블마다 지정?
     [SerializeField]

@@ -9,7 +9,7 @@ public class Visitor : MonoBehaviour
     private VisitorSpawner spawner;
     private WaitForSeconds wait = new WaitForSeconds(10f);
     private NavMeshAgent agent;
-    private VisitorOrder order;
+    // private VisitorOrder order; // - 더이상 visitor가 가지고 있을 이유가 없음
 
     public GameObject readyToOrderMark;
 

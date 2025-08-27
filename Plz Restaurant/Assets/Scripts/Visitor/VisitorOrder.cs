@@ -65,7 +65,7 @@ public class VisitorOrder : MonoBehaviour
         }
     }
 
-    
+    // 최종적으로 UI 상에 뜰 정보를 보내는 함수
     public void SendFoodInfo(List<FoodData>[] foodData, int tableNum)
     {
         // OrderMemo 상에서 표시될 정보를 이 함수에서 초기화
