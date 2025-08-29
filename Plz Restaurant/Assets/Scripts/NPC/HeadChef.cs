@@ -140,11 +140,11 @@ public class HeadChef : MonoBehaviour
                             Debug.Log("조리할 음식 추가");
                         }*/
             FoodData food = foodDB.GetFoodData(1);
-            H_cookingList.Enqueue(new OrderData(food, 1.1f));
+            H_cookingList.Enqueue(new OrderData(food, 7.1f));
             Debug.Log("조리할 음식 추가 1");
 
             food = foodDB.GetFoodData(1);
-            H_cookingList.Enqueue(new OrderData(food, 1.2f));
+            H_cookingList.Enqueue(new OrderData(food, 7.2f));
             Debug.Log("조리할 음식 추가 2");
         }
     }
