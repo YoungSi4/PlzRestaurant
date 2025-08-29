@@ -189,12 +189,16 @@ public class NPC : MonoBehaviour
                 // 1.1~4.4 형식 가정하고 chairNum 계산
                 int chairNum = (int)((B_orderDatas[i].seatNum - tableNum) * 10);
 
+                // 의자 위치를 전달받지 못하는 거면 기존꺼 다시 쓰고 방법 새로 고안해야함
                 // 의자 위치를 기반으로 음식을 올릴 위치 찾기
                 Transform chairPos = table.chairPos[chairNum - 1];
                 Vector3 spawnPos = chairPos.position + chairPos.forward * 1.3f;
                 spawnPos.y = tablePos.position.y + 0.4f; // 테이블 높이에 맞춤
                 // 테이블에 음식 생성
                 GameObject tableFood = Instantiate(B_handFood, spawnPos, chairPos.rotation);
+
+                // 테이블에 음식 생성 (기존코드, 수정 중 임시 주석 처리)
+                // GameObject tableFood = Instantiate(B_handFood, table.chairPos[chairNum - 1].position + Vector3.up * 1, table.chairPos[chairNum - 1].rotation);
 
                 // 테이블에 올릴 음식은 부모 해제 후 독립 개체로
                 tableFood.transform.SetParent(null);
