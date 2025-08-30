@@ -16,6 +16,7 @@ public class MainScene2 : MonoBehaviour
     public Animator left;
     public Animator right;
     public Animator up;
+    public Animator inventory;
 
     public GameObject timeOver;
 
@@ -79,4 +80,9 @@ public class MainScene2 : MonoBehaviour
     public void Stop(){
         //영업 중단..
     }
+    public void InventoryOn(){
+        bool currentInventory = inventory.GetBool("On");
+        inventory.SetBool("On", !currentInventory);
+    }
+    
 }
