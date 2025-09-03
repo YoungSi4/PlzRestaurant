@@ -157,8 +157,10 @@ public class Table : MonoBehaviour
         isReadyToOrder = true;
         readyToOrderIconPrefab.SetActive(true);
 
-        foreach(var visitor in visitorOnChair)
+        visitorAngry = new List<Coroutine>();
+        foreach (var visitor in visitorOnChair)
         {
+            if (visitor == null) continue;
             visitorAngry.Add(StartCoroutine(visitor.Angry()));
         }
     }
