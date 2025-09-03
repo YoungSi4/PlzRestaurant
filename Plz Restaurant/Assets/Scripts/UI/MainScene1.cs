@@ -4,9 +4,16 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class MainScene1 : MonoBehaviour
 {
+    [Header("Quest get popup")]
+    //public Button[] questGetButtons; // 수령 버튼 
+    public GameObject getPopup; // 수령 버튼에 마우스 올리면 나올 팝업
+    //public Transform getButtonTransform; // 수령 버튼 위에 팝업을 띄울거라 위치값을 가져옴
+
+
     [Header("On/Off UI")]
     public GameObject dropDownMenu;
     public GameObject storeMenu;
@@ -28,6 +35,7 @@ public class MainScene1 : MonoBehaviour
 
     Color activeColor = new Color(0.4f, 0.7f, 1f); //파란색
     Color inactiveColor = new Color(0.7f, 0.7f, 0.7f); //회색
+    Color getColor = new Color(1f, 1f, 0.6f); // 연한 노란색
 
     private void Start()
     {
@@ -109,4 +117,45 @@ public class MainScene1 : MonoBehaviour
             img.color = inactiveColor;
         }
     }
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    public void PopupOn()
+    {
+        getPopup.SetActive(true);
+    }
+    public void PopupOff()
+    {
+        getPopup.SetActive(false);
+    }
+    //@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    public Canvas rootCanvas; //최상위 canvas
+    public RectTransform tooltipPanel; // 공용 팝업(비활성 시작)
+    public TMP_Text tooltipLabel; // 팝업 텍스트
+    public Vector2 offset = new Vector2(0, 24f); // 버튼 위로 살짝
+    [Header("Quest Rewards")]
+    [SerializeField] private string[] questRewards;
+    [Header("buttons")]
+    [SerializeField] private Button[] questGetButtons;
+
+    public void ShowOver(int questIndex)
+    {
+        if (!tooltipPanel || !rootCanvas) return;
+
+        // 보상 텍스트 꺼내오기
+        if (tooltipLabel) tooltipLabel.text = questRewards[questIndex];
+
+        // 버튼 위치 가져오기
+        var targetRT = questGetButtons[questIndex].GetComponent<RectTransform>();
+        var canvasRT = (RectTransform)rootCanvas.transform;
+        var cam = rootCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : rootCanvas.worldCamera;
+
+        Vector2 screen = RectTransformUtility.WorldToScreenPoint(cam, targetRT.position);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRT, screen, cam, out var local);
+
+        tooltipPanel.anchoredPosition = local + offset;
+        tooltipPanel.gameObject.SetActive(true);
+    }
+
+    public void Hide() => tooltipPanel?.gameObject.SetActive(false);
+    //tooltipPanel이 null이 아니면 setactive(false)를 실행
 }
