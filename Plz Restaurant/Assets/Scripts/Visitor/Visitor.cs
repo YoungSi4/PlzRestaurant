@@ -63,7 +63,7 @@ public class Visitor : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         spawner = GameObject.Find("visitorSpawner").GetComponent<VisitorSpawner>();
-        order = GameObject.Find("VisitorOrder").GetComponent<VisitorOrder>();
+        // order = GameObject.Find("VisitorOrder").GetComponent<VisitorOrder>();
     }
 
     //private void OnEnable()
