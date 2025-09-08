@@ -48,10 +48,10 @@ public class MoveAndToggle : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) //T누르면 시점 변환, 나중에 인풋시스템으로 고쳐야함
-        {
-            SwitchToView();
-        }
+        //if (Input.GetKeyDown(KeyCode.T)) //T누르면 시점 변환, 나중에 인풋시스템으로 고쳐야함
+        //{
+        //    SwitchToView();
+        //}
         Move();
         // RaySystem();
     }
