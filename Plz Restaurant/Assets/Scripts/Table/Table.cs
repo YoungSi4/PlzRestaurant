@@ -98,7 +98,7 @@ public class Table : MonoBehaviour
             visitorOnChair[i] = null;
         }
         visitorNum = 0;
-        visitorCheckCollider.enabled = true; // 다시 손님 받을 준비
+        visitorCheckCollider.isTrigger = true; // 다시 손님 받을 준비
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ public class Table : MonoBehaviour
 
         if (isRightVisitor)
         {
-            visitorCheckCollider.enabled = false; // 주문 대기부터는 잠시 collider를 꺼둔다
+            visitorCheckCollider.isTrigger = false; // 주문 대기부터는 잠시 collider를 꺼둔다
             StartCoroutine(WaitingForOrder());
         }
     } // onTriggerEnter -end-
