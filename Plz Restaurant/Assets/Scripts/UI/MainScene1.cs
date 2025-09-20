@@ -128,34 +128,34 @@ public class MainScene1 : MonoBehaviour
     }
     //@@@@@@@@@@@@@@@@@@@@@@@@@
 
-    public Canvas rootCanvas; //최상위 canvas
-    public RectTransform tooltipPanel; // 공용 팝업(비활성 시작)
-    public TMP_Text tooltipLabel; // 팝업 텍스트
-    public Vector2 offset = new Vector2(0, 24f); // 버튼 위로 살짝
-    [Header("Quest Rewards")]
-    [SerializeField] private string[] questRewards;
-    [Header("buttons")]
-    [SerializeField] private Button[] questGetButtons;
+    //public Canvas rootCanvas; //최상위 canvas
+    //public RectTransform tooltipPanel; // 공용 팝업(비활성 시작)
+    //public TMP_Text tooltipLabel; // 팝업 텍스트
+    //public Vector2 offset = new Vector2(0, 24f); // 버튼 위로 살짝
+    //[Header("Quest Rewards")]
+    //[SerializeField] private string[] questRewards;
+    //[Header("buttons")]
+    //[SerializeField] private Button[] questGetButtons;
 
-    public void ShowOver(int questIndex)
-    {
-        if (!tooltipPanel || !rootCanvas) return;
+    //public void ShowOver(int questIndex)
+    //{
+    //    if (!tooltipPanel || !rootCanvas) return;
 
-        // 보상 텍스트 꺼내오기
-        if (tooltipLabel) tooltipLabel.text = questRewards[questIndex];
+    //    // 보상 텍스트 꺼내오기
+    //    if (tooltipLabel) tooltipLabel.text = questRewards[questIndex];
 
-        // 버튼 위치 가져오기
-        var targetRT = questGetButtons[questIndex].GetComponent<RectTransform>();
-        var canvasRT = (RectTransform)rootCanvas.transform;
-        var cam = rootCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : rootCanvas.worldCamera;
+    //    // 버튼 위치 가져오기
+    //    var targetRT = questGetButtons[questIndex].GetComponent<RectTransform>();
+    //    var canvasRT = (RectTransform)rootCanvas.transform;
+    //    var cam = rootCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : rootCanvas.worldCamera;
 
-        Vector2 screen = RectTransformUtility.WorldToScreenPoint(cam, targetRT.position);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRT, screen, cam, out var local);
+    //    Vector2 screen = RectTransformUtility.WorldToScreenPoint(cam, targetRT.position);
+    //    RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRT, screen, cam, out var local);
 
-        tooltipPanel.anchoredPosition = local + offset;
-        tooltipPanel.gameObject.SetActive(true);
-    }
+    //    tooltipPanel.anchoredPosition = local + offset;
+    //    tooltipPanel.gameObject.SetActive(true);
+    //}
 
-    public void Hide() => tooltipPanel?.gameObject.SetActive(false);
-    //tooltipPanel이 null이 아니면 setactive(false)를 실행
+    //public void Hide() => tooltipPanel?.gameObject.SetActive(false);
+    ////tooltipPanel이 null이 아니면 setactive(false)를 실행
 }
