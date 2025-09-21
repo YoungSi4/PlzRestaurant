@@ -485,6 +485,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3558246770827307077, guid: 856890d952066c04193ddb349544db5c, type: 3}
+      propertyPath: tableManager
+      value: 
+      objectReference: {fileID: 1483318997}
     - target: {fileID: 7629108816560492869, guid: 856890d952066c04193ddb349544db5c, type: 3}
       propertyPath: m_Name
       value: visitorSpawner
@@ -11089,6 +11093,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481894140}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1483318997 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1683551068388720942, guid: 27311a833dba5744197c04dfab16d048, type: 3}
+  m_PrefabInstance: {fileID: 423002072}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b799b7dc36230b4cbde451718dbca33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1504962643
 GameObject:
   m_ObjectHideFlags: 0
