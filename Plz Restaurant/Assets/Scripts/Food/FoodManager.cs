@@ -1,11 +1,11 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class FoodManager : Singleton<FoodManager>
 {
-    [SerializeField] private int foodNum; // 주문이 들어온 음식의 인덱스(임시로 직렬화 사용중)
+/*    [SerializeField] private int foodNum; // 주문이 들어온 음식의 인덱스(임시로 직렬화 사용중)
     private Queue<FoodData> completedFood = new Queue<FoodData>();
 
     private FoodDB foodDB;
@@ -43,6 +43,5 @@ public class FoodManager : Singleton<FoodManager>
         }
     }
 
-
-}
 */
+}

@@ -20,8 +20,12 @@ public class NPC : MonoBehaviour
     // 트레이에서 테이블까지 계속해서 존재하는 오브젝트이기 때문에 따로 관리하는 것이 좋을 것 같음
     // 어짜피 orderDatas와 동일한 Index에 동일한 음식이 관리되기 때문에 괜찮다고 생각
     private List<GameObject> B_handFoods = new List<GameObject>(); // 사장님 손에 들고 있는 음식의 리스트
-    // 주문 정보 전달 로직 작성중
     private List<OrderData> B_orderDatas = new List<OrderData>(); // 주문 정보 저장용
+
+    // 9.15 로직 수정
+    // 테이블 상 주문 상태 주문 들어왔을때부터 저장해두기
+    private int tableCount; // 테이블 수
+    private List<FoodData>[][] foodDatasOnTable; // 손님이 자리에서 일어날 때 해당 테이블의 데이터 Clear 하는 기능 필요함.
 
     private bool isBusy = false; // 현재 음식을 서빙하는 코루틴이 실행중인지 검사
 
@@ -29,7 +33,34 @@ public class NPC : MonoBehaviour
     private TrayControl trayControl;
     private TableManager tableManager;
 
-    
+    void Start()
+    {
+        tableCount = tableManager.tableNum;
+        foodDatasOnTable = new List<FoodData>[tableCount][]; // 테이블 수 x 의자 수 (2 or 4 가변)
+
+        for (int i = 0; i < tableCount; i++)
+        {
+            var table = tableManager.GetTable(i);
+            /*Debug.Log($"[NPC.Start] i={i}, table={table}");
+            if (table == null)
+            {
+                Debug.LogError($"[NPC.Start] tableManager.GetTable({i}) 가 null을 반환함!");
+                continue;
+            }*/
+
+            int chairCount = table.chairNum;
+            // Debug.Log($"[NPC.Start] table[{i}] 의자 수 = {chairCount}");
+
+
+            foodDatasOnTable[i] = new List<FoodData>[chairCount];
+
+            for (int j = 0; j < chairCount; j++)
+            {
+                foodDatasOnTable[i][j] = new List<FoodData>();
+                // Debug.Log($"[Start] foodDatasOnTable[{i}][{j}] 초기화 완료 (chairCount={chairCount})");
+            }
+        }
+    }
 
     void Awake()
     {
@@ -55,6 +86,44 @@ public class NPC : MonoBehaviour
             StartCoroutine(BossRoutine());
         }
 
+    }
+
+    // 9.15 로직 수정
+    // HeadChef와 동시에 받기
+    // 테이블 상 주문 정보 전달 받기
+    public void B_GetTableInfo(List<FoodData>[] foodDatas, int tableNum)
+    {
+        Table table = tableManager.GetTable(tableNum);
+        int chairCount = table.chairNum; // 테이블의 의자 수
+        int chiarIdx = 0;
+
+        foreach (var foodList in foodDatas)
+        {
+            if (foodList == null)
+            {
+                chiarIdx++;
+                if(chiarIdx >= chairCount) break;
+                continue;
+            }
+            else
+            {
+                foodDatasOnTable[tableNum][chiarIdx] = new List<FoodData>(foodList);
+                chiarIdx++;
+                if(chiarIdx >= chairCount) break;
+            }
+        }
+    }
+
+    // 손님이 일어날 때 해당 테이블의 음식 정보 초기화
+    // 손님이 일어나는 타이밈을 결정하고 해당 동작을 하는 스크립트에서 호출해서 실행해주면 될 듯
+    // HeadChef.cs에 대해서도 동일한 함수 동시 실행
+    public void B_ClearTableInfo(int tableNum)
+    {
+        int chairCount = tableManager.GetTable(tableNum).chairNum;
+        for (int i = 0; i < chairCount; i++)
+        {
+            foodDatasOnTable[tableNum][i].Clear();
+        }
     }
 
     // 주문 정보 전달 받는 함수
@@ -91,8 +160,8 @@ public class NPC : MonoBehaviour
                 if (!trayControl.isFoodOnTray())
                     break;
 
-                // 트레이의 음식을 하나씩 챙긴다면 여기서 WaitForSeconds 해야함
-                // 그 경우 HeadChef의 일괄 조리 로직 수정이 필요해짐
+                /*트레이의 음식을 하나씩 챙긴다면 여기서 WaitForSeconds 해야함
+                그 경우 HeadChef의 일괄 조리 로직 수정이 필요해짐*/
                 // yield return new WaitForSeconds(0.5f); // 음식 들기 전 잠시 대기
 
                 // 순서에 따라 트레이에서 음식 들기
@@ -110,7 +179,7 @@ public class NPC : MonoBehaviour
                 // 그 다음에 어떻게 할까
                 // 단순히 다음 인덱스의 테이블 위치를 얻어와도 되는걸까
                 // 서빙한 주문에 대해서는 리스트에서 제거하고 null이 아니라면 해당 인덱스의 값에서 테이블 위치를 얻어오도록 해도되나?
-                table = tableManager.GetTable((int)B_orderDatas[0].seatNum);
+                table = tableManager.GetTable(B_orderDatas[0].tableNum);
                 tablePos = table.transform;
                 // 이렇게 되면 tablePos는 private으로 변경 해도됨 - 로직 확정 및 임시로직 삭제 후
 
@@ -177,17 +246,72 @@ public class NPC : MonoBehaviour
     // 들고 있는 음식 리스트를 순회하며 도착한 테이블에 서빙할 음식이 더 있는지 확인 후 있으면 추가로 내려놓기(로직추가필요)
     void ServeFood()
     {
-        // B_orderDatas 반영해서 재작성
-        int tableNum = (int)B_orderDatas[0].seatNum; // 서빙할 테이블 번호
-        for (int i = B_orderDatas.Count - 1; i >= 0; i--)
+        int chiarCount = table.chairNum; // 테이블의 의자 수
+        Transform[] foodPos = table.foodPosPointer; // 테이블에 음식 올리는 위치 (현재는 손님이 앉은 의자와 동일한 인덱스)
+        int tableNumToServe = B_orderDatas[0].tableNum; // 서빙할 테이블 번호(리스트의 가장 앞에 있는 주문)
+
+        while(B_orderDatas.Count > 0)
         {
-            if ((int)B_orderDatas[i].seatNum == tableNum)
+            if (B_orderDatas[0].tableNum != tableNumToServe)
+            {
+                break; // 서빙할 테이블 번호와 다르면 종료
+            }
+            // 테이블 주문 구조와 서빙할 음식 비교
+            for (int i = 0; i < chiarCount; i++)
+            {
+                foreach(var food in foodDatasOnTable[tableNumToServe][i])
+                {
+                    if (food == B_orderDatas[0].foodData)
+                    {
+                        // 테이블에 음식 생성
+                        GameObject tableFood = Instantiate(B_handFoods[0], foodPos[i].position, foodPos[i].rotation);
+                        // 테이블에 올릴 음식은 부모 해제 후 독립 개체로
+                        tableFood.transform.SetParent(null);
+                        // 손에서 오브젝트 삭제
+                        Destroy(B_handFoods[0]);
+                        B_handFoods.RemoveAt(0); // 들고 있는 음식 리스트에서도 제거
+                        B_orderDatas.RemoveAt(0); // 서빙한 주문 정보는 리스트에서 제거
+                        break; // 하나 서빙했으면 다음 의자 위치로 넘어가기 위해 탈출
+                    }
+                        
+                }
+            }
+
+        }
+
+        /*for (int i = B_orderDatas.Count - 1; i >= 0; i--)
+        {
+            if (B_orderDatas[i].tableNum == tableNumToServe)
             {
                 GameObject B_handFood = B_handFoods[i];
 
-                // foodPos 결정 어떻게할지 필요. 일단 chairPos를 이용해서
-                // 1.1~4.4 형식 가정하고 chairNum 계산
-                int chairNum = (int)((B_orderDatas[i].seatNum - tableNum) * 10);
+                // ------------------------------- 09.10 ~ -----------------------------
+                // 테이블에 음식 올리는 위치 잡는 것 관련 전면 수정해야함
+                // Table.foodPos를 가져와서 null이 아닌 인덱스에 대해 foodPos에 해당 인덱스를 적용하여 음식 생성
+                Visitor[] visitorOnChair = table.visitorOnChair;
+                // 현재는 손님이 앉은 의자의 인덱스와 동일
+                Transform[] foodPos = table.foodPosPointer;
+                int tmpIndex = 0;
+                foreach (var visitor in visitorOnChair)
+                {
+                    // 손님이 앉지 않은 의자 패스
+                    if (visitor == null)
+                    {
+                        tmpIndex++;
+                        continue;
+                    }
+                    // 생성
+                    // 테이블 단위로 주문이 들어오고 순서대로 조리하여 서빙하며 주문한 테이블 번호와 함께 관리하기 때문에 다른 테이블에 가야 할 음식이 잘못 서빙 되는 경우는 없을 것으로 예상됨
+                    // orderData의 tableNum을 보고 가서 foodDatasOnTable와 FoodData 비교 후 일치하면 서빙
+                    else
+                    {
+
+                    }
+                }
+                    // --------------------------------------------------------------------
+
+                    // 테이블에서 의자가 null이 아닌 경우에 대해 서빙해야함
+                    int chairNum = (int)((B_orderDatas[i].seatNum - tableNumToServe) * 10);
 
                 // 의자 위치를 전달받지 못하는 거면 기존꺼 다시 쓰고 방법 새로 고안해야함
                 // 의자 위치를 기반으로 음식을 올릴 위치 찾기
@@ -210,9 +334,10 @@ public class NPC : MonoBehaviour
                 B_orderDatas.RemoveAt(i); // 서빙한 주문 정보는 리스트에서 제거
                 B_handFoods.RemoveAt(i); // 들고 있는 음식 리스트에서도 제거
             }
-        }
+        }*/
 
     }
+
     // 목적 위치로 이동
     IEnumerator MoveToPos(Vector3 targetPos)
     {
@@ -243,7 +368,5 @@ public class NPC : MonoBehaviour
             transform.rotation = Quaternion.Slerp(current, B_startRot, t);
             yield return null;
         }
-    }
-
-
+    }   
 }
