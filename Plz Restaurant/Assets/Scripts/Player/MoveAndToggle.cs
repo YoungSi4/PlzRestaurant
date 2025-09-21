@@ -7,23 +7,22 @@ using UnityEngine.InputSystem;
 
 public class MoveAndToggle : MonoBehaviour
 {
+    [Header("카메라 오브젝트")]
     public CinemachineVirtualCamera firstPersonCam; //1인칭 시점일 때 카메라
     public CinemachineVirtualCamera topDownCam; // 3인칭 시점일 때 카메라
-
-
-    public bool isFirstPerson = true; //현재 시점이 1인칭인지 아닌지 
-    public float moveSpeed = 2f;  //플레이어 이동속도. 아마 나중에 플레이어 스크립트에 넣어야할듯
-    
-    Rigidbody rb; //리지드바디
-
     public Transform playerBody; //좌우 회전용 (몸통 전체)
     public Transform cameraHolder; // 상하 회전용 (카메라 부모)
 
+    public bool isFirstPerson = true; //현재 시점이 1인칭인지 아닌지 
+    public float moveSpeed = 2f;  //플레이어 이동속도. 아마 나중에 플레이어 스크립트에 넣어야할듯
     float mouseSensitivity = 1f; //마우스 감도값
     float xRotation = 0f; // 카메라 상하 회전 값을 담을 변수
     float mouseY;
     float mouseX;
     float distance = 3f; //레이 거리
+    Rigidbody rb; //리지드바디
+
+
     Ray ray;
     public Transform cameraTransform;
 
@@ -33,10 +32,12 @@ public class MoveAndToggle : MonoBehaviour
     Vector2 mouseInput;
     public Vector3 direction { get; private set; } //플레이어의 이동방향을 담을 벡터
     Vector3 direction3;
-    public PlayerInput playerInput;
+    PlayerInput playerInput;
 
     [SerializeField]
     private VisitorOrder order; // 손님의 주문을 처리하는 객체
+
+    public MainScene2 mainScene2;
 
     private void Start()
     {
@@ -185,6 +186,7 @@ public class MoveAndToggle : MonoBehaviour
         // 인풋 시스템의 context phase를 적절히 활용하자
         if (context.started)
         {
+            
             ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             if (isFirstPerson)
             {
@@ -206,8 +208,10 @@ public class MoveAndToggle : MonoBehaviour
                         var table = hit.collider.gameObject.GetComponent<Table>();
                         if (!table.isReadyToOrder) return; // 아직 주문 결정을 못했다면 
 
+                        mainScene2.OrderMemoOn();
                         var foodIDs = table.SendFoodNumToOrderInfo();
                         order.SetFoodNumFromPlayer(foodIDs, table.tableNum);
+
                     }
                 }
             }
