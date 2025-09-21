@@ -38,12 +38,16 @@ public class Table : MonoBehaviour
     // 음식 둘 위치 : 각 테이블마다 지정?
     [SerializeField]
     private Transform[] foodPos;
+    public Transform[] foodPosPointer => foodPos;
 
 
+    private void Awake()
+    {
+        chairNum = chairPos.Length;
+    }
 
     private void Start()
     {
-        chairNum = chairPos.Length;
         visitorOnChair = new Visitor[chairNum];
         inspectionDelay = new(delay);
         IsWaitingForVisitorArrived = false;
