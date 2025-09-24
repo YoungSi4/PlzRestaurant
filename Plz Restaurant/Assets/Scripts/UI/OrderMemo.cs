@@ -37,10 +37,13 @@ public class OrderMemo : MonoBehaviour
     // Food Manager 같은 중간 매개체로 전달하는 게 안전해보인다.
     
     // 테이블 번호는 어디서 받아서 넘기지? -> visitor order 객체
-    public void GetFoodInfo(FoodData foodData, int tableNum)
+    public void GetFoodInfo(List<FoodData> foodData, int tableNum)
     {
-        this.foodData = foodData;
-        this.tableNum = tableNum;
+        // 여기서 어디에 뭘 넣을지 모르겠다
+        // 이건 UI가 나와야 가능
+
+        //this.foodData = foodData;
+        //this.tableNum = tableNum;
         
         Debug.Log("Memo : 데이터 받음 : " +  foodData + " " + tableNum);
 
@@ -49,23 +52,23 @@ public class OrderMemo : MonoBehaviour
 
     private void SetData()
     {
-        foodName = foodData.foodName;
-        foodPrice = foodData.foodPrice;
+        //foodName = foodData.foodName;
+        //foodPrice = foodData.foodPrice;
 
         SetText();
     }
 
     private void SetText()
     {
-        var tableNum = foodData.foodNum;
-        var foodName = foodData.foodName;
-        var foodPrice = foodData.foodPrice;
+        //var tableNum = foodData.foodNum;
+        //var foodName = foodData.foodName;
+        //var foodPrice = foodData.foodPrice;
 
-        var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
+        //var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
 
-        // 1. 테이블 번호, 2. 음식 이름, 3. 음식 가격
-        texts[1].SetText(tableNum.ToString());
-        texts[2].SetText(foodName.ToString());
-        texts[3].SetText(foodPrice.ToString());
+        //// 1. 테이블 번호, 2. 음식 이름, 3. 음식 가격
+        //texts[1].SetText(tableNum.ToString());
+        //texts[2].SetText(foodName.ToString());
+        //texts[3].SetText(foodPrice.ToString());
     }
 }
