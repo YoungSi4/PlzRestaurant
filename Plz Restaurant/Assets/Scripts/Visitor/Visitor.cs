@@ -42,7 +42,7 @@ public class Visitor : MonoBehaviour
         C_foodNumber = new int[numOfOrderFood];
         for (int i = 0; i < numOfOrderFood;  i++)
         {
-            C_foodNumber[i] = Random.Range(0, 11);
+            C_foodNumber[i] = Random.Range(1, 11);
         }
 
         //Debug.Log("seatNumber : " +  C_seatNumber);
