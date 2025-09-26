@@ -3625,6 +3625,10 @@ PrefabInstance:
       value: Table
       objectReference: {fileID: 0}
     - target: {fileID: 2199619494053850154, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: tableNum
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199619494053850154, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: readyToOrderIconPrefab
       value: 
       objectReference: {fileID: 6168560751733942499}
@@ -3663,6 +3667,10 @@ PrefabInstance:
     - target: {fileID: 4181448460295297689, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: m_TagString
       value: Table
+      objectReference: {fileID: 0}
+    - target: {fileID: 4507841406230512186, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
+      propertyPath: tableNum
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4507841406230512186, guid: fdd0e8d6540a36146a5772215a3a787f, type: 3}
       propertyPath: readyToOrderIconPrefab
