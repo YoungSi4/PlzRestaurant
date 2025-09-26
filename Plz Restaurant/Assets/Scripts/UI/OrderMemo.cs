@@ -24,30 +24,47 @@ public class OrderMemo : MonoBehaviour
     // food image?
     private int foodPrice;
 
+    private List<FoodData>[] foodDatas;
+
     // FoodInfo
     private VisitorOrder order;
     private FoodData foodData;
 
-    void Start()
-    {
-
-    }
+    [SerializeField]
+    private HeadChef chef;
 
     // FoodDB 객체에서 이 함수를 실행...?
     // Food Manager 같은 중간 매개체로 전달하는 게 안전해보인다.
     
     // 테이블 번호는 어디서 받아서 넘기지? -> visitor order 객체
-    public void GetFoodInfo(List<FoodData> foodData, int tableNum)
+    public void GetFoodInfo(List<FoodData>[] foodData, int tableNum)
     {
         // 여기서 어디에 뭘 넣을지 모르겠다
         // 이건 UI가 나와야 가능
+        this.foodDatas = foodData;
+        this.tableNum = tableNum;
 
         //this.foodData = foodData;
         //this.tableNum = tableNum;
         
-        Debug.Log("Memo : 데이터 받음 : " +  foodData + " " + tableNum);
+        // 디버깅용
+        Debug.Log("Memo - 받은 테이블 번호 : " +  tableNum);
+        string message = "";
+        message += "Memo - 받은 음식 번호 : ";
+        foreach(var dataList in foodDatas)
+        {
+            foreach(var data in dataList)
+            {
+                message += data.foodNum;
+                message += " ";
+            }
+        }
+        Debug.Log(message);
 
         SetData();
+
+        // 임시 테스트용 호출
+        SendFoodDataToChef();
     }
 
     private void SetData()
@@ -70,5 +87,11 @@ public class OrderMemo : MonoBehaviour
         //texts[1].SetText(tableNum.ToString());
         //texts[2].SetText(foodName.ToString());
         //texts[3].SetText(foodPrice.ToString());
+    }
+
+    private void SendFoodDataToChef()
+    {
+        // 쉐프 쪽 함수 호출
+        chef.GetFoodDataFromOrderMemo(foodDatas, tableNum);
     }
 }

@@ -193,6 +193,7 @@ public List<int>[] SendFoodNumToOrderInfo()
         foreach (var visitor in visitorOnChair)
         {
             // 쓰는 인덱스만 초기화
+            if(visitor == null) continue;
             foodIDs[visitor.C_seatChairNumber] = new List<int>();
             foreach(var foodId in visitor.C_foodNumber)
             {
@@ -211,6 +212,7 @@ public List<int>[] SendFoodNumToOrderInfo()
         // 화내는 애니메이션 정지
         foreach (var visitor in visitorOnChair)
         {
+            if(visitor == null) continue;
             visitor.CancelAngry();
         }
 

@@ -65,7 +65,7 @@ public class HeadChef : MonoBehaviour
     private void Update()
     {
         H_startCookingRoutine();
-        GetFood();
+        // GetFood();
         ClearTableFoodInfo();
     }
 
@@ -148,7 +148,7 @@ public class HeadChef : MonoBehaviour
     private bool H_hasFood() => H_cookingList.Count > 0;
 
     // (임시) 음식 추가용 함수
-    private void GetFood()
+    private void TestGetFood()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -157,6 +157,11 @@ public class HeadChef : MonoBehaviour
             H_GetOrderInfo(tmplist, 4);
             npc.B_GetTableInfo(tmplist, 4);
         }
+    }
+    public void GetFoodDataFromOrderMemo(List<FoodData>[] foodDatas, int tableNum)
+    {
+        H_GetOrderInfo(foodDatas, tableNum);
+        npc.B_GetTableInfo(foodDatas, tableNum);
     }
     // (임시) 테이블 위 음식 초기화용 함수
     private void ClearTableFoodInfo()
@@ -169,7 +174,7 @@ public class HeadChef : MonoBehaviour
     }
 
     // VisitorOrder에서 받아오기
-    public void H_GetOrderInfo(List<FoodData>[] foodDatas, int tableNum)
+    private void H_GetOrderInfo(List<FoodData>[] foodDatas, int tableNum)
     {
         // foodDatas는 의자 수 크기의 배열
         int chairCount = tableManager.GetTable(tableNum).chairNum;
@@ -190,7 +195,7 @@ public class HeadChef : MonoBehaviour
                 {
                     foodDatasOnTable[tableNum][chairIdx].Add(foodData);
                     H_cookingList.Enqueue(new OrderData(foodData, tableNum));
-                    Debug.Log("조리할 음식 추가");
+                    Debug.Log("조리할 음식 추가" + foodData.foodName);
                 }
                 chairIdx++;
                 if (chairIdx >= chairCount)
