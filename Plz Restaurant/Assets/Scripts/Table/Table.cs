@@ -40,6 +40,9 @@ public class Table : MonoBehaviour
     private Transform[] foodPos;
     public Transform[] foodPosPointer => foodPos;
 
+    // 올라간 음식 오브젝트 저장
+    private List<GameObject> placedFoodObjects = new List<GameObject>();
+
 
     private void Awake()
     {
@@ -217,5 +220,20 @@ public List<int>[] SendFoodNumToOrderInfo()
         }
 
         return foodIDs;
+    }
+
+    public void AddPlacedFoodObject(GameObject foodObject)
+    {
+        placedFoodObjects.Add(foodObject);
+        Debug.Log("테이블에 올라간 음식 : " + foodObject);
+    }
+
+    public void ClearPlacedFoodObjects()
+    {
+        foreach (var foodObject in placedFoodObjects)
+        {
+            Destroy(foodObject);
+        }
+        placedFoodObjects.Clear();
     }
 }
