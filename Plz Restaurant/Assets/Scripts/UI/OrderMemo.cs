@@ -28,6 +28,12 @@ public class OrderMemo : MonoBehaviour
     private VisitorOrder order;
     private FoodData foodData;
 
+
+
+    // SJ가 만든 변수
+    List<FoodData>[] foodDatasp;//p를 변수안에 다 붙이자  //리스트를 품은 배열을 가져온거라고 
+
+
     void Start()
     {
 
@@ -49,23 +55,29 @@ public class OrderMemo : MonoBehaviour
 
     private void SetData()
     {
-        foodName = foodData.foodName;
-        foodPrice = foodData.foodPrice;
+        //foodName = foodData.foodName;
+        //foodPrice = foodData.foodPrice;
 
-        SetText();
+        foreach (var foodDataListp in foodDatasp)
+        {
+
+        }
+            SetText();
     }
+
+    
 
     private void SetText()
     {
-        var tableNum = foodData.foodNum;
-        var foodName = foodData.foodName;
-        var foodPrice = foodData.foodPrice;
+        //var tableNum = foodData.foodNum;
+        //var foodName = foodData.foodName;
+        //var foodPrice = foodData.foodPrice;
 
-        var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
+        //var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
 
-        // 1. 테이블 번호, 2. 음식 이름, 3. 음식 가격
-        texts[1].SetText(tableNum.ToString());
-        texts[2].SetText(foodName.ToString());
-        texts[3].SetText(foodPrice.ToString());
+        //// 1. 테이블 번호, 2. 음식 이름, 3. 음식 가격
+        //texts[1].SetText(tableNum.ToString());
+        //texts[2].SetText(foodName.ToString());
+        //texts[3].SetText(foodPrice.ToString());
     }
 }
