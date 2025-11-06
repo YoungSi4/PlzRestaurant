@@ -1,38 +1,47 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class Visitor : MonoBehaviour
 {
+    // visitor spawner
     private VisitorPool pool;
     private VisitorSpawner spawner;
     private WaitForSeconds wait = new WaitForSeconds(10f);
+
+    // action
     private WaitForSeconds eatingTime = new WaitForSeconds(5f);
     private NavMeshAgent agent;
     // private VisitorOrder order; // - 더이상 visitor가 가지고 있을 이유가 없음
 
-    public GameObject readyToOrderMark;
-    [SerializeField]
-    private GameObject money; // 지불할 돈 객체
+    public GameObject readyToOrderMark; // 안 씀
     private Vector3 doorPos = new Vector3(12f, 0f, 12f);
+    private WaitForSeconds waitToAngry;
+    private float angryTime = 15f;
 
 
+    // info
     public int C_ID { get; private set; } // 손님 고유 id : visitor spawner에서 부여
     public int C_seatTableNumber { get; private set; } // 앉을 테이블 번호, 의자 번호
     public int C_seatChairNumber { get; private set; }
     public bool hasOrdered = false;
     private int C_orderID; // 이거 테이블에 있어야 하지 않을까? 혹은 주문 객체가 가지고 있던가
     private bool isEating = false;
-    private bool hasEaten = false;
+    public bool hasEaten { get; private set; }
     private int C_payment = 0;
     public int[] C_foodNumber { get; private set; } // 손님이 주문한 음식 번호
     public int numOfOrderFood;
 
-    private WaitForSeconds waitToAngry;
-    private int angryTime = 15;
+    // reference
+    // [SerializeField]
+    // private GameObject money; // 지불할 돈 객체 - 안 씀
+    [SerializeField]
+    private TableManager tableManager;
+    private Table curTable;
 
     public void Init(VisitorPool pool, int visitorID)
     {
@@ -44,8 +53,8 @@ public class Visitor : MonoBehaviour
 
         C_ID = visitorID;
         // C_seatNumber = Random.Range(1.1f, 4.4f);
-       
-        numOfOrderFood = UnityEngine.Random.Range(1, 3); // 1 ~ 2\
+        hasEaten = false;
+         numOfOrderFood = UnityEngine.Random.Range(1, 3); // 1 ~ 2\
         C_foodNumber = new int[numOfOrderFood];
         for (int i = 0; i < numOfOrderFood;  i++)
         {
@@ -61,6 +70,15 @@ public class Visitor : MonoBehaviour
     public void SetTableNum(int tableNum)
     {
         this.C_seatTableNumber = tableNum;
+        SetTable();
+    }
+    /// <summary>
+    /// 자신이 앉은 테이블 객체 할당
+    /// 반드시 SetTableNum 이후에 실행
+    /// </summary>
+    private void SetTable()
+    {
+        curTable = tableManager.GetTable(C_seatTableNumber);
     }
     public void SetSeatNum(int seatNum)
     {
@@ -133,15 +151,17 @@ public class Visitor : MonoBehaviour
         yield return eatingTime;
         isEating = false;
         hasEaten = true;
+        if (!curTable.isCheckingEating) curTable.waitForEating();
         // 이 이후에 해당 테이블에서 모두 음식을 다 먹었으면 다같이 퇴장
     }
 
     // 자리에 돈 지불 - 퇴장 시퀀스의 시작 함수
-    private void PayMoney()
-    {
-        Instantiate(money); // 테이블 말고 의자 위에 두고 가면 안 되나
-        departure(); // 나가기 위해 이동
-    }
+    // 삭제 - 테이블이 종합해서 돈 생성
+    //private void PayMoney()
+    //{
+    //    Instantiate(money); // 테이블 말고 의자 위에 두고 가면 안 되나
+    //    departure(); // 나가기 위해 이동
+    //}
 
     // 자리에서 일어나기 -> 테이블 매니저, 스포너 등에서 리스트 관리
     // 가게 밖으로 나가기

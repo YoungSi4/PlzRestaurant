@@ -45,7 +45,17 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         StopCoroutine(SpawnVisitor());
     }
 
-
+    /// <summary>
+    /// visitor를 생성하는 비동기 함수
+    /// 외부 Start_Spawning 함수에 의해 시작
+    /// 외부 StopSpawning 함수에 의해 종료된다.
+    /// 
+    /// 생성 딜레이 delay -> spawnDelay 3f
+    /// 생성 조건 1 : 현재 남은 테이블 중 최대 의자 수
+    /// 생성 조건 2 : 남은 테이블의 존재 여부
+    /// 생성 조건 3 : isTableOccupied의 T/F 여부
+    /// </summary>
+    /// <returns> IEnumerator </returns>
     private IEnumerator SpawnVisitor()
     {
         

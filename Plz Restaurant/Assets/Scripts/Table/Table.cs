@@ -41,6 +41,12 @@ public class Table : MonoBehaviour
     public Transform[] foodPosPointer => foodPos;
 
 
+    // waitForEating 관련
+    public bool isCheckingEating = false;
+    private float eatingCheckTime = 5f;
+    private WaitForSeconds eatingCheckDelay;
+
+
     private void Awake()
     {
         chairNum = chairPos.Length;
@@ -50,6 +56,30 @@ public class Table : MonoBehaviour
     {
         visitorOnChair = new Visitor[chairNum];
         inspectionDelay = new(delay);
+        eatingCheckDelay = new(eatingCheckTime);
+        IsWaitingForVisitorArrived = false;
+        visitorNum = 0;
+        isReadyToOrder = false;
+    }
+
+    /// <summary>
+    ///  손님이 떠난 후 변수 초기화하는 함수
+    ///  
+    ///  초기화 하는 변수 목록
+    ///  visitorOnChair
+    ///  isTableOccupied
+    ///  IsWaitingForVisitorArrived
+    ///  visitorNum
+    ///  isReadyToOrder
+    /// </summary>
+    private void ResetVars()
+    {
+        for (int i = 0; i < chairNum; i++)
+        {
+            visitorOnChair[i] = null;
+        }
+
+        isTableOccupied = false;
         IsWaitingForVisitorArrived = false;
         visitorNum = 0;
         isReadyToOrder = false;
@@ -218,4 +248,28 @@ public List<int>[] SendFoodNumToOrderInfo()
 
         return foodIDs;
     }
+
+    public IEnumerator waitForEating()
+    {
+        int mealDoneCnt = 0;
+        isCheckingEating = true;
+        while (true)
+        {
+            foreach (Visitor v in visitorOnChair)
+            {
+                if (v == null) continue;
+                if (v.hasEaten) mealDoneCnt++;
+
+            }
+
+            if (mealDoneCnt >= visitorNum) break;
+            else mealDoneCnt = 0;
+             
+            yield return eatingCheckDelay;
+        }
+
+        isCheckingEating = false;
+        // 돈 생성 함수, 손님들 일으켜 세우고 퇴장시키는 함수.
+    }
+
 }
