@@ -192,4 +192,3 @@ public class TrayControl : MonoBehaviour
         if (trayIndexTurns.Count > 0) trayIndexTurns.Dequeue();
     }
 }
-

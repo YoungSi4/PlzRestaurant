@@ -42,7 +42,7 @@ public class VisitorOrder : MonoBehaviour
     // 음식 정보 구성을 시작하는 함수 - 플레이어의 상호작용 E에서 출발
     public void SetFoodNumFromPlayer(List<int>[] foodIDs, int tableNum)
     {
-        int chairNum_ = tableManager.GetTable(tableNum).chairNum;
+        int chairNum_ = tableManager.GetTable(tableNum - 1).chairNum;
         foodDatas = new List<FoodData>[chairNum_];
         for(int i = 0; i < chairNum_; i++)
         {

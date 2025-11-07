@@ -40,6 +40,9 @@ public class Table : MonoBehaviour
     private Transform[] foodPos;
     public Transform[] foodPosPointer => foodPos;
 
+    // 올라간 음식 오브젝트 저장
+    private List<GameObject> placedFoodObjects = new List<GameObject>();
+
 
     // waitForEating 관련
     public bool isCheckingEating = false;
@@ -270,6 +273,21 @@ public List<int>[] SendFoodNumToOrderInfo()
 
         isCheckingEating = false;
         // 돈 생성 함수, 손님들 일으켜 세우고 퇴장시키는 함수.
+    }
+
+    public void AddPlacedFoodObject(GameObject foodObject)
+    {
+        placedFoodObjects.Add(foodObject);
+        Debug.Log("테이블에 올라간 음식 : " + foodObject);
+    }
+
+    public void ClearPlacedFoodObjects()
+    {
+        foreach (var foodObject in placedFoodObjects)
+        {
+            Destroy(foodObject);
+        }
+        placedFoodObjects.Clear();
     }
 
 }

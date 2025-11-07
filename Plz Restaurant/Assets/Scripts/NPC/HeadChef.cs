@@ -65,7 +65,7 @@ public class HeadChef : MonoBehaviour
     private void Update()
     {
         H_startCookingRoutine();
-        // GetFood();
+        TestGetFood();
         ClearTableFoodInfo();
     }
 
@@ -99,7 +99,7 @@ public class HeadChef : MonoBehaviour
     // FoodData -> OrderData로 변경
     private IEnumerator cookingRoutine(List<OrderData> orderDatas)
     {
-        isCooking = true; 
+        isCooking = true;
 
         // 조리 시작
         H_startCooking(orderDatas);
@@ -135,7 +135,7 @@ public class HeadChef : MonoBehaviour
     // ** 함수의 필요성 재고 필요 **
     private void H_placeFoodOnTray(List<OrderData> orderDatas)
     {
-        foreach(var orderData in orderDatas)
+        foreach (var orderData in orderDatas)
         {
             trayControl.GetOrderInfo(orderData);
 
@@ -153,9 +153,9 @@ public class HeadChef : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             FoodData food = foodDB.GetFoodData(1);
-            List<FoodData>[] tmplist = new List<FoodData>[] { new List<FoodData> { foodDB.GetFoodData(2) },  new List<FoodData> { foodDB.GetFoodData(3) }, null, null };
-            H_GetOrderInfo(tmplist, 4);
-            npc.B_GetTableInfo(tmplist, 4);
+            List<FoodData>[] tmplist = new List<FoodData>[] { new List<FoodData> { foodDB.GetFoodData(2) }, new List<FoodData> { foodDB.GetFoodData(3) }, null, null };
+            H_GetOrderInfo(tmplist, 8);
+            npc.B_GetTableInfo(tmplist, 8);
         }
     }
     public void GetFoodDataFromOrderMemo(List<FoodData>[] foodDatas, int tableNum)
@@ -163,21 +163,29 @@ public class HeadChef : MonoBehaviour
         H_GetOrderInfo(foodDatas, tableNum);
         npc.B_GetTableInfo(foodDatas, tableNum);
     }
+
     // (임시) 테이블 위 음식 초기화용 함수
+    // int tableNum을 받아서 호출하도록 하면 사용 가능할 듯
     private void ClearTableFoodInfo()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            H_ClearTableInfo(4);
-            npc.B_ClearTableInfo(4);
+            H_ClearTableInfo(7);
+            npc.B_ClearTableInfo(7);
+            Table table = tableManager.GetTable(6);
+            table.ClearPlacedFoodObjects();
         }
     }
 
     // VisitorOrder에서 받아오기
     private void H_GetOrderInfo(List<FoodData>[] foodDatas, int tableNum)
     {
+        //------------------------------ 09.27 ------------------------------
+        // GetTable에서 사용하는 tableNum은 인덱스라서 0부터 시작함.
+        // 모든 tableNum을 -1해서 0부터 시작하는 형태로 넘겨주는 것이 오히려 직관적일수도
+
         // foodDatas는 의자 수 크기의 배열
-        int chairCount = tableManager.GetTable(tableNum).chairNum;
+        int chairCount = tableManager.GetTable(tableNum - 1).chairNum;
         int chairIdx = 0;
 
         foreach (var foodList in foodDatas)
@@ -193,8 +201,8 @@ public class HeadChef : MonoBehaviour
                 // 조리할 음식 리스트에 추가a
                 foreach (var foodData in foodList)
                 {
-                    foodDatasOnTable[tableNum][chairIdx].Add(foodData);
-                    H_cookingList.Enqueue(new OrderData(foodData, tableNum));
+                    foodDatasOnTable[tableNum - 1][chairIdx].Add(foodData);
+                    H_cookingList.Enqueue(new OrderData(foodData, tableNum - 1));
                     Debug.Log("조리할 음식 추가" + foodData.foodName);
                 }
                 chairIdx++;
@@ -209,10 +217,10 @@ public class HeadChef : MonoBehaviour
     // NPC.cs에 대해서도 동일한 함수 동시 실행
     public void H_ClearTableInfo(int tableNum)
     {
-        int chairCount = tableManager.GetTable(tableNum).chairNum;
+        int chairCount = tableManager.GetTable(tableNum - 1).chairNum;
         for (int i = 0; i < chairCount; i++)
         {
-            foodDatasOnTable[tableNum][i].Clear();
+            foodDatasOnTable[tableNum - 1][i].Clear();
         }
     }
 }
