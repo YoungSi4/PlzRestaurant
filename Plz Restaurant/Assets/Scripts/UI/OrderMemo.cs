@@ -28,7 +28,7 @@ public class OrderMemo : MonoBehaviour
 
     // FoodInfo
     private VisitorOrder order;
-    private FoodData foodData;
+    // private FoodData foodData;
 
     [SerializeField]
     private HeadChef chef;
@@ -83,11 +83,11 @@ public class OrderMemo : MonoBehaviour
 
     private void SetText()
     {
-        var tableNum = foodData.foodNum;
-        var foodName = foodData.foodName;
-        var foodPrice = foodData.foodPrice;
+        // var tableNum = foodData.foodNum;
+        // var foodName = foodData.foodName;
+        // var foodPrice = foodData.foodPrice;
 
-        var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
+        // var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
     }
 
     private void SendFoodDataToChef()
