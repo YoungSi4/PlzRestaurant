@@ -72,21 +72,22 @@ public class OrderMemo : MonoBehaviour
         //foodName = foodData.foodName;
         //foodPrice = foodData.foodPrice;
 
-        SetText();
+        foreach (var foodDataList in foodDatas)
+        {
+
+        }
+            SetText();
     }
+
+
 
     private void SetText()
     {
-        //var tableNum = foodData.foodNum;
-        //var foodName = foodData.foodName;
-        //var foodPrice = foodData.foodPrice;
+        var tableNum = foodData.foodNum;
+        var foodName = foodData.foodName;
+        var foodPrice = foodData.foodPrice;
 
-        //var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
-
-        //// 1. 테이블 번호, 2. 음식 이름, 3. 음식 가격
-        //texts[1].SetText(tableNum.ToString());
-        //texts[2].SetText(foodName.ToString());
-        //texts[3].SetText(foodPrice.ToString());
+        var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
     }
 
     private void SendFoodDataToChef()
