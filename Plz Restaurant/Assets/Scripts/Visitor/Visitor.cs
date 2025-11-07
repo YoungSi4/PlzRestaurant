@@ -50,7 +50,7 @@ public class Visitor : MonoBehaviour
         /* 랜덤변수로 초기화 할 변수
         C_orderID;
         */
-
+        tableManager = GameObject.Find("TableManager").GetComponent<TableManager>();
         C_ID = visitorID;
         // C_seatNumber = Random.Range(1.1f, 4.4f);
         hasEaten = false;
