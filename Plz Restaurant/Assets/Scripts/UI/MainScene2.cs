@@ -22,7 +22,7 @@ public class MainScene2 : MonoBehaviour
     public Animator up;//
     //public Animator inventory;
 
-    public GameObject timeOver;
+    //public GameObject timeOver;
 
     public void OnOff_UI(GameObject uiObject)
     {
@@ -65,7 +65,7 @@ public class MainScene2 : MonoBehaviour
 
     public void EndGame() //³¡³µÀ» ¶§ 
     {
-        timeOver.SetActive(true);
+        //timeOver.SetActive(true);
         GameManager.Instance.R_close();
     }
 

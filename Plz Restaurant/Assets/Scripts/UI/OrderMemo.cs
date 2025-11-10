@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -75,7 +76,7 @@ public class OrderMemo : MonoBehaviour
 
     // 2025-11-09 추가함
     Dictionary<string, int[]> receiptText; //string : foodname, int[] : 개수, sub total
-
+    int totalPrice = 0;
 
     private void SetData()
     {
@@ -94,11 +95,13 @@ public class OrderMemo : MonoBehaviour
                     //이미 한 번 이상 나온 음식이면
                     value[0] += 1; //개수칸에 개수 1개늘리고
                     value[1] += foodData.foodPrice; //sub total칸에 총 가격도 더해줌
+                    totalPrice += foodData.foodPrice;
                 }
                 else
                 {
                     //처음 나온 음식이라면
                     receiptText.Add(foodData.foodName, new int[] { 1, foodData.foodPrice });
+                    totalPrice += foodData.foodPrice;
                 }
             }
         }
@@ -145,9 +148,17 @@ public class OrderMemo : MonoBehaviour
 
             //내부 텍스트 가져오기 
             var texts = newPanel.GetComponentsInChildren<TextMeshProUGUI>();
+            foreach (var t in texts) //주문서 열면 text항목이 비활성화되있어서 활성화해줌
+                t.enabled = true;
             texts[0].text = $"{foodName} {count}";
             texts[1].text = $"{subtotal}";
         }
+        GameObject totalPanel = Instantiate(panelPrefab, contentArea);
+        var totalTexts = totalPanel.GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (var t in totalTexts)
+            t.enabled = true;
+        totalTexts[0].text = "Total"; // 왼쪽에 'Total' 표시
+        totalTexts[1].text = $"{totalPrice}"; // 오른쪽에 합계 출력
 
     }
 
