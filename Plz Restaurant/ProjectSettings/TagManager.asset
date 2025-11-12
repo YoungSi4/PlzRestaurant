@@ -7,6 +7,8 @@ TagManager:
   - Visitor
   - FoodPos
   - GetButton
+  - Table
+  - Money
   layers:
   - Default
   - TransparentFX

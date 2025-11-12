@@ -14,7 +14,7 @@ public class Visitor : MonoBehaviour
     private WaitForSeconds wait = new WaitForSeconds(10f);
 
     // action
-    private WaitForSeconds eatingTime = new WaitForSeconds(5f);
+    private WaitForSeconds eatingTime = new WaitForSeconds(15f);
     private NavMeshAgent agent;
     // private VisitorOrder order; // - 더이상 visitor가 가지고 있을 이유가 없음
 

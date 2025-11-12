@@ -357,7 +357,7 @@ public List<int>[] SendFoodNumToOrderInfo()
     public void TableCleanUp()
     {
         ResetVars();
-        // 테이블 위 음식, 그릇 정리 함수
+        ClearPlacedFoodObjects();
     }
 
     public void AddPlacedFoodObject(GameObject foodObject)
