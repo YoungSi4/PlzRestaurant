@@ -320,9 +320,7 @@ public List<int>[] SendFoodNumToOrderInfo()
              
             if (hasEatenCnt == visitorNum)
             {
-                StopWaitngForEating();
-                // 돈 테이블 위에 생성하는 함수
-                // 밖으로 나가는 함수 실행
+                VisitorStandUp();
                 break;
             }
             yield return eatingCheckDelay;
@@ -332,11 +330,34 @@ public List<int>[] SendFoodNumToOrderInfo()
         // 돈 생성 함수, 손님들 일으켜 세우고 퇴장시키는 함수.
     }
 
+    // 손님 퇴장 프로세스 묶음 함수
+    private void VisitorStandUp()
+    {
+        StopWaitngForEating(); // 식사 확인 코루틴 종료
+        GenerateMoney(); // 비용 지불 (테이블 위에 생성)
+        VisitorDeparture(); // 손님 이동
+    }
+
     // 돈 생성
     private void GenerateMoney()
     {
         var tempMoney = Instantiate<GameObject>(moneyPrefab, moneyGenPos, Quaternion.Euler(0, 0, 0));
-        tempMoney.GetComponent<Money>().Init(totalPrice);
+        tempMoney.GetComponent<Money>().Init(totalPrice, this);
+    }
+
+    // 손님 퇴장
+    private void VisitorDeparture()
+    {
+        foreach (Visitor visitor in visitorOnChair) {
+            if (visitor == null) continue;
+            visitor.Departure();
+        }
+    } 
+
+    public void TableCleanUp()
+    {
+        ResetVars();
+        // 테이블 위 음식, 그릇 정리 함수
     }
 
     public void AddPlacedFoodObject(GameObject foodObject)
