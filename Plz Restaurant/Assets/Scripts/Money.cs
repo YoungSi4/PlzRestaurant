@@ -25,7 +25,7 @@ public class Money : MonoBehaviour
         DisableObj();
     }
 
-    // money도 오브젝트 풀링으로 처리해도 되긴 함
+    // instantiate, destroy로 처리
     private void DisableObj()
     {
         GameObject.Destroy(gameObject);

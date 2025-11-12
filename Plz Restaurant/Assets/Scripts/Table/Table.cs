@@ -18,6 +18,8 @@ public class Table : MonoBehaviour
     [SerializeField]
     public int chairNum { get; private set; } // 굳이 필요할까? chairPos의 길이로 접근해도 되잖아.
     public bool isTableOccupied { get; private set; }
+
+    // 손님 관련 변수
     public Visitor[] visitorOnChair { get;  private set; } // 각 의자에 앉은 손님 객체를 저장
     [SerializeField]
     public Transform[] chairPos; // 각 의자의 위치
@@ -26,11 +28,12 @@ public class Table : MonoBehaviour
 
     [SerializeField]
     private Collider visitorCheckCollider; // 손님 검사
-    private WaitForSeconds inspectionDelay;
+    private WaitForSeconds inspectionDelay; // 손님이 테이블 근처 도달했는지 확인하는 시간 딜레이
     private float delay = 5f;
     public bool IsWaitingForVisitorArrived { get;  set; } // 배정된 손님을 기다리는 중인지
     private WaitForSeconds orderDelay = new WaitForSeconds(5f);
 
+    // 주문 상호작용 관련 변수
     [SerializeField]
     private GameObject readyToOrderIconPrefab; // 컴포넌트 상에서 연결한 자식 오브젝트
     public bool isReadyToOrder { get; private set; } // true 일 때만 상호작용 가능
