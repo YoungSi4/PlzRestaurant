@@ -23,7 +23,6 @@ public class Visitor : MonoBehaviour
     private WaitForSeconds waitToAngry;
     private float angryTime = 15f;
 
-
     // info
     public int C_ID { get; private set; } // 손님 고유 id : visitor spawner에서 부여
     public int C_seatTableNumber { get; private set; } // 앉을 테이블 번호, 의자 번호
@@ -32,7 +31,7 @@ public class Visitor : MonoBehaviour
     private int C_orderID; // 이거 테이블에 있어야 하지 않을까? 혹은 주문 객체가 가지고 있던가
     private bool isEating = false;
     public bool hasEaten { get; private set; }
-    private int C_payment = 0;
+    private int C_payment = 0; // 안 씀
     public int[] C_foodNumber { get; private set; } // 손님이 주문한 음식 번호
     public int numOfOrderFood;
 
@@ -151,28 +150,22 @@ public class Visitor : MonoBehaviour
         yield return eatingTime;
         isEating = false;
         hasEaten = true;
-        if (!curTable.isCheckingEating) curTable.waitForEating();
+        if (!curTable.isCheckingEating) curTable.WaitingForEating();
         // 이 이후에 해당 테이블에서 모두 음식을 다 먹었으면 다같이 퇴장
     }
-
-    // 자리에 돈 지불 - 퇴장 시퀀스의 시작 함수
-    // 삭제 - 테이블이 종합해서 돈 생성
-    //private void PayMoney()
-    //{
-    //    Instantiate(money); // 테이블 말고 의자 위에 두고 가면 안 되나
-    //    departure(); // 나가기 위해 이동
-    //}
-
-    // 자리에서 일어나기 -> 테이블 매니저, 스포너 등에서 리스트 관리
-    // 가게 밖으로 나가기
-    private void departure()
+    
+    /// <summary>
+    /// 손님이 가게 밖으로 나가는 함수
+    /// 테이블에서 식사 종료를 확인 후 실행
+    /// </summary>
+    public void Departure()
     {
         agent.Move(doorPos); // 출구 좌표로 이동 - 좌표 안 땄음
-        checkArriveAtDoor();
+        CheckArriveAtDoor();
     }
 
-    // 출구 도착 검사 함수
-    private IEnumerator checkArriveAtDoor()
+    // 출구 도착 검사 함수 - 작동하는지 미지수이긴 합니다...
+    private IEnumerator CheckArriveAtDoor()
     {
         while(!agent.isStopped) // 도착하면 정지
         {

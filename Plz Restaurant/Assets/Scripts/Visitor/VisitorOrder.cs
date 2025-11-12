@@ -29,6 +29,7 @@ public class VisitorOrder : MonoBehaviour
     private OrderMemo orderMemo; // 플레이어 UI 받은 주문 목록
     [SerializeField]
     private TableManager tableManager;
+    private Table table;
 
     private void Start()
     {
@@ -42,7 +43,8 @@ public class VisitorOrder : MonoBehaviour
     // 음식 정보 구성을 시작하는 함수 - 플레이어의 상호작용 E에서 출발
     public void SetFoodNumFromPlayer(List<int>[] foodIDs, int tableNum)
     {
-        int chairNum_ = tableManager.GetTable(tableNum - 1).chairNum;
+        table = tableManager.GetTable(tableNum - 1);
+        int chairNum_ = table.chairNum;
         foodDatas = new List<FoodData>[chairNum_];
         for(int i = 0; i < chairNum_; i++)
         {
@@ -53,6 +55,7 @@ public class VisitorOrder : MonoBehaviour
     }
 
     // 데이터 전달 흐름
+    // DB에서 정보를 가져와서 구성하는 함수
     // VistorOrder -> FoodDB -> VisitorOrder
     private void GetFoodInfoFromDB(List<int>[] foodIDsArray)
     {
@@ -75,8 +78,23 @@ public class VisitorOrder : MonoBehaviour
         }
     }
 
+    private void SendPriceToTable()
+    {
+        foodPrice = 0;
+        foreach(var foodDataList in foodDatas)
+        {
+            if (foodDataList == null) continue;
+            foreach (var foodData in foodDataList)
+            {
+                foodPrice += foodData.foodPrice;
+            }
+        }
+
+        table.SetTotalPrice(foodPrice);
+    }
+
     // 최종적으로 UI 상에 뜰 정보를 보내는 함수
-    public void SendFoodInfo(List<FoodData>[] foodData, int tableNum)
+    private void SendFoodInfo(List<FoodData>[] foodData, int tableNum)
     {
         // OrderMemo 상에서 표시될 정보를 이 함수에서 초기화
         orderMemo.GetFoodInfo(foodData, tableNum);

@@ -46,12 +46,17 @@ public class Table : MonoBehaviour
     // 올라간 음식 오브젝트 저장
     private List<GameObject> placedFoodObjects = new List<GameObject>();
 
-
     // waitForEating 관련
     public bool isCheckingEating { get; private set; }
     private float eatingCheckTime = 5f;
     private WaitForSeconds eatingCheckDelay;
+    private Coroutine eatingCoroutine;
 
+    // 돈 오브젝트 생성 관련
+    [SerializeField]
+    private GameObject moneyPrefab;
+    private int totalPrice = 0;
+    private Vector3 moneyGenPos;
 
     private void Awake()
     {
@@ -67,6 +72,15 @@ public class Table : MonoBehaviour
         visitorNum = 0;
         isReadyToOrder = false;
         isCheckingEating = false;
+
+        SetMoneyGenPos();
+    }
+
+    private void SetMoneyGenPos()
+    {
+        var tempPos = transform.position;
+        tempPos.y += 1;
+        moneyGenPos = tempPos;
     }
 
     /// <summary>
@@ -90,6 +104,11 @@ public class Table : MonoBehaviour
         IsWaitingForVisitorArrived = false;
         visitorNum = 0;
         isReadyToOrder = false;
+    }
+
+    public void SetTotalPrice(int price)
+    {
+        totalPrice = price;
     }
 
     // 테이블에 놓인 음식 정보도 저장해야하나?
@@ -256,27 +275,68 @@ public List<int>[] SendFoodNumToOrderInfo()
         return foodIDs;
     }
 
-    public IEnumerator waitForEating()
+    /// <summary>
+    /// 테이블의 모든 손님이 식사를 다 했는지 확인하는 WaitForEatingCount()의 wrapper 함수
+    /// 해당 비동기 함수를 Coroutine으로 관리한다
+    /// 손님에서 식사를 종료하고 호출
+    /// </summary>
+    public void WaitingForEating()
     {
-        int mealDoneCnt = 0;
+        // 식사 확인 함수를 Coroutine으로 등록하고 관리
+        // 해당 테이블에서 실행 중인 루틴이 없다면 새로 실행. 이미 있다면 굳이 실행시키지 않음.
+        if (eatingCoroutine == null)
+        {
+            eatingCoroutine = StartCoroutine(WaitForEatingCount());
+        }
+    }
+
+    /// <summary>
+    /// 식사 확인 비동기 루틴을 종료하는 함수
+    /// WaitForEatingCount() 내부에서 모든 손님이 다 먹은 걸 확인하면 정지
+    /// </summary>
+    private void StopWaitngForEating()
+    {   // 식사 확인 비동기 루틴을 종료
+        StopCoroutine(eatingCoroutine);
+    }
+
+    /// <summary>
+    /// visitorNum과 hasEatenCnt가 같으면 종료
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator WaitForEatingCount()
+    {
         isCheckingEating = true;
+        int hasEatenCnt = 0;
         while (true)
         {
             foreach (Visitor v in visitorOnChair)
             {
                 if (v == null) continue;
-                if (v.hasEaten) mealDoneCnt++;
-
+                if (v.hasEaten)
+                {
+                    hasEatenCnt++;
+                }
             }
-
-            if (mealDoneCnt >= visitorNum) break;
-            else mealDoneCnt = 0;
              
+            if (hasEatenCnt == visitorNum)
+            {
+                StopWaitngForEating();
+                // 돈 테이블 위에 생성하는 함수
+                // 밖으로 나가는 함수 실행
+                break;
+            }
             yield return eatingCheckDelay;
         }
 
         isCheckingEating = false;
         // 돈 생성 함수, 손님들 일으켜 세우고 퇴장시키는 함수.
+    }
+
+    // 돈 생성
+    private void GenerateMoney()
+    {
+        var tempMoney = Instantiate<GameObject>(moneyPrefab, moneyGenPos, Quaternion.Euler(0, 0, 0));
+        tempMoney.GetComponent<Money>().Init(totalPrice);
     }
 
     public void AddPlacedFoodObject(GameObject foodObject)
