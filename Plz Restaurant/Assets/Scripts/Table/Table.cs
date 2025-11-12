@@ -48,7 +48,7 @@ public class Table : MonoBehaviour
 
 
     // waitForEating ฐüทร
-    public bool isCheckingEating = false;
+    public bool isCheckingEating { get; private set; }
     private float eatingCheckTime = 5f;
     private WaitForSeconds eatingCheckDelay;
 
@@ -66,6 +66,7 @@ public class Table : MonoBehaviour
         IsWaitingForVisitorArrived = false;
         visitorNum = 0;
         isReadyToOrder = false;
+        isCheckingEating = false;
     }
 
     /// <summary>
