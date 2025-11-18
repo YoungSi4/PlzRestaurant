@@ -15,7 +15,9 @@ public class NPC : MonoBehaviour
     private Quaternion B_startRot; // 사장님의 기본위치 방향 저장
     private float B_speed = 5; // 사장님의 이동 속도 (조정 가능)
     private int B_abillity = 2; // 한 번에 들 수 있는 음식 수 (최대4개 예정)
-    
+    [SerializeField]
+    private float foodHeight = 1f; // 음식 오브젝트 높이 조정용 변수
+
     // 실제 음식 오브젝트가 필요할 때 마다 orderDatas에서 꺼내서 사용하기 보다 따로 관리해서 사용하는 것이 단순하고
     // 트레이에서 테이블까지 계속해서 존재하는 오브젝트이기 때문에 따로 관리하는 것이 좋을 것 같음
     // 어짜피 orderDatas와 동일한 Index에 동일한 음식이 관리되기 때문에 괜찮다고 생각
@@ -248,7 +250,7 @@ public class NPC : MonoBehaviour
 
     }
 
-    // 테이블에 음식 내려놓기
+/*    // 테이블에 음식 내려놓기
     // 들고 있는 음식 리스트를 순회하며 도착한 테이블에 서빙할 음식이 더 있는지 확인 후 있으면 추가로 내려놓기(로직추가필요)
     void ServeFood()
     {
@@ -269,7 +271,7 @@ public class NPC : MonoBehaviour
                 bool isServed = false; // 해당 자리(의자)에 서빙이 완료되었는지 검사
                 foreach (var food in foodDatasOnTable[tableNumToServe][i])
                 {
-                    if(B_orderDatas.Count == 0)
+                    if (B_orderDatas.Count == 0)
                     {
                         break; // 서빙할 음식이 더 없으면 종료
                     }
@@ -277,7 +279,7 @@ public class NPC : MonoBehaviour
                     if (B_orderDatas[0] != null && food == B_orderDatas[0].foodData && !isServed)
                     {
                         // 테이블에 음식 생성
-                        GameObject tableFood = Instantiate(B_handFoods[0], foodPos[i].position, foodPos[i].rotation);
+                        GameObject tableFood = Instantiate(B_handFoods[0], foodPos[i].position + Vector3.up * foodHeight, foodPos[i].rotation);
                         tableToServe.AddPlacedFoodObject(tableFood); // 테이블에 올라간 음식 오브젝트 저장 (삭제 용이성 위해)
                         // 테이블에 올릴 음식은 부모 해제 후 독립 개체로
                         tableFood.transform.SetParent(foodPos[i]);
@@ -289,10 +291,10 @@ public class NPC : MonoBehaviour
                         isServed = true; // 해당 자리(의자)에 서빙이 완료되었음을 표시    
                     }
                     // 한 손님이 음식을 두 개 주문한 경우
-                    else if(B_orderDatas[0] != null && food == B_orderDatas[0].foodData && isServed)
+                    else if (B_orderDatas[0] != null && food == B_orderDatas[0].foodData && isServed)
                     {
                         // Table의 FoodPos를 1_1 2_1 1_2 2_2 의 순으로 배치
-                        GameObject tableFood = Instantiate(B_handFoods[0], foodPos[i + chiarCount].position, foodPos[i + chiarCount].rotation);
+                        GameObject tableFood = Instantiate(B_handFoods[0], foodPos[i + chiarCount].position + Vector3.up * foodHeight, foodPos[i + chiarCount].rotation);
                         tableToServe.AddPlacedFoodObject(tableFood);
                         tableFood.transform.SetParent(foodPos[i + chiarCount]);
                         Destroy(B_handFoods[0]);
@@ -303,7 +305,91 @@ public class NPC : MonoBehaviour
                 }
             }
         }
+    }*/
+
+
+    // ServeFood() - 안정화 버전
+    void ServeFood()
+    {
+        if (B_orderDatas.Count == 0) return;
+
+        // --- 중요: OrderData.tableNum은 0-based 라고 가정 ---
+        int tableIndex = B_orderDatas[0].tableNum; // 0-based
+        Table tableToServe = tableManager.GetTable(tableIndex);
+
+        int chairCount = tableToServe.chairNum;
+        Transform[] foodPos = tableToServe.foodPosPointer;
+
+        // 현재 테이블에서 자리별로 이미 몇개 올려졌는지 파악 (기존 자식 수로 계산)
+        int[] placedCountPerSeat = new int[chairCount];
+        for (int i = 0; i < chairCount; i++)
+        {
+            // foodPos[i] 와 foodPos[i + chairCount] 에 각각 올릴 수 있으므로,
+            // 식별을 위해 실제 자식 개수를 확인
+            if (foodPos.Length > i && foodPos[i] != null)
+                placedCountPerSeat[i] += foodPos[i].childCount;
+            if (foodPos.Length > i + chairCount && foodPos[i + chairCount] != null)
+                placedCountPerSeat[i] += foodPos[i + chairCount].childCount;
+        }
+
+        // B_orderDatas를 처음부터 끝까지 돌면서, 해당 테이블의 주문이면 자리 매칭 후 서빙
+        // 인덱스 기반으로 뒤에서부터 순회하면 RemoveAt 시 인덱스 문제를 피함
+        for (int orderIdx = B_orderDatas.Count - 1; orderIdx >= 0; orderIdx--)
+        {
+            var order = B_orderDatas[orderIdx];
+            if (order.tableNum != tableIndex) continue; // 이 루틴은 현재 도착한 tableIndex 만 처리
+
+            bool isServed = false;
+
+            // 좌석(의자)마다 그 자리의 expected foods 목록을 확인해서 매칭
+            for (int seat = 0; seat < chairCount && !isServed; seat++)
+            {
+                // foodDatasOnTable[tableIndex][seat] 는 그 자리에 주문된 FoodData 리스트
+                var expectedList = foodDatasOnTable[tableIndex][seat];
+                if (expectedList == null || expectedList.Count == 0) continue;
+
+                // 해당 자리에서 order.foodData와 같은 항목이 있는지 확인
+                // (동일 음식이 여러개면 첫 발견 항목을 제거해도 됨)
+                if (expectedList.Any(food => food == order.foodData))
+                {
+                    // 자리의 빈 슬롯(첫 or 두번째)을 계산
+                    int slotIndex = placedCountPerSeat[seat]; // 0 또는 1 (더 많으면 2 이상일수도 있음)
+
+                    // 실제 배치할 위치 결정
+                    int targetFoodPosIndex = (slotIndex == 0) ? seat : seat + chairCount;
+
+                    // hand에 들고 있는 해당 주문(인덱스 기반)을 찾아서 사용
+                    // (orderIdx와 B_handFoods 인덱스는 동일하게 유지되어 있다고 가정)
+                    GameObject handObj = B_handFoods[orderIdx];
+
+                    // Instantiate a copy at target pos
+                    var spawnPos = foodPos[targetFoodPosIndex].position + Vector3.up * foodHeight;
+                    var spawnRot = foodPos[targetFoodPosIndex].rotation;
+                    GameObject tableFood = Instantiate(handObj, spawnPos, spawnRot);
+                    tableToServe.AddPlacedFoodObject(tableFood);
+                    tableFood.transform.SetParent(foodPos[targetFoodPosIndex]);
+
+                    // 원래 손에 들고 있던 오브젝트 삭제(인스턴스는 남음)
+                    Destroy(handObj);
+
+                    // 데이터 정리: expectedList에서 하나 빼기(같은 FoodData 항목 하나 제거)
+                    var removeIdx = expectedList.FindIndex(fd => fd == order.foodData);
+                    if (removeIdx >= 0) expectedList.RemoveAt(removeIdx);
+
+                    // placedCount 업데이트
+                    placedCountPerSeat[seat]++;
+
+                    // B_handFoods와 B_orderDatas에서 제거 (같은 인덱스)
+                    B_handFoods.RemoveAt(orderIdx);
+                    B_orderDatas.RemoveAt(orderIdx);
+
+                    isServed = true;
+                    break;
+                }
+            }
+        }
     }
+
 
     // 목적 위치로 이동
     IEnumerator MoveToPos(Vector3 targetPos)
