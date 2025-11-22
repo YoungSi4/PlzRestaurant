@@ -14,10 +14,10 @@ public class OrderMemo : MonoBehaviour
      */
 
     // 숫자가 낮을수록 아래
-    public GameObject OrderMemoBlock1;
-    public GameObject OrderMemoBlock2;
-    public GameObject OrderMemoBlock3;
-    public GameObject OrderMemoBlock4;
+    //public GameObject OrderMemoBlock1;
+    //public GameObject OrderMemoBlock2;
+    //public GameObject OrderMemoBlock3;
+    //public GameObject OrderMemoBlock4;
     public Button accept;
     public Button reject;
 
@@ -38,10 +38,17 @@ public class OrderMemo : MonoBehaviour
     // FoodDB 객체에서 이 함수를 실행...?
     // Food Manager 같은 중간 매개체로 전달하는 게 안전해보인다.
 
+    // 2025-11-09 추가함
+    Dictionary<string, int[]> receiptText; //string : foodname, int[] : 개수, sub total
+    int totalPrice = 0;
+    public GameObject firstpanelPrefab; //처음에 테이블 번호있는 패널 
+    public GameObject panelPrefab;      // Panel (메뉴 이름, 메뉴 개수 담긴) 프리팹
+    public Transform contentArea;      // ScrollView의 Content 오브젝트
+
+    public TextMeshProUGUI tableCountText;
 
 
 
-    
     // 테이블 번호는 어디서 받아서 넘기지? -> visitor order 객체
     public void GetFoodInfo(List<FoodData>[] foodData, int tableNum)
     {
@@ -70,13 +77,9 @@ public class OrderMemo : MonoBehaviour
         SetData();
 
         // 임시 테스트용 호출
-        SendFoodDataToChef();
+        //SendFoodDataToChef();
     }
 
-
-    // 2025-11-09 추가함
-    Dictionary<string, int[]> receiptText; //string : foodname, int[] : 개수, sub total
-    int totalPrice = 0;
 
     private void SetData()
     {
@@ -108,12 +111,6 @@ public class OrderMemo : MonoBehaviour
             SetText();
     }
 
-    public GameObject firstpanelPrefab; //처음에 테이블 번호있는 패널 
-    public GameObject panelPrefab;      // Panel (메뉴 이름, 메뉴 개수 담긴) 프리팹
-    public Transform contentArea;      // ScrollView의 Content 오브젝트
-
-    public TextMeshProUGUI tableCountText;
-
     private void SetText()
     {
         // var tableNum = foodData.foodNum;
@@ -122,8 +119,6 @@ public class OrderMemo : MonoBehaviour
 
         // var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
 
-
-        
 
         tableCountText.text = tableNum.ToString();
 
@@ -134,8 +129,6 @@ public class OrderMemo : MonoBehaviour
                 continue;
             Destroy(child.gameObject);
         }
-
-        
 
         foreach (var item in receiptText) { 
 
@@ -161,6 +154,16 @@ public class OrderMemo : MonoBehaviour
         totalTexts[1].text = $"{totalPrice}"; // 오른쪽에 합계 출력
 
     }
+
+    public void AcceptButtonOn()
+    {
+        SendFoodDataToChef();
+    }
+    public void RejectButtonOn()
+    {
+
+    }
+
 
     private void SendFoodDataToChef()
     {
