@@ -14,7 +14,7 @@ public class Visitor : MonoBehaviour
     private WaitForSeconds wait = new WaitForSeconds(10f);
 
     // action
-    private WaitForSeconds eatingTime = new WaitForSeconds(15f);
+    private WaitForSeconds eatingTime = new WaitForSeconds(5f); // 기획서 상 15초
     private NavMeshAgent agent;
     // private VisitorOrder order; // - 더이상 visitor가 가지고 있을 이유가 없음
 
@@ -77,7 +77,7 @@ public class Visitor : MonoBehaviour
     /// </summary>
     private void SetTable()
     {
-        curTable = tableManager.GetTable(C_seatTableNumber);
+        curTable = tableManager.GetTable(C_seatTableNumber - 1);
     }
     public void SetSeatNum(int seatNum)
     {
@@ -143,10 +143,11 @@ public class Visitor : MonoBehaviour
         // 화내는 거 모션 취소, idle 상태로 돌아감
     }
 
-    // 5초동안 식사
-    private IEnumerator EatingFood()
+    // 15초동안 식사
+    public IEnumerator EatingFood()
     {
         isEating = true;
+        Debug.Log("식사 시작");
         yield return eatingTime;
         isEating = false;
         hasEaten = true;
@@ -160,16 +161,25 @@ public class Visitor : MonoBehaviour
     /// </summary>
     public void Departure()
     {
-        agent.Move(doorPos); // 출구 좌표로 이동 - 좌표 안 땄음
-        CheckArriveAtDoor();
+        Move(doorPos); // 출구 좌표로 이동 - 좌표 안 땄음
+        StartCoroutine(CheckArriveAtDoor());
     }
 
     // 출구 도착 검사 함수 - 작동하는지 미지수이긴 합니다...
     private IEnumerator CheckArriveAtDoor()
     {
-        while(!agent.isStopped) // 도착하면 정지
+        // 도착 검사 : destination과 거리가 일정 이내
+        while(true)
         {
             yield return eatingTime; // 5초에 한 번 검사
+
+            var curPos = transform.position;
+            var tartgetPos = agent.destination;
+            
+            var posDiff = curPos - tartgetPos;
+            var distance = Mathf.Sqrt(posDiff.x * posDiff.x + posDiff.y * posDiff.y + posDiff.z * posDiff.z);
+
+            if (distance < 2f) break;
         }
         DisableObj();
     }
@@ -194,8 +204,10 @@ public class Visitor : MonoBehaviour
         isEating = false;
         hasEaten = false;
         C_payment = 0;
-        C_foodNumber[0] = -1; // 손님이 주문한 음식 번호
-        C_foodNumber[1] = -1;
+        for (int i = 0; i < numOfOrderFood; i++)
+        {
+            C_foodNumber[i] = -1;
+        }
     }
 }
 

@@ -299,7 +299,7 @@ public class NPC : MonoBehaviour
                         B_handFoods.RemoveAt(0);
                         B_orderDatas.RemoveAt(0);
                     }
-
+                    tableToServe.CanWeStartToEat(); // 테이블에 음식 개수 확인
                 }
             }
         }

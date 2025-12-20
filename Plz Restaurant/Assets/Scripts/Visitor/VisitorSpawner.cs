@@ -141,7 +141,7 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
         if (visitors.Count == 1) groupTableNum = 0; // 1명인 손님은 2인 테이블 우선 배정
         else groupTableNum = Random.Range(0, tableCount);
 
-        // 테이블 번호를 전달 . 인덱스 -1 처리는 해당 함수 안에서 실행
+        // 테이블 번호를 전달 . 인덱스 -1 처리는 인자 전달 이전에 해야 한다
         var chosenTable = tableManager.GetTable(groupTableNum);
 
         // 선택한 테이블이 이미 사용 중 or 인원 수보다 테이블 자리 수가 적다면

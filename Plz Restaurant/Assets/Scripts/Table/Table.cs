@@ -9,7 +9,7 @@ using UnityEngine;
  * 멤버 함수 : 생성자 (기본, 매개변수), getter setter, VisitorSit, VisitorStandUp
  ************************************************************************************/
 
-// table 객체는 일종의 노드에 가깝고, 이걸 배열에 넣고 관리할 객체가 또 필요함
+// table 객체는 일종의 노드에 가깝고, 이걸 배열에 넣고 관리할 객체 -> 테이블 매니저
 // 트리와 노드의 관계를 연상하면 될 듯?
 
 public class Table : MonoBehaviour
@@ -37,6 +37,9 @@ public class Table : MonoBehaviour
     [SerializeField]
     private GameObject readyToOrderIconPrefab; // 컴포넌트 상에서 연결한 자식 오브젝트
     public bool isReadyToOrder { get; private set; } // true 일 때만 상호작용 가능
+
+    // 음식의 수
+    private int orderedFoodNum = 0;
 
     // 음식 둘 위치 : 각 테이블마다 지정?
     [SerializeField]
@@ -104,6 +107,7 @@ public class Table : MonoBehaviour
         IsWaitingForVisitorArrived = false;
         visitorNum = 0;
         isReadyToOrder = false;
+        orderedFoodNum = 0;
     }
 
     public void SetTotalPrice(int price)
@@ -233,7 +237,7 @@ public class Table : MonoBehaviour
 /// List<int> - 의자 번호 순서대로 저장
 /// </returns>
 public List<int>[] SendFoodNumToOrderInfo()
-    {
+{
         if (!isReadyToOrder) return null;  // 주문할 준비가 안 됐다면 리턴
 
         List<int>[] foodIDs = new List<int>[chairNum];
@@ -250,10 +254,12 @@ public List<int>[] SendFoodNumToOrderInfo()
         {
             // 쓰는 인덱스만 초기화
             if(visitor == null) continue;
+
             foodIDs[visitor.C_seatChairNumber] = new List<int>();
             foreach(var foodId in visitor.C_foodNumber)
             {
                 foodIDs[visitor.C_seatChairNumber].Add(foodId);
+                orderedFoodNum++;
             }
         }
 
@@ -273,6 +279,22 @@ public List<int>[] SendFoodNumToOrderInfo()
         }
 
         return foodIDs;
+    }
+
+    /// <summary>
+    /// 해당 테이블에서 식사를 시작해도 되는지 확인
+    /// NPC가 테이블에 음식을 서빙 후에 검사 실행
+    /// 주문한 음식의 수와 테이블에 올려진 음식의 수를 비교한다
+    /// </summary>
+    public void CanWeStartToEat()
+    {
+        if (orderedFoodNum == placedFoodObjects.Count)
+        {
+            foreach (Visitor v in visitorOnChair) {
+                if (v == null) continue;
+                StartCoroutine(v.EatingFood());
+            }
+        }
     }
 
     /// <summary>
@@ -296,6 +318,7 @@ public List<int>[] SendFoodNumToOrderInfo()
     /// </summary>
     private void StopWaitngForEating()
     {   // 식사 확인 비동기 루틴을 종료
+        if (eatingCoroutine == null) return;
         StopCoroutine(eatingCoroutine);
     }
 
@@ -309,6 +332,8 @@ public List<int>[] SendFoodNumToOrderInfo()
         int hasEatenCnt = 0;
         while (true)
         {
+            // 식사가 끝난 손님 수 체크
+            Debug.Log("식사 완료 체크 : " + tableNum);
             foreach (Visitor v in visitorOnChair)
             {
                 if (v == null) continue;
@@ -318,12 +343,15 @@ public List<int>[] SendFoodNumToOrderInfo()
                 }
             }
              
+            // 모두 식사를 했다면
             if (hasEatenCnt == visitorNum)
             {
+                Debug.Log("식사 완료 : " + tableNum);
                 VisitorStandUp();
                 break;
             }
             yield return eatingCheckDelay;
+            hasEatenCnt = 0;
         }
 
         isCheckingEating = false;
