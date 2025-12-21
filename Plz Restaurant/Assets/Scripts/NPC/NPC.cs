@@ -31,6 +31,11 @@ public class NPC : MonoBehaviour
 
     private bool isBusy = false; // 현재 음식을 서빙하는 코루틴이 실행중인지 검사
 
+    // [이상현상 추가] 이상현상 제어용 변수
+    private bool isAnomalyActive = false; // 현재 서빙 오류 이상현상이 발동 중인가?
+    private int anomalyTargetTableIndex = -1; // 실수로 서빙할 잘못된 테이블 인덱스 (0-based)
+    private int rightfulTableIndex = -1; // 원래 서빙해야 할 올바른 테이블 인덱스 (0-based)
+
     private NavMeshAgent nav; // 네비게이션
     private TrayControl trayControl;
     private TableManager tableManager;
@@ -421,5 +426,13 @@ public class NPC : MonoBehaviour
             transform.rotation = Quaternion.Slerp(current, B_startRot, t);
             yield return null;
         }
-    }   
+    }
+
+    // [이상현상 추가] 외부에서 이상현상 발동 시 호출
+    public void SetAnomalyState(int wrongTableIdx)
+    {
+        isAnomalyActive = true;
+        anomalyTargetTableIndex = wrongTableIdx;
+        Debug.Log($"[NPC] 이상현상 발동: {wrongTableIdx + 1}번 테이블로 잘못된 서빙 예정");
+    }
 }
