@@ -157,7 +157,7 @@ public class Table : MonoBehaviour
     public void VisitorStandUpChair()
     {
         isTableOccupied = false;
-        for(int i = 0;  visitorOnChair.Length > 0; i++)
+        for(int i = 0;  visitorOnChair.Length > i ; i++)
         {
             visitorOnChair[i] = null;
         }
@@ -229,6 +229,15 @@ public class Table : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 주문 접수 받았을 때 테이블 동작 함수
+    /// </summary>
+    private void OrderAccepted()
+    {
+        readyToOrderIconPrefab.SetActive(false);
+        isReadyToOrder = false;
+    }
+
 /// <summary>
 /// 해당 테이블에 앉은 손님이 주문한 음식 ID를 넘기는 함수
 /// 플레이어의 상호작용 키에 의해 작동된다
@@ -240,7 +249,12 @@ public List<int>[] SendFoodNumToOrderInfo()
 {
         if (!isReadyToOrder) return null;  // 주문할 준비가 안 됐다면 리턴
 
+        
+
         List<int>[] foodIDs = new List<int>[chairNum];
+
+        // 아이콘 끄고 isReadyToOrder false로 변경
+        OrderAccepted();
 
         // 2중 반복이라 좀 거슬리네
         /*
@@ -263,7 +277,7 @@ public List<int>[] SendFoodNumToOrderInfo()
             }
         }
 
-        isReadyToOrder = false;
+        
 
         // 화내기 코루틴 종료
         // 화내기 전에 이 함수가 실행되더라도 코루틴은 여전히 실행 중 -> 따로 종료 시켜줘야함
@@ -320,6 +334,7 @@ public List<int>[] SendFoodNumToOrderInfo()
     {   // 식사 확인 비동기 루틴을 종료
         if (eatingCoroutine == null) return;
         StopCoroutine(eatingCoroutine);
+        eatingCoroutine = null;
     }
 
     /// <summary>
@@ -386,6 +401,7 @@ public List<int>[] SendFoodNumToOrderInfo()
     {
         ResetVars();
         ClearPlacedFoodObjects();
+        VisitorStandUpChair();
     }
 
     public void AddPlacedFoodObject(GameObject foodObject)

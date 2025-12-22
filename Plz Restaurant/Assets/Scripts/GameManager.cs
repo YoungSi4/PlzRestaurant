@@ -10,8 +10,8 @@ public class GameManager : Singleton<GameManager>
     public VisitorSpawner visitorSpawner;
     //public MainScene2 mainScene2;
 
-    // 진행상황 관련 변수
-    public int R_day = 1;                                                             //@@@@@@@@@ UI에서 나타내기위해 private->public 변경
+    // 진행상황 관련 변수 -> 25.12.22 YH : get만 public으로 열고 set은 닫아도 괜찮지 않아?
+    public int R_day = 1;          //@@@@@@@@@ UI에서 나타내기위해 private->public 변경
     public int R_targetIncome = 5000; // @@@@@@@@@@@@
     private int R_targetIncomeIncrease = 5000; 
     private int R_season = 0; // spring 0, summer 1, autumn 2, winter 3
@@ -153,7 +153,8 @@ public class GameManager : Singleton<GameManager>
     private void R_repeatDay()
     {
         // blank
-        
+        // 동일한 날짜를 다시 플레이
+        // 그럼 어느 씬으로 이동? or 그냥 게임 실패 및 초기화?
     }
 
     public void StopGame()

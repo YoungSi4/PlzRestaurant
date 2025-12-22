@@ -213,6 +213,20 @@ public class MoveAndToggle : MonoBehaviour
                         order.SetFoodNumFromPlayer(foodIDs, table.tableNum);
 
                     }
+                    else if (hit.collider.CompareTag("Money"))
+                    {
+                        Debug.Log("돈 회수");
+                        var money = hit.collider.gameObject.GetComponent<Money>();
+                        if (money != null)
+                        {
+                            // 바라보고 있을 때 테두리 흰색 선 생기는 시각 피드백을 주고 싶다
+                            money.GetMoney();
+                        }
+
+                    }
+                    {
+
+                    }
                 }
             }
         }

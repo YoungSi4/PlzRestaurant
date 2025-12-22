@@ -51,6 +51,7 @@ public class VisitorOrder : MonoBehaviour
             foodDatas[i] = new List<FoodData>();
         }
         GetFoodInfoFromDB(foodIDs);
+        SendPriceToTable();
         SendFoodInfo(foodDatas, tableNum);
     }
 

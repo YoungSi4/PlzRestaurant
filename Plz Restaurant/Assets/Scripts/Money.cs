@@ -6,10 +6,12 @@ public class Money : MonoBehaviour
 {
     public int amount { get; private set; }
     Table table;
+    private GameManager manager;
 
     private void Awake()
     {
         amount = 0;
+        manager = GameObject.Find("YH_GameManager").GetComponent<GameManager>();
     }
 
     public void Init(int price, Table table)
@@ -25,6 +27,7 @@ public class Money : MonoBehaviour
     public void GetMoney()
     {
         CallTableCleanUp();
+        manager.AddDailyIncome(amount);
         DisableObj();
     }
 
