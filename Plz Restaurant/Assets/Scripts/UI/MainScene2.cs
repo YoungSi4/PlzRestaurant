@@ -9,6 +9,7 @@ public class MainScene2 : MonoBehaviour
     public GameObject stopPopup;
     public GameObject fadeOutPanel;
     public GameObject orderMemo;
+    public GameObject MenuPan;
     
 
     [Header("GameManager와 연결될 텍스트")]
@@ -94,9 +95,15 @@ public class MainScene2 : MonoBehaviour
         //bool currentInventory = inventory.GetBool("On");
         //inventory.SetBool("On", !currentInventory);
     }
-    public void OrderMemoOn()
+    public void OrderMemoOn() //다른 함수에서 불러줘야 하기 때문에 따로 만들었다.
     {
         orderMemo.SetActive(true);
     }
-    
+
+    public void MenuPanOnOff(GameObject uiObject)
+    {
+        if (uiObject == null) return;
+        uiObject.SetActive(!uiObject.activeSelf);
+    }
+
 }

@@ -41,11 +41,11 @@ public class OrderMemo : MonoBehaviour
     // 2025-11-09 추가함
     Dictionary<string, int[]> receiptText; //string : foodname, int[] : 개수, sub total
     int totalPrice = 0;
-    public GameObject firstpanelPrefab; //처음에 테이블 번호있는 패널 
     public GameObject panelPrefab;      // Panel (메뉴 이름, 메뉴 개수 담긴) 프리팹
     public Transform contentArea;      // ScrollView의 Content 오브젝트
 
-    public TextMeshProUGUI tableCountText;
+    //public TextMeshProUGUI tableCountText;
+    public Text tableCountText;
 
 
 
@@ -83,12 +83,14 @@ public class OrderMemo : MonoBehaviour
 
     private void SetData()
     {
+
         //foodName = foodData.foodName;
         //foodPrice = foodData.foodPrice;
 
         if (receiptText == null)
             receiptText = new Dictionary<string, int[]>();
-
+        receiptText.Clear();
+        totalPrice = 0;
         foreach (var foodDataList in foodDatas)
         {
             foreach( var foodData in foodDataList)
@@ -118,7 +120,8 @@ public class OrderMemo : MonoBehaviour
         // var foodPrice = foodData.foodPrice;
 
         // var texts = OrderMemoBlock1.GetComponentsInChildren<TextMeshProUGUI>();
-
+        
+        panelPrefab.SetActive(true); //여기서 panelPrefab은 복제를 위해 꼭 있어야하는 기본 패널이다.
 
         tableCountText.text = tableNum.ToString();
 
@@ -127,8 +130,13 @@ public class OrderMemo : MonoBehaviour
         {
             if (child.name == "First Panel")
                 continue;
-            Destroy(child.gameObject);
+            if (child.name == "Panel")
+                continue;
+            else Destroy(child.gameObject);
         }
+
+
+
 
         foreach (var item in receiptText) { 
 
@@ -140,19 +148,21 @@ public class OrderMemo : MonoBehaviour
             GameObject newPanel = Instantiate(panelPrefab, contentArea);
 
             //내부 텍스트 가져오기 
-            var texts = newPanel.GetComponentsInChildren<TextMeshProUGUI>();
+            //var texts = newPanel.GetComponentsInChildren<TextMeshProUGUI>();
+            var texts = newPanel.GetComponentsInChildren<Text>();
             foreach (var t in texts) //주문서 열면 text항목이 비활성화되있어서 활성화해줌
                 t.enabled = true;
             texts[0].text = $"{foodName} {count}";
             texts[1].text = $"{subtotal}";
         }
         GameObject totalPanel = Instantiate(panelPrefab, contentArea);
-        var totalTexts = totalPanel.GetComponentsInChildren<TextMeshProUGUI>();
+        //var totalTexts = totalPanel.GetComponentsInChildren<TextMeshProUGUI>();
+        var totalTexts = totalPanel.GetComponentsInChildren<Text>();
         foreach (var t in totalTexts)
             t.enabled = true;
-        totalTexts[0].text = "Total"; // 왼쪽에 'Total' 표시
+        totalTexts[0].text = "Total : "; // 왼쪽에 'Total' 표시
         totalTexts[1].text = $"{totalPrice}"; // 오른쪽에 합계 출력
-
+        panelPrefab.SetActive(false);
     }
 
     public void AcceptButtonOn()
