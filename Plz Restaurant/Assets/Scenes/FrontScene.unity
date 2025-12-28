@@ -444,7 +444,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2139053146993085348, guid: 6a51205f2e45d0440a71dd02a8a8c593, type: 3}
       propertyPath: m_Name
-      value: FrontSceneUiManager
+      value: FrontScene_UIManger
       objectReference: {fileID: 0}
     - target: {fileID: 2139053146993085348, guid: 6a51205f2e45d0440a71dd02a8a8c593, type: 3}
       propertyPath: m_IsActive
