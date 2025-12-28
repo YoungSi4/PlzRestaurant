@@ -9,17 +9,21 @@ using UnityEngine.UI;
 public class Minigame1 : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] foodImages; // 테이블에 음식 이미지가 들어갈 오브젝트 저장
+    private Button[] foodImages; // 테이블에 음식 이미지가 들어갈 오브젝트 저장
     [SerializeField]
     private TextMeshProUGUI tableNumText; // 테이블 번호 텍스트 - 출력
     [SerializeField]
     private TextMeshProUGUI tryedTimesText; // 시도 횟수 텍스트 - 출력
+    [SerializeField]
+    private TextMeshProUGUI timerText; // 타이머 텍스트 - 출력
+    float currentTime;
 
     FoodDB foodDB;
 
     private FoodData[] orderedFoods; // 올바른 주문 정보 저장 배열
     private int tableNum; // 테이블 번호
     private List<int> wrongFoodIndexList; // 정답이 아닌 음식들의 인덱스 리스트
+
 
     private void Awake()
     {
@@ -28,12 +32,34 @@ public class Minigame1 : MonoBehaviour
         wrongFoodIndexList = new List<int>(); // 초기화
     }
 
+    private void Update()
+    {
+        //CountTimer();
+    }
+
+/*    private void CountTimer()
+    {
+        if(currentTime > 0)
+        {
+            currentTime -= Time.deltaTime;
+            timerText.text = Mathf.CeilToInt(currentTime).ToString();
+        }
+        if(currentTime <= 0)
+        {
+            timerText.text = "0";
+            // 타임오버 처리 - 추후 구현
+        }
+    }*/
+
     // 해당 테이블의 올바른 주문 정보 전달 받기
     // MiniGame1의 시작 - 호출 지점
     public void GetOrderedFoodData(int tableNumber, FoodData[] foods)
     {
         tableNum = tableNumber;
         orderedFoods = foods;
+        // 타이머 초기화
+        timerText.SetText("15");
+        currentTime = 15f;
 
         InitWrongList(foods);
         SetMinigameStart();
@@ -45,7 +71,7 @@ public class Minigame1 : MonoBehaviour
         // 리스트 비우기 - 재사용 고려
         wrongFoodIndexList.Clear();
 
-        // foodDB의 음식 개수만큼 인덱스 추가 - 데이터 전달 받은 후 정답 데이터 제외시키기
+        // foodDB의 음식 개수만큼 인덱스 추가 - 데이터 전달 받은 후 정답 데이터 제외시킬 것
         for (int i = 0; i < foodDB.foodCount; i++)
         {
             wrongFoodIndexList.Add(i);
@@ -77,7 +103,7 @@ public class Minigame1 : MonoBehaviour
 
     // 올바른 주문 정보 개수만큼 0~15 사이의 중복되지 않는 랜덤 숫자 뽑기
     // 해당 숫자의 인덱스에 정답 음식 이미지를 넣기 위함
-    private List<int> GetRandomNumbers()
+    private List<int> GetRandomNumbersToCorrect()
     {
         // 0~15까지 숫자가 든 리스트 생성
         List<int> pool = new List<int>();
@@ -100,9 +126,10 @@ public class Minigame1 : MonoBehaviour
         return result;
     }
 
+    // 정답과 오답 음식 이미지 16개 세팅
     private void SetFoodImages()
     {
-        List<int> randNums = GetRandomNumbers();
+        List<int> randNums = GetRandomNumbersToCorrect();
         int index = 0;
         for (int i = 0; i < 16; i++)
         {
