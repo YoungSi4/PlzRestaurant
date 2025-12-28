@@ -48,13 +48,13 @@ MonoBehaviour:
   stopPopup: {fileID: 0}
   fadeOutPanel: {fileID: 0}
   orderMemo: {fileID: 0}
+  MenuPan: {fileID: 0}
   targetIncomeText: {fileID: 0}
   todayIncomeText: {fileID: 0}
   giveUpTodayText: {fileID: 0}
   left: {fileID: 0}
   right: {fileID: 0}
   up: {fileID: 0}
-  timeOver: {fileID: 0}
 --- !u!1 &8402379087359175218
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class Money : MonoBehaviour
     private void Awake()
     {
         amount = 0;
-        manager = GameObject.Find("YH_GameManager").GetComponent<GameManager>();
+        manager = GameObject.FindAnyObjectByType<GameManager>();
     }
 
     public void Init(int price, Table table)
