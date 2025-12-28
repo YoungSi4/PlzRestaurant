@@ -204,8 +204,9 @@ public class MoveAndToggle : MonoBehaviour
                     }
                     else if (hit.collider.CompareTag("Table"))
                     {
-                        Debug.Log("Table 상호작용");
+                        // Debug.Log("Table 상호작용");
                         var table = hit.collider.gameObject.GetComponent<Table>();
+                        Debug.Log("Table 상호작용" + table.tableNum);
                         if (!table.isReadyToOrder) return; // 아직 주문 결정을 못했다면 
 
                         mainScene2.OrderMemoOn();
