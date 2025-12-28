@@ -13,8 +13,6 @@ public class MenuPan : MonoBehaviour // 페이지 1, 2, 3가 존재
     public Button leftButton;
     public TextMeshProUGUI pageText;
 
-    public ScrollRect scrollView1;
-
     public FoodDB foodDB;
 
     [SerializeField] private Transform content;
@@ -47,6 +45,7 @@ public class MenuPan : MonoBehaviour // 페이지 1, 2, 3가 존재
         }
         pageText.text = pageNumber.ToString();
     }
+
 
     void SettingMenuPan(int StartNumber, int EndNumber)
     {
