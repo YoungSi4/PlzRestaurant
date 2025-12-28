@@ -65,7 +65,7 @@ public class HeadChef : MonoBehaviour
     private void Update()
     {
         H_startCookingRoutine();
-        TestGetFood();
+        // TestGetFood();
         ClearTableFoodInfo();
     }
 

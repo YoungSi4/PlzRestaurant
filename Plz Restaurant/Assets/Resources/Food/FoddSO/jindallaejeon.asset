@@ -18,4 +18,4 @@ MonoBehaviour:
   foodPrice: 9000
   foodDescription: "\uC190\uC218 \uB530\uC11C \uB9D0\uB9B0 \uC9C4\uB2EC\uB798\uAF43\uC73C\uB85C
     \uB9CC\uB4E0 \uC9C4\uB2EC\uB798\uC804"
-  foodPrefab: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}
+  foodPrefab: {fileID: 919132149155446097, guid: 494313f56eff7554084e0c3017367b6b, type: 3}

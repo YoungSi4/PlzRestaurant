@@ -17,4 +17,4 @@ MonoBehaviour:
   foodName: "\uC0DD\uC120\uAD6C\uC774"
   foodPrice: 9000
   foodDescription: "\uC2E0\uC120\uD55C \uC81C\uCCA0 \uC0DD\uC120\uAD6C\uC774"
-  foodPrefab: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}
+  foodPrefab: {fileID: 919132149155446097, guid: b6f66e7aec94f9740a26799395c47784, type: 3}

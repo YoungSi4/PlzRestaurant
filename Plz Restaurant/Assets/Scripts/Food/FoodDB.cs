@@ -10,6 +10,8 @@ public class FoodDB : MonoBehaviour
 
     // 위 데이터를 컨테이너에 저장
     private Dictionary<int, FoodData> foodDB;
+    // 개수 참조를 위한 프로퍼티
+    public int foodCount => foodDB.Count;
 
     void Awake()
     {
@@ -25,5 +27,4 @@ public class FoodDB : MonoBehaviour
         FoodData targetFood = foodDB[foodNum];
         return targetFood;
     }
-
 }
