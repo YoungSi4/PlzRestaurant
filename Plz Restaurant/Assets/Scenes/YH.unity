@@ -3022,6 +3022,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5716555945061918444, guid: 9d44ef7230be09b4c801c21b96d30963, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnToggleInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716555945061918444, guid: 9d44ef7230be09b4c801c21b96d30963, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnToggleInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716555945061918444, guid: 9d44ef7230be09b4c801c21b96d30963, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: InterAction
       objectReference: {fileID: 0}
