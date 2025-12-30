@@ -17,12 +17,18 @@ public class Minigame1 : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timerText; // 타이머 텍스트 - 출력
     float currentTime;
+    [SerializeField]
+    private GameObject gameOverImage; // 게임 오버 이미지 - 타임오버 시 활성화
+    [SerializeField]
+    private GameObject gameClearImage; // 클리어 이미지 - 미니게임 클리어 시 활성화
 
     FoodDB foodDB;
 
     private FoodData[] orderedFoods; // 올바른 주문 정보 저장 배열
     private int tableNum; // 테이블 번호
     private List<int> wrongFoodIndexList; // 정답이 아닌 음식들의 인덱스 리스트
+    List<int> correctRandNums; // 정답 음식이 들어갈 위치의 랜덤 인덱스 리스트
+    private bool isTimeOver = false; // 타임오버가 이미 되었는지 체크하는 변수
 
 
     private void Awake()
@@ -30,26 +36,51 @@ public class Minigame1 : MonoBehaviour
         foodDB = FindObjectOfType<FoodDB>();
 
         wrongFoodIndexList = new List<int>(); // 초기화
+        correctRandNums = new List<int>();
+
+        // 호출 테스트
+        // GetOrderedFoodData(1, new FoodData[]{foodDB.GetFoodData(1), foodDB.GetFoodData(2)});
+        InitTimer();
     }
 
     private void Update()
     {
-        //CountTimer();
+        if (!isTimeOver)
+        {
+            CountTimer();
+        }
     }
 
-/*    private void CountTimer()
+    private void CountTimer()
     {
-        if(currentTime > 0)
+        if (currentTime > 0)
         {
             currentTime -= Time.deltaTime;
             timerText.text = Mathf.CeilToInt(currentTime).ToString();
         }
-        if(currentTime <= 0)
+        if (currentTime <= 0)
         {
             timerText.text = "0";
-            // 타임오버 처리 - 추후 구현
+            isTimeOver = true;
+            StartCoroutine(TimeOverImageSet());
         }
-    }*/
+    }
+
+    // 타임오버 이미지 활성화 코루틴 - 2초 뒤 사라짐
+    IEnumerator TimeOverImageSet()
+    {
+        gameOverImage.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameOverImage.SetActive(false);
+    }
+
+    // 타이머 초기화
+    private void InitTimer()
+    {
+        isTimeOver = false;
+        timerText.SetText("15");
+        currentTime = 15f;
+    }
 
     // 해당 테이블의 올바른 주문 정보 전달 받기
     // MiniGame1의 시작 - 호출 지점
@@ -57,10 +88,9 @@ public class Minigame1 : MonoBehaviour
     {
         tableNum = tableNumber;
         orderedFoods = foods;
-        // 타이머 초기화
-        timerText.SetText("15");
-        currentTime = 15f;
 
+        // 타이머 초기화
+        InitTimer();
         InitWrongList(foods);
         SetMinigameStart();
     }
@@ -129,12 +159,12 @@ public class Minigame1 : MonoBehaviour
     // 정답과 오답 음식 이미지 16개 세팅
     private void SetFoodImages()
     {
-        List<int> randNums = GetRandomNumbersToCorrect();
+        correctRandNums = GetRandomNumbersToCorrect();
         int index = 0;
         for (int i = 0; i < 16; i++)
         {
             // 정답을 넣기 위해 선택해 둔 위치인 경우
-            if (randNums.Contains(i))
+            if (correctRandNums.Contains(i))
             {
                 // 정답의 이미지를 순서대로 넣기
                 foodImages[i].GetComponent<Image>().sprite = orderedFoods[index].foodImage;
@@ -157,6 +187,26 @@ public class Minigame1 : MonoBehaviour
                 wrongFoodIndexList.RemoveAt(randomPick);
             }
         }
+    }
+
+    // ---------------------------------------------------------------
+    // 미니게임 플레이 관련 로직 작성 시작
+    // ---------------------------------------------------------------
+
+    // 호출로 미니게임 시작
+    private void PlayMinigame()
+    {
+
+    }
+
+    private void PickCorectAnswer()
+    {
+
+    }
+    
+    private void PickWrongAnswer()
+    {
+
     }
 
 }
