@@ -13,7 +13,7 @@ public class Minigame1 : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI tableNumText; // 테이블 번호 텍스트 - 출력
     [SerializeField]
-    private TextMeshProUGUI tryedTimesText; // 시도 횟수 텍스트 - 출력
+    private TextMeshProUGUI remainingAttemptsText; // 시도 횟수 텍스트 - 출력
     [SerializeField]
     private TextMeshProUGUI timerText; // 타이머 텍스트 - 출력
     float currentTime;
@@ -21,6 +21,8 @@ public class Minigame1 : MonoBehaviour
     private GameObject gameOverImage; // 게임 오버 이미지 - 타임오버 시 활성화
     [SerializeField]
     private GameObject gameClearImage; // 클리어 이미지 - 미니게임 클리어 시 활성화
+    [SerializeField]
+    private GameObject gameFailedImage; // 실패 이미지 - 미니게임 실패 시 활성화
 
     FoodDB foodDB;
 
@@ -29,6 +31,8 @@ public class Minigame1 : MonoBehaviour
     private List<int> wrongFoodIndexList; // 정답이 아닌 음식들의 인덱스 리스트
     List<int> correctRandNums; // 정답 음식이 들어갈 위치의 랜덤 인덱스 리스트
     private bool isTimeOver = false; // 타임오버가 이미 되었는지 체크하는 변수
+    private bool isCleared = false; // 미니게임 클리어 여부 체크 변수
+    private bool isFailed = false; // 미니게임 실패 여부 체크 변수
 
 
     private void Awake()
@@ -40,7 +44,7 @@ public class Minigame1 : MonoBehaviour
 
         // 호출 테스트
         // GetOrderedFoodData(1, new FoodData[]{foodDB.GetFoodData(1), foodDB.GetFoodData(2)});
-        InitTimer();
+        InitUIText();
     }
 
     private void Update()
@@ -62,7 +66,7 @@ public class Minigame1 : MonoBehaviour
         {
             timerText.text = "0";
             isTimeOver = true;
-            StartCoroutine(TimeOverImageSet());
+            GameOver();
         }
     }
 
@@ -73,13 +77,40 @@ public class Minigame1 : MonoBehaviour
         yield return new WaitForSeconds(2f);
         gameOverImage.SetActive(false);
     }
-
-    // 타이머 초기화
-    private void InitTimer()
+    // 게임클리어 이미지 활성화 코루틴 - 2초 뒤 사라짐
+    IEnumerator GameClearImageSet()
     {
-        isTimeOver = false;
+        gameClearImage.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameClearImage.SetActive(false);
+    }
+    // 게임실패 이미지 활성화 코루틴 - 2초 뒤 사라짐
+    IEnumerator GameFailedImageSet()
+    {
+        gameFailedImage.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameFailedImage.SetActive(false);
+    }
+
+    // UI 출력 텍스트 초기화
+    private void InitUIText()
+    {
+        // 타이머 초기화
         timerText.SetText("15");
         currentTime = 15f;
+
+        // 남은 시도 횟수 초기화
+        remainingAttemptsText.SetText("3");
+
+        // tableNumText 출력
+        if (tableNum >= 10)
+        {
+            tableNumText.SetText(tableNum.ToString());
+        }
+        else if (tableNum < 10 && tableNum > 0)
+        {
+            tableNumText.SetText("0" + tableNum.ToString());
+        }
     }
 
     // 해당 테이블의 올바른 주문 정보 전달 받기
@@ -89,8 +120,7 @@ public class Minigame1 : MonoBehaviour
         tableNum = tableNumber;
         orderedFoods = foods;
 
-        // 타이머 초기화
-        InitTimer();
+        InitUIText();
         InitWrongList(foods);
         SetMinigameStart();
     }
@@ -118,15 +148,11 @@ public class Minigame1 : MonoBehaviour
     // 필요한 동작들 추가할 예정
     private void SetMinigameStart()
     {
-        // tableNumText 출력
-        if (tableNum >= 10)
-        {
-            tableNumText.SetText(tableNum.ToString());
-        }
-        else if (tableNum < 10 && tableNum > 0)
-        {
-            tableNumText.SetText("0" + tableNum.ToString());
-        }
+        isTimeOver = false;
+        isCleared = false;
+        isFailed = false;
+
+
 
         SetFoodImages();
     }
@@ -163,6 +189,11 @@ public class Minigame1 : MonoBehaviour
         int index = 0;
         for (int i = 0; i < 16; i++)
         {
+            int buttonIndex = i;
+            // 리스너 연결 (람다식)
+            foodImages[i].onClick.RemoveAllListeners(); // 기존 연결 해제
+            foodImages[i].onClick.AddListener(() => CheckAnswer(buttonIndex)); // 새로운 연결 생성
+
             // 정답을 넣기 위해 선택해 둔 위치인 경우
             if (correctRandNums.Contains(i))
             {
@@ -193,20 +224,77 @@ public class Minigame1 : MonoBehaviour
     // 미니게임 플레이 관련 로직 작성 시작
     // ---------------------------------------------------------------
 
-    // 호출로 미니게임 시작
-    private void PlayMinigame()
+    // 버튼 클릭 시 호출 (index는 0 ~ 15)
+    private void CheckAnswer(int index)
     {
+        if (isTimeOver) return;
 
+        // [핵심 변경] 이미지를 비교할 필요 없이, 
+        // "누른 버튼의 번호(index)가 정답 리스트(correctRandNums)에 포함되어 있나?"만 확인하면 끝!
+        if (correctRandNums.Contains(index))
+        {
+            PickCorectAnswer(index); 
+        }
+        else
+        {
+            PickWrongAnswer(index);
+        }
     }
 
-    private void PickCorectAnswer()
+    private void PickCorectAnswer(int index)
     {
+        // 잘 고른 그림에 O표시하는 기능 추가해야 함
 
+        // 선택한 버튼 비활성화
+        foodImages[index].interactable = false;
+
+        // 선택한 정답을 정답 리스트에서 삭제
+        correctRandNums.Remove(index);
+        // 모든 정답을 선택한 경우 GameOver() 호출 및 isCleared = true 설정
+        if (correctRandNums.Count == 0)
+        {
+            isCleared = true;
+            GameOver();
+        }
     }
-    
-    private void PickWrongAnswer()
-    {
 
+    private void PickWrongAnswer(int index)
+    {
+        // 잘못 고른 그림에 X표시하는 기능 추가해야 함
+
+        // 선택한 버튼 비활성화
+        foodImages[index].interactable = false;
+
+        var text = remainingAttemptsText.text;
+        int attempts = int.Parse(text);
+        if (attempts > 1)
+        {
+            attempts--;
+            remainingAttemptsText.SetText(attempts.ToString());
+        }
+        else if(attempts == 1)
+        {
+            attempts--;
+            remainingAttemptsText.SetText(attempts.ToString());
+            isFailed = true;
+            GameOver();
+        }
+    }
+    // 게임 오버 처리 - 미니게임 UI 내리기 등 추가해야 할 듯
+    private void GameOver()
+    {
+        if (isTimeOver)
+        {
+            StartCoroutine(TimeOverImageSet());
+        }
+        else if (isFailed)
+        {
+            StartCoroutine(GameFailedImageSet());
+        }
+        else if (isCleared)
+        {
+            StartCoroutine(GameClearImageSet());
+        }
     }
 
 }
