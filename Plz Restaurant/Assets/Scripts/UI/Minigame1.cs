@@ -23,6 +23,10 @@ public class Minigame1 : MonoBehaviour
     private GameObject gameClearImage; // 클리어 이미지 - 미니게임 클리어 시 활성화
     [SerializeField]
     private GameObject gameFailedImage; // 실패 이미지 - 미니게임 실패 시 활성화
+    [SerializeField]
+    private Image[] OImages; // 정답 시 출력할 O 이미지 배열
+    [SerializeField]
+    private Image[] XImages; // 오답 시 출력할 X 이미지 배열
 
     FoodDB foodDB;
 
@@ -243,8 +247,8 @@ public class Minigame1 : MonoBehaviour
 
     private void PickCorectAnswer(int index)
     {
-        // 잘 고른 그림에 O표시하는 기능 추가해야 함
-
+        // 잘 고른 그림에 O표시
+        OImages[index].gameObject.SetActive(true);
         // 선택한 버튼 비활성화
         foodImages[index].interactable = false;
 
@@ -260,7 +264,10 @@ public class Minigame1 : MonoBehaviour
 
     private void PickWrongAnswer(int index)
     {
-        // 잘못 고른 그림에 X표시하는 기능 추가해야 함
+        // 잘못 고른 그림에 X표시
+        XImages[index].gameObject.SetActive(true);
+        // 선택한 버튼 비활성화
+        foodImages[index].interactable = false;
 
         // 선택한 버튼 비활성화
         foodImages[index].interactable = false;
