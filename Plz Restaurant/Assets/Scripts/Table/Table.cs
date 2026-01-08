@@ -154,6 +154,7 @@ public class Table : MonoBehaviour
         visitorNum++;
     }
 
+    // 의자에 저장해둔 손님 정보 초기화
     public void VisitorStandUpChair()
     {
         isTableOccupied = false;
@@ -199,6 +200,13 @@ public class Table : MonoBehaviour
         }
     } // onTriggerEnter -end-
 
+    // 이 위로는 맞는 손님인지 확인하는 플로우일 뿐
+
+    /// <summary>
+    /// 주문 시작하는 함수!!!
+    /// 여기서 주문 플로우 시작
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator WaitingForOrder()
     {
         int randInt = Random.Range(5, 11); // 5 ~ 10
@@ -417,6 +425,38 @@ public List<int>[] SendFoodNumToOrderInfo()
             Destroy(foodObject);
         }
         placedFoodObjects.Clear();
+    }
+
+    private void SendVsitorChooseFoodAgain()
+    {
+        foreach (Visitor visitor in visitorOnChair)
+        {
+            if (visitor == null) continue;
+            visitor.ChooseFood();
+        }
+    }
+
+    /// <summary>
+    /// 주문서에서 거절 선택하면 호출하는 함수
+    /// </summary>
+    public void OrderRejected()
+    {
+        float p = Random.Range(1, 10);
+        // 재주문
+        if (p > 3)
+        {
+            // 재주문을 위해 음식을 다시 정하는 함수
+            SendVsitorChooseFoodAgain();
+            StartCoroutine(WaitingForOrder()); // 주문 프로세스는 여기서 재시작
+        }
+        // 퇴장
+        else
+        {
+            // 다른 함수 없이 떠나는 것만 있으면 될 것 같음
+            VisitorDeparture();
+            ResetVars();
+            VisitorStandUpChair();
+        }
     }
 
 }

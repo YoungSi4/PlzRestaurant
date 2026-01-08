@@ -208,10 +208,9 @@ public class MoveAndToggle : MonoBehaviour
                         var table = hit.collider.gameObject.GetComponent<Table>();
                         if (!table.isReadyToOrder) return; // 아직 주문 결정을 못했다면 
 
-                        mainScene2.OrderMemoOn();
                         var foodIDs = table.SendFoodNumToOrderInfo();
                         order.SetFoodNumFromPlayer(foodIDs, table.tableNum);
-
+                        mainScene2.OrderMemoOn();
                     }
                     else if (hit.collider.CompareTag("Money"))
                     {

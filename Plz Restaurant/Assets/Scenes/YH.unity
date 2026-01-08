@@ -1854,8 +1854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2288c25e2486c842a7ab5bcd224c909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accept: {fileID: 0}
-  reject: {fileID: 0}
+  accept: {fileID: 1292169662}
+  reject: {fileID: 1628395763}
   chef: {fileID: 1645504873}
   panelPrefab: {fileID: 0}
   contentArea: {fileID: 0}
@@ -2156,7 +2156,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1292169663}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1191905807}
+        m_TargetAssemblyTypeName: OrderMemo, Assembly-CSharp
+        m_MethodName: AcceptButtonOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1292169663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2732,7 +2744,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1628395764}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1191905805}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1628395764
 MonoBehaviour:
   m_ObjectHideFlags: 0

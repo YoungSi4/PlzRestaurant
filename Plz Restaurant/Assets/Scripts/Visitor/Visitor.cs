@@ -54,16 +54,22 @@ public class Visitor : MonoBehaviour
         // C_seatNumber = Random.Range(1.1f, 4.4f);
         hasEaten = false;
          numOfOrderFood = UnityEngine.Random.Range(1, 3); // 1 ~ 2\
-        C_foodNumber = new int[numOfOrderFood];
-        for (int i = 0; i < numOfOrderFood;  i++)
-        {
-            C_foodNumber[i] = UnityEngine.Random.Range(1, 11);
-        }
+        ChooseFood();
 
         //Debug.Log("seatNumber : " +  C_seatNumber);
         //Debug.Log("foodNumber : " + C_foodNumber);
 
         // StartCoroutine(DisableObj());
+    }
+
+    // 음식을 선택하는 함수
+    public void ChooseFood()
+    {
+        C_foodNumber = new int[numOfOrderFood];
+        for (int i = 0; i < numOfOrderFood; i++)
+        {
+            C_foodNumber[i] = UnityEngine.Random.Range(1, 11);
+        }
     }
 
     public void SetTableNum(int tableNum)

@@ -22,6 +22,8 @@ public class OrderMemo : MonoBehaviour
     public Button reject;
 
     private int tableNum;
+    private TableManager tableManager;
+    
     private string foodName;
     // food image?
     private int foodPrice;
@@ -47,7 +49,14 @@ public class OrderMemo : MonoBehaviour
     //public TextMeshProUGUI tableCountText;
     public Text tableCountText;
 
-
+    private void Awake()
+    {
+        // YH - 거절 피드백을 위한 테이블 매니저 추가
+        // 수락 거절 버튼 함수 코드 상으로 연결 (컴포넌트 상에서 연결할 필요 X)
+        tableManager = FindAnyObjectByType<TableManager>().GetComponent<TableManager>();
+        accept.onClick.AddListener(AcceptButtonOn);
+        reject.onClick.AddListener(RejectButtonOn);
+    }
 
     // 테이블 번호는 어디서 받아서 넘기지? -> visitor order 객체
     public void GetFoodInfo(List<FoodData>[] foodData, int tableNum)
@@ -169,9 +178,11 @@ public class OrderMemo : MonoBehaviour
     {
         SendFoodDataToChef();
     }
+
     public void RejectButtonOn()
     {
-
+        Table table = tableManager.GetTable(tableNum);
+        table.OrderRejected();
     }
 
 

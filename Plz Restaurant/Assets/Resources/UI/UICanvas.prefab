@@ -5248,12 +5248,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2288c25e2486c842a7ab5bcd224c909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OrderMemoBlock1: {fileID: 6552067912842233220}
-  OrderMemoBlock2: {fileID: 874112363526902214}
-  OrderMemoBlock3: {fileID: 7946584051109398986}
-  OrderMemoBlock4: {fileID: 4308500342810988800}
   accept: {fileID: 5444933471852871752}
   reject: {fileID: 6311580835330112031}
+  chef: {fileID: 0}
+  panelPrefab: {fileID: 0}
+  contentArea: {fileID: 0}
+  tableCountText: {fileID: 0}
 --- !u!1 &1953017938934481167
 GameObject:
   m_ObjectHideFlags: 0
