@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
   m_Name: Fried Fsih
   m_EditorClassIdentifier: 
-  foodImage: {fileID: 0}
+  foodImage: {fileID: 21300000, guid: 7fc4a78a16457da4c9471c5267a233a1, type: 3}
   foodNum: 11
   foodName: "\uC0DD\uC120\uAD6C\uC774"
   foodPrice: 9000

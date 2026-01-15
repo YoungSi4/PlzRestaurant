@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
   m_Name: Ramen
   m_EditorClassIdentifier: 
-  foodImage: {fileID: 0}
+  foodImage: {fileID: 21300000, guid: 9f259fa1f6cf33446a8e62f38638e09b, type: 3}
   foodNum: 25
   foodName: "\uB77C\uBA58"
   foodPrice: 11000

@@ -45,10 +45,12 @@ public class Minigame1 : MonoBehaviour
 
         wrongFoodIndexList = new List<int>(); // 초기화
         correctRandNums = new List<int>();
+    }
 
+    private void Start()
+    {
         // 호출 테스트
-        // GetOrderedFoodData(1, new FoodData[]{foodDB.GetFoodData(1), foodDB.GetFoodData(2)});
-        InitUIText();
+        GetOrderedFoodData(1, new FoodData[] { foodDB.GetFoodData(1), foodDB.GetFoodData(2) });
     }
 
     private void Update()

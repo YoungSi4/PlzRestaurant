@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
   m_Name: Tteokbokki
   m_EditorClassIdentifier: 
-  foodImage: {fileID: 0}
+  foodImage: {fileID: 21300000, guid: 8d57f6eb8dbc58f4d88be423d44ed114, type: 3}
   foodNum: 38
   foodName: "\uB5A1\uBCF6\uC774"
   foodPrice: 9000

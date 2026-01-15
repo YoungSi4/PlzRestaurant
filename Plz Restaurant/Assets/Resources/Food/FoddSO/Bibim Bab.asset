@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
   m_Name: Bibim Bab
   m_EditorClassIdentifier: 
-  foodImage: {fileID: 0}
+  foodImage: {fileID: 21300000, guid: 06d8f5da1744be44cb02d53f8617e86c, type: 3}
   foodNum: 2
   foodName: "\uBE44\uBE54\uBC25"
   foodPrice: 8500

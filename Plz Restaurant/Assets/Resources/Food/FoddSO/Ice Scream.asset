@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
   m_Name: Ice Scream
   m_EditorClassIdentifier: 
-  foodImage: {fileID: 0}
+  foodImage: {fileID: 21300000, guid: 5d57869395af3274bb4302455dfb2d5b, type: 3}
   foodNum: 15
   foodName: "\uD558\uB4DC \uBC14 \uC544\uC774\uC2A4\uD06C\uB9BC"
   foodPrice: 4000
