@@ -50,7 +50,7 @@ public class Minigame1 : MonoBehaviour
     private void Start()
     {
         // 호출 테스트
-        GetOrderedFoodData(1, new FoodData[] { foodDB.GetFoodData(1), foodDB.GetFoodData(2) });
+        // GetOrderedFoodData(1, new FoodData[] { foodDB.GetFoodData(1), foodDB.GetFoodData(2), foodDB.GetFoodData(4), foodDB.GetFoodData(8), foodDB.GetFoodData(12) });
     }
 
     private void Update()
@@ -82,6 +82,8 @@ public class Minigame1 : MonoBehaviour
         gameOverImage.SetActive(true);
         yield return new WaitForSeconds(2f);
         gameOverImage.SetActive(false);
+        // 미니게임 팝업 닫기
+        CloseGame();
     }
     // 게임클리어 이미지 활성화 코루틴 - 2초 뒤 사라짐
     IEnumerator GameClearImageSet()
@@ -89,6 +91,8 @@ public class Minigame1 : MonoBehaviour
         gameClearImage.SetActive(true);
         yield return new WaitForSeconds(2f);
         gameClearImage.SetActive(false);
+        // 미니게임 팝업 닫기
+        CloseGame();
     }
     // 게임실패 이미지 활성화 코루틴 - 2초 뒤 사라짐
     IEnumerator GameFailedImageSet()
@@ -96,6 +100,8 @@ public class Minigame1 : MonoBehaviour
         gameFailedImage.SetActive(true);
         yield return new WaitForSeconds(2f);
         gameFailedImage.SetActive(false);
+        // 미니게임 팝업 닫기
+        CloseGame();
     }
 
     // UI 출력 텍스트 초기화
@@ -121,6 +127,7 @@ public class Minigame1 : MonoBehaviour
 
     // 해당 테이블의 올바른 주문 정보 전달 받기
     // MiniGame1의 시작 - 호출 지점
+    // 외부 호출 시 미니게임 UI SetActive(true)가 선행되어야 함
     public void GetOrderedFoodData(int tableNumber, FoodData[] foods)
     {
         tableNum = tableNumber;
@@ -138,7 +145,7 @@ public class Minigame1 : MonoBehaviour
         wrongFoodIndexList.Clear();
 
         // foodDB의 음식 개수만큼 인덱스 추가 - 데이터 전달 받은 후 정답 데이터 제외시킬 것
-        for (int i = 0; i < foodDB.foodCount; i++)
+        for (int i = 1; i <= foodDB.foodCount; i++)
         {
             wrongFoodIndexList.Add(i);
         }
@@ -154,11 +161,11 @@ public class Minigame1 : MonoBehaviour
     // 필요한 동작들 추가할 예정
     private void SetMinigameStart()
     {
+        gameObject.SetActive(true); // 미니게임 UI 팝업 활성화
+
         isTimeOver = false;
         isCleared = false;
         isFailed = false;
-
-
 
         SetFoodImages();
     }
@@ -289,9 +296,16 @@ public class Minigame1 : MonoBehaviour
             GameOver();
         }
     }
+
     // 게임 오버 처리 - 미니게임 UI 내리기 등 추가해야 할 듯
     private void GameOver()
     {
+        // 버튼 상호작용 비활성화(남은 모든 버튼 클릭 방지)
+        foreach (var btn in foodImages)
+        {
+            btn.interactable = false;
+        }
+
         if (isTimeOver)
         {
             StartCoroutine(TimeOverImageSet());
@@ -304,6 +318,12 @@ public class Minigame1 : MonoBehaviour
         {
             StartCoroutine(GameClearImageSet());
         }
+    }
+    
+    private void CloseGame()
+    {
+        // UI 팝업 비활성화 (창 닫기)
+        gameObject.SetActive(false);
     }
 
 }
