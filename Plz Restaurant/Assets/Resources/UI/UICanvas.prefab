@@ -2365,7 +2365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4522236506817165707
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3444,7 +3444,7 @@ GameObject:
   - component: {fileID: 5269059363413032372}
   - component: {fileID: 727579416872646861}
   m_Layer: 5
-  m_Name: (5) Quest BackGround
+  m_Name: Quest BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3724,12 +3724,12 @@ GameObject:
   - component: {fileID: 3015494384443469708}
   - component: {fileID: 8700812981335447925}
   m_Layer: 5
-  m_Name: (2) Store Menu
+  m_Name: Store Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1099932946456561483
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4238,7 +4238,7 @@ GameObject:
   - component: {fileID: 1417638786041366064}
   - component: {fileID: 3167708555163933132}
   m_Layer: 5
-  m_Name: (1) Exit Button
+  m_Name: Exit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4263,7 +4263,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 330.00003, y: -155.05696}
-  m_SizeDelta: {x: 150, y: 50}
+  m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &7849564400494739429
 CanvasRenderer:
@@ -4293,8 +4293,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: e112c916b517d94488a55252c07a39d2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5164,7 +5164,7 @@ GameObject:
   - component: {fileID: 5705920578833301482}
   - component: {fileID: 7280974320702976655}
   m_Layer: 5
-  m_Name: (3) Booster <Button>
+  m_Name: Booster <Button>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6153,7 +6153,7 @@ GameObject:
   - component: {fileID: 4243746000086680384}
   - component: {fileID: 12724961484324925}
   m_Layer: 5
-  m_Name: Current Time
+  m_Name: Current Time <Image>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6177,7 +6177,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -0.000015258789, y: 144.05074}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4243746000086680384
 CanvasRenderer:
@@ -7519,7 +7519,7 @@ GameObject:
   - component: {fileID: 8461664942048305547}
   - component: {fileID: 8593213519473133231}
   m_Layer: 5
-  m_Name: (3) Option<button>
+  m_Name: Option<Button>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7656,7 +7656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8157897889461026488
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7693,7 +7693,7 @@ GameObject:
   - component: {fileID: 1889122545629350150}
   - component: {fileID: 7379281231472043380}
   m_Layer: 5
-  m_Name: (4) Quest/Achievement
+  m_Name: Quest/Achievement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7813,7 +7813,7 @@ GameObject:
   - component: {fileID: 2184368094697068357}
   - component: {fileID: 2730669895451371560}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Button <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11024,7 +11024,7 @@ GameObject:
   - component: {fileID: 9050321768584311329}
   - component: {fileID: 3823315754781212499}
   m_Layer: 5
-  m_Name: (1) Current Date
+  m_Name: Current Date
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11121,7 +11121,7 @@ GameObject:
   - component: {fileID: 7082881786176567325}
   - component: {fileID: 7870785485735719090}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Day <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11257,7 +11257,7 @@ GameObject:
   - component: {fileID: 8354381770854029424}
   - component: {fileID: 5629272102539005024}
   m_Layer: 5
-  m_Name: (1) DropDownMenu<Button>
+  m_Name: DropDownMenu<Button>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11369,7 +11369,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainScene1, Assembly-CSharp
-        m_MethodName: OnOff_UI
+        m_MethodName: On_UI
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4652092509645933974}
@@ -12055,7 +12055,7 @@ GameObject:
   - component: {fileID: 4202089051833409460}
   - component: {fileID: 3583616910129264036}
   m_Layer: 5
-  m_Name: (5) achievement BackGround
+  m_Name: achievement BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12206,7 +12206,7 @@ GameObject:
   - component: {fileID: 3864386517613082484}
   - component: {fileID: 4872215643726545143}
   m_Layer: 5
-  m_Name: (3) Collection<button>
+  m_Name: Collection<Button>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13157,7 +13157,7 @@ GameObject:
   - component: {fileID: 9073948790025743093}
   - component: {fileID: 9022996702018582826}
   m_Layer: 5
-  m_Name: (3) Item <Button>
+  m_Name: Item <Button>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13315,7 +13315,7 @@ GameObject:
   - component: {fileID: 2066973052651866164}
   - component: {fileID: 7155084195392641811}
   m_Layer: 5
-  m_Name: (3) Upgrade <Button>
+  m_Name: Upgrade <Button>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14269,7 +14269,7 @@ GameObject:
   - component: {fileID: 7478422403685292520}
   - component: {fileID: 272904965294389565}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Booster <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15713,7 +15713,7 @@ GameObject:
   - component: {fileID: 8996566804811581180}
   - component: {fileID: 6211563294315350619}
   m_Layer: 5
-  m_Name: Colon
+  m_Name: Colon <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16057,7 +16057,7 @@ GameObject:
   - component: {fileID: 7499686376899215254}
   - component: {fileID: 4587399913671706003}
   m_Layer: 5
-  m_Name: (3) Achievement<button>
+  m_Name: Achievement<Button>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16191,7 +16191,7 @@ GameObject:
   - component: {fileID: 8002872787768755331}
   - component: {fileID: 8060633337836372599}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Exit <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16487,7 +16487,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -716, y: -29}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8573044141267544590
 CanvasRenderer:
@@ -16517,8 +16517,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -16573,11 +16573,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainScene2, Assembly-CSharp
-        m_MethodName: StopGame
-        m_Mode: 1
+        m_MethodName: On_UI
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 5341540127978131678}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -16958,12 +16958,12 @@ GameObject:
   - component: {fileID: 7940919039460323494}
   - component: {fileID: 5021705875806969215}
   m_Layer: 5
-  m_Name: (2) Three Menu
+  m_Name: Three Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6095353867731158174
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17074,7 +17074,7 @@ GameObject:
   - component: {fileID: 7309497580576950526}
   - component: {fileID: 1005720281465479294}
   m_Layer: 5
-  m_Name: (6) Day Quest Panel
+  m_Name: Day Quest Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17539,7 +17539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1638269307142056204
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17846,7 +17846,7 @@ GameObject:
   - component: {fileID: 6247197168612229449}
   - component: {fileID: 3600581038036295926}
   m_Layer: 5
-  m_Name: Text_Minute
+  m_Name: Text_Minute <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18373,7 +18373,7 @@ GameObject:
   - component: {fileID: 8729547710672567415}
   - component: {fileID: 484859046876154994}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Item <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20638,7 +20638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7678639677708311069
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20842,7 +20842,7 @@ GameObject:
   - component: {fileID: 6376091093500041400}
   - component: {fileID: 5880891565707892600}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Option <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20976,7 +20976,7 @@ GameObject:
   - component: {fileID: 6814797035870936886}
   - component: {fileID: 855718129472772664}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Achievement <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21560,8 +21560,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -21578,8 +21578,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -23219,7 +23219,7 @@ GameObject:
   - component: {fileID: 5027016006299827501}
   - component: {fileID: 5130767417623406282}
   m_Layer: 5
-  m_Name: (2) Exit Window
+  m_Name: Exit Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24910,7 +24910,7 @@ GameObject:
   - component: {fileID: 8802686397436625974}
   - component: {fileID: 6091050688742008154}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Collection <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25201,7 +25201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 100, y: 71.51318}
+  m_AnchoredPosition: {x: 137, y: 70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &7336352717976233061
@@ -27294,7 +27294,7 @@ GameObject:
   - component: {fileID: 3536419204910957744}
   - component: {fileID: 2398129956566783483}
   m_Layer: 5
-  m_Name: (1) Current Asset
+  m_Name: Current Asset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28050,7 +28050,7 @@ GameObject:
   - component: {fileID: 463800882065927062}
   - component: {fileID: 6961375878883067781}
   m_Layer: 5
-  m_Name: (6) Week Quest Panel
+  m_Name: Week Quest Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28532,7 +28532,7 @@ GameObject:
   - component: {fileID: 913589694121038908}
   - component: {fileID: 5738939839724784136}
   m_Layer: 5
-  m_Name: Text
+  m_Name: asset <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29715,7 +29715,7 @@ GameObject:
   - component: {fileID: 3405255431838674614}
   - component: {fileID: 2729666504101303967}
   m_Layer: 5
-  m_Name: Text_Hour
+  m_Name: Text_Hour <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29983,7 +29983,7 @@ GameObject:
   - component: {fileID: 3792869959092823192}
   - component: {fileID: 837758739987050773}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Store <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30121,7 +30121,7 @@ GameObject:
   - component: {fileID: 4163392788302245547}
   - component: {fileID: 7495667269533038765}
   m_Layer: 5
-  m_Name: (1) Store Button
+  m_Name: Store <Button>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30354,7 +30354,7 @@ GameObject:
   - component: {fileID: 2154350276415827795}
   - component: {fileID: 6018070043609315625}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Upgrade <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
