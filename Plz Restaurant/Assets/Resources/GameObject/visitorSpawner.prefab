@@ -92,3 +92,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 3746186248982303575}
+  tableManager: {fileID: 0}
+  spawnDelay: 5
+  tableCount: 8

@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2478570823774416509, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
+      propertyPath: tableNum
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8489105477681419352, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
       propertyPath: m_Name
       value: table2_6
@@ -118,6 +122,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.419456
       objectReference: {fileID: 0}
+    - target: {fileID: 4204384247153204728, guid: dfe3161a19def914b968fd94c4157ba2, type: 3}
+      propertyPath: tableNum
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9207033225835325852, guid: dfe3161a19def914b968fd94c4157ba2, type: 3}
       propertyPath: m_Name
       value: table1Shabby_4
@@ -180,6 +188,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2478570823774416509, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
+      propertyPath: tableNum
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8489105477681419352, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
       propertyPath: m_Name
       value: table2_10
@@ -241,6 +253,10 @@ PrefabInstance:
     - target: {fileID: 2272910882036047382, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478570823774416509, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
+      propertyPath: tableNum
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8489105477681419352, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
       propertyPath: m_Name
@@ -365,6 +381,10 @@ PrefabInstance:
     - target: {fileID: 2272910882036047382, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478570823774416509, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
+      propertyPath: tableNum
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8489105477681419352, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
       propertyPath: m_Name
@@ -506,6 +526,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.419456
       objectReference: {fileID: 0}
+    - target: {fileID: 4204384247153204728, guid: dfe3161a19def914b968fd94c4157ba2, type: 3}
+      propertyPath: tableNum
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9207033225835325852, guid: dfe3161a19def914b968fd94c4157ba2, type: 3}
       propertyPath: m_Name
       value: table1Shabby_3
@@ -567,6 +591,10 @@ PrefabInstance:
     - target: {fileID: 2272910882036047382, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478570823774416509, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
+      propertyPath: tableNum
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8489105477681419352, guid: 9cdcd3ea542801e4ca61160182ebb69d, type: 3}
       propertyPath: m_Name
@@ -1840,6 +1868,10 @@ PrefabInstance:
     - target: {fileID: 2921810361104937277, guid: dfe3161a19def914b968fd94c4157ba2, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.419456
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204384247153204728, guid: dfe3161a19def914b968fd94c4157ba2, type: 3}
+      propertyPath: tableNum
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9207033225835325852, guid: dfe3161a19def914b968fd94c4157ba2, type: 3}
       propertyPath: m_Name
