@@ -26,7 +26,7 @@ public class HeadChef : MonoBehaviour
     private List<FoodData>[][] foodDatasOnTable; // 테이블 크기의 배열에 저장된 의자 수 배열에 저장된 음식 데이터 리스트
     private Queue<int> tableNums = new Queue<int>(); // 주문 들어온 순서대로 테이블 번호 저장
 
-    private float cookTime = 1f; // 음식 조리에 걸리는 시간(5초로 수정 예정)
+    private float cookTime = 5f; // 음식 조리에 걸리는 시간(5초로 수정 예정)
     private bool isCooking = false;
 
     private FoodDB foodDB;
