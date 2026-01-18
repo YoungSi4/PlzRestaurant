@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
   m_Name: Pancake
   m_EditorClassIdentifier: 
-  foodImage: {fileID: 0}
+  foodImage: {fileID: 21300000, guid: 7a694b7481ed3a14d8c1ddf8bfc0d0d0, type: 3}
   foodNum: 23
   foodName: "\uD32C\uCF00\uC775"
   foodPrice: 9500

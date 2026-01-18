@@ -13,16 +13,30 @@ public class Minigame1 : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI tableNumText; // 테이블 번호 텍스트 - 출력
     [SerializeField]
-    private TextMeshProUGUI tryedTimesText; // 시도 횟수 텍스트 - 출력
+    private TextMeshProUGUI remainingAttemptsText; // 시도 횟수 텍스트 - 출력
     [SerializeField]
     private TextMeshProUGUI timerText; // 타이머 텍스트 - 출력
     float currentTime;
+    [SerializeField]
+    private GameObject gameOverImage; // 게임 오버 이미지 - 타임오버 시 활성화
+    [SerializeField]
+    private GameObject gameClearImage; // 클리어 이미지 - 미니게임 클리어 시 활성화
+    [SerializeField]
+    private GameObject gameFailedImage; // 실패 이미지 - 미니게임 실패 시 활성화
+    [SerializeField]
+    private Image[] OImages; // 정답 시 출력할 O 이미지 배열
+    [SerializeField]
+    private Image[] XImages; // 오답 시 출력할 X 이미지 배열
 
     FoodDB foodDB;
 
     private FoodData[] orderedFoods; // 올바른 주문 정보 저장 배열
     private int tableNum; // 테이블 번호
     private List<int> wrongFoodIndexList; // 정답이 아닌 음식들의 인덱스 리스트
+    List<int> correctRandNums; // 정답 음식이 들어갈 위치의 랜덤 인덱스 리스트
+    private bool isTimeOver = false; // 타임오버가 이미 되었는지 체크하는 변수
+    private bool isCleared = false; // 미니게임 클리어 여부 체크 변수
+    private bool isFailed = false; // 미니게임 실패 여부 체크 변수
 
 
     private void Awake()
@@ -30,37 +44,96 @@ public class Minigame1 : MonoBehaviour
         foodDB = FindObjectOfType<FoodDB>();
 
         wrongFoodIndexList = new List<int>(); // 초기화
+        correctRandNums = new List<int>();
+    }
+
+    private void Start()
+    {
+        // 호출 테스트
+        // GetOrderedFoodData(1, new FoodData[] { foodDB.GetFoodData(1), foodDB.GetFoodData(2), foodDB.GetFoodData(4), foodDB.GetFoodData(8), foodDB.GetFoodData(12) });
     }
 
     private void Update()
     {
-        //CountTimer();
+        if (!isTimeOver)
+        {
+            CountTimer();
+        }
     }
 
-/*    private void CountTimer()
+    private void CountTimer()
     {
-        if(currentTime > 0)
+        if (currentTime > 0)
         {
             currentTime -= Time.deltaTime;
             timerText.text = Mathf.CeilToInt(currentTime).ToString();
         }
-        if(currentTime <= 0)
+        if (currentTime <= 0)
         {
             timerText.text = "0";
-            // 타임오버 처리 - 추후 구현
+            isTimeOver = true;
+            GameOver();
         }
-    }*/
+    }
 
-    // 해당 테이블의 올바른 주문 정보 전달 받기
-    // MiniGame1의 시작 - 호출 지점
-    public void GetOrderedFoodData(int tableNumber, FoodData[] foods)
+    // 타임오버 이미지 활성화 코루틴 - 2초 뒤 사라짐
+    IEnumerator TimeOverImageSet()
     {
-        tableNum = tableNumber;
-        orderedFoods = foods;
+        gameOverImage.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameOverImage.SetActive(false);
+        // 미니게임 팝업 닫기
+        CloseGame();
+    }
+    // 게임클리어 이미지 활성화 코루틴 - 2초 뒤 사라짐
+    IEnumerator GameClearImageSet()
+    {
+        gameClearImage.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameClearImage.SetActive(false);
+        // 미니게임 팝업 닫기
+        CloseGame();
+    }
+    // 게임실패 이미지 활성화 코루틴 - 2초 뒤 사라짐
+    IEnumerator GameFailedImageSet()
+    {
+        gameFailedImage.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameFailedImage.SetActive(false);
+        // 미니게임 팝업 닫기
+        CloseGame();
+    }
+
+    // UI 출력 텍스트 초기화
+    private void InitUIText()
+    {
         // 타이머 초기화
         timerText.SetText("15");
         currentTime = 15f;
 
+        // 남은 시도 횟수 초기화
+        remainingAttemptsText.SetText("3");
+
+        // tableNumText 출력
+        if (tableNum >= 10)
+        {
+            tableNumText.SetText(tableNum.ToString());
+        }
+        else if (tableNum < 10 && tableNum > 0)
+        {
+            tableNumText.SetText("0" + tableNum.ToString());
+        }
+    }
+
+    // 해당 테이블의 올바른 주문 정보 전달 받기
+    // MiniGame1의 시작 - 호출 지점
+    // 외부 호출 시 미니게임 UI SetActive(true)가 선행되어야 함
+    public void GetOrderedFoodData(int tableNumber, FoodData[] foods)
+    {
+        tableNum = tableNumber;
+        orderedFoods = foods;
+
+        InitUIText();
         InitWrongList(foods);
         SetMinigameStart();
     }
@@ -72,7 +145,7 @@ public class Minigame1 : MonoBehaviour
         wrongFoodIndexList.Clear();
 
         // foodDB의 음식 개수만큼 인덱스 추가 - 데이터 전달 받은 후 정답 데이터 제외시킬 것
-        for (int i = 0; i < foodDB.foodCount; i++)
+        for (int i = 1; i <= foodDB.foodCount; i++)
         {
             wrongFoodIndexList.Add(i);
         }
@@ -88,15 +161,11 @@ public class Minigame1 : MonoBehaviour
     // 필요한 동작들 추가할 예정
     private void SetMinigameStart()
     {
-        // tableNumText 출력
-        if (tableNum >= 10)
-        {
-            tableNumText.SetText(tableNum.ToString());
-        }
-        else if (tableNum < 10 && tableNum > 0)
-        {
-            tableNumText.SetText("0" + tableNum.ToString());
-        }
+        gameObject.SetActive(true); // 미니게임 UI 팝업 활성화
+
+        isTimeOver = false;
+        isCleared = false;
+        isFailed = false;
 
         SetFoodImages();
     }
@@ -129,12 +198,17 @@ public class Minigame1 : MonoBehaviour
     // 정답과 오답 음식 이미지 16개 세팅
     private void SetFoodImages()
     {
-        List<int> randNums = GetRandomNumbersToCorrect();
+        correctRandNums = GetRandomNumbersToCorrect();
         int index = 0;
         for (int i = 0; i < 16; i++)
         {
+            int buttonIndex = i;
+            // 리스너 연결 (람다식)
+            foodImages[i].onClick.RemoveAllListeners(); // 기존 연결 해제
+            foodImages[i].onClick.AddListener(() => CheckAnswer(buttonIndex)); // 새로운 연결 생성
+
             // 정답을 넣기 위해 선택해 둔 위치인 경우
-            if (randNums.Contains(i))
+            if (correctRandNums.Contains(i))
             {
                 // 정답의 이미지를 순서대로 넣기
                 foodImages[i].GetComponent<Image>().sprite = orderedFoods[index].foodImage;
@@ -157,6 +231,99 @@ public class Minigame1 : MonoBehaviour
                 wrongFoodIndexList.RemoveAt(randomPick);
             }
         }
+    }
+
+    // ---------------------------------------------------------------
+    // 미니게임 플레이 관련 로직 작성 시작
+    // ---------------------------------------------------------------
+
+    // 버튼 클릭 시 호출 (index는 0 ~ 15)
+    private void CheckAnswer(int index)
+    {
+        if (isTimeOver) return;
+
+        // [핵심 변경] 이미지를 비교할 필요 없이, 
+        // "누른 버튼의 번호(index)가 정답 리스트(correctRandNums)에 포함되어 있나?"만 확인하면 끝!
+        if (correctRandNums.Contains(index))
+        {
+            PickCorectAnswer(index); 
+        }
+        else
+        {
+            PickWrongAnswer(index);
+        }
+    }
+
+    private void PickCorectAnswer(int index)
+    {
+        // 잘 고른 그림에 O표시
+        OImages[index].gameObject.SetActive(true);
+        // 선택한 버튼 비활성화
+        foodImages[index].interactable = false;
+
+        // 선택한 정답을 정답 리스트에서 삭제
+        correctRandNums.Remove(index);
+        // 모든 정답을 선택한 경우 GameOver() 호출 및 isCleared = true 설정
+        if (correctRandNums.Count == 0)
+        {
+            isCleared = true;
+            GameOver();
+        }
+    }
+
+    private void PickWrongAnswer(int index)
+    {
+        // 잘못 고른 그림에 X표시
+        XImages[index].gameObject.SetActive(true);
+        // 선택한 버튼 비활성화
+        foodImages[index].interactable = false;
+
+        // 선택한 버튼 비활성화
+        foodImages[index].interactable = false;
+
+        var text = remainingAttemptsText.text;
+        int attempts = int.Parse(text);
+        if (attempts > 1)
+        {
+            attempts--;
+            remainingAttemptsText.SetText(attempts.ToString());
+        }
+        else if(attempts == 1)
+        {
+            attempts--;
+            remainingAttemptsText.SetText(attempts.ToString());
+            isFailed = true;
+            GameOver();
+        }
+    }
+
+    // 게임 오버 처리 - 미니게임 UI 내리기 등 추가해야 할 듯
+    private void GameOver()
+    {
+        // 버튼 상호작용 비활성화(남은 모든 버튼 클릭 방지)
+        foreach (var btn in foodImages)
+        {
+            btn.interactable = false;
+        }
+
+        if (isTimeOver)
+        {
+            StartCoroutine(TimeOverImageSet());
+        }
+        else if (isFailed)
+        {
+            StartCoroutine(GameFailedImageSet());
+        }
+        else if (isCleared)
+        {
+            StartCoroutine(GameClearImageSet());
+        }
+    }
+    
+    private void CloseGame()
+    {
+        // UI 팝업 비활성화 (창 닫기)
+        gameObject.SetActive(false);
     }
 
 }

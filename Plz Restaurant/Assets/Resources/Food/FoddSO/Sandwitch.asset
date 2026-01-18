@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
   m_Name: Sandwitch
   m_EditorClassIdentifier: 
-  foodImage: {fileID: 0}
+  foodImage: {fileID: 21300000, guid: 8271a1ed248718947be231e89cb7c129, type: 3}
   foodNum: 26
   foodName: "\uC0CC\uB4DC\uC704\uCE58"
   foodPrice: 5000

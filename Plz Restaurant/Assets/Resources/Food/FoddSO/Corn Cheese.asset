@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d6965f59bb96c4eb66d8f0a5680a5f, type: 3}
   m_Name: Corn Cheese
   m_EditorClassIdentifier: 
-  foodImage: {fileID: 0}
+  foodImage: {fileID: 21300000, guid: afc705d973229f3428f7aae4a7b56cbf, type: 3}
   foodNum: 4
   foodName: "\uCF58\uCE58\uC988"
   foodPrice: 6500
