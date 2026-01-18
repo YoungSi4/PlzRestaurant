@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2518958390433555131
 Transform:
   m_ObjectHideFlags: 0
@@ -45,9 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getPopup: {fileID: 0}
-  dropDownMenu: {fileID: 0}
-  storeMenu: {fileID: 0}
-  exitMenu: {fileID: 0}
   fadeOutPanel: {fileID: 0}
   currentAsset: {fileID: 0}
   currentDate: {fileID: 0}
@@ -56,11 +53,3 @@ MonoBehaviour:
   uiDown: {fileID: 0}
   mainScene2: {fileID: 0}
   mainScene_2: {fileID: 0}
-  rootCanvas: {fileID: 0}
-  tooltipPanel: {fileID: 0}
-  tooltipLabel: {fileID: 0}
-  offset: {x: 0, y: 24}
-  questRewards:
-  - good item1
-  questGetButtons:
-  - {fileID: 0}
