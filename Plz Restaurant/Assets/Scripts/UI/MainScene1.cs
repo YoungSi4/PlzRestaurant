@@ -14,10 +14,10 @@ public class MainScene1 : MonoBehaviour
     //public Transform getButtonTransform; // 수령 버튼 위에 팝업을 띄울거라 위치값을 가져옴
 
 
-    [Header("On/Off UI")]
-    public GameObject dropDownMenu;
-    public GameObject storeMenu;
-    public GameObject exitMenu;
+    //[Header("On/Off UI")]
+    //public GameObject dropDownMenu;
+    //public GameObject storeMenu;
+    //public GameObject exitMenu;
     public GameObject fadeOutPanel;
     //public GameObject startMenu;
 

@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 4303651807468846455}
   - component: {fileID: 159025783743472316}
   m_Layer: 5
-  m_Name: 'Text : Inventory'
+  m_Name: Inventory <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3729,7 +3729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1099932946456561483
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22793,7 +22793,7 @@ GameObject:
   - component: {fileID: 2039713003768253778}
   - component: {fileID: 3733611052833318176}
   m_Layer: 5
-  m_Name: (1) Start Button
+  m_Name: Start <Button>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27881,7 +27881,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainScene2, Assembly-CSharp
-        m_MethodName: ReStartGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30994,7 +30994,7 @@ GameObject:
   - component: {fileID: 4744504921818592322}
   - component: {fileID: 3359970367123562148}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Start <Text>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
