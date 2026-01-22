@@ -9,17 +9,11 @@ using UnityEngine.EventSystems;
 public class MainScene1 : MonoBehaviour
 {
     [Header("Quest get popup")]
-    //public Button[] questGetButtons; // 수령 버튼 
+   
     public GameObject getPopup; // 수령 버튼에 마우스 올리면 나올 팝업
-    //public Transform getButtonTransform; // 수령 버튼 위에 팝업을 띄울거라 위치값을 가져옴
 
+    public GameObject fadeOutPanel; //팝업 창 띄우면 화면 밝기 어둡게 할 페이드아웃 패널 
 
-    //[Header("On/Off UI")]
-    //public GameObject dropDownMenu;
-    //public GameObject storeMenu;
-    //public GameObject exitMenu;
-    public GameObject fadeOutPanel;
-    //public GameObject startMenu;
 
     [Header("Update Text")]
     [SerializeField] TextMeshProUGUI currentAsset;
@@ -30,8 +24,10 @@ public class MainScene1 : MonoBehaviour
     public Animator uiRight;
     public Animator uiDown;
 
-    public MainScene2 mainScene2;
-    public GameObject mainScene_2;
+
+    public GameObject mainScene1_UI; // mainScene1_UI자체를 말함
+    public MainScene2 mainScene2;    // mainScene2 manager를 말함 (함수 불러오는거라서)
+    public GameObject mainScene2_UI; // mainScene2_UI자체를 말함
 
     Color activeColor = new Color(0.4f, 0.7f, 1f); //파란색
     Color inactiveColor = new Color(0.7f, 0.7f, 0.7f); //회색
@@ -39,19 +35,19 @@ public class MainScene1 : MonoBehaviour
 
     private void Start()
     {
-        TodayInit();//@@@@@@@@@@ 씬이 시작하면 현재 플레이어의 자산과 현재 영업일을 업데이트해줌
+        TodayInit();//씬이 시작하면 현재 플레이어의 자산과 현재 영업일을 업데이트해줌
     }
 
     private void TodayInit()
     {
         Asset();
-        currentDate.SetText("Day " + GameManager.Instance.R_day.ToString()); //@@@@@@@@@ 게임매니저에서 가져옴
+        currentDate.SetText("Day " + GameManager.Instance.R_day.ToString()); // 게임매니저에서 가져옴
     }
 
     /// //////////////////////////////////////////////////
     public void Asset()
     {
-        currentAsset.SetText("asset " + FormatNumber(GameManager.Instance.R_totalIncome)); //@@@@@@@  게임매니저에서 가져옴
+        currentAsset.SetText("asset " + FormatNumber(GameManager.Instance.R_totalIncome)); // 게임매니저에서 가져옴
     }
     string FormatNumber(int num)
     {
@@ -68,7 +64,6 @@ public class MainScene1 : MonoBehaviour
 
     public void GameStart()
     {
-        //startMenu.SetActive(false);
         uiRight.SetBool("Out", true);
         uiLeft.SetBool("Out", true);
         uiDown.SetBool("Out", true);
@@ -78,29 +73,29 @@ public class MainScene1 : MonoBehaviour
     IEnumerator IGameStart()
     {
         yield return new WaitForSeconds(1);
-        mainScene_2.SetActive(true);
+        mainScene2_UI.SetActive(true);
         StartCoroutine(mainScene2.MainScene2Start());
+        mainScene1_UI.SetActive(false);
     }
 
-    public void OnOff_UI(GameObject uiObject)
+    public void OnOff_UI(GameObject uiObject) //오브젝트를 on off 토글로 할 수 있는데 얘는 페이드아웃이 되지않음
     {
         if (uiObject == null) return;
         uiObject.SetActive(!uiObject.activeSelf);
     }
 
-    public void On_UI(GameObject uiObject)
+    public void On_UI_Fadeout(GameObject uiObject) //오브젝트를 On만 할 수있는데 페이드아웃이 됨
     {
         if (uiObject == null) return;
         uiObject.SetActive(true);
         fadeOutPanel.SetActive(true);
     }
-    public void Off_UI(GameObject uiObject)
+    public void Off_UI_FadeIn(GameObject uiObject) //오브젝트를 Off만 할 수있는데 페이드아웃이 풀림
     {
         if (uiObject == null) return;
         uiObject.SetActive(false);
         fadeOutPanel.SetActive(false);
     }
-
     public void BtnOn(GameObject uiObject)
     {
         Image img = uiObject.GetComponent<Image>(); 
@@ -117,7 +112,6 @@ public class MainScene1 : MonoBehaviour
             img.color = inactiveColor;
         }
     }
-    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     public void PopupOn()
     {
         getPopup.SetActive(true);
@@ -126,36 +120,4 @@ public class MainScene1 : MonoBehaviour
     {
         getPopup.SetActive(false);
     }
-    //@@@@@@@@@@@@@@@@@@@@@@@@@
-
-    //public Canvas rootCanvas; //최상위 canvas
-    //public RectTransform tooltipPanel; // 공용 팝업(비활성 시작)
-    //public TMP_Text tooltipLabel; // 팝업 텍스트
-    //public Vector2 offset = new Vector2(0, 24f); // 버튼 위로 살짝
-    //[Header("Quest Rewards")]
-    //[SerializeField] private string[] questRewards;
-    //[Header("buttons")]
-    //[SerializeField] private Button[] questGetButtons;
-
-    //public void ShowOver(int questIndex)
-    //{
-    //    if (!tooltipPanel || !rootCanvas) return;
-
-    //    // 보상 텍스트 꺼내오기
-    //    if (tooltipLabel) tooltipLabel.text = questRewards[questIndex];
-
-    //    // 버튼 위치 가져오기
-    //    var targetRT = questGetButtons[questIndex].GetComponent<RectTransform>();
-    //    var canvasRT = (RectTransform)rootCanvas.transform;
-    //    var cam = rootCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : rootCanvas.worldCamera;
-
-    //    Vector2 screen = RectTransformUtility.WorldToScreenPoint(cam, targetRT.position);
-    //    RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRT, screen, cam, out var local);
-
-    //    tooltipPanel.anchoredPosition = local + offset;
-    //    tooltipPanel.gameObject.SetActive(true);
-    //}
-
-    //public void Hide() => tooltipPanel?.gameObject.SetActive(false);
-    ////tooltipPanel이 null이 아니면 setactive(false)를 실행
 }

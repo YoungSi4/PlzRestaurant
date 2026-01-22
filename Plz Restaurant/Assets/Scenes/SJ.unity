@@ -1564,10 +1564,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 941879060}
-    - target: {fileID: 1831949169762381009, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2227108775318570643, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1656,6 +1652,22 @@ PrefabInstance:
       propertyPath: chef
       value: 
       objectReference: {fileID: 429973012}
+    - target: {fileID: 3287688393548544800, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 941879060}
+    - target: {fileID: 3287688393548544800, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 941879060}
+    - target: {fileID: 3287688393548544800, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 941879060}
+    - target: {fileID: 3287688393548544800, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 941879060}
     - target: {fileID: 4163392788302245547, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1668,10 +1680,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 941879060}
-    - target: {fileID: 4892404924935182465, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 4882124845545226121, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 941879060}
     - target: {fileID: 5116030352030374317, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1684,6 +1696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6186306290803628689, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 56785737}
     - target: {fileID: 6784647924741206034, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
       propertyPath: foodDB
       value: 
@@ -1708,6 +1724,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 56785737}
+    - target: {fileID: 8883193577559054146, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 941879060}
+    - target: {fileID: 8883193577559054146, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 941879060}
+    - target: {fileID: 8883193577559054146, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 941879060}
+    - target: {fileID: 8883193577559054146, guid: ef255d0a2e86f004f9917f338f0964ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 941879060}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -25,6 +25,7 @@ public class MainScene2 : MonoBehaviour
 
     //public GameObject timeOver;
 
+
     public void OnOff_UI(GameObject uiObject)
     {
         if (uiObject == null) return;
@@ -38,12 +39,14 @@ public class MainScene2 : MonoBehaviour
         fadeOutPanel.SetActive(true);
         
     }
+
     public void Off_UI(GameObject uiObect) // uiºñÈ°¼ºÈ­, È­¸é ¹à¾ÆÁü
     {
         if (uiObect == null) return;
         uiObect.SetActive(false);
         fadeOutPanel.SetActive(false);
     }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape)) { //ESC¸¦ ´­·¶À» ¶§ ÆË¾÷ÀÌ ²¨Áö°Ô 
