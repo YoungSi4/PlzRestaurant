@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2518958390433555131
 Transform:
   m_ObjectHideFlags: 0
@@ -51,5 +51,6 @@ MonoBehaviour:
   uiLeft: {fileID: 0}
   uiRight: {fileID: 0}
   uiDown: {fileID: 0}
+  mainScene1_UI: {fileID: 0}
   mainScene2: {fileID: 0}
-  mainScene_2: {fileID: 0}
+  mainScene2_UI: {fileID: 0}

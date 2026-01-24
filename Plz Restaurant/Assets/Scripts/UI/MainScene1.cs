@@ -26,7 +26,7 @@ public class MainScene1 : MonoBehaviour
 
 
     public GameObject mainScene1_UI; // mainScene1_UI자체를 말함
-    public MainScene2 mainScene2;    // mainScene2 manager를 말함 (함수 불러오는거라서)
+    public MainScene2 mainScene2_Manager;    // mainScene2 manager를 말함 (함수 불러오는거라서)
     public GameObject mainScene2_UI; // mainScene2_UI자체를 말함
 
     Color activeColor = new Color(0.4f, 0.7f, 1f); //파란색
@@ -74,7 +74,7 @@ public class MainScene1 : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         mainScene2_UI.SetActive(true);
-        StartCoroutine(mainScene2.MainScene2Start());
+        StartCoroutine(mainScene2_Manager.MainScene2Start());
         mainScene1_UI.SetActive(false);
     }
 

@@ -31,27 +31,24 @@ public class MainScene2 : MonoBehaviour
         if (uiObject == null) return;
         uiObject.SetActive(!uiObject.activeSelf);
     }
-
-    public void On_UI(GameObject uiObect) // ui활성화, 화면 어두워짐
+    public void On_UI_Fadeout(GameObject uiObject) // ui활성화, 화면 어두워짐
     {
-        if (uiObect == null) return;
-        uiObect.SetActive(true);
+        if (uiObject == null) return;
+        uiObject.SetActive(true);
         fadeOutPanel.SetActive(true);
-        
     }
-
-    public void Off_UI(GameObject uiObect) // ui비활성화, 화면 밝아짐
+    public void Off_UI_Fadein(GameObject uiObject) // ui비활성화, 화면 밝아짐
     {
-        if (uiObect == null) return;
-        uiObect.SetActive(false);
+        if (uiObject == null) return;
+        uiObject.SetActive(false);
         fadeOutPanel.SetActive(false);
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) { //ESC를 눌렀을 때 팝업이 꺼지게 
-            Off_UI(stopPopup);
-             }
+        //if(Input.GetKeyDown(KeyCode.Escape)) { //ESC를 눌렀을 때 팝업이 꺼지게 
+        //    Off_UI(stopPopup);
+        //     }
         todayIncomeText.SetText(GameManager.Instance.R_dailyIncome.ToString()); //항상 업데이트 되는 텍스트
         targetIncomeText.SetText(GameManager.Instance.R_targetIncome.ToString());
         giveUpTodayText.SetText("Day "+GameManager.Instance.R_day.ToString());
@@ -94,19 +91,9 @@ public class MainScene2 : MonoBehaviour
     public void Stop(){
         //영업 중단..
     }
-    public void InventoryOn(){
-        //bool currentInventory = inventory.GetBool("On");
-        //inventory.SetBool("On", !currentInventory);
-    }
     public void OrderMemoOn() //다른 함수에서 불러줘야 하기 때문에 따로 만들었다.
     {
         orderMemo.SetActive(true);
-    }
-
-    public void MenuPanOnOff(GameObject uiObject)
-    {
-        if (uiObject == null) return;
-        uiObject.SetActive(!uiObject.activeSelf);
     }
 
 }
