@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7861798537608542065}
   - component: {fileID: 3448645256733219312}
   m_Layer: 0
-  m_Name: '#FrontSceneUiManager#'
+  m_Name: FrontScene_UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

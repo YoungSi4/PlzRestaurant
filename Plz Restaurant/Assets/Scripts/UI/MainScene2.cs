@@ -21,6 +21,13 @@ public class MainScene2 : MonoBehaviour
     public Animator left; // 
     public Animator right;//
     public Animator up;//
+
+
+
+    public MainScene1 mainScene1_UIManager;
+    public GameObject mainScene1_UI;
+
+
     //public Animator inventory;
 
     //public GameObject timeOver;
@@ -68,13 +75,14 @@ public class MainScene2 : MonoBehaviour
     {
         //timeOver.SetActive(true);
         GameManager.Instance.R_close();
+
     }
 
-    public IEnumerator MainScene2Start() //메인씬1에서 메인씬2로 넘어갈 때 
+    public IEnumerator IMainScene2Start() //메인씬1에서 메인씬2로 넘어갈 때 
     {
-        left.SetBool("In",true); //ui들 생기고 
-        right.SetBool("In",true);
-        up.SetBool("In",true);
+        left.SetTrigger("In");
+        right.SetTrigger("In");
+        up.SetTrigger("In");
         yield return new WaitForSeconds(1); // 1초 있다가 게임 시작
         GameManager.Instance.StartGame();
         Debug.Log("시작");
@@ -89,8 +97,15 @@ public class MainScene2 : MonoBehaviour
         GameManager.Instance.ReStartGame();
     }
     public void Stop(){
+        left.SetTrigger("Out");
+        right.SetTrigger("Out");
+        up.SetTrigger("Out");
+        mainScene1_UI.SetActive(true);
+        StartCoroutine(mainScene1_UIManager.IBackMainScene1UI());
         //영업 중단..
     }
+
+
     public void OrderMemoOn() //다른 함수에서 불러줘야 하기 때문에 따로 만들었다.
     {
         orderMemo.SetActive(true);

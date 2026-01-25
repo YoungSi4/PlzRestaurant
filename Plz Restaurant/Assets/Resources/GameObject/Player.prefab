@@ -88,7 +88,7 @@ Transform:
   m_GameObject: {fileID: 1048076043151637837}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -183,12 +183,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPersonCam: {fileID: 3852421682056778920}
   topDownCam: {fileID: 2809537833628142440}
-  isFirstPerson: 1
-  moveSpeed: 2
   playerBody: {fileID: 7318457367390197359}
   cameraHolder: {fileID: 966789712882747928}
+  isFirstPerson: 1
+  moveSpeed: 2
   cameraTransform: {fileID: 966789712882747928}
-  playerInput: {fileID: 0}
+  order: {fileID: 0}
+  mainScene2: {fileID: 0}
 --- !u!54 &104188551963950868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -293,7 +294,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8657426431097614366}
         m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
-        m_MethodName: OnToggleView
+        m_MethodName: OnToggleInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -309,7 +310,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8657426431097614366}
         m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
-        m_MethodName: OnToggleView
+        m_MethodName: OnToggleInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -321,6 +322,78 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 12bd7c5d-fc8b-4e5b-a790-de7a7e0b95e2
     m_ActionName: ThreePerspective/Toggle[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8657426431097614366}
+        m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
+        m_MethodName: InterAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 52531f55-4650-4aac-9552-7236fa6ac40e
+    m_ActionName: FirstPerspective/InterAction[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MainScene2, Assembly-CSharp
+        m_MethodName: OnOff_UI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2e588d78-aa62-4e13-8474-c859d4c7ecce
+    m_ActionName: FirstPerspective/LookMenupan[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8657426431097614366}
+        m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
+        m_MethodName: InterAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: db233576-ec9f-4729-a97e-2a3e02fac9d0
+    m_ActionName: ThreePerspective/Interaction[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MainScene2, Assembly-CSharp
+        m_MethodName: OnOff_UI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 95be7b33-938c-4f46-a8a0-b7f526d46dcc
+    m_ActionName: ThreePerspective/LookMenupan[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4dd22c9d-2d61-41c5-8790-bf13c2290179
+    m_ActionName: UI/New action[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e875a12c-3bca-4bcb-96e2-25c73389f9a4
+    m_ActionName: Nothing/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPerspective
@@ -677,8 +750,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8065286116907550223}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7009093, y: -0, z: -0, w: 0.71325046}
-  m_LocalPosition: {x: 0, y: -0.00076150894, z: -0.0872612}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.0000014305115, y: 5.0000043, z: -0.0000038146973}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

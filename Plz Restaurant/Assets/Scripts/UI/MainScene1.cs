@@ -28,6 +28,7 @@ public class MainScene1 : MonoBehaviour
     public GameObject mainScene1_UI; // mainScene1_UI자체를 말함
     public MainScene2 mainScene2_Manager;    // mainScene2 manager를 말함 (함수 불러오는거라서)
     public GameObject mainScene2_UI; // mainScene2_UI자체를 말함
+    public GameObject mainScene1_Background;
 
     Color activeColor = new Color(0.4f, 0.7f, 1f); //파란색
     Color inactiveColor = new Color(0.7f, 0.7f, 0.7f); //회색
@@ -64,17 +65,28 @@ public class MainScene1 : MonoBehaviour
 
     public void GameStart()
     {
-        uiRight.SetBool("Out", true);
-        uiLeft.SetBool("Out", true);
-        uiDown.SetBool("Out", true);
+        uiRight.SetTrigger("Out");
+        uiLeft.SetTrigger("Out");
+        uiDown.SetTrigger("Out");
         StartCoroutine(IGameStart());
+    }
+
+    public IEnumerator IBackMainScene1UI()
+    {
+        yield return new WaitForSeconds(1);
+        mainScene1_Background.SetActive(true);
+        uiRight.SetTrigger("In");
+        uiLeft.SetTrigger("In");
+        uiDown.SetTrigger("In");
+        mainScene2_UI.SetActive(false);
     }
 
     IEnumerator IGameStart()
     {
         yield return new WaitForSeconds(1);
+        mainScene1_Background.SetActive(false);
         mainScene2_UI.SetActive(true);
-        StartCoroutine(mainScene2_Manager.MainScene2Start());
+        StartCoroutine(mainScene2_Manager.IMainScene2Start());
         mainScene1_UI.SetActive(false);
     }
 
@@ -119,5 +131,14 @@ public class MainScene1 : MonoBehaviour
     public void PopupOff()
     {
         getPopup.SetActive(false);
+    }
+    
+    public void GameExit()
+    {
+    #if UNITY_EDITOR // 에디터에서 실행 중이면 플레이 모드 종료
+            UnityEditor.EditorApplication.isPlaying = false;
+    #else //빌드된 게임이면 프로그램 종료 
+        Application.Quit();
+    #endif
     }
 }
