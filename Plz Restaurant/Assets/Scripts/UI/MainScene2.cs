@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MainScene2 : MonoBehaviour
 {
     [Header("오브젝트들")]
-    public GameObject stopPopup;
     public GameObject fadeOutPanel;
     public GameObject orderMemo;
     public GameObject MenuPan;
@@ -18,19 +18,31 @@ public class MainScene2 : MonoBehaviour
     public TextMeshProUGUI giveUpTodayText;
 
     [Header("애니메이션")]
-    public Animator left; // 
-    public Animator right;//
-    public Animator up;//
+    public Animator left; 
+    public Animator right;
+    public Animator up;
+
+    public MainScene1 mainScene1_UIManager; //메인씬1의 ui manager
+    public GameObject mainScene1_UI; //메인씬1의 UI자체를 말함 
 
 
 
-    public MainScene1 mainScene1_UIManager;
-    public GameObject mainScene1_UI;
+    [Header("UI인풋맵 관련")]
+    PlayerInput playerInput; // 플레이어 인풋
+    public enum inputState  //플레이어인풋 종류 (이름만 저장할 수 있으면 되니까)
+    {
+        FirstPerspective,
+        ThreePerspective,
+        UI,
+        Nothing
+    }
+    public string previousPlayerState; //이전 상태의 인풋맵을 기억한다. string으로 이름만 기억하면 된다.
+    
 
-
-    //public Animator inventory;
-
-    //public GameObject timeOver;
+    private void Start()
+    {
+        playerInput = GetComponent<PlayerInput>();
+    }
 
 
     public void OnOff_UI(GameObject uiObject)
@@ -53,9 +65,6 @@ public class MainScene2 : MonoBehaviour
 
     private void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.Escape)) { //ESC를 눌렀을 때 팝업이 꺼지게 
-        //    Off_UI(stopPopup);
-        //     }
         todayIncomeText.SetText(GameManager.Instance.R_dailyIncome.ToString()); //항상 업데이트 되는 텍스트
         targetIncomeText.SetText(GameManager.Instance.R_targetIncome.ToString());
         giveUpTodayText.SetText("Day "+GameManager.Instance.R_day.ToString());
@@ -109,6 +118,20 @@ public class MainScene2 : MonoBehaviour
     public void OrderMemoOn() //다른 함수에서 불러줘야 하기 때문에 따로 만들었다.
     {
         orderMemo.SetActive(true);
+    }
+
+    public void PopUpOn() // ESC키를 눌러 꺼야하는 팝업이 켜지면 
+    {
+        previousPlayerState = (playerInput.currentActionMap.name);
+        playerInput.SwitchCurrentActionMap("UI1");
+    }
+
+    public void Esc() 
+    {
+        playerInput.SwitchCurrentActionMap(previousPlayerState);
+        Debug.Log("Esc");
+    
+    
     }
 
 }

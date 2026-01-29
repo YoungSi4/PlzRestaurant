@@ -286,11 +286,11 @@
             ]
         },
         {
-            "name": "UI",
+            "name": "UI1",
             "id": "a7524851-d1b6-40a7-a938-0d53460ca1a5",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Esc",
                     "type": "Button",
                     "id": "4dd22c9d-2d61-41c5-8790-bf13c2290179",
                     "expectedControlType": "",
@@ -307,7 +307,35 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI2",
+            "id": "9587667c-a85b-4c88-9ad2-7c0a34d70ab8",
+            "actions": [
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "eca3d80f-0f60-48e3-b0b1-3bd537341926",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "49bf3f26-2b67-4545-befb-f1ee950bad83",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Esc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
