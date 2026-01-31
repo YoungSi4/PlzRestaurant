@@ -28,6 +28,9 @@ public class Minigame1 : MonoBehaviour
     [SerializeField]
     private Image[] XImages; // 오답 시 출력할 X 이미지 배열
 
+    public Button TMPAnomalyButton; // 기현상 발생조건 로직 작성이전 임시테스트용 버튼
+    private NPC npc;
+
     FoodDB foodDB;
 
     private FoodData[] orderedFoods; // 올바른 주문 정보 저장 배열
@@ -42,6 +45,7 @@ public class Minigame1 : MonoBehaviour
     private void Awake()
     {
         foodDB = FindObjectOfType<FoodDB>();
+        npc = FindObjectOfType<NPC>();
 
         wrongFoodIndexList = new List<int>(); // 초기화
         correctRandNums = new List<int>();
@@ -49,6 +53,7 @@ public class Minigame1 : MonoBehaviour
 
     private void Start()
     {
+        TMPStartAnomaly();
         // 호출 테스트
         // GetOrderedFoodData(1, new FoodData[] { foodDB.GetFoodData(1), foodDB.GetFoodData(2), foodDB.GetFoodData(4), foodDB.GetFoodData(8), foodDB.GetFoodData(12) });
     }
@@ -324,6 +329,12 @@ public class Minigame1 : MonoBehaviour
     {
         // UI 팝업 비활성화 (창 닫기)
         gameObject.SetActive(false);
+    }
+
+    // 임시 기현상 트리거 연결
+    private void TMPStartAnomaly()
+    {
+        TMPAnomalyButton.onClick.AddListener(npc.TriggerAnomaly);
     }
 
 }
