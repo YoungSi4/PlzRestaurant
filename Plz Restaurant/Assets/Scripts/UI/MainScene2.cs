@@ -28,7 +28,7 @@ public class MainScene2 : MonoBehaviour
 
 
     [Header("UI인풋맵 관련")]
-    PlayerInput playerInput; // 플레이어 인풋
+    public PlayerInput playerInput; // 플레이어 인풋
     public enum inputState  //플레이어인풋 종류 (이름만 저장할 수 있으면 되니까)
     {
         FirstPerspective,
@@ -37,12 +37,10 @@ public class MainScene2 : MonoBehaviour
         Nothing
     }
     public string previousPlayerState; //이전 상태의 인풋맵을 기억한다. string으로 이름만 기억하면 된다.
+
+    GameObject uiPopUp; // esc로 꺼야할 "Popup"이라는 태그를 가진 게임 오브젝트를 말한다.
     
 
-    private void Start()
-    {
-        playerInput = GetComponent<PlayerInput>();
-    }
 
 
     public void OnOff_UI(GameObject uiObject)
@@ -52,12 +50,33 @@ public class MainScene2 : MonoBehaviour
     }
     public void On_UI_Fadeout(GameObject uiObject) // ui활성화, 화면 어두워짐
     {
+        if (uiObject.CompareTag("Popup"))
+        {
+            uiPopUp = uiObject;
+            PopUpOn2();
+        }
         if (uiObject == null) return;
         uiObject.SetActive(true);
         fadeOutPanel.SetActive(true);
     }
+    public void On_UI(GameObject uiObject) // ui활성화만 실행 => 메뉴판 esc로 닫을 때를 위해서 만듦 => 얘는 다른 팝업창 처럼 화면이 페이드아웃 들어가면 안되기 떄문에
+    {
+        if (uiObject.CompareTag("Popup"))
+        {
+            uiPopUp = uiObject;
+            PopUpOn2();
+        }
+        if (uiObject == null) return;
+        uiObject.SetActive(true);
+    }
+
     public void Off_UI_Fadein(GameObject uiObject) // ui비활성화, 화면 밝아짐
     {
+        if (uiObject.CompareTag("Popup"))
+        {
+            uiPopUp = null;
+            playerInput.SwitchCurrentActionMap(previousPlayerState);
+        }
         if (uiObject == null) return;
         uiObject.SetActive(false);
         fadeOutPanel.SetActive(false);
@@ -120,18 +139,22 @@ public class MainScene2 : MonoBehaviour
         orderMemo.SetActive(true);
     }
 
-    public void PopUpOn() // ESC키를 눌러 꺼야하는 팝업이 켜지면 
+    public void PopUpOn2() // ESC키를 눌러 꺼야하는 팝업이 켜지면 
     {
         previousPlayerState = (playerInput.currentActionMap.name);
-        playerInput.SwitchCurrentActionMap("UI1");
+        playerInput.SwitchCurrentActionMap("UI2");
     }
 
     public void Esc() 
     {
+        if (uiPopUp != null)
+        {
+            uiPopUp.SetActive(false);
+            uiPopUp = null;
+        }
         playerInput.SwitchCurrentActionMap(previousPlayerState);
         Debug.Log("Esc");
-    
-    
+        fadeOutPanel.SetActive(false);
     }
 
 }

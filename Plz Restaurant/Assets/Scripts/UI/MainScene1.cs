@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class MainScene1 : MonoBehaviour
 {
@@ -33,6 +34,19 @@ public class MainScene1 : MonoBehaviour
     Color activeColor = new Color(0.4f, 0.7f, 1f); //파란색
     Color inactiveColor = new Color(0.7f, 0.7f, 0.7f); //회색
     Color getColor = new Color(1f, 1f, 0.6f); // 연한 노란색
+
+
+
+
+
+
+    [Header("UI인풋맵 관련")]
+    public PlayerInput playerInput; // 플레이어 인풋
+
+    GameObject uiPopUp; // esc로 꺼야할 "Popup"이라는 태그를 가진 게임 오브젝트를 말한다.
+
+
+
 
     private void Start()
     {
@@ -98,12 +112,22 @@ public class MainScene1 : MonoBehaviour
 
     public void On_UI_Fadeout(GameObject uiObject) //오브젝트를 On만 할 수있는데 페이드아웃이 됨
     {
+        if (uiObject.CompareTag("Popup"))
+        {
+            uiPopUp = uiObject;
+            PopUpOn1();
+        }
         if (uiObject == null) return;
         uiObject.SetActive(true);
         fadeOutPanel.SetActive(true);
     }
     public void Off_UI_FadeIn(GameObject uiObject) //오브젝트를 Off만 할 수있는데 페이드아웃이 풀림
     {
+        if (uiObject.CompareTag("Popup"))
+        {
+            uiPopUp = null;
+            playerInput.SwitchCurrentActionMap("FirstPerspective");
+        }
         if (uiObject == null) return;
         uiObject.SetActive(false);
         fadeOutPanel.SetActive(false);
@@ -132,7 +156,28 @@ public class MainScene1 : MonoBehaviour
     {
         getPopup.SetActive(false);
     }
-    
+
+
+    public void PopUpOn1() // ESC키를 눌러 꺼야하는 팝업이 켜지면 
+    {
+        playerInput.SwitchCurrentActionMap("UI1");
+    }
+
+    public void Esc()
+    {
+        if (uiPopUp != null)
+        {
+            uiPopUp.SetActive(false);
+            uiPopUp = null;
+        }
+        playerInput.SwitchCurrentActionMap("FirstPerspective");
+        Debug.Log("Esc");
+        fadeOutPanel.SetActive(false);
+    }
+
+
+
+
     public void GameExit()
     {
     #if UNITY_EDITOR // 에디터에서 실행 중이면 플레이 모드 종료
