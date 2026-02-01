@@ -4181,7 +4181,7 @@ GameObject:
   - component: {fileID: 8700812981335447925}
   m_Layer: 5
   m_Name: Store Menu
-  m_TagString: Untagged
+  m_TagString: Popup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8670,11 +8670,11 @@ GameObject:
   - component: {fileID: 7379281231472043380}
   m_Layer: 5
   m_Name: Quest/Achievement Window
-  m_TagString: Untagged
+  m_TagString: Popup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7999236609384578898
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16444,8 +16444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2288c25e2486c842a7ab5bcd224c909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accept: {fileID: 0}
-  reject: {fileID: 0}
+  accept: {fileID: 7927851746017012270}
+  reject: {fileID: 8640875141419136844}
   chef: {fileID: 0}
   panelPrefab: {fileID: 4196939841379025844}
   contentArea: {fileID: 5685261038901761261}
@@ -18410,7 +18410,7 @@ GameObject:
   - component: {fileID: 1046035701434843938}
   m_Layer: 5
   m_Name: Settings
-  m_TagString: Untagged
+  m_TagString: Popup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22526,7 +22526,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainScene2, Assembly-CSharp
-        m_MethodName: Off_UI
+        m_MethodName: Off_UI_Fadein
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 3754986090353246535}
@@ -24036,7 +24036,7 @@ GameObject:
   - component: {fileID: 1670547221104898345}
   m_Layer: 5
   m_Name: Stop Popup
-  m_TagString: Untagged
+  m_TagString: Popup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25091,7 +25091,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainScene2, Assembly-CSharp
-        m_MethodName: Off_UI
+        m_MethodName: Off_UI_Fadein
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 3754986090353246535}
@@ -25892,7 +25892,7 @@ GameObject:
   - component: {fileID: 7721520241914494887}
   m_Layer: 5
   m_Name: Collection
-  m_TagString: Untagged
+  m_TagString: Popup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28755,7 +28755,7 @@ GameObject:
   - component: {fileID: 5130767417623406282}
   m_Layer: 5
   m_Name: Exit Window
-  m_TagString: Untagged
+  m_TagString: Popup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
