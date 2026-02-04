@@ -177,12 +177,14 @@ public class OrderMemo : MonoBehaviour
     public void AcceptButtonOn()
     {
         SendFoodDataToChef();
+        gameObject.SetActive(false);
     }
 
     public void RejectButtonOn()
     {
-        Table table = tableManager.GetTable(tableNum);
+        Table table = tableManager.GetTable(tableNum - 1);
         table.OrderRejected();
+        gameObject.SetActive(false);
     }
 
 

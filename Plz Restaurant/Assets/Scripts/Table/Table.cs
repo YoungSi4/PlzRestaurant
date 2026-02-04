@@ -443,8 +443,9 @@ public List<int>[] SendFoodNumToOrderInfo()
     {
         float p = Random.Range(1, 10);
         // 재주문
-        if (p > 3)
+        if (p > 5) // 원래는 3
         {
+            Debug.Log("재주문");
             // 재주문을 위해 음식을 다시 정하는 함수
             SendVsitorChooseFoodAgain();
             StartCoroutine(WaitingForOrder()); // 주문 프로세스는 여기서 재시작
@@ -452,6 +453,7 @@ public List<int>[] SendFoodNumToOrderInfo()
         // 퇴장
         else
         {
+            Debug.Log("퇴장");
             // 다른 함수 없이 떠나는 것만 있으면 될 것 같음
             VisitorDeparture();
             ResetVars();
