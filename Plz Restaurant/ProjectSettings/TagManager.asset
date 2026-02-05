@@ -9,6 +9,7 @@ TagManager:
   - GetButton
   - Table
   - Money
+  - ShutDown
   layers:
   - Default
   - TransparentFX
