@@ -9,12 +9,13 @@ public class ShutDownBtn : MonoBehaviour
 
     private void Start()
     {
-        shutdown = GameObject.FindWithTag("ShutDown").GetComponent<Button>();
+        shutdown = GameObject.FindGameObjectWithTag("ShutDown").GetComponent<Button>();
         shutdown.onClick.AddListener(ExitGame);
     }
 
     void ExitGame()
     {
+        Debug.Log("종료버튼");
         Application.Quit();
     }
 }
