@@ -71,7 +71,8 @@ public class FrontSceneUI : MonoBehaviour
             if (alpha1 >= 1f)
             {
                 Debug.Log("다음 씬으로 넘어감");
-                SceneManager.LoadScene("SJ");
+                //SceneManager.LoadScene("SJ");
+                SceneManager.LoadScene("MainScene");
             }
         }
     }
