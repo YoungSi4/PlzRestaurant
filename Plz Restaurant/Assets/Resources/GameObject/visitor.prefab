@@ -469,6 +469,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   readyToOrderMark: {fileID: 6216265179960143940, guid: 4f005dddd76ecf545a300aedef61aecc, type: 3}
+  hasOrdered: 0
+  numOfOrderFood: 0
+  tableManager: {fileID: 0}
 --- !u!195 &3591895740982544131
 NavMeshAgent:
   m_ObjectHideFlags: 0

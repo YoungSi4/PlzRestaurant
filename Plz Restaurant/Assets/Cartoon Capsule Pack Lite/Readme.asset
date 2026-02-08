@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: Readme
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 407619c5c19a54982b3880b5a085c597, type: 3}
+  iconMaxWidth: 192
+  title: Cartoon Capsule Pack | Lite
+  sections:
+  - heading: About
+    text: "Thank you for downloading the Cartoon Capsule Pack | Lite. These lowpoly
+      stylized characters are ideal to build your game or prototype. \n\nStill using the same boring capsules for your prototypes and tests? Level up your workflow with Cartoon Capsule Characters! Perfect for devs and students, this pack brings fun and personality to your projects with customizable, modular capsules. Add eyes, mouths, hair, hats, ears, and more! Mix and match to create endless combinations. Easy to recolor, quick to set up, and way more exciting than a plain capsule with a cube stuck to its face. Make your prototypes playful, unique, and full of character, because even testing should be fun!"
+    linkText: 
+    url: 
+  - heading: ✓ Optimization
+    text: "These characters and props are extremely light and can be used in pc, console and mobile
+      games. All models share a single texture file reducing performance costs even further, allowing you to easily customize the colors just by duplicanting materials and adjusting the material offset. \n\n⚠*Many models have multiple material slots, check the <Materials> option in the [ Inspector > Skinned Mesh Renderer ] to customize materials and colors to fit your needs."
+    linkText: 
+    url: 
+  - heading: ✓ Textures
+    text: "Diffuse/Albedo:\n-256px (.png)"
+    linkText: 
+    url: 
+  - heading: ✓ Polycount
+    text: "- capsule_basic_body | 224 Tris\n- capsule_basic_cap | 254 Tris\n- capsule_basic_dress | 192 Tris\n- capsule_basic_ears | 260 Tris\n- capsule_basic_eyebrows | 192 Tris\n- capsule_basic_eyes | 128 Tris\n- capsule_basic_female_eyelashes | 288 Tris\n- capsule_basic_hair_female | 558 Tris\n- capsule_basic_hair_male | 258 Tris\n- capsule_basic_mouth | 132 Tris\n- capsule_basic_nose | 40 Tris\n- capsule_basic_pants | 144 Tris\n- capsule_basic_shirt | 160 Tris\n- capsule_dummy_body | 1220 Tris\n- capsule_dummy_ears | 256 Tris\n\n- checkpoint | 206 Tris\n- coin | 440 Tris\n- crate | 1524 Tris\n- heart | 128 Tris\n- star | 316 Tris"
+    linkText: 
+    url: 
+  - heading: ✓ Blendshapes
+    text:  "Eyebrows:\nAngry\n\nMouth:\nAngry\n\n⚠*Make sure that the option <Legacy Blend Shape Normals> is checked in the models or set <Blend Shape Normals> to <None> in [ Inspector > Import Settings > Model Tab ] to avoid artifacts when using the blendshapes"
+    linkText:
+    url:
+  - heading: ╳ Animations
+    text:  "These characters and props doesn´t have any animations."
+    linkText:
+    url:
+  - heading: ✓ Modular Design
+    text:  "These characters are designed to be modular, making it easy to create a variety of combinations, allowing you to create unique characters and scenes."
+    linkText:
+    url:
+  - heading:
+    text:  "Each asset has been carefully crafted to add a unique touch to your game project!"
+    linkText:
+    url:
+  - heading: ☎ Contact/Support
+    text: 
+    linkText: Asset Store Profile 
+    url: https://assetstore.unity.com/publishers/20594
+  - heading: ☛ Website
+    text: 
+    linkText: joaobaltieri.com
+    url: https://joaobaltieri.com
+  loadedLayout: 1

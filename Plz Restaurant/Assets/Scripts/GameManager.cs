@@ -36,6 +36,11 @@ public class GameManager : Singleton<GameManager>
     //[SerializeField]
     //private TextMeshProUGUI R_day_Tmp;
 
+    public bool R_Success_Fail;
+    public MainScene2 mainScene2UiManager; //메인씬2ui매니저의 결과창 보여주는 함수를 이 스크립트의 rclose함수안에서 실행함.
+
+
+
     public override void Awake()
     {
         base.Awake();
@@ -77,6 +82,8 @@ public class GameManager : Singleton<GameManager>
         R_isOpen = false;
         R_checkSuccess();
         R_resetVars();
+        mainScene2UiManager.ResultWindowOn();
+        
     }
 
 
@@ -107,6 +114,7 @@ public class GameManager : Singleton<GameManager>
         // 플레이어는 동일한 확인 버튼을 누르지만 함수는 다르게 동작
         if (R_dailyIncome >= R_targetIncome)
         {
+            R_Success_Fail = true;
             // 아래 수익 처리하는 건 따로 함수로 빼고
             // 결과창 표시는 성공 실패 2개로 만들어서 처리해야 할 듯
 
@@ -121,6 +129,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
+            R_Success_Fail = false;
             R_totalIncome += R_dailyIncome / 3;
 
             Debug.Log("total money : " + R_totalIncome);

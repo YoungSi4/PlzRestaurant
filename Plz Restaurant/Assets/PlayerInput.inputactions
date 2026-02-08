@@ -284,6 +284,90 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI1",
+            "id": "a7524851-d1b6-40a7-a938-0d53460ca1a5",
+            "actions": [
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "4dd22c9d-2d61-41c5-8790-bf13c2290179",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7a0b1f61-6a16-4e0c-9377-1f501aa59f31",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI2",
+            "id": "9587667c-a85b-4c88-9ad2-7c0a34d70ab8",
+            "actions": [
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "eca3d80f-0f60-48e3-b0b1-3bd537341926",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "49bf3f26-2b67-4545-befb-f1ee950bad83",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Nothing",
+            "id": "e833f1c6-744d-4055-bb56-a952ece77b79",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "e875a12c-3bca-4bcb-96e2-25c73389f9a4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "353850b9-57a9-4719-8066-ce266ce8cbe4",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
