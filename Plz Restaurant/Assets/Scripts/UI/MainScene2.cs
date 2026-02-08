@@ -24,6 +24,24 @@ public class MainScene2 : MonoBehaviour
 
     public MainScene1 mainScene1_UIManager; //메인씬1의 ui manager
     public GameObject mainScene1_UI; //메인씬1의 UI자체를 말함 
+    //public GameManager gameManager; //게임이 끝나고 결과창에 보일 텍스트들을 위해 가져온다.
+
+
+
+    [Header("결과창에 필요한 텍스트들")]
+    public TextMeshProUGUI successFailureText;
+    public TextMeshProUGUI todayDateText;
+    //public TextMeshProUGUI targetIncomeText; 이 두가지는 위에 이미 선언했다.
+    //public TextMeshProUGUI todayIncomeText;
+    public TextMeshProUGUI handledAnomaliesText;
+    public TextMeshProUGUI FailedAnomaliesText;
+
+    [Header("결과창")]
+    public GameObject resultWindow;
+
+
+
+
 
 
 
@@ -124,7 +142,7 @@ public class MainScene2 : MonoBehaviour
     {
         GameManager.Instance.ReStartGame();
     }
-    public void Stop(){
+    public void Stop(){ //영업이 끝날 때 
         left.SetTrigger("Out");
         right.SetTrigger("Out");
         up.SetTrigger("Out");
@@ -155,6 +173,17 @@ public class MainScene2 : MonoBehaviour
         playerInput.SwitchCurrentActionMap(previousPlayerState);
         Debug.Log("Esc");
         fadeOutPanel.SetActive(false);
+    }
+
+    public void ResultWindowOn()
+    {
+        resultWindow.SetActive(true);
+        successFailureText.SetText(GameManager.Instance.R_Success_Fail ? "Success" : "Failure");
+        todayIncomeText.SetText(GameManager.Instance.R_dailyIncome.ToString()); //항상 업데이트 되는 텍스트
+        targetIncomeText.SetText(GameManager.Instance.R_targetIncome.ToString());
+        todayDateText.SetText("Day " + GameManager.Instance.R_day.ToString());
+        //handledAnomaliesText.SetText("Day " + GameManager.Instance..ToString()); //기현상의 개수는 아직 정해진게 없는거 같아서 이렇게 둠
+        //FailedAnomaliesText.SetText("Day " + GameManager.Instance..ToString());
     }
 
 }
