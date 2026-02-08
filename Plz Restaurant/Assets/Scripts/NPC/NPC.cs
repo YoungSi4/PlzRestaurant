@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -35,10 +36,15 @@ public class NPC : MonoBehaviour
     private bool isAnomalyActive = false; // 현재 서빙 오류 이상현상이 발동 중인가?
     private int anomalyTargetTableIndex = -1; // 실수로 서빙할 잘못된 테이블 인덱스 (0-based)
     private int rightfulTableIndex = -1; // 원래 서빙해야 할 올바른 테이블 인덱스 (0-based)
+    private List<int> RightFoodsIndex = new List<int>(); // 올바른 음식 인덱스 저장용 리스트(정답이 아닌 오브젝트를 들 때 예외처리에 사용 예정)
+    private List<int> WrongFoodsIndex = new List<int>(); // 잘못된 음식 인덱스 저장용 리스트(오답 카운트용)    
 
     private NavMeshAgent nav; // 네비게이션
     private TrayControl trayControl;
     private TableManager tableManager;
+    private FoodDB foodDB;
+    [SerializeField]
+    private Minigame1 minigame1;
 
     void Start()
     {
@@ -80,6 +86,7 @@ public class NPC : MonoBehaviour
         nav = gameObject.GetComponent<NavMeshAgent>(); 
         trayControl = FindObjectOfType<TrayControl>();
         tableManager = FindObjectOfType<TableManager>();
+        foodDB = FindObjectOfType<FoodDB>();
 
         nav.speed = B_speed;
     }
@@ -228,15 +235,16 @@ public class NPC : MonoBehaviour
                 return bossHandPos2;
             // 음식을 이미 들 수 있는 만큼 들고 있는 경우
             default:
-                return null;
+               return null;
         }
     }
 
     // 사장님이 트레이에서 음식을 챙기는 로직
-    void PickFood(int trayIndex)
+    private void PickFood(int trayIndex)
     {
         // 오류방지 들 수 있는 음식 수 만큼 들고 있으면 
         if (B_handFoods.Count >= B_abillity) return;
+
         // 어느 위치에 들지 선택
         Transform handPos = selectHandPos();
         // 트레이에서 들 음식 정보 불러 오기
@@ -245,6 +253,17 @@ public class NPC : MonoBehaviour
 
         if (B_handFood != null && B_orderData != null)
         {
+            // [이상현상 추가]
+            if(isAnomalyActive && B_orderData.tableNum == anomalyTargetTableIndex)
+            {
+                Destroy(B_handFood); // 원래 음식 제거
+
+                int randomNumber = Random.Range(0, WrongFoodsIndex.Count);
+                int wrongFoodNum = WrongFoodsIndex[randomNumber];
+                WrongFoodsIndex.Remove(wrongFoodNum);
+                B_handFood = Instantiate(foodDB.GetFoodData(wrongFoodNum).foodPrefab, handPos.position, handPos.rotation);
+            }    
+
             // B_handFood의 부모를 사장님의 손 위치로 설정
             B_handFood.transform.SetParent(handPos);
             // 들고있는 음식 큐에 넣기
@@ -253,6 +272,14 @@ public class NPC : MonoBehaviour
             trayControl.ClearFood(trayIndex); // 트레이에서 음식 및 주묹 정보 삭제
         }
 
+    }
+
+    // 음식을 내려놓으며 손과 리스트에서 제거
+    private void PutDownFood()
+    {
+        Destroy(B_handFoods[0]); // 손에서 오브젝트 삭제
+        B_handFoods.RemoveAt(0); // 들고 있는 음식 리스트에서도 제거
+        B_orderDatas.RemoveAt(0); // 서빙한 주문 정보는 리스트에서 제거
     }
 
     // 테이블에 음식 내려놓기
@@ -286,13 +313,10 @@ public class NPC : MonoBehaviour
                         // 테이블에 음식 생성
                         GameObject tableFood = Instantiate(B_handFoods[0], foodPos[i].position, foodPos[i].rotation);
                         tableToServe.AddPlacedFoodObject(tableFood); // 테이블에 올라간 음식 오브젝트 저장 (삭제 용이성 위해)
-                                                                     // 테이블에 올릴 음식은 부모 해제 후 독립 개체로
+                                                                         // 테이블에 올릴 음식은 부모 해제 후 독립 개체로
                         tableFood.transform.SetParent(foodPos[i]);
-                        // 손에서 오브젝트 삭제
-                        Destroy(B_handFoods[0]);
-                        B_handFoods.RemoveAt(0); // 들고 있는 음식 리스트에서도 제거
-                        B_orderDatas.RemoveAt(0); // 서빙한 주문 정보는 리스트에서 제거
-                                                  // break; // 하나 서빙했으면 다음 의자 위치로 넘어가기 위해 탈출
+                        PutDownFood();
+                        // break; // 하나 서빙했으면 다음 의자 위치로 넘어가기 위해 탈출
                         isServed = true; // 해당 자리(의자)에 서빙이 완료되었음을 표시    
                     }
                     // 한 손님이 음식을 두 개 주문한 경우
@@ -302,11 +326,8 @@ public class NPC : MonoBehaviour
                         GameObject tableFood = Instantiate(B_handFoods[0], foodPos[i + chiarCount].position, foodPos[i + chiarCount].rotation);
                         tableToServe.AddPlacedFoodObject(tableFood);
                         tableFood.transform.SetParent(foodPos[i + chiarCount]);
-                        Destroy(B_handFoods[0]);
-                        B_handFoods.RemoveAt(0);
-                        B_orderDatas.RemoveAt(0);
+                        PutDownFood();
                     }
-
                 }
             }
         }
@@ -329,7 +350,7 @@ public class NPC : MonoBehaviour
         while (nav.remainingDistance > nav.stoppingDistance || nav.velocity.sqrMagnitude > 0.01f)
             yield return null;
     }
-    // 초기 위치 이동 시 초기 상태로 회전
+        // 초기 위치 이동 시 초기 상태로 회전
     IEnumerator RotateToStart()
     {
         // 보간을 위한 시간값
@@ -352,5 +373,49 @@ public class NPC : MonoBehaviour
         isAnomalyActive = true;
         anomalyTargetTableIndex = wrongTableIdx;
         Debug.Log($"[NPC] 이상현상 발동: {wrongTableIdx + 1}번 테이블로 잘못된 서빙 예정");
+    }
+
+   // Minigame1.cs에서 이상현상 발동 요청 시 호출
+    public void TriggerAnomaly()
+    {
+        trayControl.RequestAnomalyInfo();
+        Debug.Log("기현상 발생 요청됨");
+    }
+
+    public void SetAnomalyActive(int targetTableNum)
+    {
+        isAnomalyActive = true;
+        anomalyTargetTableIndex = targetTableNum;
+
+        // 초기화
+        RightFoodsIndex.Clear(); 
+        WrongFoodsIndex.Clear(); 
+
+        // 정답 저장
+        if (targetTableNum >= 0)
+        {
+            foreach(var chairOrders in foodDatasOnTable[targetTableNum])
+            {
+                if(chairOrders == null) continue;
+                foreach (var food in chairOrders)
+                {
+                    if(food == null) continue;
+                    RightFoodsIndex.Add(food.foodNum);
+                }
+            }
+        }
+        // 오답으로 쓸 음식 인덱스 리스트
+        for(int i=0; i < foodDB.foodCount; i++)
+        {
+            if(RightFoodsIndex.Contains(i)) continue;
+            WrongFoodsIndex.Add(i);
+        }
+
+        Debug.Log($"[NPC] 이상현상 적용: {targetTableNum}번 테이블 음식을 잘못된 것으로 서빙 예정");
+    }
+
+    public void EndAnomaly()
+    {
+        isAnomalyActive = false;
     }
 }

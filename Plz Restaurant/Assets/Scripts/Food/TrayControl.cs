@@ -26,6 +26,10 @@ public class TrayControl : MonoBehaviour
 
     private NPC npc;
 
+    // [기현상 관련]
+    private bool isListeningForAnomaly = false;
+    private int anomalyFirstTableNum = -1;
+
     void Start()
     {
         SetTray(0);
@@ -104,6 +108,15 @@ public class TrayControl : MonoBehaviour
         trayOrderDatas[index] = order;
         // 트레이 인덱스 큐에 추가 (서빙 순서 관리)
         trayIndexTurns.Enqueue(posNum);
+
+        // [이상현상] Listen 상태에서 다른 테이블 음식이 올라왔는지 체크
+        if (isListeningForAnomaly && order.tableNum != anomalyFirstTableNum)
+        {
+            // 새로 올라온 이 테이블(order.tableNum)에 이상현상 발동
+            npc.SetAnomalyActive(order.tableNum);
+            isListeningForAnomaly = false;
+            Debug.Log($"[TrayControl] Listen 완료: {order.tableNum}번 테이블(두 번째) 이상현상 발동");
+        }
     }
 
     // 트레이에 음식을 올릴 위치 결정 (앞에서부터 빈자리가 있으면 바로바로 채우기)
@@ -190,5 +203,58 @@ public class TrayControl : MonoBehaviour
     public void ConfirmPickIndex()
     {
         if (trayIndexTurns.Count > 0) trayIndexTurns.Dequeue();
+    }
+
+    // --------------------- 기현상 관련 -------------------
+    // 기현상 발생 요청받기
+    // NPC.cs에서 호출
+    public void RequestAnomalyInfo()
+    {
+        if (trayOrderDatas.Count == 0) return;
+
+        int firstTable = GetFirstPriorityTableNum();
+        int secondTable = GetSecondPriorityTableNum(firstTable);
+
+        if (secondTable != -1)
+        {
+            // 트레이에 이미 다른 테이블 음식이 있음 - 즉시 NPC에게 알림
+            npc.SetAnomalyActive(secondTable);
+            Debug.Log($"[TrayControl] 즉시 이상현상 발동: {secondTable}번 테이블");
+        }
+        else
+        {
+            // 아직 다른 테이블 음식이 없음 - Listen 상태 시작
+            isListeningForAnomaly = true;
+            anomalyFirstTableNum = firstTable;
+            Debug.Log($"[TrayControl] Listen 시작: {firstTable}번 외 다른 테이블 주문 대기중");
+        }
+    }
+
+    // 트레이에서 최우선 테이블 번호 반환
+    private int GetFirstPriorityTableNum()
+    {
+        // trayIndexTurns의 첫 번째 인덱스에 해당하는 주문의 테이블 번호
+        if (trayIndexTurns.Count > 0)
+        {
+            int firstIndex = trayIndexTurns.Peek() - 1;
+            if (trayOrderDatas[firstIndex] != null)
+            {
+                return trayOrderDatas[firstIndex].tableNum;
+            }
+        }
+        return -1;
+    }
+
+    // 첫 번째 테이블과 다른 테이블 번호 반환 (없으면 -1)
+    private int GetSecondPriorityTableNum(int excludeTableNum)
+    {
+        foreach (var orderData in trayOrderDatas)
+        {
+            if (orderData != null && orderData.tableNum != excludeTableNum)
+            {
+                return orderData.tableNum;
+            }
+        }
+        return -1;
     }
 }
