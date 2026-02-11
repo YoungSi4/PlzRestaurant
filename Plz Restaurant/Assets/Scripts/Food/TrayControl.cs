@@ -115,7 +115,7 @@ public class TrayControl : MonoBehaviour
             // 새로 올라온 이 테이블(order.tableNum)에 이상현상 발동
             npc.SetAnomalyActive(order.tableNum);
             isListeningForAnomaly = false;
-            Debug.Log($"[TrayControl] Listen 완료: {order.tableNum}번 테이블(두 번째) 이상현상 발동");
+            Debug.Log($"[TrayControl] Listen 완료: {order.tableNum + 1}번 테이블(두 번째) 이상현상 발동");
         }
     }
 
@@ -219,14 +219,14 @@ public class TrayControl : MonoBehaviour
         {
             // 트레이에 이미 다른 테이블 음식이 있음 - 즉시 NPC에게 알림
             npc.SetAnomalyActive(secondTable);
-            Debug.Log($"[TrayControl] 즉시 이상현상 발동: {secondTable}번 테이블");
+            Debug.Log($"[TrayControl] 즉시 이상현상 발동: {secondTable + 1}번 테이블");
         }
         else
         {
             // 아직 다른 테이블 음식이 없음 - Listen 상태 시작
             isListeningForAnomaly = true;
             anomalyFirstTableNum = firstTable;
-            Debug.Log($"[TrayControl] Listen 시작: {firstTable}번 외 다른 테이블 주문 대기중");
+            Debug.Log($"[TrayControl] Listen 시작: {firstTable + 1}번 외 다른 테이블 주문 대기중");
         }
     }
 

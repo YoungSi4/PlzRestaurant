@@ -38,6 +38,9 @@ public class NPC : MonoBehaviour
     private int rightfulTableIndex = -1; // 원래 서빙해야 할 올바른 테이블 인덱스 (0-based)
     private List<int> RightFoodsIndex = new List<int>(); // 올바른 음식 인덱스 저장용 리스트(정답이 아닌 오브젝트를 들 때 예외처리에 사용 예정)
     private List<int> WrongFoodsIndex = new List<int>(); // 잘못된 음식 인덱스 저장용 리스트(오답 카운트용)    
+    private int anomalyTargetTableIndex_1 = -1; // 기현상이 발동 될 테이블 인덱스 (0-based)
+    private float anomalyChance = 0.5f; // 이상현상 발생 확률
+    private bool isAnomalyPending = false; // 기현상 요청 중임을 나타내는 변수
 
     private NavMeshAgent nav; // 네비게이션
     private TrayControl trayControl;
@@ -180,6 +183,10 @@ public class NPC : MonoBehaviour
                 그 경우 HeadChef의 일괄 조리 로직 수정이 필요해짐*/
                 // yield return new WaitForSeconds(0.5f); // 음식 들기 전 잠시 대기
 
+                // [이상현상 추가] 이상현상 발생 확률에 따라 이상현상 발동 결정
+                // 음식 하나를 트레이에서 들 때 마다 동작
+                DetermineAnomalyOccurrence();
+
                 // 순서에 따라 트레이에서 음식 들기
                 int pickIndex = trayControl.PeekPickIndex();
                 PickFood(pickIndex);
@@ -254,7 +261,7 @@ public class NPC : MonoBehaviour
         if (B_handFood != null && B_orderData != null)
         {
             // [이상현상 추가]
-            if(isAnomalyActive && B_orderData.tableNum == anomalyTargetTableIndex)
+            if(isAnomalyActive && B_orderData.tableNum == anomalyTargetTableIndex_1)
             {
                 Destroy(B_handFood); // 원래 음식 제거
 
@@ -385,7 +392,8 @@ public class NPC : MonoBehaviour
     public void SetAnomalyActive(int targetTableNum)
     {
         isAnomalyActive = true;
-        anomalyTargetTableIndex = targetTableNum;
+        isAnomalyPending = false; // 실제 활성화되었으므로 예약 상태 해제
+        anomalyTargetTableIndex_1 = targetTableNum;
 
         // 초기화
         RightFoodsIndex.Clear(); 
@@ -411,11 +419,23 @@ public class NPC : MonoBehaviour
             WrongFoodsIndex.Add(i);
         }
 
-        Debug.Log($"[NPC] 이상현상 적용: {targetTableNum}번 테이블 음식을 잘못된 것으로 서빙 예정");
+        Debug.Log($"[NPC] 이상현상 적용: {targetTableNum + 1}번 테이블 음식을 잘못된 것으로 서빙 예정");
     }
 
     public void EndAnomaly()
     {
         isAnomalyActive = false;
+    }
+
+    private void DetermineAnomalyOccurrence()
+    {
+        if (isAnomalyActive || isAnomalyPending) return;
+
+        if (Random.value < anomalyChance)
+        {
+            isAnomalyPending = true; // 예약 상태로 전환
+            TriggerAnomaly();
+            Debug.Log("기현상 발생 - 확률적 발생");
+        }
     }
 }
