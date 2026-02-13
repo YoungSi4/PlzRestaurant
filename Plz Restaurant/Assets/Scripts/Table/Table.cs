@@ -310,8 +310,10 @@ public List<int>[] SendFoodNumToOrderInfo()
     /// </summary>
     public void CanWeStartToEat()
     {
+        Debug.Log(tableNum + "번 : 식사 가능 확인 중");
         if (orderedFoodNum == placedFoodObjects.Count)
         {
+            Debug.Log(tableNum + "번 : 식사 시작");
             foreach (Visitor v in visitorOnChair) {
                 if (v == null) continue;
                 StartCoroutine(v.EatingFood());
