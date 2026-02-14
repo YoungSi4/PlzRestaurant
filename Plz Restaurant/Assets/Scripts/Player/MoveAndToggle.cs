@@ -36,8 +36,16 @@ public class MoveAndToggle : MonoBehaviour
 
     [SerializeField]
     private VisitorOrder order; // 손님의 주문을 처리하는 객체
+    [SerializeField]
+    private Minigame1 minigame1;
+    private NPC npc;
 
     public MainScene2 mainScene2;
+
+    private void Awake()
+    {
+        npc = FindObjectOfType<NPC>();
+    }
 
     private void Start()
     {
@@ -203,6 +211,18 @@ public class MoveAndToggle : MonoBehaviour
                         // Debug.Log("Table 상호작용");
                         var table = hit.collider.gameObject.GetComponent<Table>();
                         Debug.Log("Table 상호작용" + table.tableNum);
+
+                        // [기현상 추가]
+                        if (table.HasAnomaly)
+                        {
+                            FoodData[] foodDatas = table.GetAnomalyOrderedFoods();
+                            if(foodDatas != null && foodDatas.Length > 0)
+                            {
+                                minigame1.GetOrderedFoodData(table.tableNum, foodDatas);
+                            }
+                            return;
+                        }
+
                         if (!table.isReadyToOrder) return; // 아직 주문 결정을 못했다면 
 
                         var foodIDs = table.SendFoodNumToOrderInfo();

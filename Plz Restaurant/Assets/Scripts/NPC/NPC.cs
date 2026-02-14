@@ -298,6 +298,14 @@ public class NPC : MonoBehaviour
         int tableNumToServe = B_orderDatas[0].tableNum; // 서빙할 테이블 번호(리스트의 가장 앞에 있는 주문)
         Table tableToServe = tableManager.GetTable(tableNumToServe); // 서빙할 테이블 객체
 
+        // 기현상 발생 시 주문 정보 저장
+        if (isAnomalyActive && tableNumToServe == anomalyTargetTableIndex_1)
+        {
+            // 이 테이블의 올바른 주문 정보를 가져와서 저장
+            FoodData[] correctOrders = GetTableCorrectOrders(tableNumToServe);
+            tableToServe.SetAnomalyServed(correctOrders);
+        }
+
         while (B_orderDatas.Count > 0)
         {
             if (B_orderDatas[0].tableNum != tableNumToServe)
@@ -320,8 +328,14 @@ public class NPC : MonoBehaviour
                         // 테이블에 음식 생성
                         GameObject tableFood = Instantiate(B_handFoods[0], foodPos[i].position, foodPos[i].rotation);
                         tableToServe.AddPlacedFoodObject(tableFood); // 테이블에 올라간 음식 오브젝트 저장 (삭제 용이성 위해)
-                                                                         // 테이블에 올릴 음식은 부모 해제 후 독립 개체로
-                        tableFood.transform.SetParent(foodPos[i]);
+
+                        // [기현상 추가] 잘못된 음식 서빙됨을 테이블에 알림
+                        if (isAnomalyActive && B_orderDatas[0].tableNum == anomalyTargetTableIndex_1)
+                        {
+                            tableToServe.SetAnomaly();
+                        }
+
+                        tableFood.transform.SetParent(foodPos[i]); // 테이블 음식 위치의 자식으로 설정
                         PutDownFood();
                         // break; // 하나 서빙했으면 다음 의자 위치로 넘어가기 위해 탈출
                         isServed = true; // 해당 자리(의자)에 서빙이 완료되었음을 표시    
@@ -437,5 +451,22 @@ public class NPC : MonoBehaviour
             TriggerAnomaly();
             Debug.Log("기현상 발생 - 확률적 발생");
         }
+    }
+    private FoodData[] GetTableCorrectOrders(int tableNum)
+    {
+        List<FoodData> orders = new List<FoodData>();
+
+        if (tableNum >= 0 && tableNum < foodDatasOnTable.Length)
+        {
+            foreach (var chairOrders in foodDatasOnTable[tableNum])
+            {
+                if (chairOrders != null)
+                {
+                    orders.AddRange(chairOrders);
+                }
+            }
+        }
+
+        return orders.ToArray();
     }
 }

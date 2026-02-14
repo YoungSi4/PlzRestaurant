@@ -61,9 +61,19 @@ public class Table : MonoBehaviour
     private int totalPrice = 0;
     private Vector3 moneyGenPos;
 
+    // [기현상 관련]
+    private bool hasAnomaly = false; // 테이블에 대한 이상 현상 발생 여부
+    public bool HasAnomaly => hasAnomaly;
+    private FoodData[] anomalyOrderedFoods;
+
+    private NPC npc;
+    private Minigame1 minigame1;
+
     private void Awake()
     {
         chairNum = chairPos.Length;
+        npc = FindObjectOfType<NPC>();
+        minigame1 = FindObjectOfType<Minigame1>();
     }
 
     private void Start()
@@ -461,4 +471,27 @@ public List<int>[] SendFoodNumToOrderInfo()
         }
     }
 
+
+    // [기현상 추가]
+    // 기현상 발생
+    public void SetAnomaly()
+    {
+        hasAnomaly = true;
+    }
+    // 기현상 해소
+    public void ResolveAnomaly()
+    {
+        hasAnomaly = false;
+        anomalyOrderedFoods = null;
+
+    }
+    public void SetAnomalyServed(FoodData[] orderedFoods)
+    {
+        hasAnomaly = true;
+        anomalyOrderedFoods = orderedFoods;
+    }
+    public FoodData[] GetAnomalyOrderedFoods()
+    {
+        return anomalyOrderedFoods;
+    }
 }

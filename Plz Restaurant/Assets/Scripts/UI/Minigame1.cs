@@ -30,8 +30,8 @@ public class Minigame1 : MonoBehaviour
 
     public Button TMPAnomalyButton; // 기현상 발생조건 로직 작성이전 임시테스트용 버튼
     private NPC npc;
-
-    FoodDB foodDB;
+    private TableManager tableManager;
+    private FoodDB foodDB;
 
     private FoodData[] orderedFoods; // 올바른 주문 정보 저장 배열
     private int tableNum; // 테이블 번호
@@ -41,15 +41,6 @@ public class Minigame1 : MonoBehaviour
     private bool isCleared = false; // 미니게임 클리어 여부 체크 변수
     private bool isFailed = false; // 미니게임 실패 여부 체크 변수
 
-
-    private void Awake()
-    {
-        foodDB = FindObjectOfType<FoodDB>();
-        npc = FindObjectOfType<NPC>();
-
-        wrongFoodIndexList = new List<int>(); // 초기화
-        correctRandNums = new List<int>();
-    }
 
     private void Start()
     {
@@ -135,6 +126,13 @@ public class Minigame1 : MonoBehaviour
     // 외부 호출 시 미니게임 UI SetActive(true)가 선행되어야 함
     public void GetOrderedFoodData(int tableNumber, FoodData[] foods)
     {
+        npc = FindObjectOfType<NPC>();
+        tableManager = FindObjectOfType<TableManager>();
+        foodDB = FindObjectOfType<FoodDB>();
+        wrongFoodIndexList = new List<int>(); // 초기화
+        correctRandNums = new List<int>();
+
+
         tableNum = tableNumber;
         orderedFoods = foods;
 
@@ -146,8 +144,11 @@ public class Minigame1 : MonoBehaviour
     // 정답이 아닌 음식들의 인덱스 리스트 초기화
     private void InitWrongList(FoodData[] foods)
     {
-        // 리스트 비우기 - 재사용 고려
-        wrongFoodIndexList.Clear();
+        if(wrongFoodIndexList != null)
+        {
+            // 리스트 비우기 - 재사용 고려
+            wrongFoodIndexList.Clear();
+        }
 
         // foodDB의 음식 개수만큼 인덱스 추가 - 데이터 전달 받은 후 정답 데이터 제외시킬 것
         for (int i = 1; i <= foodDB.foodCount; i++)
@@ -323,6 +324,9 @@ public class Minigame1 : MonoBehaviour
         {
             StartCoroutine(GameClearImageSet());
         }
+        // 미니게임 결과와 상관없이 기현상 상태는 해소
+        Table table = tableManager.GetTable(tableNum);
+        table.ResolveAnomaly();
     }
     
     private void CloseGame()
