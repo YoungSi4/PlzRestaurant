@@ -45,12 +45,13 @@ public class MainScene1 : MonoBehaviour
 
     GameObject uiPopUp; // esc로 꺼야할 "Popup"이라는 태그를 가진 게임 오브젝트를 말한다.
 
-
-
+    [SerializeField]
+    private Button startBtn;
 
     private void Start()
     {
         TodayInit();//씬이 시작하면 현재 플레이어의 자산과 현재 영업일을 업데이트해줌
+        startBtn.onClick.AddListener(GameStart);
     }
 
     private void TodayInit()
