@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Alt (Cursor)",
+                    "type": "Button",
+                    "id": "dffe5131-1aca-4f2c-a8e1-4bd6a9f30bb3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -150,6 +159,17 @@
                     "action": "LookMenupan",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b04bc73-0185-41e7-a4d1-869c620b66db",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Alt (Cursor)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -191,6 +211,15 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Alt (Cursor)",
+                    "type": "Button",
+                    "id": "1adda42c-035d-4dcf-a74d-da1b6f9b7e6a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -280,6 +309,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LookMenupan",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "151f578c-d3c4-4b74-8213-d87105a9a135",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Alt (Cursor)",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

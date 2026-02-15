@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MainScene2 : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class MainScene2 : MonoBehaviour
     public GameObject fadeOutPanel;
     public GameObject orderMemo;
     public GameObject MenuPan;
+
+    public Button resultOKButton;
+
     
 
     [Header("GameManager와 연결될 텍스트")]
@@ -57,8 +61,18 @@ public class MainScene2 : MonoBehaviour
     public string previousPlayerState; //이전 상태의 인풋맵을 기억한다. string으로 이름만 기억하면 된다.
 
     GameObject uiPopUp; // esc로 꺼야할 "Popup"이라는 태그를 가진 게임 오브젝트를 말한다.
-    
 
+
+    private void Start()
+    {
+        resultOKButton.onClick.AddListener(ResultOk);
+    }
+
+    public void ResultOk()
+    {
+        resultWindow.SetActive(false);
+        Stop();
+    }
 
 
     public void OnOff_UI(GameObject uiObject)
@@ -143,6 +157,8 @@ public class MainScene2 : MonoBehaviour
         GameManager.Instance.ReStartGame();
     }
     public void Stop(){ //영업이 끝날 때 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         left.SetTrigger("Out");
         right.SetTrigger("Out");
         up.SetTrigger("Out");
@@ -161,6 +177,8 @@ public class MainScene2 : MonoBehaviour
     {
         previousPlayerState = (playerInput.currentActionMap.name);
         playerInput.SwitchCurrentActionMap("UI2");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void Esc() 
@@ -173,6 +191,8 @@ public class MainScene2 : MonoBehaviour
         playerInput.SwitchCurrentActionMap(previousPlayerState);
         Debug.Log("Esc");
         fadeOutPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void ResultWindowOn()

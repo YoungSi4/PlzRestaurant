@@ -33,6 +33,8 @@ public class FrontSceneUI : MonoBehaviour
         buttonImage_Color = buttonImage.color;
         fadeOutImage_Color = fadeOutImage.color;
         audioSource = GetComponent<AudioSource>();
+        Cursor.visible = false; // Ä¿¼­ ¼û±è
+        Cursor.lockState = CursorLockMode.Locked; // È­¸é Áß¾Ó¿¡ °íÁ¤
     }
 
     void Update()

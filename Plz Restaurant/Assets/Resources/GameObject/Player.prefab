@@ -387,13 +387,73 @@ MonoBehaviour:
     m_ActionId: 95be7b33-938c-4f46-a8a0-b7f526d46dcc
     m_ActionName: ThreePerspective/LookMenupan[/Keyboard/1]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MainScene1, Assembly-CSharp
+        m_MethodName: Esc
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 4dd22c9d-2d61-41c5-8790-bf13c2290179
     m_ActionName: UI/New action[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: e875a12c-3bca-4bcb-96e2-25c73389f9a4
     m_ActionName: Nothing/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MainScene2, Assembly-CSharp
+        m_MethodName: Esc
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: eca3d80f-0f60-48e3-b0b1-3bd537341926
+    m_ActionName: UI2/Esc[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8657426431097614366}
+        m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
+        m_MethodName: MouseCursor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dffe5131-1aca-4f2c-a8e1-4bd6a9f30bb3
+    m_ActionName: FirstPerspective/Alt (Cursor)
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8657426431097614366}
+        m_TargetAssemblyTypeName: MoveAndToggle, Assembly-CSharp
+        m_MethodName: MouseCursor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1adda42c-035d-4dcf-a74d-da1b6f9b7e6a
+    m_ActionName: ThreePerspective/Alt (Cursor)
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPerspective
@@ -427,7 +487,7 @@ Transform:
   m_GameObject: {fileID: 2375946091105842277}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.529, z: 0.436}
+  m_LocalPosition: {x: 0, y: 0.529, z: 0.166}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -751,7 +811,7 @@ Transform:
   m_GameObject: {fileID: 8065286116907550223}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0000014305115, y: 5.0000043, z: -0.0000038146973}
+  m_LocalPosition: {x: 0, y: 5.0000005, z: 0.0000038146973}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

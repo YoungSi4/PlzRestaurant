@@ -228,4 +228,24 @@ public class MoveAndToggle : MonoBehaviour
         }
     }
 
+    public void MouseCursor(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            // 꾹 누르고 있을 때 실행
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Debug.Log("누르고있음");
+
+        }
+
+        if (context.canceled)
+        {
+            // 버튼 뗐을 때 실행
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Debug.Log("안누르고있음");
+        }
+    }
+
 }
