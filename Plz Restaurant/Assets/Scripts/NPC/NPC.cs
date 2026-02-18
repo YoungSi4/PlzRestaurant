@@ -329,12 +329,6 @@ public class NPC : MonoBehaviour
                         GameObject tableFood = Instantiate(B_handFoods[0], foodPos[i].position, foodPos[i].rotation);
                         tableToServe.AddPlacedFoodObject(tableFood); // 테이블에 올라간 음식 오브젝트 저장 (삭제 용이성 위해)
 
-                        // [기현상 추가] 잘못된 음식 서빙됨을 테이블에 알림
-                        if (isAnomalyActive && B_orderDatas[0].tableNum == anomalyTargetTableIndex_1)
-                        {
-                            tableToServe.SetAnomaly();
-                        }
-
                         tableFood.transform.SetParent(foodPos[i]); // 테이블 음식 위치의 자식으로 설정
                         PutDownFood();
                         // break; // 하나 서빙했으면 다음 의자 위치로 넘어가기 위해 탈출

@@ -473,11 +473,6 @@ public List<int>[] SendFoodNumToOrderInfo()
 
 
     // [기현상 추가]
-    // 기현상 발생
-    public void SetAnomaly()
-    {
-        hasAnomaly = true;
-    }
     // 기현상 해소
     public void ResolveAnomaly()
     {
@@ -485,6 +480,7 @@ public List<int>[] SendFoodNumToOrderInfo()
         anomalyOrderedFoods = null;
 
     }
+    // 기현상 발생
     public void SetAnomalyServed(FoodData[] orderedFoods)
     {
         hasAnomaly = true;
