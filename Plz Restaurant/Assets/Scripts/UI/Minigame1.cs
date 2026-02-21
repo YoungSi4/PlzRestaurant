@@ -31,6 +31,7 @@ public class Minigame1 : MonoBehaviour
     public Button TMPAnomalyButton; // 기현상 발생조건 로직 작성이전 임시테스트용 버튼
     private NPC npc;
     private TableManager tableManager;
+    [SerializeField]
     private FoodDB foodDB;
 
     private FoodData[] orderedFoods; // 올바른 주문 정보 저장 배열
@@ -40,14 +41,6 @@ public class Minigame1 : MonoBehaviour
     private bool isTimeOver = false; // 타임오버가 이미 되었는지 체크하는 변수
     private bool isCleared = false; // 미니게임 클리어 여부 체크 변수
     private bool isFailed = false; // 미니게임 실패 여부 체크 변수
-
-
-    private void Start()
-    {
-        TMPStartAnomaly();
-        // 호출 테스트
-        // GetOrderedFoodData(1, new FoodData[] { foodDB.GetFoodData(1), foodDB.GetFoodData(2), foodDB.GetFoodData(4), foodDB.GetFoodData(8), foodDB.GetFoodData(12) });
-    }
 
     private void Update()
     {
@@ -128,7 +121,7 @@ public class Minigame1 : MonoBehaviour
     {
         npc = FindObjectOfType<NPC>();
         tableManager = FindObjectOfType<TableManager>();
-        foodDB = FindObjectOfType<FoodDB>();
+        //foodDB = FindObjectOfType<FoodDB>();
         wrongFoodIndexList = new List<int>(); // 초기화
         correctRandNums = new List<int>();
 
@@ -144,7 +137,7 @@ public class Minigame1 : MonoBehaviour
     // 정답이 아닌 음식들의 인덱스 리스트 초기화
     private void InitWrongList(FoodData[] foods)
     {
-        if(wrongFoodIndexList != null)
+        if (wrongFoodIndexList != null)
         {
             // 리스트 비우기 - 재사용 고려
             wrongFoodIndexList.Clear();
@@ -158,6 +151,8 @@ public class Minigame1 : MonoBehaviour
         // 정답 데이터의 인덱스 제거
         foreach (FoodData correctFood in foods)
         {
+            if (correctFood == null) continue;
+
             int correctIndex = correctFood.foodNum;
             wrongFoodIndexList.Remove(correctIndex);
         }
@@ -334,11 +329,4 @@ public class Minigame1 : MonoBehaviour
         // UI 팝업 비활성화 (창 닫기)
         gameObject.SetActive(false);
     }
-
-    // 임시 기현상 트리거 연결
-    private void TMPStartAnomaly()
-    {
-        TMPAnomalyButton.onClick.AddListener(npc.TriggerAnomaly);
-    }
-
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Schema;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -41,6 +42,7 @@ public class NPC : MonoBehaviour
     private int anomalyTargetTableIndex_1 = -1; // 기현상이 발동 될 테이블 인덱스 (0-based)
     private float anomalyChance = 0.5f; // 이상현상 발생 확률
     private bool isAnomalyPending = false; // 기현상 요청 중임을 나타내는 변수
+    private FoodData[] correctOrderedFoods;
 
     private NavMeshAgent nav; // 네비게이션
     private TrayControl trayControl;
@@ -298,14 +300,6 @@ public class NPC : MonoBehaviour
         int tableNumToServe = B_orderDatas[0].tableNum; // 서빙할 테이블 번호(리스트의 가장 앞에 있는 주문)
         Table tableToServe = tableManager.GetTable(tableNumToServe); // 서빙할 테이블 객체
 
-        // 기현상 발생 시 주문 정보 저장
-        if (isAnomalyActive && tableNumToServe == anomalyTargetTableIndex_1)
-        {
-            // 이 테이블의 올바른 주문 정보를 가져와서 저장
-            FoodData[] correctOrders = GetTableCorrectOrders(tableNumToServe);
-            tableToServe.SetAnomalyServed(correctOrders);
-        }
-
         while (B_orderDatas.Count > 0)
         {
             if (B_orderDatas[0].tableNum != tableNumToServe)
@@ -331,7 +325,7 @@ public class NPC : MonoBehaviour
 
                         tableFood.transform.SetParent(foodPos[i]); // 테이블 음식 위치의 자식으로 설정
                         PutDownFood();
-                        // break; // 하나 서빙했으면 다음 의자 위치로 넘어가기 위해 탈출
+                        CountAnomalyOrders(tableNumToServe, food);
                         isServed = true; // 해당 자리(의자)에 서빙이 완료되었음을 표시    
                     }
                     // 한 손님이 음식을 두 개 주문한 경우
@@ -342,11 +336,21 @@ public class NPC : MonoBehaviour
                         tableToServe.AddPlacedFoodObject(tableFood);
                         tableFood.transform.SetParent(foodPos[i + chiarCount]);
                         PutDownFood();
+                        CountAnomalyOrders(tableNumToServe, food);
                     }
                 }
             }
         }
+
+        bool isAnomalyServed = CheckAnomalyServed(tableNumToServe);
+        if(isAnomalyActive && tableNumToServe == anomalyTargetTableIndex_1 && isAnomalyServed)
+        {
+            tableToServe.SetAnomalyServed(GetTableCorrectOrders(anomalyTargetTableIndex_1));
+            B_EndAnomaly();
+        }
+
         tableToServe.CanWeStartToEat();
+
     }
 
 
@@ -402,6 +406,8 @@ public class NPC : MonoBehaviour
         isAnomalyActive = true;
         isAnomalyPending = false; // 실제 활성화되었으므로 예약 상태 해제
         anomalyTargetTableIndex_1 = targetTableNum;
+        // 기현상 테이블의 주문 정보 저장
+        correctOrderedFoods = GetTableCorrectOrders(targetTableNum);
 
         // 초기화
         RightFoodsIndex.Clear(); 
@@ -421,7 +427,7 @@ public class NPC : MonoBehaviour
             }
         }
         // 오답으로 쓸 음식 인덱스 리스트
-        for(int i=0; i < foodDB.foodCount; i++)
+        for(int i=1; i <= foodDB.foodCount; i++)
         {
             if(RightFoodsIndex.Contains(i)) continue;
             WrongFoodsIndex.Add(i);
@@ -430,7 +436,7 @@ public class NPC : MonoBehaviour
         Debug.Log($"[NPC] 이상현상 적용: {targetTableNum + 1}번 테이블 음식을 잘못된 것으로 서빙 예정");
     }
 
-    public void EndAnomaly()
+    public void B_EndAnomaly()
     {
         isAnomalyActive = false;
     }
@@ -462,5 +468,34 @@ public class NPC : MonoBehaviour
         }
 
         return orders.ToArray();
+    }
+
+    // [기현상] 기현상 테이블의 서빙 수순 확인을 위함
+    private void CountAnomalyOrders(int tableNumToServe, FoodData food)
+    {
+        if (isAnomalyActive && tableNumToServe == anomalyTargetTableIndex_1)
+        {
+            for (int idx = 0; idx < correctOrderedFoods.Length; idx++)
+            {
+                // 아직 체크되지 않았고(null이 아니고) 현재 서빙한 음식과 일치하는 데이터 찾기
+                if (correctOrderedFoods[idx] != null && correctOrderedFoods[idx] == food)
+                {
+                    // 찾은 요소를 null로 만들어 '서빙 완료' 표시
+                    correctOrderedFoods[idx] = null;
+                    break; // 하나 찾았으므로 루프 탈출
+                }
+            }
+        }
+    }
+
+    // [기현상] 기현상 테이블의 서빙이 완료되었는지 확인
+    private bool CheckAnomalyServed(int tableNum)
+    {
+        if (isAnomalyActive && tableNum == anomalyTargetTableIndex_1)
+        {
+            // correctOrderedFoods 배열에 null이 아닌 요소가 하나라도 있으면 아직 서빙이 완료되지 않은 것
+            return correctOrderedFoods.All(food => food == null);
+        }
+        return false; // 이상현상이 활성화되지 않았거나 다른 테이블인 경우
     }
 }
