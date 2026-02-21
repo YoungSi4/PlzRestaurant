@@ -36,6 +36,7 @@ public class Minigame1 : MonoBehaviour
 
     private FoodData[] orderedFoods; // 올바른 주문 정보 저장 배열
     private int tableNum; // 테이블 번호
+    private Table table;
     private List<int> wrongFoodIndexList; // 정답이 아닌 음식들의 인덱스 리스트
     List<int> correctRandNums; // 정답 음식이 들어갈 위치의 랜덤 인덱스 리스트
     private bool isTimeOver = false; // 타임오버가 이미 되었는지 체크하는 변수
@@ -127,6 +128,7 @@ public class Minigame1 : MonoBehaviour
 
 
         tableNum = tableNumber;
+        table = tableManager.GetTable(tableNum);
         orderedFoods = foods;
 
         InitUIText();
@@ -318,9 +320,9 @@ public class Minigame1 : MonoBehaviour
         else if (isCleared)
         {
             StartCoroutine(GameClearImageSet());
+            GameClear();
         }
         // 미니게임 결과와 상관없이 기현상 상태는 해소
-        Table table = tableManager.GetTable(tableNum);
         table.ResolveAnomaly();
     }
     
@@ -328,5 +330,14 @@ public class Minigame1 : MonoBehaviour
     {
         // UI 팝업 비활성화 (창 닫기)
         gameObject.SetActive(false);
+    }
+
+    // 게임 클리어 처리
+    // 음식 오브젝트 원래대로 되돌리기
+    // 식사 시작 호출하기
+    private void GameClear()
+    {
+        table.SetCcorrectFoodObjects();
+        table.CanWeStartToEat();
     }
 }

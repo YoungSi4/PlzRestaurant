@@ -59,23 +59,14 @@ public class NPC : MonoBehaviour
         for (int i = 0; i < tableCount; i++)
         {
             var table = tableManager.GetTable(i);
-            /*Debug.Log($"[NPC.Start] i={i}, table={table}");
-            if (table == null)
-            {
-                Debug.LogError($"[NPC.Start] tableManager.GetTable({i}) 가 null을 반환함!");
-                continue;
-            }*/
 
             int chairCount = table.chairNum;
-            // Debug.Log($"[NPC.Start] table[{i}] 의자 수 = {chairCount}");
-
 
             foodDatasOnTable[i] = new List<FoodData>[chairCount];
 
             for (int j = 0; j < chairCount; j++)
             {
                 foodDatasOnTable[i][j] = new List<FoodData>();
-                // Debug.Log($"[Start] foodDatasOnTable[{i}][{j}] 초기화 완료 (chairCount={chairCount})");
             }
         }
     }
@@ -342,6 +333,9 @@ public class NPC : MonoBehaviour
             }
         }
 
+        // 기현상 테이블 서빙이었는지 체크
+        bool isCurrentTarget = (tableNumToServe == anomalyTargetTableIndex_1);
+
         bool isAnomalyServed = CheckAnomalyServed(tableNumToServe);
         if(isAnomalyActive && tableNumToServe == anomalyTargetTableIndex_1 && isAnomalyServed)
         {
@@ -349,7 +343,10 @@ public class NPC : MonoBehaviour
             B_EndAnomaly();
         }
 
-        tableToServe.CanWeStartToEat();
+        if(!isCurrentTarget)
+        {
+            tableToServe.CanWeStartToEat();
+        }
 
     }
 
@@ -436,9 +433,12 @@ public class NPC : MonoBehaviour
         Debug.Log($"[NPC] 이상현상 적용: {targetTableNum + 1}번 테이블 음식을 잘못된 것으로 서빙 예정");
     }
 
+    // 기현상 관련 변수 초기화
     public void B_EndAnomaly()
     {
         isAnomalyActive = false;
+        anomalyTargetTableIndex_1 = -1;
+        correctOrderedFoods = null;
     }
 
     private void DetermineAnomalyOccurrence()

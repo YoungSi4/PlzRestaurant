@@ -490,4 +490,10 @@ public List<int>[] SendFoodNumToOrderInfo()
     {
         return anomalyOrderedFoods;
     }
+
+
+    public void SetCcorrectFoodObjects()
+    {
+
+    }
 }
