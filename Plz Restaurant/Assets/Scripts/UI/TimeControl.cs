@@ -11,7 +11,7 @@ public class TimeControl : Singleton<TimeControl>
     private GameManager gameManager;
 
     public TextMeshProUGUI[] TimeText;
-    public GameObject TimeOutImage;
+    // public GameObject TimeOutImage;
     //public Button StartButton; @@@@@@@ start버튼은 없앰 mainscene1에서 영업시작을 하기 때문에
 
     private int StartTime = 480;

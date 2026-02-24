@@ -11,7 +11,7 @@ public class Visitor : MonoBehaviour
     // visitor spawner
     private VisitorPool pool;
     private VisitorSpawner spawner;
-    private WaitForSeconds wait = new WaitForSeconds(10f);
+    private WaitForSeconds withdrawWait = new WaitForSeconds(3f);
 
     // action
     private WaitForSeconds eatingTime = new WaitForSeconds(5f); // 기획서 상 15초
@@ -171,13 +171,13 @@ public class Visitor : MonoBehaviour
         StartCoroutine(CheckArriveAtDoor());
     }
 
-    // 출구 도착 검사 함수 - 작동하는지 미지수이긴 합니다...
+    // 출구 도착 검사 함수
     private IEnumerator CheckArriveAtDoor()
     {
         // 도착 검사 : destination과 거리가 일정 이내
         while(true)
         {
-            yield return eatingTime; // 5초에 한 번 검사
+            yield return withdrawWait;
 
             var curPos = transform.position;
             var tartgetPos = agent.destination;

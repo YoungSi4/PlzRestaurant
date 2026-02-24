@@ -36,14 +36,15 @@ public class GameManager : Singleton<GameManager>
     //[SerializeField]
     //private TextMeshProUGUI R_day_Tmp;
 
-    public bool R_Success_Fail;
+    public bool R_Success_Fail;// true : 성공, false : 실패
     public MainScene2 mainScene2UiManager; //메인씬2ui매니저의 결과창 보여주는 함수를 이 스크립트의 rclose함수안에서 실행함.
-
+    private TableManager tableManager;
 
 
     public override void Awake()
     {
         base.Awake();
+        tableManager = FindAnyObjectByType<TableManager>();
 
         // UI 좌측상단 수익 관련 텍스트 초기화
         //R_targetIncome_Tmp.SetText(R_targetIncome.ToString());
@@ -74,11 +75,8 @@ public class GameManager : Singleton<GameManager>
     */
     public void R_close()
     {
-        // 아직 둘 다 함수가 없음
-        // visitorSpawner.stop
-        // timeControl.stop
         visitorSpawner.StopSpawning();
-
+        tableManager.AllTalbleClear();
         R_isOpen = false;
         R_checkSuccess();
         R_resetVars();
@@ -125,7 +123,7 @@ public class GameManager : Singleton<GameManager>
 
             Debug.Log("total money : " + R_totalIncome);
             Debug.Log("next day");
-            R_nextDay();
+            R_nextDay(); // 결과창 일자가 여기서 미리 증가하면 뒤로 뺼 것
         }
         else
         {
@@ -157,13 +155,14 @@ public class GameManager : Singleton<GameManager>
         R_targetIncome += R_targetIncomeIncrease;
         var tempTarget = R_targetIncome.ToString();
         //R_targetIncome_Tmp.SetText(tempTarget);
+        // 씬 1으로 이동
     }
 
     private void R_repeatDay()
     {
         // blank
         // 동일한 날짜를 다시 플레이
-        // 그럼 어느 씬으로 이동? or 그냥 게임 실패 및 초기화?
+        // 씬 1으로 이동
     }
 
     public void StopGame()

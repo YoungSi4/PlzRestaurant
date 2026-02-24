@@ -60,6 +60,7 @@ public class Table : MonoBehaviour
     private GameObject moneyPrefab;
     private int totalPrice = 0;
     private Vector3 moneyGenPos;
+    private GameObject tempMoney;
 
     private void Awake()
     {
@@ -394,12 +395,20 @@ public List<int>[] SendFoodNumToOrderInfo()
     // 돈 생성
     private void GenerateMoney()
     {
-        var tempMoney = Instantiate<GameObject>(moneyPrefab, moneyGenPos, Quaternion.Euler(0, 0, 0));
+        tempMoney = Instantiate<GameObject>(moneyPrefab, moneyGenPos, Quaternion.Euler(0, 0, 0));
         tempMoney.GetComponent<Money>().Init(totalPrice, this);
     }
 
+    public void DestroyMoney()
+    {
+        if(tempMoney != null)
+        {
+            Destroy(tempMoney);
+        }
+    }
+
     // 손님 퇴장
-    private void VisitorDeparture()
+    public void VisitorDeparture()
     {
         foreach (Visitor visitor in visitorOnChair) {
             if (visitor == null) continue;
@@ -445,7 +454,7 @@ public List<int>[] SendFoodNumToOrderInfo()
     {
         float p = Random.Range(1, 10);
         // 재주문
-        if (p > 5) // 원래는 3
+        if (p > 3) // 원래는 3
         {
             Debug.Log("재주문");
             // 재주문을 위해 음식을 다시 정하는 함수

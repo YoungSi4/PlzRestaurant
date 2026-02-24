@@ -20,7 +20,7 @@ public class TableManager : MonoBehaviour
     /// Tables 배열의 getter
     /// </summary>
     /// <param name="tableNum">
-    /// 0 ~ n - 1
+    /// ** 0 ~ n - 1 **
     /// </param>
     /// <returns>
     /// Tables 객체
@@ -40,5 +40,15 @@ public class TableManager : MonoBehaviour
     public void DisableTableManager()
     {
         gameObject.SetActive(false);
+    }
+
+    public void AllTalbleClear()
+    {
+        foreach (Table table in tables)
+        {
+            table.DestroyMoney(); // 게임 종료 상태에서 테이블 위에 남아 있는 돈 삭제
+            table.VisitorDeparture(); // 테이블에 남은 손님 퇴장
+            table.TableCleanUp(); // 변수 초기화, 음식 오브젝트 삭제, 손님 정보 삭제
+        }
     }
 }

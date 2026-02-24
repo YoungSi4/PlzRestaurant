@@ -23,26 +23,29 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
     [SerializeField]
     int tableCount; // 맵 상의 테이블 수
 
+    private Coroutine spawnVisitor;
+
     public override void Awake()
     {
         base.Awake();
         delay = new WaitForSeconds(spawnDelay);
         emptyTableCheckDelay = new WaitForSeconds(tablecCheckDelay);
 
-        Start_Spawning(); // start 버튼 누르면 실행됨
+        // Start_Spawning(); // start 버튼 누르면 실행됨
     }
 
     // UI 상의 start 버튼을 누르면 실행된다
     public void Start_Spawning()
     {
-        StartCoroutine(SpawnVisitor());
+        spawnVisitor = StartCoroutine(SpawnVisitor());
         tableCount = tableManager.tableNum;
         groupVisitorsList = new List<Visitor>[tableCount]; // 테이블 수에 맞게
     }
 
+    // game manager - R_close에서 호출
     public void StopSpawning()
     {
-        StopCoroutine(SpawnVisitor());
+        StopCoroutine(spawnVisitor);
     }
 
     /// <summary>
