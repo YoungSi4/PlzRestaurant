@@ -253,6 +253,7 @@ public class Minigame1 : MonoBehaviour
                 // 오답끼리 중복 안 되게 하려면 뽑은 건 제거
                 wrongFoodIndexList.RemoveAt(randomPick);
             }
+            foodImages[i].interactable = true; // 버튼 상호작용 활성화
         }
     }
 
