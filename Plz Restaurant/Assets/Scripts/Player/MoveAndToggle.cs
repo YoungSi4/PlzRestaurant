@@ -42,6 +42,8 @@ public class MoveAndToggle : MonoBehaviour
 
     public MainScene2 mainScene2;
 
+    private bool isFrozen = false; // 플레이어 이동 불가 상태인지 체크 - 미니게임 실패 시 활성화
+
     private void Awake()
     {
         npc = FindObjectOfType<NPC>();
@@ -112,12 +114,21 @@ public class MoveAndToggle : MonoBehaviour
     //인풋시스템으로 이동 값 받음.
     public void OnMoveInput(InputAction.CallbackContext context)
     {
+        // 빙결 상태라면 키보드 입력값을 0으로 덮어씌움
+        if (isFrozen)
+        {
+            moveInput = Vector2.zero;
+            return;
+        }
+
         moveInput = context.ReadValue<Vector2>(); 
     }
 
     //인풋시스템으로 마우스의 2D 벡터(x:좌우,y:상하)로 받아옴.
     public void OnMouseInput(InputAction.CallbackContext context)
     {
+        if (isFrozen) return; // 이동 불가 상태면 마우스 입력 무시
+
         mouseInput = context.ReadValue<Vector2>(); //2D 벡터(x:좌우,y:상하)로 받아옴.
 
         mouseX = mouseInput.x * mouseSensitivity * Time.deltaTime; 
@@ -142,6 +153,13 @@ public class MoveAndToggle : MonoBehaviour
 
     public void Move()
     {
+        // 빙결 상태라면 리지드바디의 관성(속도)을 0으로 만들어버림
+        if (isFrozen)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
+
         if (!isFirstPerson && moveInput != Vector2.zero) //3인칭 이고 입력받는 값이 존재할때(키보드가 눌릴때?)
         {
             direction3 = new Vector3(moveInput.x, 0, moveInput.y); //3인칭일 때는 그냥 인풋값자체를 direction으로 받아야함... 카메라 상관없이 좌표대로 움직여야하기 때문에..
@@ -247,5 +265,18 @@ public class MoveAndToggle : MonoBehaviour
             }
         }
     }
+    
+    // [기현상]
+    private IEnumerator FreezeRoutine()
+    {
+        isFrozen = true; // 이동 불가 켬
+        yield return new WaitForSeconds(3f); // 3초 대기
+        isFrozen = false; // 3초 뒤 이동 불가 해제
+    }
 
+    public void ApplyPenaltyFreeze()
+    {
+        StartCoroutine(FreezeRoutine());
+        Debug.Log("미니게임 실패! [패널티 : 3초간 이동 불가]");
+    }
 }
