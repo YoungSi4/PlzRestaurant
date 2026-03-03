@@ -65,8 +65,6 @@ public class HeadChef : MonoBehaviour
     private void Update()
     {
         H_startCookingRoutine();
-        // TestGetFood();
-        ClearTableFoodInfo();
     }
 
     private void H_startCookingRoutine()
@@ -147,17 +145,6 @@ public class HeadChef : MonoBehaviour
     // FoodData -> OrderData로 변경
     private bool H_hasFood() => H_cookingList.Count > 0;
 
-    // (임시) 음식 추가용 함수
-    private void TestGetFood()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            FoodData food = foodDB.GetFoodData(1);
-            List<FoodData>[] tmplist = new List<FoodData>[] { new List<FoodData> { foodDB.GetFoodData(2) }, new List<FoodData> { foodDB.GetFoodData(3) }, null, null };
-            H_GetOrderInfo(tmplist, 8);
-            npc.B_GetTableInfo(tmplist, 8);
-        }
-    }
     public void GetFoodDataFromOrderMemo(List<FoodData>[] foodDatas, int tableNum)
     {
         H_GetOrderInfo(foodDatas, tableNum);
