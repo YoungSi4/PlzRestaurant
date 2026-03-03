@@ -127,7 +127,9 @@ public class MoveAndToggle : MonoBehaviour
     //인풋시스템으로 마우스의 2D 벡터(x:좌우,y:상하)로 받아옴.
     public void OnMouseInput(InputAction.CallbackContext context)
     {
+        // 회전 방지
         if (isFrozen) return; // 이동 불가 상태면 마우스 입력 무시
+        if (minigame1 != null && minigame1.gameObject.activeSelf) return; // 미니게임 중 마우스 입력 무시
 
         mouseInput = context.ReadValue<Vector2>(); //2D 벡터(x:좌우,y:상하)로 받아옴.
 
@@ -208,7 +210,12 @@ public class MoveAndToggle : MonoBehaviour
         // 인풋 시스템의 context phase를 적절히 활용하자
         if (context.started)
         {
-            
+            // 미니게임 작동 중 상호작용 막기
+            if (minigame1 != null && minigame1.gameObject.activeSelf)
+            {
+                return;
+            }
+
             ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             if (isFirstPerson)
             {
