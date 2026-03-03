@@ -33,6 +33,8 @@ public class Minigame1 : MonoBehaviour
     private TableManager tableManager;
     [SerializeField]
     private FoodDB foodDB;
+    private HeadChef headChef;
+    private GameManager gameManager;
 
     private FoodData[] orderedFoods; // 올바른 주문 정보 저장 배열
     private int tableNum; // 테이블 번호
@@ -122,6 +124,8 @@ public class Minigame1 : MonoBehaviour
     {
         npc = FindObjectOfType<NPC>();
         tableManager = FindObjectOfType<TableManager>();
+        headChef = FindAnyObjectByType<HeadChef>();
+        gameManager = FindAnyObjectByType<GameManager>();
         //foodDB = FindObjectOfType<FoodDB>();
         wrongFoodIndexList = new List<int>(); // 초기화
         correctRandNums = new List<int>();
@@ -313,10 +317,12 @@ public class Minigame1 : MonoBehaviour
         if (isTimeOver)
         {
             StartCoroutine(TimeOverImageSet());
+            GameFailed();
         }
         else if (isFailed)
         {
             StartCoroutine(GameFailedImageSet());
+            GameFailed();
         }
         else if (isCleared)
         {
@@ -340,5 +346,15 @@ public class Minigame1 : MonoBehaviour
     {
         table.SetCorrectFoodObjects();
         table.CanWeStartToEat();
+    }
+
+    private void GameFailed()
+    {
+        table.ForceleaveVisitors();
+        headChef.H_ClearTableInfo(tableNum - 1);
+        npc.B_ClearTableInfo(tableNum - 1);
+        // 일매출 차감 로직 필요
+        gameManager.AddDailyIncome(table.TotalPrice * -1);
+        // 플레이어 기절 로직 필요 - MoveAndToggle.cs ?
     }
 }

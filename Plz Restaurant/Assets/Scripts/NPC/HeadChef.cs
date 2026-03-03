@@ -151,19 +151,6 @@ public class HeadChef : MonoBehaviour
         npc.B_GetTableInfo(foodDatas, tableNum);
     }
 
-    // (임시) 테이블 위 음식 초기화용 함수
-    // int tableNum을 받아서 호출하도록 하면 사용 가능할 듯
-    private void ClearTableFoodInfo()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            H_ClearTableInfo(7);
-            npc.B_ClearTableInfo(7);
-            Table table = tableManager.GetTable(6);
-            table.ClearPlacedFoodObjects();
-        }
-    }
-
     // VisitorOrder에서 받아오기
     private void H_GetOrderInfo(List<FoodData>[] foodDatas, int tableNum)
     {

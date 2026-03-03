@@ -59,6 +59,7 @@ public class Table : MonoBehaviour
     [SerializeField]
     private GameObject moneyPrefab;
     private int totalPrice = 0;
+    public int TotalPrice => totalPrice;
     private Vector3 moneyGenPos;
 
     // [기현상 관련]
@@ -529,5 +530,12 @@ public List<int>[] SendFoodNumToOrderInfo()
                 AddPlacedFoodObject(correctFoodObject);
             }
         }
+    }
+
+    // 미니게임 실패로 강제로 손님이 떠나야 하는 경우, 테이블 상태 초기화하는 함수
+    public void ForceleaveVisitors()
+    {
+        VisitorDeparture(); // 손님 퇴장
+        TableCleanUp(); // 테이블 상태 초기화
     }
 }
