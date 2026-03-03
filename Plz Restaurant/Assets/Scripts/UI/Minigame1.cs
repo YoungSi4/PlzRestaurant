@@ -117,6 +117,18 @@ public class Minigame1 : MonoBehaviour
         }
     }
 
+    private void InitOXImages()
+    {
+        foreach (var O in OImages)
+        {
+            O.gameObject.SetActive(false);
+        }
+        foreach (var X in XImages)
+        {
+            X.gameObject.SetActive(false);
+        }
+    }
+
     // 해당 테이블의 올바른 주문 정보 전달 받기
     // MiniGame1의 시작 - 호출 지점
     // 외부 호출 시 미니게임 UI SetActive(true)가 선행되어야 함
@@ -138,6 +150,7 @@ public class Minigame1 : MonoBehaviour
 
         InitUIText();
         InitWrongList(foods);
+        InitOXImages();
         SetMinigameStart();
     }
 
@@ -283,9 +296,6 @@ public class Minigame1 : MonoBehaviour
     {
         // 잘못 고른 그림에 X표시
         XImages[index].gameObject.SetActive(true);
-        // 선택한 버튼 비활성화
-        foodImages[index].interactable = false;
-
         // 선택한 버튼 비활성화
         foodImages[index].interactable = false;
 
