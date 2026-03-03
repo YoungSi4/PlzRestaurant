@@ -68,12 +68,14 @@ public class Table : MonoBehaviour
 
     private NPC npc;
     private Minigame1 minigame1;
+    private FoodDB fooddb;
 
     private void Awake()
     {
         chairNum = chairPos.Length;
         npc = FindObjectOfType<NPC>();
         minigame1 = FindObjectOfType<Minigame1>();
+        fooddb = FindObjectOfType<FoodDB>();
     }
 
     private void Start()
@@ -491,9 +493,41 @@ public List<int>[] SendFoodNumToOrderInfo()
         return anomalyOrderedFoods;
     }
 
-
-    public void SetCcorrectFoodObjects()
+    // 기현상 처리 후 올바른 음식 오브젝트를 테이블에 세팅
+    public void SetCorrectFoodObjects()
     {
+        // 테이블의 올바른 주문 정보 저장
+        List<int>[] foodIDs = new List<int>[chairNum];
+        foreach(var visitor in visitorOnChair)
+        {
+            if (visitor == null) continue;
+            foodIDs[visitor.C_seatChairNumber] = new List<int>();
+            foreach (var foodId in visitor.C_foodNumber)
+            {
+                foodIDs[visitor.C_seatChairNumber].Add(foodId);
+            }
+        }
 
+        ClearPlacedFoodObjects();
+
+        // 테이블에 올바른 음식 오브젝트 세팅
+        for (int i = 0; i < chairNum; i++)
+        {
+            if(foodIDs[i] == null) continue;
+            for (int j = 0; j < foodIDs[i].Count; j++)
+            {
+                int foodId = foodIDs[i][j];
+                FoodData correctFood = fooddb.GetFoodData(foodId);
+
+                // 첫 번째 주문한 음식은 i, 두 번째 주문한 음식은 i + chairNum
+                int posIndex = (j == 0) ? i : (i + chairNum);
+
+                Transform targetPos = foodPos[posIndex];
+                GameObject correctFoodObject = Instantiate(correctFood.foodPrefab, targetPos.position, targetPos.rotation);
+                // 음식 오브젝트를 테이블의 foodPos의 자식으로 설정해서 위치 고정
+                correctFoodObject.transform.SetParent(targetPos);
+                AddPlacedFoodObject(correctFoodObject);
+            }
+        }
     }
 }

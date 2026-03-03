@@ -128,7 +128,8 @@ public class Minigame1 : MonoBehaviour
 
 
         tableNum = tableNumber;
-        table = tableManager.GetTable(tableNum);
+        table = tableManager.GetTable(tableNum - 1);
+        Debug.Log("[Minigame1.cs] GetOrderedFoodData() called - tableNum: " + tableNum);
         orderedFoods = foods;
 
         InitUIText();
@@ -337,7 +338,7 @@ public class Minigame1 : MonoBehaviour
     // 식사 시작 호출하기
     private void GameClear()
     {
-        table.SetCcorrectFoodObjects();
+        table.SetCorrectFoodObjects();
         table.CanWeStartToEat();
     }
 }
