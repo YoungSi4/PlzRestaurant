@@ -350,6 +350,11 @@ public class Minigame1 : MonoBehaviour
     {
         // UI 팝업 비활성화 (창 닫기)
         gameObject.SetActive(false);
+        // 플레이어 기절 유발
+        if(isFailed || isTimeOver)
+        {
+            moveAndtoggle.ApplyPenaltyFreeze();
+        }
     }
 
     // 게임 클리어 처리
@@ -366,9 +371,8 @@ public class Minigame1 : MonoBehaviour
         table.ForceleaveVisitors();
         headChef.H_ClearTableInfo(tableNum);
         npc.B_ClearTableInfo(tableNum);
-        // 일매출 차감 로직 필요
+        // 일매출 차감
         gameManager.AddDailyIncome(table.TotalPrice * -1);
-        // 플레이어 기절 로직 필요 - MoveAndToggle.cs ?
-        moveAndtoggle.ApplyPenaltyFreeze();
+
     }
 }
