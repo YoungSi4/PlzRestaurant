@@ -6,6 +6,9 @@ public class VisitorPool : MonoBehaviour
 {
     public int poolsize;
     public GameObject prefab;
+    public GameObject[] prefabs; //visitor1,2,3을 담고 있는 배열
+    int randomIndex; //랜덤으로 사용할 숫자
+
 
     // stack 활용
     public Stack<Visitor> visitorStack = new ();
@@ -20,8 +23,9 @@ public class VisitorPool : MonoBehaviour
 
     private void GenerateObj()
     {
+        randomIndex = Random.Range(0, prefabs.Length);
         // visitor prefab generate
-        var tempObj = Instantiate(prefab);
+        var tempObj = Instantiate(prefabs[randomIndex]);
         tempObj.transform.SetParent(transform);
         tempObj.SetActive(false); // deactivate obj - activate if needed
 

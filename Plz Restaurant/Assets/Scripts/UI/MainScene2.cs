@@ -175,8 +175,19 @@ public class MainScene2 : MonoBehaviour
 
     public void PopUpOn2() // ESC키를 눌러 꺼야하는 팝업이 켜지면 
     {
-        previousPlayerState = (playerInput.currentActionMap.name);
-        playerInput.SwitchCurrentActionMap("UI2");
+        previousPlayerState = (playerInput.currentActionMap.name); //이전 인풋맵을 기억하고
+        playerInput.SwitchCurrentActionMap("UI2"); //인풋맵을 바꿔주고
+        MouseCursorTrue();
+    }
+
+    public void MouseCursorFalse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void MouseCursorTrue()
+    {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -191,8 +202,7 @@ public class MainScene2 : MonoBehaviour
         playerInput.SwitchCurrentActionMap(previousPlayerState);
         Debug.Log("Esc");
         fadeOutPanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        MouseCursorFalse();
     }
 
     public void ResultWindowOn()

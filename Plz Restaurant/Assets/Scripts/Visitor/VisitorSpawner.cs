@@ -23,6 +23,8 @@ public class VisitorSpawner : Singleton<VisitorSpawner>
     [SerializeField]
     int tableCount; // 맵 상의 테이블 수
 
+
+
     public override void Awake()
     {
         base.Awake();

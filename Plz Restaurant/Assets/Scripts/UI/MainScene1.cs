@@ -51,8 +51,8 @@ public class MainScene1 : MonoBehaviour
     private void Start()
     {
         TodayInit();//씬이 시작하면 현재 플레이어의 자산과 현재 영업일을 업데이트해줌
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        MouseCursorTrue();
+        playerInput.SwitchCurrentActionMap("UI1");
     }
 
     private void TodayInit()
@@ -86,6 +86,7 @@ public class MainScene1 : MonoBehaviour
         uiRight.SetTrigger("Out");
         uiLeft.SetTrigger("Out");
         uiDown.SetTrigger("Out");
+        playerInput.SwitchCurrentActionMap("FirstPerspective");
         StartCoroutine(IGameStart());
     }
 
@@ -97,6 +98,14 @@ public class MainScene1 : MonoBehaviour
         uiLeft.SetTrigger("In");
         uiDown.SetTrigger("In");
         mainScene2_UI.SetActive(false);
+        playerInput.SwitchCurrentActionMap("UI1");
+        MouseCursorTrue();
+    }
+
+    public void MouseCursorTrue()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     IEnumerator IGameStart()
@@ -164,9 +173,7 @@ public class MainScene1 : MonoBehaviour
 
     public void PopUpOn1() // ESC키를 눌러 꺼야하는 팝업이 켜지면 
     {
-        playerInput.SwitchCurrentActionMap("UI1");
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //playerInput.SwitchCurrentActionMap("UI1");
     }
 
     public void Esc()
@@ -176,11 +183,9 @@ public class MainScene1 : MonoBehaviour
             uiPopUp.SetActive(false);
             uiPopUp = null;
         }
-        playerInput.SwitchCurrentActionMap("FirstPerspective");
+        //playerInput.SwitchCurrentActionMap("FirstPerspective");
         Debug.Log("Esc");
         fadeOutPanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
 
@@ -194,6 +199,8 @@ public class MainScene1 : MonoBehaviour
         Application.Quit();
     #endif
     }
+
+
 
 
 }
